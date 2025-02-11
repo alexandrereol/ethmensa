@@ -1,0 +1,6 @@
+.DS_Store
+*.xcuserstate
+xcschememanagement.plist
+ethmensa.xcodeproj/project.xcworkspace/xcuserdata/*
+ethmensa.xcodeproj/xcuserdata/*
+ETH Mensa.doccarchive
