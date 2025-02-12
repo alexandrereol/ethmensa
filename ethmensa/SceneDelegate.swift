@@ -101,12 +101,18 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
            let unfilteredMenaList = MensaDataManager.shared.unfilteredMenaList,
            !unfilteredMenaList.isEmpty {
             Task {
-                try await CSSearchableIndex.default().deleteAllSearchableItems()
-                try await CSSearchableIndex.default().indexAppEntities(
-                    unfilteredMenaList.map { mensa in
-                        MensaEntity(id: mensa.id, name: mensa.name)
-                    }
-                )
+                do {
+                    try await CSSearchableIndex.default().deleteAppEntities(ofType: MensaEntity.self)
+                    try await CSSearchableIndex.default().indexAppEntities(
+                        unfilteredMenaList.map { mensa in
+                            MensaEntity(id: mensa.id, name: mensa.name)
+                        },
+                        priority: 10 // For future use
+                    )
+                    logger.info("sceneWillResignActive(): Indexed \(unfilteredMenaList.count) mensas")
+                } catch {
+                    logger.error("sceneWillResignActive(): Could not index app entities: \(error)")
+                }
             }
         }
 #endif

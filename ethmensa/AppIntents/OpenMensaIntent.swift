@@ -17,9 +17,7 @@ struct OpenMensaIntent: OpenIntent {
     func perform() async throws -> some IntentResult {
         await mensaDataManager.resetFiltersAndSearch()
         navigationManager.sheet = .none
-        navigationManager.selectedMensa = mensaDataManager.unfilteredMenaList?.first {
-            $0.id == target.id
-        }
+        navigationManager.universalLinkMensaId = target.id
         return .result()
     }
 }
