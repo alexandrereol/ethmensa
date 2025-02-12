@@ -24,5 +24,5 @@ struct ModalLabelView: View {
 }
 
 #Preview {
-    ModalViewUI(viewModel: .about())
+    ModalViewUI(viewModel: .about)
 }

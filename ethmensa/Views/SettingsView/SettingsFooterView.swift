@@ -10,7 +10,6 @@ struct SettingsFooterView: View {
 
     @State var shareSheetShown = false
     @State var privacyPolicyPresented = false
-    @State var debugSheetShown = false
 
     private var isETHVideoPromotionShown: Bool {
         !UIApplication.shared.canOpenURL("ethvideo://".toURL()!)
@@ -99,16 +98,7 @@ struct SettingsFooterView: View {
                 .tint(.primary)
             }
             NavigationLink {
-                ModalViewUI(
-                    viewModel: .about(
-                        appIconPressAction: {
-                            debugSheetShown = true
-                        }
-                    )
-                )
-                .sheet(isPresented: $debugSheetShown) {
-                    DebugView()
-                }
+                ModalViewUI(viewModel: .about)
             } label: {
                 Label {
                     Text("ABOUT_\(Bundle.main.displayName)")

@@ -44,5 +44,5 @@ struct ModalButtonView: View {
 }
 
 #Preview {
-    ModalViewUI(viewModel: .about())
+    ModalViewUI(viewModel: .about)
 }

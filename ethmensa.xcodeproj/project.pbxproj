@@ -429,6 +429,7 @@
 		29E870282D5B9E8B00E83208 /* DateComponentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E870262D5B9E8B00E83208 /* DateComponentsExtension.swift */; };
 		29E870292D5B9E8B00E83208 /* DateComponentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E870262D5B9E8B00E83208 /* DateComponentsExtension.swift */; };
 		29E8702A2D5B9E8B00E83208 /* DateComponentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E870262D5B9E8B00E83208 /* DateComponentsExtension.swift */; };
+		29ED42FF2D5CC72D00D526B9 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937DC472A93AC5C003E0573 /* DebugView.swift */; };
 		29EDEFF22D36E31F00B7A12F /* MensaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EDEFF02D36E31900B7A12F /* MensaEntity.swift */; };
 		29F262D82B6E3BB800C8FDA3 /* AllMensasClosedTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F262D72B6E3BB800C8FDA3 /* AllMensasClosedTodayView.swift */; };
 		29F262DA2B6E3BFA00C8FDA3 /* NoResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F262D92B6E3BFA00C8FDA3 /* NoResultsView.swift */; };
@@ -1664,6 +1665,7 @@
 				294ED72A2D3AEC06006A74D3 /* MensaDataManager.swift in Sources */,
 				29E307B22B45C505000C8C10 /* GeoCacheDBManager.swift in Sources */,
 				2939D6272B04C3550089A3EB /* ETHAPI.swift in Sources */,
+				29ED42FF2D5CC72D00D526B9 /* DebugView.swift in Sources */,
 				29E307B02B45C502000C8C10 /* GeoCache.xcdatamodeld in Sources */,
 				299F768E2B8787D000D49AC4 /* OpenURLViewModifier.swift in Sources */,
 				294ED7232D3AE9FD006A74D3 /* SettingsManager+LaunchAndMigrate.swift in Sources */,

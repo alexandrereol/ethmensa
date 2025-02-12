@@ -32,16 +32,10 @@ struct SettingsView: View {
                 }
                 Section {
                     NavigationLink {
-                        ModalViewUI(
-                            viewModel: .about(
-                                appIconPressAction: {
-                                    debugSheetShown = true
-                                }
-                            )
-                        )
-                        .sheet(isPresented: $debugSheetShown) {
-                            DebugView()
-                        }
+                        ModalViewUI(viewModel: .about)
+                            .sheet(isPresented: $debugSheetShown) {
+                                DebugView()
+                            }
                     } label: {
                         SettingsElementLabel(text: "ABOUT_\(Bundle.main.displayName)")
                     }

@@ -7,6 +7,7 @@ import SwiftUI
 struct ModalAppView: View {
 
     @State var appIconPressActionCount = 0
+    @State var debugSheetShown = false
 
     var viewModel: ModalViewModel
 
@@ -34,14 +35,17 @@ struct ModalAppView: View {
                 .onChange(of: appIconPressActionCount) { newValue in
                     if newValue >= 10 {
                         appIconPressActionCount = 0
-                        viewModel.appIconPressAction?()
+                        debugSheetShown = true
                     }
                 }
         }
         .padding(.horizontal, 20)
+        .sheet(isPresented: $debugSheetShown) {
+            DebugView()
+        }
     }
 }
 
 #Preview {
-    ModalViewUI(viewModel: .about())
+    ModalViewUI(viewModel: .about)
 }

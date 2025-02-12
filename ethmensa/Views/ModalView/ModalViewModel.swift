@@ -69,15 +69,12 @@ extension ModalViewModel {
         [version, build].compactMap(\.self).joined(separator: "\n")
     }
 
-    static func about(
-        appIconPressAction: (() -> Void)? = nil
-    ) -> ModalViewModel {
+    static var about: ModalViewModel {
         .init(
             type: .about,
             title: Bundle.main.displayName,
             label1: versionBuildString,
-            label2: .init(localized: "DEVELOPED_BY:") + " " + .developerName,
-            appIconPressAction: appIconPressAction
+            label2: .init(localized: "DEVELOPED_BY:") + " " + .developerName
         )
     }
 }
