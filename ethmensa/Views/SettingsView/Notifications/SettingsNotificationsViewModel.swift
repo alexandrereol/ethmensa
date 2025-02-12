@@ -9,6 +9,7 @@ import Combine
 import CoreLocation
 #endif
 
+@MainActor
 class SettingsNotificationsViewModel: NSObject, ObservableObject {
 
     @Published var notifications = SettingsManager.shared.notifications
@@ -135,7 +136,7 @@ class SettingsNotificationsViewModel: NSObject, ObservableObject {
 }
 
 #if !os(visionOS)
-extension SettingsNotificationsViewModel: CLLocationManagerDelegate {
+extension SettingsNotificationsViewModel: @preconcurrency CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if loadedLocationPermission {
             Task {

@@ -4,11 +4,11 @@
 
 // Note: iOS 16 does not support xcstrings for App Shortcuts, so we need to use a strings file.
 
-"SHOW_OPEN_IN_${applicationName}'" = "Show open in ${applicationName}'";
-"SHOW_OPEN_MENSAS_IN_${applicationName}'" = "Show open mensas in ${applicationName}'";
-"SHOWS_HONGG_IN_${applicationName}'" = "Show Hönggerberg in ${applicationName}'";
-"SHOWS_HONGG_MENSAS_IN_${applicationName}'" = "Show Hönggerberg mensas in ${applicationName}'";
-"SHOWS_IRCHEL_IN_${applicationName}'" = "Show Irchel in ${applicationName}'";
-"SHOWS_IRCHEL_MENSAS_IN_${applicationName}'" = "Show Irchel mensas in ${applicationName}'";
-"SHOWS_ZENTRUM_IN_${applicationName}'" = "Show Zentrum in ${applicationName}'";
-"SHOWS_ZENTRUM_MENSAS_IN_${applicationName}'" = "Show Zentrum mensas in ${applicationName}'";
+"SHOW_OPEN_IN_${applicationName}" = "Show open in ${applicationName}";
+"SHOW_OPEN_MENSAS_IN_${applicationName}" = "Show open mensas in ${applicationName}";
+"SHOWS_HONGG_IN_${applicationName}" = "Show Hönggerberg in ${applicationName}";
+"SHOWS_HONGG_MENSAS_IN_${applicationName}" = "Show Hönggerberg mensas in ${applicationName}";
+"SHOWS_IRCHEL_IN_${applicationName}" = "Show Irchel in ${applicationName}";
+"SHOWS_IRCHEL_MENSAS_IN_${applicationName}" = "Show Irchel mensas in ${applicationName}";
+"SHOWS_ZENTRUM_IN_${applicationName}" = "Show Zentrum in ${applicationName}";
+"SHOWS_ZENTRUM_MENSAS_IN_${applicationName}" = "Show Zentrum mensas in ${applicationName}";

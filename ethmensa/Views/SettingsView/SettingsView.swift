@@ -19,7 +19,6 @@ struct SettingsView: View {
                 SettingsCellView(label: .init(localized: "ADVANCED_SETTINGS")) {
                     AdvancedSettingsView()
                 }
-//                SettingsETHVideoView()
                 SettingsFooterView()
             }
             .environmentObject(settingsManager)
