@@ -84,9 +84,10 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
 
 #if !os(watchOS)
     private func initializeLinkHandlers() {
-        $universalLinkMensaId.sink { receivedValue in
-            guard let receivedValue,
-                  let unfilteredMenaList = MensaDataManager.shared.unfilteredMenaList else {
+        $universalLinkMensaId
+            .compactMap { $0 }
+            .sink { receivedValue in
+            guard let unfilteredMenaList = MensaDataManager.shared.unfilteredMenaList else {
                 return
             }
             guard let mensa = unfilteredMenaList.first(where: { $0.id == receivedValue }) else {
@@ -96,9 +97,10 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
             self.selectedMensa = mensa
             self.universalLinkMensaId = nil
         }.store(in: &subscribers)
-        MensaDataManager.shared.$unfilteredMenaList.sink { receivedValue in
-            guard let universalLinkMensaId = self.universalLinkMensaId,
-                  let receivedValue else {
+        MensaDataManager.shared.$unfilteredMenaList
+            .compactMap { $0 }
+            .sink { receivedValue in
+            guard let universalLinkMensaId = self.universalLinkMensaId else {
                 return
             }
             guard let mensa = receivedValue.first(where: { $0.id == universalLinkMensaId }) else {

@@ -1,5 +1,5 @@
 //
-//  Copyright © 2024 Alexandre Reol. All rights reserved.
+//  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
 import SwiftUI
