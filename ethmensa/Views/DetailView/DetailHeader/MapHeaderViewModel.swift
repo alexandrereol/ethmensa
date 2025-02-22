@@ -4,12 +4,26 @@
 
 import Foundation
 import MapKit
+import Combine
 
 class MapHeaderViewModel: ObservableObject {
 
     @Published var mapCenter: MKCoordinateRegion?
     @Published var mapItem: MKMapItem?
     @Published var mapSheetShown = false
+
+    private var subscribers: Set<AnyCancellable> = []
+
+    init() {
+        NavigationManager.shared.$selectedMensa
+            .compactMap { $0 }
+            .sink { mensa in
+                Task {
+                    await self.loadMap(forMensa: mensa)
+                }
+            }
+            .store(in: &subscribers)
+    }
 
     func handleTap(mensa: Mensa) {
         if #available(iOS 18.0, visionOS 2.0, *) {
@@ -19,7 +33,7 @@ class MapHeaderViewModel: ObservableObject {
         }
     }
 
-    func onAppear(mensa: Mensa) async {
+    func loadMap(forMensa mensa: Mensa) async {
         guard let result = await mensa.getCoordinates() else {
             return
         }

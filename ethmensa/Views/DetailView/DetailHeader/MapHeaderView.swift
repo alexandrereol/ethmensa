@@ -62,7 +62,7 @@ struct MapHeaderView: View {
             }
             .onAppear {
                 Task {
-                    await viewModel.onAppear(mensa: selectedMensa)
+                    await viewModel.loadMap(forMensa: selectedMensa)
                 }
             }
         }
