@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lascic/UIOnboarding.git",
       "state" : {
-        "revision" : "efd1e944c399de24c10d9f4947301e1c105dbb9b",
-        "version" : "2.0.3"
+        "revision" : "88d304a0a78b608fd993c9065bb86631f962aaf9",
+        "version" : "2.0.4"
       }
     },
     {
