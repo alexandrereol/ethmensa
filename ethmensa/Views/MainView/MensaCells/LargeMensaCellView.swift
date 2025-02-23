@@ -18,7 +18,6 @@ struct LargeMensaCellView: View {
                 NavigationLink(value: mensa) {
                     EmptyView()
                 }
-                .disabled(isLoading)
                 .opacity(0)
                 URLImage(url: url) {
                     Color.gray

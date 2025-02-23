@@ -39,7 +39,6 @@ struct MinimalMensaCellView: View {
                 .padding(.trailing, 5)
             }
         }
-        .disabled(isLoading)
     }
 }
 

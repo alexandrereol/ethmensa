@@ -41,7 +41,6 @@ struct MainView: View {
                 FilterView()
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
-                    .disabled(viewState == .loading)
                 if viewState == .loadedWithContent {
                     ForEach(mensaDataManager.mensaList ?? []) { mensa in
                         MainMensaView(mensa: mensa)
@@ -58,6 +57,8 @@ struct MainView: View {
                 }
             }
             .redacted(reason: viewState == .loading ? .placeholder : [])
+            .disabled(viewState == .loading)
+            .scrollDisabled(viewState == .loading)
             .listRowSpacing(listRowSpacing)
             .refreshable {
                 Task {

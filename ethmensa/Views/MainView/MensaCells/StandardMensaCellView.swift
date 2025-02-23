@@ -48,7 +48,6 @@ struct StandardMensaCellView: View {
                 )
             }
         }
-        .disabled(isLoading)
 #if targetEnvironment(macCatalyst)
         .padding(.vertical, 5)
 #endif
