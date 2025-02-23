@@ -15,7 +15,7 @@ private struct OpenURLViewModifier: ViewModifier {
             .onOpenURL { url in
                 let mensaIdRef = Reference<Substring>()
                 let regex = Regex {
-                    Optionally("/s/")
+                    "/s/"
                     Capture(as: mensaIdRef) {
                         OneOrMore(.word)
                         "/"
@@ -25,8 +25,6 @@ private struct OpenURLViewModifier: ViewModifier {
                 }
                 if let matchSubstring = url.relativePath.firstMatch(of: regex)?[mensaIdRef] {
                     universalLinkMensaId = String(matchSubstring)
-                } else {
-                    universalLinkAlertShown = true
                 }
             }
             .alert(
