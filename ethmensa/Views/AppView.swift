@@ -45,7 +45,7 @@ struct AppView: View {
         .onboardingFullScreenCoverIfNecessary(
             showOnboarding: $showOnboarding
         ) {
-            SettingsManager.shared.completedFirstLaunch = true
+            settingsManager.completedFirstLaunch = true
         }
 #endif
 #if APPCLIP

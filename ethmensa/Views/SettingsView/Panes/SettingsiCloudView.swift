@@ -38,7 +38,7 @@ struct SettingsiCloudView: View {
                             Label("ICLOUD_UNAVAILABLE", systemImage: "icloud.slash.fill")
                             Spacer()
                         }
-                        NavigationLink("") {
+                        NavigationLink(String("")) {
                             EmptyView()
                         }
                     }

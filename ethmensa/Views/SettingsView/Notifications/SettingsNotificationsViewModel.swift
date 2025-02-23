@@ -56,7 +56,9 @@ class SettingsNotificationsViewModel: NSObject, ObservableObject {
             let unc = UNUserNotificationCenter.current()
             switch await unc.notificationSettings().authorizationStatus {
             case .authorized:
-                SettingsManager.shared.notifications = true
+                await MainActor.run {
+                    SettingsManager.shared.notifications = true
+                }
             case .denied:
                 setNotificationToggleBack()
                 await MainActor.run {
