@@ -6,8 +6,8 @@ import SwiftUI
 
 struct ModalAppView: View {
 
-    @State var appIconPressActionCount = 0
-    @State var debugSheetShown = false
+    @State private var appIconPressActionCount = 0
+    @State private var debugSheetShown = false
 
     var viewModel: ModalViewModel
 

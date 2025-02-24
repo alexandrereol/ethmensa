@@ -7,7 +7,7 @@ import StoreKit
 
 struct SKOverlayModifier: ViewModifier {
 
-    @State var showSKOverlay = false
+    @State private var showSKOverlay = false
 
     func body(content: Content) -> some View {
         content

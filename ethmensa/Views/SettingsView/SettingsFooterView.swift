@@ -8,8 +8,8 @@ struct SettingsFooterView: View {
 
     @Environment(\.openURL) var openURL
 
-    @State var shareSheetShown = false
-    @State var privacyPolicyPresented = false
+    @State private var shareSheetShown = false
+    @State private var privacyPolicyPresented = false
 
     private var isETHVideoPromotionShown: Bool {
         !UIApplication.shared.canOpenURL("ethvideo://".toURL()!)

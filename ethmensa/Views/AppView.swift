@@ -18,7 +18,7 @@ struct AppView: View {
     @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var settingsManager: SettingsManager
 
-    @State var showOnboarding = !SettingsManager.shared.completedFirstLaunch
+    @State private var showOnboarding = !SettingsManager.shared.completedFirstLaunch
 
     var body: some View {
         NavigationSplitView {

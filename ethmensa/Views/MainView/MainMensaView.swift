@@ -9,7 +9,7 @@ struct MainMensaView: View {
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var mensaDataManager: MensaDataManager
 
-    @State var shareSheetShown = false
+    @State private var shareSheetShown = false
 
     var mensa: Mensa
     var isLoading = false

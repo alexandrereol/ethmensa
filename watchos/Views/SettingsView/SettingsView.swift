@@ -8,7 +8,7 @@ struct SettingsView: View {
 
     @EnvironmentObject var settingsManager: SettingsManager
 
-    @State var debugSheetShown = false
+    @State private var debugSheetShown = false
 
     var body: some View {
         NavigationStack {

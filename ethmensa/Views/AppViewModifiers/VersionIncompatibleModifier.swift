@@ -6,7 +6,7 @@ import SwiftUI
 
 struct VersionIncompatibleModifier: ViewModifier {
 
-    @State var versionIncompatible = false
+    @State private var versionIncompatible = false
 
     private var host: String
     private var tintColor: Color

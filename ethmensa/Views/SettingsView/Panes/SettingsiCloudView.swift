@@ -8,7 +8,7 @@ struct SettingsiCloudView: View {
 
     @EnvironmentObject var settingsManager: SettingsManager
 
-    @State var cloudkitUnavailableSafariCoverShown = false
+    @State private var cloudkitUnavailableSafariCoverShown = false
 
     private var cloudKitUnavailableURL: URL {
         String.iCloudUnavailableURL.toURL()!

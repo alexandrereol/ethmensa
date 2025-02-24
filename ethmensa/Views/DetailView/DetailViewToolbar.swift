@@ -8,7 +8,7 @@ struct DetailViewToolbar: ToolbarContent {
 
     var selectedMensa: Mensa?
 
-    @State var shareSheetShown = false
+    @State private var shareSheetShown = false
 
     var body: some ToolbarContent {
         if let selectedMensa {
