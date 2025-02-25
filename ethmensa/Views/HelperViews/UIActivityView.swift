@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
+import LinkPresentation
 import SwiftUI
 import UIKit
-import LinkPresentation
 
 struct UIActivityView: UIViewControllerRepresentable {
     var name: String

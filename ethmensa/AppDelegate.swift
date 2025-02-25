@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
+import AppIntents
 import os.log
 import UIKit
-import AppIntents
 
 #if !APPCLIP && !os(visionOS)
 import CoreLocation

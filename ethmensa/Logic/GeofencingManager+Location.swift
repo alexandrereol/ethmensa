@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import os.log
-import Foundation
 import CoreLocation
+import Foundation
+import os.log
 import UserNotifications
 
 extension GeofencingManager: CLLocationManagerDelegate {

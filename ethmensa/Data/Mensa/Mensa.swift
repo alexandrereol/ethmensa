@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import os.log
 import CoreTransferable
 import MapKit
+import os.log
 
 #if !os(watchOS)
 import SharedWithYou

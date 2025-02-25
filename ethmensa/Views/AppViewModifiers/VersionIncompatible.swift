@@ -2,8 +2,8 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import os.log
 import Foundation
+import os.log
 
 class VersionIncompatible: ObservableObject {
     static private let logger = Logger(

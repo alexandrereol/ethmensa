@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
+import Combine
 import os.log
 import SwiftUI
-import Combine
 
 /// Responsible for managing navigation within the application.
 class NavigationManager: ObservableObject, @unchecked Sendable {

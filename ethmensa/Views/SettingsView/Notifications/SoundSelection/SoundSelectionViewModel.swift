@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
+import AVFoundation
 import os.log
 import SwiftUI
-import AVFoundation
 
 class SoundSelectionViewModel: ObservableObject {
     let logger = Logger(

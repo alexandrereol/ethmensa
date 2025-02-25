@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import os.log
-import Foundation
 import Combine
+import Foundation
+import os.log
 
 /// Responsible for managing the data related to Mensas.
 class MensaDataManager: ObservableObject, @unchecked Sendable {

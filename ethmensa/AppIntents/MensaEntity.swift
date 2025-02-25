@@ -2,8 +2,8 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import UIKit
 import AppIntents
+import UIKit
 
 struct MensaEntity: AppEntity, Identifiable {
 

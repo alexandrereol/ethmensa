@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
+import Combine
 import Foundation
 import MapKit
-import Combine
 
 class MapHeaderViewModel: ObservableObject {
 

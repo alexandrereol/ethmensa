@@ -2,8 +2,8 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import os.log
 import CoreLocation
+import os.log
 
 /// Handles setup, monitoring, and processing of geofencing events.
 ///

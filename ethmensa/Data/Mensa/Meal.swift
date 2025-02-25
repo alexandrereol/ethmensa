@@ -2,8 +2,8 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import Foundation
 import CoreTransferable
+import Foundation
 
 /// Represent a single meal
 class Meal: Identifiable {

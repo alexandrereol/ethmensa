@@ -3,8 +3,8 @@
 //
 
 #if canImport(SharedWithYou)
-import SharedWithYou
 import RegexBuilder
+import SharedWithYou
 
 extension SWHighlight {
     /// A computed property that extracts and returns the share ID from the URL's relative path.

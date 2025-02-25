@@ -528,6 +528,7 @@
 		293C3DDA2B74DE4600B594BE /* SettingsGeneralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeneralView.swift; sourceTree = "<group>"; };
 		293C3DDC2B74DEB300B594BE /* SettingsAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearanceView.swift; sourceTree = "<group>"; };
 		293C3DE62B74E08100B594BE /* SettingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellView.swift; sourceTree = "<group>"; };
+		293CAF6E2D6DCFFD0066E9F8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		293E85842BA993EE005E79CB /* MealType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealType.swift; sourceTree = "<group>"; };
 		293E85892BA99EA1005E79CB /* MeatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeatType.swift; sourceTree = "<group>"; };
 		294E16392A8E22C3000A3AB6 /* ETH Mensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -777,6 +778,7 @@
 		294E16302A8E22C3000A3AB6 = {
 			isa = PBXGroup;
 			children = (
+				293CAF6E2D6DCFFD0066E9F8 /* .swiftlint.yml */,
 				294E163B2A8E22C3000A3AB6 /* ethmensa */,
 				29550BD42AEADD550014F07F /* clip */,
 				2982AFA82AEC4FCC008B2B41 /* watchos */,

@@ -2,10 +2,10 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
+import CoreSpotlight
 import os.log
 import UIKit
 import UserNotifications
-import CoreSpotlight
 
 class SceneDelegate: NSObject, UIWindowSceneDelegate {
     var window: UIWindow?

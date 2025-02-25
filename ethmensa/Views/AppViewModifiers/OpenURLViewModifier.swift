@@ -2,8 +2,8 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import SwiftUI
 import RegexBuilder
+import SwiftUI
 
 private struct OpenURLViewModifier: ViewModifier {
 

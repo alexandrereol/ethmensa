@@ -2,9 +2,9 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import os.log
-import Foundation
 import CoreData
+import Foundation
+import os.log
 
 class ClickCountDBManager {
     static let shared = ClickCountDBManager()

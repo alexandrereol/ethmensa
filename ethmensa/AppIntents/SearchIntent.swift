@@ -2,8 +2,8 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import Foundation
 import AppIntents
+import Foundation
 
 @available(iOS 17.2, *)
 @AssistantIntent(schema: .system.search)

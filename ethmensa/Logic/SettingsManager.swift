@@ -2,8 +2,8 @@
 //  Copyright © 2025 Alexandre Reol. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 #if !APPCLIP && !os(watchOS)
 import UserNotifications
