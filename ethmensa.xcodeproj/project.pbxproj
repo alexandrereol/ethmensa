@@ -401,7 +401,7 @@
 		29CEE1902D84301B00C6D257 /* ethmensaWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE18F2D84301B00C6D257 /* ethmensaWidgets.swift */; };
 		29CEE1922D84301B00C6D257 /* ShowLegiWidgetControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE1912D84301B00C6D257 /* ShowLegiWidgetControl.swift */; };
 		29CEE1962D84301C00C6D257 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29CEE1952D84301C00C6D257 /* Assets.xcassets */; };
-		29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29CEE1882D84301B00C6D257 /* widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29CEE1882D84301B00C6D257 /* widget.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29CEE1A12D84311800C6D257 /* ShowLegiIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE1422D842CCC00C6D257 /* ShowLegiIntent.swift */; };
 		29CEE1A22D84315600C6D257 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909FBFD2AA0CE29002846C6 /* NavigationManager.swift */; };
 		29CEE1A32D84321C00C6D257 /* AppViewSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999A21E2C71F55C00451D18 /* AppViewSheets.swift */; };
@@ -1940,6 +1940,7 @@
 		};
 		29CEE1992D84301C00C6D257 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 29CEE1872D84301B00C6D257 /* widget */;
 			targetProxy = 29CEE1982D84301C00C6D257 /* PBXContainerItemProxy */;
 		};

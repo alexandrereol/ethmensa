@@ -5,6 +5,7 @@
 import AppIntents
 import SwiftUI
 
+#if !targetEnvironment(macCatalyst)
 struct ShowLegiIntent: AppIntent {
     static let title: LocalizedStringResource = "SHOW_LEGI_CARD"
     static let description: IntentDescription? = "SHOW_LEGI_CARD_DESCRIPTION"
@@ -19,3 +20,4 @@ struct ShowLegiIntent: AppIntent {
         return .result()
     }
 }
+#endif
