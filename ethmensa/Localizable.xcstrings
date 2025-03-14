@@ -1438,8 +1438,35 @@
             "value" : "Vista grande"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "LEGI_CARD" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi Karte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi Card"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte Legi"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi card"
+          }
+        }
+      }
     },
     "LIVE_SUPPORT_OVER_WHATSAPP" : {
       "localizations" : {
@@ -3323,8 +3350,63 @@
             "value" : "Mostra nei menu"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "SHOW_LEGI_CARD" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi-Karte anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Legi card"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la carte Legi"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra la Legi card"
+          }
+        }
+      }
+    },
+    "SHOW_LEGI_CARD_DESCRIPTION" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet die App und zeigt deine Legi-Karte an."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the app and show your Legi card."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre l'application et affiche ta carte Legi."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apre l'app e mostra la tua Legi card."
+          }
+        }
+      }
     },
     "SMART_SORTING" : {
       "localizations" : {

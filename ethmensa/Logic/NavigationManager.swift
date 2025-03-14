@@ -23,6 +23,12 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
         category: String(describing: NavigationManager.self)
     )
 
+    /// A published property that holds the current sheet type to be displayed.
+    /// When this property is updated, the view will reactively update to show the corresponding sheet.
+    /// - Note: The `SheetType` is an enum that defines the different types of sheets that can be presented.
+    @Published var sheet: SheetType?
+
+#if !WIDGET
     /// A published property that holds the currently selected Mensa.
     /// When this property is updated, any views observing it will be notified.
     @Published var selectedMensa: Mensa?
@@ -34,11 +40,6 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     /// A published property that allows overriding the selected weekday code.
     /// If set, this value will be used instead of `selectedWeekdayCode`.
     @Published var selectedWeekdayCodeOverride: Int?
-
-    /// A published property that holds the current sheet type to be displayed.
-    /// When this property is updated, the view will reactively update to show the corresponding sheet.
-    /// - Note: The `SheetType` is an enum that defines the different types of sheets that can be presented.
-    @Published var sheet: SheetType?
 
 #if !os(watchOS)
     /// The identifier for the Mensa obtained from a universal link.
@@ -112,8 +113,10 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
         }.store(in: &subscribers)
     }
 #endif
+#endif
 }
 
+#if !WIDGET
 extension NavigationManager {
     /// An example instance of `NavigationManager` for testing or preview purposes.
     /// This instance is initialized with a selected mensa set to the example mensa.
@@ -121,3 +124,4 @@ extension NavigationManager {
         selectedMensa: .example
     )
 }
+#endif

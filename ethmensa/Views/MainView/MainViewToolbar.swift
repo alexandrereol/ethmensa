@@ -34,6 +34,13 @@ struct MainViewToolbar: ToolbarContent {
                 Image(systemName: "square.text.square")
             }
         }
+#if !os(watchOS) && !os(visionOS) && !APPCLIP && !targetEnvironment(macCatalyst)
+        ToolbarItem(placement: .topBarTrailing) {
+            Button("LEGI_CARD", systemImage: "person.text.rectangle") {
+                NavigationManager.shared.sheet = .legiCard
+            }
+        }
+#endif
 #if !APPCLIP
         ToolbarItem(placement: .topBarTrailing) {
             Button("SETTINGS", systemImage: "gear") {

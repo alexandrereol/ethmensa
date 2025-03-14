@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2909FBFA2AA0C846002846C6 /* MenuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909FBF92AA0C846002846C6 /* MenuCellView.swift */; };
 		2909FBFE2AA0CE29002846C6 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909FBFD2AA0CE29002846C6 /* NavigationManager.swift */; };
+		291305432D830B94007EEC84 /* LegiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291305402D830B94007EEC84 /* LegiView.swift */; };
 		291872142B74C12A00AC666A /* DetailMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291872132B74C12A00AC666A /* DetailMenuView.swift */; };
 		291872162B74C1DD00AC666A /* SettingsAppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291872152B74C1DD00AC666A /* SettingsAppearanceView.swift */; };
 		291872182B74C6A300AC666A /* Allergen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291872172B74C6A300AC666A /* Allergen.swift */; };
@@ -394,6 +395,18 @@
 		29C0B0A82B21C6E00065478D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C0B0A62B21C6400065478D /* Strings.swift */; };
 		29C0B0A92B21C6E30065478D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C0B0A62B21C6400065478D /* Strings.swift */; };
 		29C0B0AB2B21C96B0065478D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 29C0B0A42B21C61C0065478D /* Localizable.xcstrings */; };
+		29CEE1432D842CCC00C6D257 /* ShowLegiIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE1422D842CCC00C6D257 /* ShowLegiIntent.swift */; };
+		29CEE18B2D84301B00C6D257 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CEE18A2D84301B00C6D257 /* WidgetKit.framework */; };
+		29CEE18D2D84301B00C6D257 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CEE18C2D84301B00C6D257 /* SwiftUI.framework */; };
+		29CEE1902D84301B00C6D257 /* ethmensaWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE18F2D84301B00C6D257 /* ethmensaWidgets.swift */; };
+		29CEE1922D84301B00C6D257 /* ShowLegiWidgetControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE1912D84301B00C6D257 /* ShowLegiWidgetControl.swift */; };
+		29CEE1962D84301C00C6D257 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29CEE1952D84301C00C6D257 /* Assets.xcassets */; };
+		29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29CEE1882D84301B00C6D257 /* widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		29CEE1A12D84311800C6D257 /* ShowLegiIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE1422D842CCC00C6D257 /* ShowLegiIntent.swift */; };
+		29CEE1A22D84315600C6D257 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2909FBFD2AA0CE29002846C6 /* NavigationManager.swift */; };
+		29CEE1A32D84321C00C6D257 /* AppViewSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999A21E2C71F55C00451D18 /* AppViewSheets.swift */; };
+		29CEE1A42D84326D00C6D257 /* LegiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291305402D830B94007EEC84 /* LegiView.swift */; };
+		29CEE1A52D84329000C6D257 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BC9ACC2D47FA1800DE6AA6 /* StringExtension.swift */; };
 		29D204B32AE97666005416D4 /* SharedWithYouAttributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D204B22AE97666005416D4 /* SharedWithYouAttributionView.swift */; };
 		29D204B62AE9768A005416D4 /* OpeningTimesCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D204B52AE9768A005416D4 /* OpeningTimesCircle.swift */; };
 		29D204B82AE976C2005416D4 /* StandardMensaCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D204B72AE976C2005416D4 /* StandardMensaCellView.swift */; };
@@ -447,6 +460,13 @@
 			remoteGlobalIDString = 29550BD22AEADD550014F07F;
 			remoteInfo = Clip;
 		};
+		29CEE1982D84301C00C6D257 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 294E16312A8E22C3000A3AB6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29CEE1872D84301B00C6D257;
+			remoteInfo = widgetExtension;
+		};
 		29E53F9A2AED5D4500BCDB65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 294E16312A8E22C3000A3AB6 /* Project object */;
@@ -463,6 +483,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,6 +516,7 @@
 		2904E3152B7258390072E422 /* visionos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = visionos.entitlements; sourceTree = "<group>"; };
 		2909FBF92AA0C846002846C6 /* MenuCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCellView.swift; sourceTree = "<group>"; };
 		2909FBFD2AA0CE29002846C6 /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		291305402D830B94007EEC84 /* LegiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegiView.swift; sourceTree = "<group>"; };
 		291872132B74C12A00AC666A /* DetailMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenuView.swift; sourceTree = "<group>"; };
 		291872152B74C1DD00AC666A /* SettingsAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearanceView.swift; sourceTree = "<group>"; };
 		291872172B74C6A300AC666A /* Allergen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergen.swift; sourceTree = "<group>"; };
@@ -619,6 +641,15 @@
 		29BC9CFB2C5FA6B200419EA6 /* MainViewToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewToolbar.swift; sourceTree = "<group>"; };
 		29C0B0A42B21C61C0065478D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		29C0B0A62B21C6400065478D /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		29CEE1422D842CCC00C6D257 /* ShowLegiIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLegiIntent.swift; sourceTree = "<group>"; };
+		29CEE1882D84301B00C6D257 /* widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		29CEE18A2D84301B00C6D257 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		29CEE18C2D84301B00C6D257 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		29CEE18F2D84301B00C6D257 /* ethmensaWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ethmensaWidgets.swift; sourceTree = "<group>"; };
+		29CEE1912D84301B00C6D257 /* ShowLegiWidgetControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLegiWidgetControl.swift; sourceTree = "<group>"; };
+		29CEE1952D84301C00C6D257 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		29CEE1972D84301C00C6D257 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29CEE19B2D84301C00C6D257 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		29D204B22AE97666005416D4 /* SharedWithYouAttributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedWithYouAttributionView.swift; sourceTree = "<group>"; };
 		29D204B52AE9768A005416D4 /* OpeningTimesCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTimesCircle.swift; sourceTree = "<group>"; };
 		29D204B72AE976C2005416D4 /* StandardMensaCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardMensaCellView.swift; sourceTree = "<group>"; };
@@ -683,6 +714,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29CEE1852D84301B00C6D257 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29CEE18D2D84301B00C6D257 /* SwiftUI.framework in Frameworks */,
+				29CEE18B2D84301B00C6D257 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,8 +821,10 @@
 				293CAF6E2D6DCFFD0066E9F8 /* .swiftlint.yml */,
 				294E163B2A8E22C3000A3AB6 /* ethmensa */,
 				29550BD42AEADD550014F07F /* clip */,
+				29CEE1A02D84304100C6D257 /* widget */,
 				2982AFA82AEC4FCC008B2B41 /* watchos */,
 				292074512C6FA75500A453F5 /* TestFlight */,
+				29CEE1892D84301B00C6D257 /* Frameworks */,
 				294E163A2A8E22C3000A3AB6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -794,6 +836,7 @@
 				29550BD32AEADD550014F07F /* ETH Mensa Clip.app */,
 				2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */,
 				291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */,
+				29CEE1882D84301B00C6D257 /* widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1051,6 +1094,27 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		29CEE1892D84301B00C6D257 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29CEE18A2D84301B00C6D257 /* WidgetKit.framework */,
+				29CEE18C2D84301B00C6D257 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		29CEE1A02D84304100C6D257 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				29CEE19B2D84301C00C6D257 /* widgetExtension.entitlements */,
+				29CEE1972D84301C00C6D257 /* Info.plist */,
+				29CEE1952D84301C00C6D257 /* Assets.xcassets */,
+				29CEE18F2D84301B00C6D257 /* ethmensaWidgets.swift */,
+				29CEE1912D84301B00C6D257 /* ShowLegiWidgetControl.swift */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
 		29D204B42AE9766F005416D4 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,6 +1144,7 @@
 			children = (
 				29BC9AC02D47FA0F00DE6AA6 /* CustomContentUnavailableView.swift */,
 				2937DC472A93AC5C003E0573 /* DebugView.swift */,
+				291305402D830B94007EEC84 /* LegiView.swift */,
 				29BC9AC12D47FA0F00DE6AA6 /* SafariWebView.swift */,
 				29BC9AC52D47FA0F00DE6AA6 /* UIActivityView.swift */,
 			);
@@ -1108,12 +1173,13 @@
 		29EDEFEF2D36E30F00B7A12F /* AppIntents */ = {
 			isa = PBXGroup;
 			children = (
-				2935E2E22D36E95C00853FA5 /* ShortcutsProvider.swift */,
 				299751BD2B35F71100C11342 /* FilterIntents.swift */,
-				2935E2E62D36E97A00853FA5 /* OpenMensaIntent.swift */,
-				29D8F7D22D5B7B7A004FE342 /* SearchIntent.swift */,
 				29EDEFF02D36E31900B7A12F /* MensaEntity.swift */,
 				2935E2F32D36F49300853FA5 /* MensaEntity+IndexedEntity.swift */,
+				2935E2E62D36E97A00853FA5 /* OpenMensaIntent.swift */,
+				29D8F7D22D5B7B7A004FE342 /* SearchIntent.swift */,
+				2935E2E22D36E95C00853FA5 /* ShortcutsProvider.swift */,
+				29CEE1422D842CCC00C6D257 /* ShowLegiIntent.swift */,
 			);
 			path = AppIntents;
 			sourceTree = "<group>";
@@ -1171,6 +1237,7 @@
 			dependencies = (
 				29550BE12AEADD560014F07F /* PBXTargetDependency */,
 				29E53F9B2AED5D4500BCDB65 /* PBXTargetDependency */,
+				29CEE1992D84301C00C6D257 /* PBXTargetDependency */,
 			);
 			name = ethmensa;
 			packageProductDependencies = (
@@ -1222,6 +1289,25 @@
 			productReference = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		29CEE1872D84301B00C6D257 /* widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29CEE19D2D84301C00C6D257 /* Build configuration list for PBXNativeTarget "widget" */;
+			buildPhases = (
+				29CEE1842D84301B00C6D257 /* Sources */,
+				29CEE1852D84301B00C6D257 /* Frameworks */,
+				29CEE1862D84301B00C6D257 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = widget;
+			packageProductDependencies = (
+			);
+			productName = widgetExtension;
+			productReference = 29CEE1882D84301B00C6D257 /* widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1229,7 +1315,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					291C81DA2B5998BB00730BFD = {
@@ -1243,6 +1329,9 @@
 					};
 					2982AFA32AEC4FCC008B2B41 = {
 						CreatedOnToolsVersion = 15.0.1;
+					};
+					29CEE1872D84301B00C6D257 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
@@ -1271,6 +1360,7 @@
 				29550BD22AEADD550014F07F /* clip */,
 				2982AFA32AEC4FCC008B2B41 /* watchos */,
 				291C81DA2B5998BB00730BFD /* visionos */,
+				29CEE1872D84301B00C6D257 /* widget */,
 			);
 		};
 /* End PBXProject section */
@@ -1337,6 +1427,14 @@
 				29D608552D5A1F7D00EED2DE /* AppShortcuts.strings in Resources */,
 				291C824D2B599D1600730BFD /* PrivacyInfo.xcprivacy in Resources */,
 				291C81D62B59978200730BFD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29CEE1862D84301B00C6D257 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29CEE1962D84301C00C6D257 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,6 +1678,7 @@
 				293C3DDB2B74DE4600B594BE /* SettingsGeneralView.swift in Sources */,
 				299F76902B87891F00D49AC4 /* MainViewToolbar.swift in Sources */,
 				293C3DD82B74DDDC00B594BE /* SettingsiCloudView.swift in Sources */,
+				291305432D830B94007EEC84 /* LegiView.swift in Sources */,
 				299751BB2B35E24200C11342 /* MapHeaderViewModel.swift in Sources */,
 				2939D62E2B04CFA80089A3EB /* ArrayExtension.swift in Sources */,
 				29BC9CF82C5F79DD00419EA6 /* Mensa+OpeningTimes.swift in Sources */,
@@ -1625,6 +1724,7 @@
 				299F76A22B878F8100D49AC4 /* ClickCountAndWeekdayModifier.swift in Sources */,
 				292DC2842B4AFCDB00A98280 /* AdvancedSettingsView.swift in Sources */,
 				29A23F0F2CB50ECC00AA8CC3 /* Sound.swift in Sources */,
+				29CEE1432D842CCC00C6D257 /* ShowLegiIntent.swift in Sources */,
 				29C0B0A72B21C6400065478D /* Strings.swift in Sources */,
 				294E16712A8E28D3000A3AB6 /* SettingsView.swift in Sources */,
 				29D204B82AE976C2005416D4 /* StandardMensaCellView.swift in Sources */,
@@ -1815,6 +1915,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		29CEE1842D84301B00C6D257 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29CEE1902D84301B00C6D257 /* ethmensaWidgets.swift in Sources */,
+				29CEE1A52D84329000C6D257 /* StringExtension.swift in Sources */,
+				29CEE1A32D84321C00C6D257 /* AppViewSheets.swift in Sources */,
+				29CEE1A22D84315600C6D257 /* NavigationManager.swift in Sources */,
+				29CEE1922D84301B00C6D257 /* ShowLegiWidgetControl.swift in Sources */,
+				29CEE1A12D84311800C6D257 /* ShowLegiIntent.swift in Sources */,
+				29CEE1A42D84326D00C6D257 /* LegiView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1823,6 +1937,11 @@
 			platformFilter = ios;
 			target = 29550BD22AEADD550014F07F /* clip */;
 			targetProxy = 29550BE02AEADD560014F07F /* PBXContainerItemProxy */;
+		};
+		29CEE1992D84301C00C6D257 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29CEE1872D84301B00C6D257 /* widget */;
+			targetProxy = 29CEE1982D84301C00C6D257 /* PBXContainerItemProxy */;
 		};
 		29E53F9B2AED5D4500BCDB65 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2282,6 +2401,79 @@
 			};
 			name = Release;
 		};
+		29CEE19E2D84301C00C6D257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = widget/widgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z6384MH549;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited) WIDGET";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29CEE19F2D84301C00C6D257 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = widget/widgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z6384MH549;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WIDGET;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2326,6 +2518,15 @@
 			buildConfigurations = (
 				2982AFB32AEC4FCD008B2B41 /* Debug */,
 				2982AFB42AEC4FCD008B2B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29CEE19D2D84301C00C6D257 /* Build configuration list for PBXNativeTarget "widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29CEE19E2D84301C00C6D257 /* Debug */,
+				29CEE19F2D84301C00C6D257 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
