@@ -17,14 +17,9 @@ extension Array<UIOnboardingFeature> {
                 description: .init(localized: "ONBOARDING_FEATURE_1_DESCRIPTION")
             ),
             .init(
-                icon: .init(systemName: "photo")!,
+                icon: .init(systemName: "person.text.rectangle.fill")!,
                 title: .init(localized: "ONBOARDING_FEATURE_2_TITLE"),
                 description: .init(localized: "ONBOARDING_FEATURE_2_DESCRIPTION")
-            ),
-            .init(
-                icon: .init(systemName: "gear")!,
-                title: .init(localized: "ONBOARDING_FEATURE_3_TITLE"),
-                description: .init(localized: "ONBOARDING_FEATURE_3_DESCRIPTION")
             )
         ]
     }

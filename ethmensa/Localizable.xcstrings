@@ -220,8 +220,35 @@
             "value" : "Informazioni su %@"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "ACCESS_LEGI_CARD_IN_APP" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greife in der App auf deine Legi Card zu"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access your Legi Card in-app"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accédez à votre carte Legi dans l'application"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accedi alla tua Legi Card nell'app"
+          }
+        }
+      }
     },
     "ADVANCED_SETTINGS" : {
       "localizations" : {
@@ -394,66 +421,7 @@
             "value" : "Aspetto"
           }
         }
-      },
-      "proofread" : true
-    },
-    "BETTER_ALLERGEN_INFO" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bessere Informationen zu Allergenen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Better allergen information"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meilleures informations sur les allergènes"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Migliori informazioni sugli allergeni"
-          }
-        }
-      },
-      "proofread" : true
-    },
-    "BETTER_ALLERGEN_INFO_SUBTITLE" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erhalten Sie verbesserte Informationen zu Allergenen mit der Möglichkeit, leichter nach Wochentagen zu filtern."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get improved allergen information with the option to more easily filter by weekday."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtenez des informations améliorées sur les allergènes avec l’option de filtrer par jour de la semaine."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ottieni informazioni migliorate sugli allergeni con l’opzione di filtrare più facilmente per giorno della settimana."
-          }
-        }
-      },
-      "proofread" : true
+      }
     },
     "CELERY" : {
       "localizations" : {
@@ -1438,8 +1406,63 @@
             "value" : "Vista grande"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "LEGI_CARD" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi Karte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi Card"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte Legi"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi card"
+          }
+        }
+      }
+    },
+    "LEGI_CARD_SUBTITLE" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die ETH Zürich Legi Card wird digital! Greife in der App, über den Sperrbildschirm oder das Kontrollzentrum darauf zu. Funktioniert in jeder ETH und USZ Mensa."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The ETH Zürich Legi Card is going digital! Access it in-app, from the Lockscreen or the Control Center. Works at any ETH and USZ Mensa."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La carte Legi de l'ETH Zürich devient numérique ! Accédez-y dans l'application, depuis l'écran de verrouillage ou le Centre de contrôle. Fonctionne dans toutes les Mensas ETH et USZ."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La Legi Card di ETH Zürich diventa digitale! Accedila nell'app, dalla schermata di blocco o dal Centro di Controllo. Funziona in qualunque Mensa ETH e USZ."
+          }
+        }
+      }
     },
     "LIVE_SUPPORT_OVER_WHATSAPP" : {
       "localizations" : {
@@ -1467,8 +1490,7 @@
             "value" : "Supporto dal vivo su WhatsApp"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "LOCATION" : {
       "localizations" : {
@@ -1496,8 +1518,7 @@
             "value" : "Posizione"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "LOCATIONS_BASED_NOTIFICATIONS" : {
       "localizations" : {
@@ -1525,8 +1546,7 @@
             "value" : "Notifiche basate sulla posizione"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "LOCATIONS_BASED_NOTIFICATIONS_FOOTER" : {
       "localizations" : {
@@ -1554,8 +1574,7 @@
             "value" : "Ricevi notifiche solo se sei vicino a ETH Zentrum o ETH Hönggerberg. Questo richiede l'accesso \"sempre\" alla tua posizione. L'app utilizza il geofencing, il che significa che l'app non accede direttamente alla tua posizione. Viene solo avvisata dal tuo dispositivo quando entri o esci dal campus. Questo utilizza esclusivamente l'elaborazione sul dispositivo, nessun log viene mantenuto e i dati della tua posizione non lasciano mai il tuo dispositivo."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "LUPIN" : {
       "localizations" : {
@@ -1583,8 +1602,7 @@
             "value" : "lupino"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MEAL" : {
       "localizations" : {
@@ -1612,8 +1630,7 @@
             "value" : "Pasto"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MENSA" : {
       "localizations" : {
@@ -1641,8 +1658,7 @@
             "value" : "Mensa"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MENSA_CELL_SIZE" : {
       "localizations" : {
@@ -1670,8 +1686,7 @@
             "value" : "Dimensione della cella Mensa"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MENSA_NAME" : {
       "localizations" : {
@@ -1699,8 +1714,7 @@
             "value" : "Nome mensa"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MENU" : {
       "localizations" : {
@@ -1728,8 +1742,7 @@
             "value" : "Menu"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MINIMAL_VIEW" : {
       "localizations" : {
@@ -1757,8 +1770,7 @@
             "value" : "Vista minima"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MOLLUSCS" : {
       "localizations" : {
@@ -1786,8 +1798,7 @@
             "value" : "molluschi"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MUSTARD" : {
       "localizations" : {
@@ -1815,8 +1826,7 @@
             "value" : "senape"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "MY_ALLERGENS" : {
       "localizations" : {
@@ -1844,66 +1854,7 @@
             "value" : "I miei allergeni"
           }
         }
-      },
-      "proofread" : true
-    },
-    "NEW_LANGUAGES" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neue Sprachen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New languages"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nouvelles langues"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nuove lingue"
-          }
-        }
-      },
-      "proofread" : true
-    },
-    "NEW_LANGUAGES_SUBTITLE" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die App ist jetzt in Deutsch, Französisch und Italienisch verfügbar!"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The app is now available in German, French and Italian!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'application est désormais disponible en allemand, français et italien !"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L’app è ora disponibile in tedesco, francese e italiano!"
-          }
-        }
-      },
-      "proofread" : true
+      }
     },
     "nil" : {
       "localizations" : {
@@ -1931,8 +1882,7 @@
             "value" : "nil"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO" : {
       "localizations" : {
@@ -1960,8 +1910,7 @@
             "value" : "No"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_ALLERGENS_SELECTED" : {
       "localizations" : {
@@ -1989,8 +1938,7 @@
             "value" : "Nessun allergene selezionato"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_MENSA_SELECTED" : {
       "localizations" : {
@@ -2018,8 +1966,7 @@
             "value" : "Nessuna Mensa selezionata"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_MENSA_SELECTED_MESSAGE" : {
       "localizations" : {
@@ -2047,8 +1994,7 @@
             "value" : "Seleziona una Mensa per vedere i suoi menu della settimana."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_MENU" : {
       "localizations" : {
@@ -2076,8 +2022,7 @@
             "value" : "Nessun menu"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_MENU_ON_THIS_DAY" : {
       "localizations" : {
@@ -2105,8 +2050,7 @@
             "value" : "Sfortunatamente, non è disponibile alcun menu in questo giorno. Forse la Mensa è chiusa o il menu non è stato pubblicato."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_RESULTS" : {
       "localizations" : {
@@ -2134,8 +2078,7 @@
             "value" : "Nessun risultato"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_RESULTS_FOR_SELECTED_FILTERS." : {
       "localizations" : {
@@ -2163,8 +2106,7 @@
             "value" : "Nessun risultato per i filtri selezionati."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NO_WEEKDAY_ALLERGEN_FILTER" : {
       "localizations" : {
@@ -2192,8 +2134,7 @@
             "value" : "Nessun filtro allergeni per giorni della settimana"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NOT_SUPPORTED" : {
       "localizations" : {
@@ -2221,8 +2162,7 @@
             "value" : "Non supportato"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NOTIFICATION_SOUND" : {
       "localizations" : {
@@ -2250,8 +2190,7 @@
             "value" : "Suono di notifica"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NOTIFICATIONS" : {
       "localizations" : {
@@ -2279,8 +2218,7 @@
             "value" : "Notifiche"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NUTS" : {
       "localizations" : {
@@ -2308,37 +2246,35 @@
             "value" : "noci"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ONBOARDING_FEATURE_1_DESCRIPTION" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Siehe die Menüs der verschiedenen ETH Zürich und UZH Mensen mit Beschreibungen und Allergenen."
+            "value" : "Sieh dir die Menüs der verschiedenen ETH Zürich und UZH Mensas mit Beschreibungen, Bildern und Allergenen an."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See the menus of various ETH Zürich and UZH Mensas with descriptions and allergens."
+            "value" : "See the menus of various ETH Zürich and UZH Mensas with descriptions, images and allergens."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voyez les menus de plusieurs Mensas ETH Zürich et UZH avec des descriptions et des allergènes."
+            "value" : "Consultez les menus de diverses Mensas ETH Zürich et UZH avec descriptions, images et allergènes."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Guarda i menu delle varie Mensas di ETH Zürich e UZH con descrizioni e allergeni."
+            "value" : "Guarda i menu delle varie Mensa ETH Zürich e UZH con descrizioni, immagini e allergeni."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ONBOARDING_FEATURE_1_TITLE" : {
       "localizations" : {
@@ -2366,124 +2302,63 @@
             "value" : "Controlla i menu settimanali"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ONBOARDING_FEATURE_2_DESCRIPTION" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In kompatiblen Mensen sehen Sie ein Bild des Gerichts, das Ihnen hilft zu entscheiden, wo Sie essen möchten."
+            "value" : "Die ETH Zürich Legi Card ist jetzt digital! Greife in der App, über den Sperrbildschirm oder das Kontrollzentrum zu, indem du dort ein Widget platzierst. Funktioniert in jeder ETH und USZ Mensa."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In compatible Mensas, you'll see an image of the dish helping you decide where to eat."
+            "value" : "The ETH Zürich Legi Card is now digital! Access it in-app, from the Lockscreen or the Control Center by placing a Widget Control there. Works at any ETH and USZ Mensa."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dans les Mensas compatibles, vous verrez une image du plat pour vous aider à décider où manger."
+            "value" : "La carte Legi de l'ETH Zürich est maintenant numérique ! Accédez-y dans l'application, depuis l'écran de verrouillage ou le Centre de contrôle en plaçant un widget de contrôle à cet endroit. Fonctionne dans toutes les Mensas ETH et USZ."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nelle Mensas compatibili, vedrai un'immagine del piatto che ti aiuta a decidere dove mangiare."
+            "value" : "La Legi Card di ETH Zürich è ora digitale! Accedila nell'app, dalla schermata di blocco o dal Centro di Controllo posizionando lì un Widget. Funziona in qualunque Mensa ETH e USZ."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ONBOARDING_FEATURE_2_TITLE" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bilder des Gerichts"
+            "value" : "Legi Card in der App"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Images of the dish"
+            "value" : "Legi Card in-app"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Images du plat"
+            "value" : "Carte Legi dans l'application"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Immagini del piatto"
+            "value" : "Legi Card nell'app"
           }
         }
-      },
-      "proofread" : true
-    },
-    "ONBOARDING_FEATURE_3_DESCRIPTION" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aus Respekt sind verschiedene Einstellungen und Funktionen standardmässig deaktiviert. Gehen Sie zu den Einstellungen, um alle Funktionen der App zu erkunden."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Out of respect, various settings and features are turned off by default. Go to settings to explore all the features of the app."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Par respect, divers réglages et fonctionnalités sont désactivés par défaut. Allez dans les paramètres pour explorer toutes les fonctionnalités de l'application."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Per rispetto, varie impostazioni e funzionalità sono disattivate per impostazione predefinita. Vai su impostazioni per esplorare tutte le funzionalità dell'app."
-          }
-        }
-      },
-      "proofread" : true
-    },
-    "ONBOARDING_FEATURE_3_TITLE" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mehr in den Einstellungen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "More in settings"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plus dans les paramètres"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Di più nelle impostazioni"
-          }
-        }
-      },
-      "proofread" : true
+      }
     },
     "ONBOARDING_PRIVACY_POLICY_MESSAGE" : {
       "localizations" : {
@@ -2511,8 +2386,7 @@
             "value" : "L'app non contiene alcun tracciamento o analisi. Se riscontri problemi, ti preghiamo di contattarci utilizzando le opzioni disponibili nell'app."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN" : {
       "localizations" : {
@@ -2540,8 +2414,7 @@
             "value" : "Aperto"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN_AND_CLOSED" : {
       "localizations" : {
@@ -2569,8 +2442,7 @@
             "value" : "Aperto e chiuso"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN_APP_AND_SHOW_CURRENTLY_OPEN" : {
       "localizations" : {
@@ -2598,8 +2470,7 @@
             "value" : "Apri l'app e mostra le mense attualmente aperte."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN_APP_AND_SHOW_HONGG_MENSAS" : {
       "localizations" : {
@@ -2627,8 +2498,7 @@
             "value" : "Apri l'app e mostra le mense di Hönggerberg."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN_APP_AND_SHOW_IRCHEL_MENSAS" : {
       "localizations" : {
@@ -2656,8 +2526,7 @@
             "value" : "Apri l'app e mostra le mense di Irchel."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN_APP_AND_SHOW_ZENTRUM_MENSAS" : {
       "localizations" : {
@@ -2685,8 +2554,7 @@
             "value" : "Apri l'app e mostra le Mensa di Zentrum."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN_SELECTED_MENSA" : {
       "localizations" : {
@@ -2714,8 +2582,7 @@
             "value" : "Apri la Mensa selezionata"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "OPEN_SETTINGS" : {
       "localizations" : {
@@ -2743,8 +2610,7 @@
             "value" : "Apri impostazioni"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "PEANUTS" : {
       "localizations" : {
@@ -2772,8 +2638,7 @@
             "value" : "arachidi"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "PERMISSION_DENIED" : {
       "localizations" : {
@@ -2801,8 +2666,7 @@
             "value" : "Permesso negato"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "PRICE_TO_SHOW" : {
       "localizations" : {
@@ -2830,8 +2694,7 @@
             "value" : "Prezzo da mostrare"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "PRICE_TO_SHOW_FOOTER" : {
       "localizations" : {
@@ -2859,8 +2722,7 @@
             "value" : "Questo determinerà dinamicamente quale prezzo mostrarti. In alcune Mensas dove alcuni prezzi non sono disponibili, vedresti il prezzo più economico applicabile."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "PRIVACY_POLICY" : {
       "localizations" : {
@@ -2888,8 +2750,7 @@
             "value" : "Informativa sulla privacy"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "RESET_FILTERS" : {
       "localizations" : {
@@ -2917,8 +2778,7 @@
             "value" : "Reimposta filtri"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "RESET_FILTERS_AND_SEARCH" : {
       "localizations" : {
@@ -2946,8 +2806,7 @@
             "value" : "Reimposta filtri e cerca"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "RESET_MAPS_CACHE" : {
       "localizations" : {
@@ -2975,8 +2834,7 @@
             "value" : "Reimposta cache mappe"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "RESET_SETTINGS" : {
       "localizations" : {
@@ -3004,8 +2862,7 @@
             "value" : "Ripristina impostazioni"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "RESET_SETTINGS_AND_DATA" : {
       "localizations" : {
@@ -3033,8 +2890,7 @@
             "value" : "Ripristina impostazioni e dati"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "RESET_SMART_SORTING" : {
       "localizations" : {
@@ -3062,8 +2918,7 @@
             "value" : "Ripristina ordinamento intelligente"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "RETRY" : {
       "localizations" : {
@@ -3091,8 +2946,7 @@
             "value" : "Riprova"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "REVIEW_ON_APP_STORE" : {
       "localizations" : {
@@ -3120,8 +2974,7 @@
             "value" : "Recensisci su App Store"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SEARCH_IN_ETH_MENSA" : {
       "localizations" : {
@@ -3149,8 +3002,7 @@
             "value" : "Ricerca in ETH Mensa"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SEARCH_MENSAS" : {
       "localizations" : {
@@ -3178,8 +3030,7 @@
             "value" : "Cerca mensas"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SESAME" : {
       "localizations" : {
@@ -3207,8 +3058,7 @@
             "value" : "sesamo"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SETTINGS" : {
       "localizations" : {
@@ -3236,8 +3086,7 @@
             "value" : "Impostazioni"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SHARE" : {
       "localizations" : {
@@ -3265,8 +3114,7 @@
             "value" : "Condividi"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SHARE_APP" : {
       "localizations" : {
@@ -3294,8 +3142,7 @@
             "value" : "Condividi l'app"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SHOW_IN_MENUS" : {
       "localizations" : {
@@ -3323,8 +3170,63 @@
             "value" : "Mostra nei menu"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "SHOW_LEGI_CARD" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legi-Karte anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Legi card"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la carte Legi"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra la Legi card"
+          }
+        }
+      }
+    },
+    "SHOW_LEGI_CARD_DESCRIPTION" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet die App und zeigt deine Legi-Karte an."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the app and show your Legi card."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre l'application et affiche ta carte Legi."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apre l'app e mostra la tua Legi card."
+          }
+        }
+      }
     },
     "SMART_SORTING" : {
       "localizations" : {
@@ -3352,8 +3254,7 @@
             "value" : "Ordinamento intelligente"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SORT_BY" : {
       "localizations" : {
@@ -3381,8 +3282,7 @@
             "value" : "Ordina per"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SORTING_BY_NAME" : {
       "localizations" : {
@@ -3410,8 +3310,7 @@
             "value" : "Ordinamento per nome"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SOYA" : {
       "localizations" : {
@@ -3439,8 +3338,7 @@
             "value" : "soia"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "STAFF" : {
       "localizations" : {
@@ -3468,8 +3366,7 @@
             "value" : "Personale"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "STANDARD_VIEW" : {
       "localizations" : {
@@ -3497,8 +3394,7 @@
             "value" : "Vista standard"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "STUDENT" : {
       "localizations" : {
@@ -3526,8 +3422,7 @@
             "value" : "Studente"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SULPHURDIOXIDE" : {
       "localizations" : {
@@ -3555,8 +3450,7 @@
             "value" : "anidride solforosa"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SUPPORT_OVER_EMAIL" : {
       "localizations" : {
@@ -3584,8 +3478,7 @@
             "value" : "Supporto via Email"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SYNC_SETTINGS" : {
       "localizations" : {
@@ -3613,8 +3506,7 @@
             "value" : "Sincronizza impostazioni"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SYNCING_OVER_ICLOUD" : {
       "localizations" : {
@@ -3642,8 +3534,7 @@
             "value" : "Sincronizzazione su iCloud"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "SYNCING_OVER_ICLOUD_FOOTER" : {
       "localizations" : {
@@ -3671,8 +3562,7 @@
             "value" : "Sincronizza le tue impostazioni su iCloud ai tuoi altri dispositivi."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "THERE_ARE_NO_MENUS_AVAILABLE_TODAY." : {
       "localizations" : {
@@ -3700,8 +3590,7 @@
             "value" : "Non ci sono menu disponibili oggi."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "THIS_ACTION_IS_IRREVERSIBLE" : {
       "localizations" : {
@@ -3729,8 +3618,7 @@
             "value" : "Questa azione è irreversibile."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TIME_OF_NOTIFICATIONS" : {
       "localizations" : {
@@ -3758,8 +3646,7 @@
             "value" : "Ora delle notifiche"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TIME_OF_NOTIFICATIONS_FOOTER" : {
       "localizations" : {
@@ -3787,8 +3674,7 @@
             "value" : "Scegli a che ora desideri ricevere la notifica quotidiana."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "UNIVERSAL_LINK_NO_MENSA" : {
       "localizations" : {
@@ -3816,8 +3702,7 @@
             "value" : "URL non valido"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "UNIVERSAL_LINK_NO_MENSA_MESSAGE" : {
       "localizations" : {
@@ -3845,8 +3730,7 @@
             "value" : "Qualcosa è andato storto poiché non ci sono corrispondenze Mensa per quell'URL. Controlla con il mittente se sta utilizzando l'ultima versione dell'app."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "UPDATE_GO_TO_APP_STORE" : {
       "localizations" : {
@@ -3874,8 +3758,7 @@
             "value" : "Vai su App Store"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "UPDATE_REQUIRED" : {
       "localizations" : {
@@ -3903,8 +3786,7 @@
             "value" : "Aggiornamento richiesto"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "UPDATE_REQUIRED_LABEL_1" : {
       "localizations" : {
@@ -3932,8 +3814,7 @@
             "value" : "Grazie per essere un utente attivo dell'app. Purtroppo la tua app è obsoleta e non è più supportata dal server."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "UPDATE_REQUIRED_LABEL_2" : {
       "localizations" : {
@@ -3961,8 +3842,7 @@
             "value" : "Per la migliore esperienza, si consiglia di attivare gli aggiornamenti automatici nelle impostazioni dell'App Store."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "UPDATE_TURN_ON_AUTOMATIC_UPDATES" : {
       "localizations" : {
@@ -3990,66 +3870,7 @@
             "value" : "Attiva aggiornamenti automatici"
           }
         }
-      },
-      "proofread" : true
-    },
-    "VARIOUS_UI_AND_ANMIATION_IMPROVEMENTS" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verschiedene Verbesserungen der Benutzeroberfläche und Animationen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Various UI and animation improvements"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diverses améliorations de l'interface utilisateur et des animations"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Varie migliorie all’interfaccia utente e alle animazioni"
-          }
-        }
-      },
-      "proofread" : true
-    },
-    "VARIOUS_UI_AND_ANMIATION_IMPROVEMENTS_SUBTITLE" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Für ein noch besseres App-Erlebnis"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For a even better app experience"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pour une expérience encore meilleure avec l'application"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Per un’esperienza dell’app ancora migliore"
-          }
-        }
-      },
-      "proofread" : true
+      }
     },
     "WEEKDAY" : {
       "localizations" : {
@@ -4077,8 +3898,7 @@
             "value" : "Giorno della settimana"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "WELCOME_TO" : {
       "localizations" : {
@@ -4106,8 +3926,7 @@
             "value" : "Benvenuto in"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "WHATS_NEW_IN_VERSION_%@" : {
       "localizations" : {
@@ -4135,8 +3954,7 @@
             "value" : "Novità nella versione %@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "WHEAT" : {
       "localizations" : {
@@ -4164,8 +3982,7 @@
             "value" : "grano"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "YES" : {
       "localizations" : {
@@ -4193,8 +4010,7 @@
             "value" : "Sì"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ZENTRUM" : {
       "localizations" : {
@@ -4222,8 +4038,7 @@
             "value" : "Zentrum"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ZENTRUM_MENSAS" : {
       "localizations" : {
@@ -4251,8 +4066,7 @@
             "value" : "Zentrum Mensas"
           }
         }
-      },
-      "proofread" : true
+      }
     }
   },
   "version" : "1.0"
