@@ -20,7 +20,6 @@ struct LegiView: View {
                     url: "https://eduapp.ethz.ch/eth-card".toURL()!
                 )
             )
-            .disabled(true)
             .ignoresSafeArea(.all, edges: .bottom)
             .navigationTitle("LEGI_CARD")
             .navigationBarTitleDisplayMode(.inline)
@@ -50,7 +49,7 @@ struct WebView: UIViewRepresentable {
         let webView = WKWebView()
         webView.uiDelegate = context.coordinator
         webView.navigationDelegate = context.coordinator
-        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.delegate = context.coordinator
         return webView
     }
 
@@ -62,8 +61,7 @@ struct WebView: UIViewRepresentable {
         Coordinator()
     }
 
-    class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
-
+    class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
         func webView(
             _ webView: WKWebView,
             didFinish navigation: WKNavigation!
@@ -75,7 +73,10 @@ struct WebView: UIViewRepresentable {
                 ".header {visibility: hidden !important}",
                 ".sidebar {visibility: hidden !important}",
                 "#eth-card-display {background: white;}",
-                "#main-content {margin: 0 !important;background: \(backgroundColor) !important}",
+                ".barcode-wrap {height: 70px !important}",
+                ".barcode-wrap {padding-top: 20px !important}",
+                "#main-content {margin: 0 !important}",
+                "#main-content {background: \(backgroundColor) !important}",
                 "#app {background: \(backgroundColor)}",
                 ".layout {background: \(backgroundColor)}",
                 ".time-display.date-time {color: \(foregroundColor) !important}",
@@ -87,6 +88,13 @@ struct WebView: UIViewRepresentable {
                 "document.head.appendChild(style);"
             ].joined(separator: "")
             webView.evaluateJavaScript(jsc, completionHandler: nil)
+        }
+
+        func scrollViewWillBeginZooming(
+            _ scrollView: UIScrollView,
+            with view: UIView?
+        ) {
+            scrollView.pinchGestureRecognizer?.isEnabled = false
         }
     }
 }
@@ -104,7 +112,7 @@ private extension UIColor {
 }
 
 #Preview {
-    Text("Hello World!")
+    Text(String("Hello World!"))
         .sheet(isPresented: .constant(true)) {
             LegiView()
         }
