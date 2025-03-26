@@ -28,8 +28,7 @@
             "value" : "ETH Mensa"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CFBundleName" : {
       "comment" : "Bundle name",
@@ -58,8 +57,7 @@
             "value" : "ETH Mensa"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NSLocationAlwaysAndWhenInUseUsageDescription" : {
       "extractionState" : "manual",
@@ -88,11 +86,11 @@
             "value" : "La posizione è utilizzata per la geofencing del tuo dispositivo presso gli edifici universitari nelle vicinanze."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NSLocationUsageDescription" : {
       "comment" : "Privacy - Location Usage Description",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -118,8 +116,7 @@
             "value" : "La posizione è utilizzata per la geofencing del tuo dispositivo presso gli edifici universitari nelle vicinanze per inviare notifiche."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "NSLocationWhenInUseUsageDescription" : {
       "extractionState" : "manual",
@@ -148,8 +145,7 @@
             "value" : "La posizione è utilizzata per la geofencing del tuo dispositivo presso gli edifici universitari nelle vicinanze."
           }
         }
-      },
-      "proofread" : true
+      }
     }
   },
   "version" : "1.0"
