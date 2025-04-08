@@ -9,7 +9,8 @@ import WebKit
 
 struct LegiView: View {
 
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) var scenePhase
 
     @State private var previousBrightness = CGFloat(1.0)
 
@@ -25,11 +26,20 @@ struct LegiView: View {
             .navigationBarTitleDisplayMode(.inline)
             .background(Color(uiColor: .secondarySystemBackground))
             .onAppear {
-                previousBrightness = UIScreen.main.brightness
-                UIScreen.main.brightness = 1.0
+                setBrightness()
             }
             .onDisappear {
-                UIScreen.main.brightness = previousBrightness
+                restorePrevBrightness()
+            }
+            .onChange(of: scenePhase) { scenePhase in
+                switch scenePhase {
+                case .active:
+                    setBrightness()
+                case .inactive, .background:
+                    restorePrevBrightness()
+                @unknown default:
+                    break
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -39,6 +49,15 @@ struct LegiView: View {
                 }
             }
         }
+    }
+
+    private func setBrightness() {
+        previousBrightness = UIScreen.main.brightness
+        UIScreen.main.brightness = 1.0
+    }
+
+    private func restorePrevBrightness() {
+        UIScreen.main.brightness = previousBrightness
     }
 }
 
