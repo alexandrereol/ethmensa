@@ -30,7 +30,7 @@ private struct OpeningTimeFilterButtonView: View {
     var body: some View {
         Menu(settingsManager.mensaShowType.localizedString) {
             Picker(
-                "",
+                String(""),
                 selection: $settingsManager.mensaShowType.animation()
             ) {
                 ForEach(MensaShowType.allCases, id: \.rawValue) { showType in
@@ -52,7 +52,7 @@ private struct LocationFilterButtonView: View {
     var body: some View {
         Menu(settingsManager.mensaLocationType.localizedString) {
             Picker(
-                "",
+                String(""),
                 selection: $settingsManager.mensaLocationType.animation()
             ) {
                 ForEach(Campus.CampusType.allCases, id: \.rawValue) { showType in
@@ -74,7 +74,7 @@ private struct SortTypeButtonView: View {
     var body: some View {
         Menu(settingsManager.sortBy.localizedString) {
             Picker(
-                "",
+                String(""),
                 selection: $settingsManager.sortBy.animation()
             ) {
                 ForEach(SortType.allCases, id: \.rawValue) { showType in
@@ -103,7 +103,7 @@ private struct WeekdayButtonView: View {
         if !SettingsManager.shared.allergens.isEmpty {
             Menu(menuString) {
                 Picker(
-                    "",
+                    String(""),
                     selection: $navigationManager.selectedWeekdayCodeOverride.animation()
                 ) {
                     Text("NO_WEEKDAY_ALLERGEN_FILTER").tag(Int?(nil))
