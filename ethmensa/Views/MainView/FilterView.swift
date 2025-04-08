@@ -29,14 +29,12 @@ private struct OpeningTimeFilterButtonView: View {
 
     var body: some View {
         Menu(settingsManager.mensaShowType.localizedString) {
-            ForEach(MensaShowType.allCases, id: \.rawValue) { showType in
-                ButtonView(
-                    localizedString: showType.localizedString,
-                    selected: settingsManager.mensaShowType == showType
-                ) {
-                    withAnimation {
-                        settingsManager.mensaShowType = showType
-                    }
+            Picker(
+                "",
+                selection: $settingsManager.mensaShowType.animation()
+            ) {
+                ForEach(MensaShowType.allCases, id: \.rawValue) { showType in
+                    Text(showType.localizedString).tag(showType)
                 }
             }
         }
@@ -53,14 +51,12 @@ private struct LocationFilterButtonView: View {
 
     var body: some View {
         Menu(settingsManager.mensaLocationType.localizedString) {
-            ForEach(Campus.CampusType.allCases, id: \.rawValue) { showType in
-                ButtonView(
-                    localizedString: showType.localizedString,
-                    selected: settingsManager.mensaLocationType == showType
-                ) {
-                    withAnimation {
-                        settingsManager.mensaLocationType = showType
-                    }
+            Picker(
+                "",
+                selection: $settingsManager.mensaLocationType.animation()
+            ) {
+                ForEach(Campus.CampusType.allCases, id: \.rawValue) { showType in
+                    Text(showType.localizedString).tag(showType)
                 }
             }
         }
@@ -77,14 +73,12 @@ private struct SortTypeButtonView: View {
 
     var body: some View {
         Menu(settingsManager.sortBy.localizedString) {
-            ForEach(SortType.allCases, id: \.rawValue) { showType in
-                ButtonView(
-                    localizedString: showType.localizedString,
-                    selected: settingsManager.sortBy == showType
-                ) {
-                    withAnimation {
-                        settingsManager.sortBy = showType
-                    }
+            Picker(
+                "",
+                selection: $settingsManager.sortBy.animation()
+            ) {
+                ForEach(SortType.allCases, id: \.rawValue) { showType in
+                    Text(showType.localizedString).tag(showType)
                 }
             }
         }
@@ -108,22 +102,13 @@ private struct WeekdayButtonView: View {
     var body: some View {
         if !SettingsManager.shared.allergens.isEmpty {
             Menu(menuString) {
-                ButtonView(
-                    localizedString: .init(localized: "NO_WEEKDAY_ALLERGEN_FILTER"),
-                    selected: navigationManager.selectedWeekdayCodeOverride == nil
+                Picker(
+                    "",
+                    selection: $navigationManager.selectedWeekdayCodeOverride.animation()
                 ) {
-                    withAnimation {
-                        navigationManager.selectedWeekdayCodeOverride = nil
-                    }
-                }
-                ForEach(Date.weekdaysStartingAtOne, id: \.0) { (index, weekday) in
-                    ButtonView(
-                        localizedString: weekday,
-                        selected: navigationManager.selectedWeekdayCodeOverride == index
-                    ) {
-                        withAnimation {
-                            navigationManager.selectedWeekdayCodeOverride = index
-                        }
+                    Text("NO_WEEKDAY_ALLERGEN_FILTER").tag(Int?(nil))
+                    ForEach(Date.weekdaysStartingAtOne, id: \.0) { (index, weekday) in
+                        Text(weekday).tag(index)
                     }
                 }
             }
@@ -131,25 +116,6 @@ private struct WeekdayButtonView: View {
             .buttonStyle(
                 selected: navigationManager.selectedWeekdayCodeOverride == nil
             )
-        }
-    }
-}
-
-private struct ButtonView: View {
-
-    var localizedString: String
-    var selected: Bool
-    var action: () -> Void
-
-    var body: some View {
-        Button {
-            action()
-        } label: {
-            if selected {
-                Label(localizedString, systemImage: "checkmark")
-            } else {
-                Text(localizedString)
-            }
         }
     }
 }
