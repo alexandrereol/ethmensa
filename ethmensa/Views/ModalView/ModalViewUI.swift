@@ -6,8 +6,8 @@ import SwiftUI
 
 struct ModalViewUI: View {
 
-    @Environment(\.horizontalSizeClass) var hSizeClass
-    @Environment(\.verticalSizeClass) var vSizeClass
+    @Environment(\.horizontalSizeClass) private var hSizeClass
+    @Environment(\.verticalSizeClass) private var vSizeClass
 
     var viewModel: ModalViewModel
 

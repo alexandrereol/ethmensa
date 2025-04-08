@@ -6,7 +6,7 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
 
     @EnvironmentObject var settingsManager: SettingsManager
 

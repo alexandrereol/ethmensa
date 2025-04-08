@@ -6,7 +6,7 @@ import SwiftUI
 
 struct SettingsFooterView: View {
 
-    @Environment(\.openURL) var openURL
+    @Environment(\.openURL) private var openURL
 
     @State private var shareSheetShown = false
     @State private var privacyPolicyPresented = false

@@ -11,7 +11,7 @@ import WhatsNewKit
 
 struct AppView: View {
 
-    @Environment(\.openURL) var openURL
+    @Environment(\.openURL) private var openURL
 
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var mensaDataManager: MensaDataManager
