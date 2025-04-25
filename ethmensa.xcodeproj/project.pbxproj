@@ -450,6 +450,7 @@
 		29FAF04B2ACDE0FF00813CFC /* ETHAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAF04A2ACDE0FF00813CFC /* ETHAPI.swift */; };
 		29FAF04D2ACDE34A00813CFC /* ETHMensaAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAF04C2ACDE34A00813CFC /* ETHMensaAnswer.swift */; };
 		29FAF04F2ACDE3A800813CFC /* Mensa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAF04E2ACDE3A800813CFC /* Mensa.swift */; };
+		29FCAF5E2DBB9B4C00AC489E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 29C0B0A42B21C61C0065478D /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1434,6 +1435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29FCAF5E2DBB9B4C00AC489E /* Localizable.xcstrings in Resources */,
 				29CEE1962D84301C00C6D257 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
