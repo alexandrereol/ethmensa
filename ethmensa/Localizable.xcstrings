@@ -27,8 +27,7 @@
             "value" : "%@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "%@_IS_NOT_SUPPORTED_ON_THIS_DEVICE" : {
       "localizations" : {
@@ -56,8 +55,7 @@
             "value" : "%@ non è supportato su questo dispositivo"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "%@_PERMISSION_DENIED_MESSAGE" : {
       "localizations" : {
@@ -85,8 +83,7 @@
             "value" : "Permesso %@ negato"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "%@?" : {
       "localizations" : {
@@ -114,8 +111,7 @@
             "value" : "%@?"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "%lld_ALLERGENS_SELECTED" : {
       "localizations" : {
@@ -191,8 +187,7 @@
             }
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ABOUT_%@" : {
       "localizations" : {
@@ -276,8 +271,7 @@
             "value" : "Impostazioni avanzate"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ADVANCED_SETTINGS_FOOTER_MESSAGE" : {
       "localizations" : {
@@ -305,8 +299,7 @@
             "value" : "Utilizzare queste impostazioni solo se si riscontrano problemi con l'app o se è stata consigliata dal sviluppatore."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ALL" : {
       "localizations" : {
@@ -334,8 +327,7 @@
             "value" : "Tutti"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ALL_LOCATIONS" : {
       "localizations" : {
@@ -363,8 +355,7 @@
             "value" : "Tutte le posizioni"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ALLERGENS" : {
       "localizations" : {
@@ -392,8 +383,7 @@
             "value" : "Allergeni"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "APPEARANCE" : {
       "localizations" : {
@@ -449,8 +439,7 @@
             "value" : "sedano"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CHECK_OUT_ETH_VIDEO!" : {
       "localizations" : {
@@ -478,8 +467,7 @@
             "value" : "Scopri ETH Video!"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CHECK_OUT_TODAYS_MENSA_MENU!" : {
       "localizations" : {
@@ -507,8 +495,7 @@
             "value" : "Controlla il menu Mensa di oggi!"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CLOSE" : {
       "localizations" : {
@@ -536,8 +523,7 @@
             "value" : "Chiudi"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CONTAINS:_%@" : {
       "localizations" : {
@@ -565,8 +551,7 @@
             "value" : "Contiene: %@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CONTINUE" : {
       "localizations" : {
@@ -594,8 +579,7 @@
             "value" : "Continua"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "COPY" : {
       "localizations" : {
@@ -623,8 +607,7 @@
             "value" : "Copia"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CRUSTACEANS" : {
       "localizations" : {
@@ -652,8 +635,7 @@
             "value" : "crostacei"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CURRENT_STATUS" : {
       "localizations" : {
@@ -681,8 +663,7 @@
             "value" : "Stato attuale"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "CURRENTLY_OPEN" : {
       "localizations" : {
@@ -710,8 +691,7 @@
             "value" : "Attualmente aperto"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "DEBUG" : {
       "localizations" : {
@@ -739,8 +719,7 @@
             "value" : "Debug"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "DEFAULT" : {
       "localizations" : {
@@ -768,8 +747,7 @@
             "value" : "Predefinito"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "DEVELOPED_BY:" : {
       "localizations" : {
@@ -797,8 +775,7 @@
             "value" : "Sviluppato da:"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EGGS" : {
       "localizations" : {
@@ -826,8 +803,7 @@
             "value" : "uova"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ENABLE_NOTIFICATIONS" : {
       "localizations" : {
@@ -855,8 +831,7 @@
             "value" : "Abilita le notifiche"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ENABLE_NOTIFICATIONS_FOOTER" : {
       "localizations" : {
@@ -884,8 +859,7 @@
             "value" : "Ricevi una notifica tempestiva del menu automaticamente nei giorni feriali."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EXTERNAL" : {
       "localizations" : {
@@ -913,8 +887,7 @@
             "value" : "Esterno"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "FILTER" : {
       "localizations" : {
@@ -942,8 +915,7 @@
             "value" : "Filtro"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "FILTER_OPTIONS" : {
       "localizations" : {
@@ -971,8 +943,7 @@
             "value" : "Opzioni di filtro"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "FISH" : {
       "localizations" : {
@@ -1000,8 +971,7 @@
             "value" : "pesce"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "GENERAL" : {
       "localizations" : {
@@ -1029,8 +999,7 @@
             "value" : "Generale"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "GLUTEN" : {
       "localizations" : {
@@ -1058,8 +1027,7 @@
             "value" : "glutine"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "HIDE_MENSAS_WITHOUT_MENUS" : {
       "localizations" : {
@@ -1087,8 +1055,7 @@
             "value" : "Nascondi le Mensa senza menu"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "HONGG_MENSAS" : {
       "localizations" : {
@@ -1116,8 +1083,7 @@
             "value" : "Mensas di Hönggerberg"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "HONGGERBERG" : {
       "localizations" : {
@@ -1145,8 +1111,7 @@
             "value" : "Hönggerberg"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "ICLOUD_UNAVAILABLE" : {
       "localizations" : {
@@ -1174,8 +1139,7 @@
             "value" : "iCloud non disponibile"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "INTERNET_CONNECTION_REQUIRED" : {
       "localizations" : {
@@ -1203,8 +1167,7 @@
             "value" : "È necessaria la connessione a Internet!"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "INTERNET_CONNECTION_REQUIRED_MESSAGE" : {
       "localizations" : {
@@ -1232,8 +1195,7 @@
             "value" : "È necessaria una connessione internet funzionante per utilizzare l'app."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "INTERNET_CONNECTION_REQUIRED_MESSAGE_2_WIFI" : {
       "localizations" : {
@@ -1261,8 +1223,7 @@
             "value" : "Controlla la tua connessione WiFi."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "INTERNET_CONNECTION_REQUIRED_MESSAGE_2_WIFI/CELLULAR" : {
       "localizations" : {
@@ -1290,8 +1251,7 @@
             "value" : "Controlla la tua connessione WiFi o cellulare."
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "IRCHEL" : {
       "localizations" : {
@@ -1319,8 +1279,7 @@
             "value" : "Irchel"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "IRCHEL_MENSAS" : {
       "localizations" : {
@@ -1348,8 +1307,7 @@
             "value" : "Mensas di Irchel"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "LACTOSE" : {
       "localizations" : {
@@ -1377,8 +1335,7 @@
             "value" : "lattosio"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "LARGE_VIEW" : {
       "localizations" : {

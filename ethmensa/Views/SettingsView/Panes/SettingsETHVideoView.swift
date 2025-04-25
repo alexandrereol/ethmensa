@@ -6,7 +6,7 @@ import SwiftUI
 
 struct SettingsETHVideoView: View {
 
-    @Environment(\.openURL) var openURL
+    @Environment(\.openURL) private var openURL
 
     private var isShown: Bool {
         !UIApplication.shared.canOpenURL("ethvideo://".toURL()!)

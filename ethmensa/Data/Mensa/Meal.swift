@@ -42,7 +42,17 @@ class Meal: Identifiable {
         self.description = description
         self.imageURL = imageURL
         self.price = price
-        self.mealType = mealType
+        self.mealType = {
+            // Remove "vegetarian" if "vegan" is present
+            if var mealType,
+               mealType.contains(.vegan),
+               mealType.contains(.vegetarian) {
+                mealType.removeAll { $0 == .vegetarian}
+                return mealType
+            } else {
+                return mealType
+            }
+        }()
         self.meatType = meatType
         self.allergen = allergen
     }

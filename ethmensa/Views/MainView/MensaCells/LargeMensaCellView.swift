@@ -7,7 +7,7 @@ import URLImage
 
 struct LargeMensaCellView: View {
 
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
 
     var mensa: Mensa
     var isLoading: Bool
