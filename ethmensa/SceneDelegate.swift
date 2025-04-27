@@ -109,9 +109,9 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
                         },
                         priority: 10 // For future use
                     )
-                    logger.info("sceneWillResignActive(): Indexed \(unfilteredMenaList.count) mensas")
+                    logger.info("\(#function): Indexed \(unfilteredMenaList.count) mensas")
                 } catch {
-                    logger.error("sceneWillResignActive(): Could not index app entities: \(error)")
+                    logger.error("\(#function): Could not index app entities: \(error)")
                 }
             }
         }

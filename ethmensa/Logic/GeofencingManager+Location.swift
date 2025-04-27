@@ -17,11 +17,11 @@ extension GeofencingManager: CLLocationManagerDelegate {
         _ manager: CLLocationManager,
         didEnterRegion region: CLRegion
     ) {
-        logger.info("Entered region with identifier: \(region.identifier)")
+        logger.info("\(#function): Entered region with identifier: \(region.identifier)")
         guard region is CLCircularRegion,
               SettingsManager.shared.notifications,
               SettingsManager.shared.location else {
-            logger.critical("Region is not a circular region or notifications are disabled")
+            logger.critical("\(#function): Region is not a circular region or notifications are disabled")
             return
         }
         if Campus.CampusType.allCases.map(\.rawValue).contains(
@@ -35,11 +35,11 @@ extension GeofencingManager: CLLocationManagerDelegate {
         _ manager: CLLocationManager,
         didExitRegion region: CLRegion
     ) {
-        logger.info("Exited region with identifier: \(region.identifier)")
+        logger.info("\(#function): Exited region with identifier: \(region.identifier)")
         guard region is CLCircularRegion,
               SettingsManager.shared.notifications,
               SettingsManager.shared.location else {
-            logger.critical("Region is not a circular region or notifications are disabled")
+            logger.critical("\(#function): Region is not a circular region or notifications are disabled")
             return
         }
         if Campus.CampusType.allCases.map(\.rawValue).contains(region.identifier) {
@@ -52,13 +52,13 @@ extension GeofencingManager: CLLocationManagerDelegate {
         monitoringDidFailFor region: CLRegion?,
         withError error: Error
     ) {
-        logger.critical("Monitoring failed for region with identifier: \(region!.identifier)")
+        logger.critical("\(#function): failed for region with id \(region!.identifier)")
     }
 
     internal func locationManager(
         _ manager: CLLocationManager,
         didFailWithError error: Error
     ) {
-        logger.critical("Location Manager failed with the following error: \(error)")
+        logger.critical("\(#function): \(error)")
     }
 }

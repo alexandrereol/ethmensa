@@ -18,7 +18,7 @@ class UZHAPI: APIProtocol {
     func get() async -> [Mensa] {
         guard let uzhAnswer = await download(),
               let uzhDays = uzhAnswer.days else {
-            logger.critical("get(): Could not download UZH data")
+            logger.critical("\(#function): Could not download UZH data")
             return []
         }
         let uniqueIds = getUniqueIds(fromUZHDays: uzhDays)
@@ -27,7 +27,7 @@ class UZHAPI: APIProtocol {
 
     private func download() async -> UZHMensaAnswer? {
         guard let url = self.endpoint.toURL() else {
-            logger.critical("download(): Could not create URL from endpoint")
+            logger.critical("\(#function): Could not create URL from endpoint")
             return nil
         }
         let result = await API.shared.perform(
@@ -39,7 +39,7 @@ class UZHAPI: APIProtocol {
         case .success(let mensa):
             return mensa
         case .failure(let error):
-            logger.critical("download(): \(error)")
+            logger.critical("\(#function): \(error)")
             return nil
         }
     }
@@ -47,7 +47,7 @@ class UZHAPI: APIProtocol {
     private func getUniqueIds(fromUZHDays uzhDays: [UZHDay]) -> [Int] {
         uzhDays.compactMap { uzhDay -> [Int]? in
             guard let mensaArray = uzhDay.mensa else {
-                logger.critical("getUniqueIds(): Could not get mensa array from UZH day (\(uzhDay.dayDate ?? "nil"))")
+                logger.critical("\(#function): Could not get mensa array from UZH day (\(uzhDay.dayDate ?? "nil"))")
                 return nil
             }
             return mensaArray.compactMap(\.mensaId)
@@ -63,7 +63,7 @@ class UZHAPI: APIProtocol {
     private func mapMensa(fromId id: Int, usingUzhDays uzhDays: [UZHDay]) -> Mensa? {
         let filteredUZHDay = uzhDays.compactMap { uzhDay -> UZHDay? in
             guard let mensaArray = uzhDay.mensa else {
-                logger.critical("mapMensa(): Could not get mensa (\(id)) from UZH day (\(uzhDay.dayDate ?? "nil"))")
+                logger.critical("\(#function): Could not get mensa (\(id)) from UZH day (\(uzhDay.dayDate ?? "nil"))")
                 return nil
             }
             let mensas = mensaArray.filter { mensa in
@@ -77,7 +77,7 @@ class UZHAPI: APIProtocol {
         guard let mensaOnFirstUZHDay = filteredUZHDay.first?.mensa?.first,
               let mensaId = mensaOnFirstUZHDay.mensaId,
               let name = mensaOnFirstUZHDay.name else {
-            logger.critical("mapMensa(): Could not get mensa (\(id)) data from UZH day")
+            logger.critical("\(#function): Could not get mensa (\(id)) data from UZH day")
             return nil
         }
         let timeString = mensaOnFirstUZHDay.open?.first?.text?
@@ -116,14 +116,14 @@ class UZHAPI: APIProtocol {
         guard let mensa = uzhDay.mensa?.first,
               let menuTime = mensa.menuTime,
               let menu = mensa.menus else {
-            logger.critical("mapToMealTime(): Could not get menu data from UZH day (\(uzhDay.dayDate ?? "unknown"))")
+            logger.critical("\(#function): Could not get menu data from UZH day (\(uzhDay.dayDate ?? "unknown"))")
             return nil
         }
         let meals = menu.enumerated().compactMap { index, uzhMenu -> Meal? in
             mapToMeal(fromUzhMenu: uzhMenu, id: index)
         }
         if meals.isEmpty {
-            logger.info("mapToMealTime(): No meals found for UZH day (\(uzhDay.dayDate ?? "unknown"))")
+            logger.info("\(#function): No meals found for UZH day (\(uzhDay.dayDate ?? "unknown"))")
             return nil
         } else {
             return .init(
@@ -139,7 +139,7 @@ class UZHAPI: APIProtocol {
     private func mapToMeal(fromUzhMenu uzhMenu: UZHMenu, id: Int) -> Meal? {
         guard let menuTitle = uzhMenu.menuTitle,
               let menuText = uzhMenu.menuText else {
-            logger.critical("mapToMeal(): Could not get menu data from UZH menu (\(id))")
+            logger.critical("\(#function): Could not get menu data from UZH menu (\(id))")
             return nil
         }
         let price = Price(

@@ -42,7 +42,7 @@ class ClickCountDBManager {
             do {
                 try managedContext.save()
             } catch let error as NSError {
-                logger.critical("create(id: \(id)): Could not save. \(error), \(error.userInfo)")
+                logger.critical("\(#function): Could not save. \(error), \(error.userInfo)")
             }
         }
     }
@@ -55,7 +55,7 @@ class ClickCountDBManager {
                 let objects = try managedContext.fetch(fetchRequest)
                 if let newEntity = objects.first {
                     guard let previousCount = newEntity.value(forKey: "count") as? Int else {
-                        logger.critical("increaseByOne(id: \(id): Error decoding \(self.entityName)")
+                        logger.critical("\(#function): Error decoding \(self.entityName)")
                         return
                     }
                     let newCount = previousCount + 1
@@ -65,7 +65,7 @@ class ClickCountDBManager {
                     create(id: id)
                 }
             } catch let error as NSError {
-                logger.critical("increaseByOne(id: \(id)): Could not fetch/save. \(error), \(error.userInfo)")
+                logger.critical("\(#function): Could not fetch/save. \(error), \(error.userInfo)")
             }
         }
     }
@@ -80,12 +80,12 @@ class ClickCountDBManager {
                     return nil
                 }
                 guard let count = entity.value(forKey: "count") as? Int else {
-                    logger.critical("read(id: \(id)): Error decoding \(self.entityName)")
+                    logger.critical("\(#function): Error decoding \(self.entityName)")
                     return nil
                 }
                 return count
             } catch let error as NSError {
-                logger.critical("read(id: \(id)): Could not fetch. \(error), \(error.userInfo)")
+                logger.critical("\(#function): Could not fetch. \(error), \(error.userInfo)")
                 return nil
             }
         }
@@ -104,7 +104,7 @@ class ClickCountDBManager {
                 }
                 return mappedResult
             } catch let error as NSError {
-                logger.critical("read(): Could not fetch. \(error), \(error.userInfo)")
+                logger.critical("\(#function): Could not fetch. \(error), \(error.userInfo)")
             }
             return []
         }
@@ -131,7 +131,7 @@ class ClickCountDBManager {
                     options: nil
                 )
             } catch {
-                logger.critical("reset(): Could not reset. \(error)")
+                logger.critical("\(#function): Could not reset. \(error)")
             }
         }
     }

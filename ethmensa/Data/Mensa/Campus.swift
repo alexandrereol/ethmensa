@@ -43,7 +43,7 @@ struct Campus {
         /// A computed property that returns the campus matching the given Mensa if one is matching.
         static func getNearest(forMensa mensa: Mensa) async -> Self? {
             guard let mensaLocation = await mensa.getCoordinates() else {
-                Campus.logger.critical("getNearest(forMensa: \(mensa.id): Could not get coordinates")
+                Campus.logger.critical("\(#function): Could not get coordinates")
                 return nil
             }
             let result = allCampuses.map { campus -> (campus: Campus.CampusType, distance: Double) in
@@ -52,11 +52,11 @@ struct Campus {
                 lhs.distance < rhs.distance
             }
             guard let result else {
-                Campus.logger.critical("getNearest(forMensa: \(mensa.id): Could not get nearest campus")
+                Campus.logger.critical("\(#function): Could not get nearest campus")
                 return nil
             }
             if result.distance > 1000 {
-                logger.info("getNearest(forMensa: \(mensa.id): Nearest campus is more than 1000m away")
+                logger.info("\(#function): Nearest campus is more than 1000m away")
                 return nil
             } else {
                 return result.campus

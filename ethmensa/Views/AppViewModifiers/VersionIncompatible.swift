@@ -17,13 +17,13 @@ class VersionIncompatible: ObservableObject {
 
     static func fetchVersionCompatible(host: String) async -> Bool {
         if CommandLine.arguments.contains("OUTDATED") {
-            logger.info("OUTDATED flag detected. Skipping version check.")
+            logger.info("\(#function): OUTDATED flag detected. Skipping version check.")
             return true
         } else if AppReleaseType.getCurrent == .debug {
-            logger.info("Debug build detected. Skipping version check.")
+            logger.info("\(#function): Debug build detected. Skipping version check.")
             return false
         } else if NetworkManager.shared.isOffline {
-            logger.info("No network connection. Skipping version check.")
+            logger.info("\(#function): No network connection. Skipping version check.")
             return false
         }
         let urlString = if CommandLine.arguments.contains("LOCALHOST") {
@@ -32,7 +32,7 @@ class VersionIncompatible: ObservableObject {
             "https://\(host)/version?obj=1"
         }
         guard let url = urlString.toURL() else {
-            logger.critical("Unable to create URL from string: \(urlString)")
+            logger.critical("\(#function): Unable to create URL from string: \(urlString)")
             return false
         }
         switch await API.shared.perform(
@@ -43,12 +43,12 @@ class VersionIncompatible: ObservableObject {
         case .success(let dataResult):
             guard let buildString = Bundle.main.buildVersionNumberString,
                   let build = Int(buildString) else {
-                logger.critical("Error fetching build version number.")
+                logger.critical("\(#function): Error fetching build version number.")
                 return false
             }
             return dataResult.data > build
         case .failure(let error):
-            logger.critical("Error fetching version: \(error)")
+            logger.critical("\(#function): Error fetching version: \(error)")
             return false
         }
     }

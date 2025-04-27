@@ -22,7 +22,7 @@ extension API {
         var request = URLRequest(url: url)
         if CommandLine.arguments.contains("LOCALHOST") {
             guard let host else {
-                logger.critical("prepareRequest(): Using LOCALHOST but did    not specify a host in the header")
+                logger.critical("\(#function): Using LOCALHOST but did not specify a host in the header")
                 fatalError()
             }
             request.addValue(host, forHTTPHeaderField: "Host")
@@ -41,17 +41,17 @@ extension API {
     /// - Returns: An `API.Errors` object representing the decoded error.
     private func decodeError(_ data: Data) -> API.Errors {
         do {
-            logger.info("decodeError(): Decoding error")
+            logger.info("\(#function): Decoding error")
             let result = try JSONDecoder().decode(API.VaporError.self, from: data)
-            logger.error("decodeError(): \(result.reason)")
+            logger.error("\(#function): \(result.reason)")
             return .customAPIerror(result.reason)
         } catch {
-            logger.info("decodeError(): Failed decoding as API.VaporError, trying String")
+            logger.info("\(#function): Failed decoding as API.VaporError, trying String")
             if let result = String(data: data, encoding: .utf8) {
-                logger.error("decodeError(): \(result)")
+                logger.error("\(#function): \(result)")
                 return .unknownError(result)
             } else {
-                logger.critical("decodeError(): Failed decoding as API.VaporError and String")
+                logger.critical("\(#function): Failed decoding as API.VaporError and String")
                 return .failedDecoding
             }
         }
@@ -82,19 +82,19 @@ extension API {
             if let resultType = resultType as? Decodable.Type {
                 do {
                     guard let result = try JSONDecoder().decode(resultType, from: data) as? T else {
-                        logger.critical("perform<T>(): ")
+                        logger.critical("\(#function): Failed casting decoded object to \(T.self)")
                         return decodeData(data: data, resultType: T.self)
                     }
                     return .success(result)
                 } catch {
-                    logger.critical("perform<T>(): \(error)")
+                    logger.critical("\(#function): \(error)")
                     return decodeData(data: data, resultType: T.self)
                 }
             } else {
                 return decodeData(data: data, resultType: T.self)
             }
         } catch {
-            logger.critical("perform<T>(): \(error)")
+            logger.critical("\(#function): \(error)")
             return .failure(.failedDownloading)
         }
     }
