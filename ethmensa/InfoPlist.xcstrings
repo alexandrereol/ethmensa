@@ -90,7 +90,6 @@
     },
     "NSLocationUsageDescription" : {
       "comment" : "Privacy - Location Usage Description",
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

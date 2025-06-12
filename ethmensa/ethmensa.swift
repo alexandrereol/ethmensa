@@ -8,6 +8,8 @@ import SwiftUI
 import WhatsNewKit
 #endif
 
+import Network // TODO: remove when Xcode 26.0 fixed
+
 @main
 // swiftlint:disable:next type_name
 struct ethmensa: App {
@@ -18,6 +20,10 @@ struct ethmensa: App {
     @StateObject var navigationManager = NavigationManager.shared
     @StateObject var networkManager = NetworkManager.shared
     @StateObject var settingsManager = SettingsManager.shared
+
+    init() {
+        nw_tls_create_options() // TODO: remove when Xcode 26.0 fixed
+    }
 
     var body: some Scene {
         WindowGroup {
