@@ -14,7 +14,7 @@ struct OnboardingView: UIViewControllerRepresentable {
     ) -> UIOnboardingViewController {
         let onboardingController = UIOnboardingViewController(
             withConfiguration: .get(
-                appIcon: .appIconRounded,
+                appIcon: .appIconRoundedForUserVersion,
                 displayName: Bundle.main.displayName,
                 accent: .accent,
                 onboardingFeatures: .featureTuple,

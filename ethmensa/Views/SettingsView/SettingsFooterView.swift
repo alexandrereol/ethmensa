@@ -34,7 +34,7 @@ struct SettingsFooterView: View {
                 UIActivityView(
                     name: Bundle.main.displayName,
                     url: String.appStoreURLString.toURL()!,
-                    image: .appIconRounded,
+                    image: .appIconRoundedForUserVersion,
                     excludedActivityTypes: []
                 )
                 .presentationDetents([.medium])
@@ -86,7 +86,7 @@ struct SettingsFooterView: View {
                     Label {
                         Text("CHECK_OUT_ETH_VIDEO!")
                     } icon: {
-                        Image(.appIconRoundedEthvideo)
+                        Image(.appETHVideoIconRoundedForUserVersion)
                             .resizable()
                             .scaledToFit()
                             .frame(
@@ -104,7 +104,7 @@ struct SettingsFooterView: View {
                     Text("ABOUT_\(Bundle.main.displayName)")
                         .tint(.primary)
                 } icon: {
-                    Image(.appIconRounded)
+                    Image(.appIconRoundedForUserVersion)
                         .resizable()
                         .scaledToFit()
                         .frame(

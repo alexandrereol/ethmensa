@@ -100,7 +100,7 @@ struct MealCellView: View {
                             } inProgress: { _ in
                                 Color.gray
                             } failure: { _, _ in
-                                Image(.appIconRounded)
+                                Image(.appIconRoundedForUserVersion)
                                     .resizable()
                             } content: { image in
                                 image

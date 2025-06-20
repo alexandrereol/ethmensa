@@ -230,8 +230,6 @@
 		298933532AE7B0B300831DA4 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298933522AE7B0B300831DA4 /* APIProtocol.swift */; };
 		298933552AE7B18B00831DA4 /* ETHAPILegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298933542AE7B18B00831DA4 /* ETHAPILegacy.swift */; };
 		298933572AE7B1ED00831DA4 /* ETHMensaAnswerLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298933562AE7B1ED00831DA4 /* ETHMensaAnswerLegacy.swift */; };
-		2993148D2C8F13510046D221 /* SettingsETHVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993148C2C8F134C0046D221 /* SettingsETHVideoView.swift */; };
-		2993148E2C8F13510046D221 /* SettingsETHVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993148C2C8F134C0046D221 /* SettingsETHVideoView.swift */; };
 		299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 299314982C8F4A8E0046D221 /* WhatsNewKit */; };
 		2993149B2C8F4A990046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2993149A2C8F4A990046D221 /* WhatsNewKit */; };
 		2993149D2C8F4B7F0046D221 /* WhatsNewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993149C2C8F4B750046D221 /* WhatsNewProvider.swift */; };
@@ -398,6 +396,13 @@
 		29C0B0A82B21C6E00065478D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C0B0A62B21C6400065478D /* Strings.swift */; };
 		29C0B0A92B21C6E30065478D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C0B0A62B21C6400065478D /* Strings.swift */; };
 		29C0B0AB2B21C96B0065478D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 29C0B0A42B21C61C0065478D /* Localizable.xcstrings */; };
+		29C87C182E05A198002EAA2E /* ImageResourceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C87C172E05A198002EAA2E /* ImageResourceExtension.swift */; };
+		29C87C192E05A198002EAA2E /* ImageResourceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C87C172E05A198002EAA2E /* ImageResourceExtension.swift */; };
+		29C87C1A2E05A198002EAA2E /* ImageResourceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C87C172E05A198002EAA2E /* ImageResourceExtension.swift */; };
+		29C87C1B2E05A198002EAA2E /* ImageResourceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C87C172E05A198002EAA2E /* ImageResourceExtension.swift */; };
+		29C87C1D2E05A243002EAA2E /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C87C1C2E05A243002EAA2E /* UIImageExtension.swift */; };
+		29C87C1F2E05A243002EAA2E /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C87C1C2E05A243002EAA2E /* UIImageExtension.swift */; };
+		29C87C202E05A243002EAA2E /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C87C1C2E05A243002EAA2E /* UIImageExtension.swift */; };
 		29CEE1432D842CCC00C6D257 /* ShowLegiIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE1422D842CCC00C6D257 /* ShowLegiIntent.swift */; };
 		29CEE18B2D84301B00C6D257 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CEE18A2D84301B00C6D257 /* WidgetKit.framework */; };
 		29CEE18D2D84301B00C6D257 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CEE18C2D84301B00C6D257 /* SwiftUI.framework */; };
@@ -590,7 +595,6 @@
 		298933522AE7B0B300831DA4 /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		298933542AE7B18B00831DA4 /* ETHAPILegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHAPILegacy.swift; sourceTree = "<group>"; };
 		298933562AE7B1ED00831DA4 /* ETHMensaAnswerLegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHMensaAnswerLegacy.swift; sourceTree = "<group>"; };
-		2993148C2C8F134C0046D221 /* SettingsETHVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsETHVideoView.swift; sourceTree = "<group>"; };
 		2993149C2C8F4B750046D221 /* WhatsNewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewProvider.swift; sourceTree = "<group>"; };
 		299751B42B35DA7600C11342 /* WeekdaySelectorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaySelectorHeaderView.swift; sourceTree = "<group>"; };
 		299751B72B35DB1300C11342 /* MapHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeaderView.swift; sourceTree = "<group>"; };
@@ -646,6 +650,8 @@
 		29BC9CFB2C5FA6B200419EA6 /* MainViewToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewToolbar.swift; sourceTree = "<group>"; };
 		29C0B0A42B21C61C0065478D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		29C0B0A62B21C6400065478D /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		29C87C172E05A198002EAA2E /* ImageResourceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResourceExtension.swift; sourceTree = "<group>"; };
+		29C87C1C2E05A243002EAA2E /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		29CEE1422D842CCC00C6D257 /* ShowLegiIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLegiIntent.swift; sourceTree = "<group>"; };
 		29CEE1882D84301B00C6D257 /* widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEE18A2D84301B00C6D257 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -805,7 +811,6 @@
 				293C3DDA2B74DE4600B594BE /* SettingsGeneralView.swift */,
 				293C3DDC2B74DEB300B594BE /* SettingsAppearanceView.swift */,
 				293C3DD72B74DDDC00B594BE /* SettingsiCloudView.swift */,
-				2993148C2C8F134C0046D221 /* SettingsETHVideoView.swift */,
 			);
 			path = Panes;
 			sourceTree = "<group>";
@@ -956,13 +961,15 @@
 				2939D62D2B04CFA80089A3EB /* ArrayExtension.swift */,
 				29BC9AD12D47FA1800DE6AA6 /* BundleExtension.swift */,
 				29BBBE552C971C130066DED7 /* CalendarExtension.swift */,
-				297040492B0771F10080D69C /* DateExtension.swift */,
 				29E870262D5B9E8B00E83208 /* DateComponentsExtension.swift */,
+				297040492B0771F10080D69C /* DateExtension.swift */,
 				291A4EB42C776E6F00608873 /* DateFormatterExtension.swift */,
 				299DF9D62AE85E61001758C6 /* DoubleExtension.swift */,
+				29C87C172E05A198002EAA2E /* ImageResourceExtension.swift */,
 				29BC9ACB2D47FA1800DE6AA6 /* ProcessInfoExtension.swift */,
 				29BC9ACC2D47FA1800DE6AA6 /* StringExtension.swift */,
 				2927A5B12C5287F00030257B /* SWHighlightExtension.swift */,
+				29C87C1C2E05A243002EAA2E /* UIImageExtension.swift */,
 				29BC9ACD2D47FA1800DE6AA6 /* URLExtension.swift */,
 			);
 			path = Extensions;
@@ -1542,7 +1549,6 @@
 				291C82242B59999100730BFD /* DetailView.swift in Sources */,
 				2927A5B42C5289100030257B /* SWHighlightExtension.swift in Sources */,
 				299F76AF2B87991500D49AC4 /* AdvancedSettingsAlertModifiers.swift in Sources */,
-				2993148D2C8F13510046D221 /* SettingsETHVideoView.swift in Sources */,
 				291C81F72B59996200730BFD /* APIProtocol.swift in Sources */,
 				291C82252B59999100730BFD /* MapHeaderView.swift in Sources */,
 				294ED72B2D3AEC06006A74D3 /* MensaDataManager.swift in Sources */,
@@ -1554,6 +1560,7 @@
 				2918722F2B74C9C800AC666A /* MensaShowType.swift in Sources */,
 				2918722A2B74C97700AC666A /* Campus.swift in Sources */,
 				2918724C2B74D1BB00AC666A /* PriceType.swift in Sources */,
+				29C87C1B2E05A198002EAA2E /* ImageResourceExtension.swift in Sources */,
 				29E870292D5B9E8B00E83208 /* DateComponentsExtension.swift in Sources */,
 				29BC9B612D48061900DE6AA6 /* API+Errors.swift in Sources */,
 				293C3DEF2B74E0C100B594BE /* SettingsGeneralView.swift in Sources */,
@@ -1609,6 +1616,7 @@
 				29BC9B3A2D47FB4300DE6AA6 /* SettingsFooterView.swift in Sources */,
 				29BC9B3D2D47FB4300DE6AA6 /* UIActivityView.swift in Sources */,
 				29BC9B3E2D47FB4300DE6AA6 /* CustomContentUnavailableView.swift in Sources */,
+				29C87C1F2E05A243002EAA2E /* UIImageExtension.swift in Sources */,
 				29BC9B5E2D48018100DE6AA6 /* ModalLabelView.swift in Sources */,
 				29BC9B452D47FB4300DE6AA6 /* SafariWebView.swift in Sources */,
 				291C820B2B59997A00730BFD /* ArrayExtension.swift in Sources */,
@@ -1635,12 +1643,12 @@
 				29BC9AED2D47FB3A00DE6AA6 /* BundleExtension.swift in Sources */,
 				29BC9AEE2D47FB3A00DE6AA6 /* ProcessInfoExtension.swift in Sources */,
 				29BC9AEF2D47FB3A00DE6AA6 /* URLExtension.swift in Sources */,
+				29C87C192E05A198002EAA2E /* ImageResourceExtension.swift in Sources */,
 				29FAF04B2ACDE0FF00813CFC /* ETHAPI.swift in Sources */,
 				293E858A2BA99EA1005E79CB /* MeatType.swift in Sources */,
 				2937DC482A93AC5C003E0573 /* DebugView.swift in Sources */,
 				29BC9CEF2C5F79A400419EA6 /* Mensa+Location.swift in Sources */,
 				2918721D2B74C85B00AC666A /* SortType.swift in Sources */,
-				2993148E2C8F13510046D221 /* SettingsETHVideoView.swift in Sources */,
 				29FAF04F2ACDE3A800813CFC /* Mensa.swift in Sources */,
 				294ED7282D3AEC06006A74D3 /* MensaDataManager.swift in Sources */,
 				294E16842A921394000A3AB6 /* MainView.swift in Sources */,
@@ -1700,6 +1708,7 @@
 				294E163D2A8E22C3000A3AB6 /* ethmensa.swift in Sources */,
 				2935E2F52D36F49700853FA5 /* MensaEntity+IndexedEntity.swift in Sources */,
 				2918723B2B74CF2700AC666A /* MealTime.swift in Sources */,
+				29C87C1D2E05A243002EAA2E /* UIImageExtension.swift in Sources */,
 				294E165D2A8E2488000A3AB6 /* NotificationManager.swift in Sources */,
 				29BC9AE42D47FB2E00DE6AA6 /* NetworkManager.swift in Sources */,
 				291872402B74CF3C00AC666A /* Meal.swift in Sources */,
@@ -1806,6 +1815,7 @@
 				29BC9AF62D47FB3A00DE6AA6 /* ProcessInfoExtension.swift in Sources */,
 				29BC9AF72D47FB3A00DE6AA6 /* OperatingSystemType.swift in Sources */,
 				29BC9AF82D47FB3A00DE6AA6 /* DeviceType.swift in Sources */,
+				29C87C182E05A198002EAA2E /* ImageResourceExtension.swift in Sources */,
 				29550BE82AEAEADB0014F07F /* SceneDelegate.swift in Sources */,
 				291872512B74D35900AC666A /* MensaShowType.swift in Sources */,
 				29E307AA2B457540000C8C10 /* FilterView.swift in Sources */,
@@ -1825,6 +1835,7 @@
 				29550BEA2AEAEB6A0014F07F /* UZHMensaAnswer.swift in Sources */,
 				2939D62F2B04D1EE0089A3EB /* ArrayExtension.swift in Sources */,
 				29550BFC2AEAEC550014F07F /* LargeMensaCellView.swift in Sources */,
+				29C87C202E05A243002EAA2E /* UIImageExtension.swift in Sources */,
 				29550BE92AEAEB670014F07F /* UZHAPI.swift in Sources */,
 				29550BFE2AEAEC630014F07F /* MenuCellView.swift in Sources */,
 				299F76A52B87902500D49AC4 /* ClickCountAndWeekdayModifier.swift in Sources */,
@@ -1864,6 +1875,7 @@
 				29BC9AFC2D47FB3A00DE6AA6 /* URLExtension.swift in Sources */,
 				29BC9AFD2D47FB3A00DE6AA6 /* AppReleaseType.swift in Sources */,
 				29BC9AFE2D47FB3A00DE6AA6 /* OperatingSystemType.swift in Sources */,
+				29C87C1A2E05A198002EAA2E /* ImageResourceExtension.swift in Sources */,
 				29E870272D5B9E8B00E83208 /* DateComponentsExtension.swift in Sources */,
 				29BC9AFF2D47FB3A00DE6AA6 /* DeviceType.swift in Sources */,
 				29BC9B012D47FB3A00DE6AA6 /* BundleExtension.swift in Sources */,

@@ -17,7 +17,7 @@ struct MensaEntity: AppEntity, Identifiable {
 
     var displayRepresentation: DisplayRepresentation {
         if let uiImagePngData = UIImage(
-            resource: .appIconRounded
+            resource: .appIconRoundedForUserVersion
         ).pngData() {
             .init(
                 title: "\(name)",
