@@ -208,6 +208,9 @@
 		297040512B07ADAE0080D69C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297040492B0771F10080D69C /* DateExtension.swift */; };
 		2975A9BA2B0408390001DECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2975A9B92B0408390001DECD /* AppDelegate.swift */; };
 		297A84612A9E788E00064B44 /* SettingsNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A84602A9E788E00064B44 /* SettingsNotificationsViewModel.swift */; };
+		297EB87E2E059E890015E66D /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 297EB87D2E059E890015E66D /* AppIcon.icon */; };
+		297EB87F2E059E890015E66D /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 297EB87D2E059E890015E66D /* AppIcon.icon */; };
+		297EB8802E059E890015E66D /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 297EB87D2E059E890015E66D /* AppIcon.icon */; };
 		2982AFAA2AEC4FCC008B2B41 /* ethmensa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982AFA92AEC4FCC008B2B41 /* ethmensa.swift */; };
 		2982AFB92AEC504C008B2B41 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294E16532A8E2488000A3AB6 /* SettingsManager.swift */; };
 		2982AFBA2AEC504C008B2B41 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294E16572A8E2488000A3AB6 /* API.swift */; };
@@ -579,6 +582,7 @@
 		297040492B0771F10080D69C /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		2975A9B92B0408390001DECD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		297A84602A9E788E00064B44 /* SettingsNotificationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsNotificationsViewModel.swift; sourceTree = "<group>"; };
+		297EB87D2E059E890015E66D /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2982AFA92AEC4FCC008B2B41 /* ethmensa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ethmensa.swift; sourceTree = "<group>"; };
 		2982AFCC2AEC5589008B2B41 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -850,6 +854,7 @@
 				2904E3152B7258390072E422 /* visionos.entitlements */,
 				294E164F2A8E23CA000A3AB6 /* Info.plist */,
 				294E16812A9211F8000A3AB6 /* Assets.xcassets */,
+				297EB87D2E059E890015E66D /* AppIcon.icon */,
 				291C824E2B599FC700730BFD /* InfoPlist.xcstrings */,
 				29C0B0A42B21C61C0065478D /* Localizable.xcstrings */,
 				29D608522D5A1F7D00EED2DE /* AppShortcuts.strings */,
@@ -1391,6 +1396,7 @@
 				294E16822A9211F8000A3AB6 /* Assets.xcassets in Resources */,
 				292074522C6FA75500A453F5 /* WhatToTest.en-US.txt in Resources */,
 				291C824F2B599FC800730BFD /* InfoPlist.xcstrings in Resources */,
+				297EB8802E059E890015E66D /* AppIcon.icon in Resources */,
 				29A23F102CB50ECC00AA8CC3 /* click.mp3 in Resources */,
 				29B9A9FA2D555CD9009291B9 /* WhatToTest.it.txt in Resources */,
 				29A23F112CB50ECC00AA8CC3 /* default.mp3 in Resources */,
@@ -1406,6 +1412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29C0B0AB2B21C96B0065478D /* Localizable.xcstrings in Resources */,
+				297EB87F2E059E890015E66D /* AppIcon.icon in Resources */,
 				292074532C6FA75500A453F5 /* WhatToTest.en-US.txt in Resources */,
 				29B9A9F82D555CD9009291B9 /* WhatToTest.it.txt in Resources */,
 				29B9A9EE2D555CA5009291B9 /* WhatToTest.fr-FR.txt in Resources */,
@@ -1421,6 +1428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29F68F0C2B506CC3003518A8 /* Localizable.xcstrings in Resources */,
+				297EB87E2E059E890015E66D /* AppIcon.icon in Resources */,
 				292074542C6FA75500A453F5 /* WhatToTest.en-US.txt in Resources */,
 				29B9A9F92D555CD9009291B9 /* WhatToTest.it.txt in Resources */,
 				29B9A9ED2D555CA5009291B9 /* WhatToTest.fr-FR.txt in Resources */,
