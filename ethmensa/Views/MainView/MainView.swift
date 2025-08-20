@@ -95,6 +95,9 @@ struct MainView: View {
         )
         .toolbar {
             MainViewToolbar(
+                mensaShowType: $settingsManager.mensaShowType,
+                mensaLocationType: $settingsManager.mensaLocationType,
+                sortBy: $settingsManager.sortBy,
                 mensaCellType: $settingsManager.mensaCellType
             )
         }

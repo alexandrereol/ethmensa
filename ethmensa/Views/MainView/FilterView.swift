@@ -10,112 +10,54 @@ struct FilterView: View {
     @EnvironmentObject var settingsManager: SettingsManager
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                OpeningTimeFilterButtonView()
-                LocationFilterButtonView()
-                SortTypeButtonView()
-                WeekdayButtonView()
+        if (settingsManager.mensaShowType != .all ||
+            settingsManager.sortBy != .def ||
+            settingsManager.mensaLocationType != .all) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    FilterBubble(
+                        value: $settingsManager.mensaShowType,
+                        defaultValue: .all,
+                        name: String(localized: "OPEN_ONLY")
+                    )
+                    FilterBubble(
+                        value: $settingsManager.sortBy,
+                        defaultValue: .def,
+                        name: String(localized: "ALPHABETIC_SORTING")
+                    )
+                    FilterBubble(
+                        value: $settingsManager.mensaLocationType,
+                        defaultValue: .all,
+                        name: settingsManager.mensaLocationType.localizedString
+                    )
+                }
+                .environmentObject(navigationManager)
+                .environmentObject(settingsManager)
             }
-            .environmentObject(navigationManager)
-            .environmentObject(settingsManager)
         }
     }
 }
 
-private struct OpeningTimeFilterButtonView: View {
-
-    @EnvironmentObject var settingsManager: SettingsManager
-
-    var body: some View {
-        Menu(settingsManager.mensaShowType.localizedString) {
-            Picker(
-                String(""),
-                selection: $settingsManager.mensaShowType.animation()
-            ) {
-                ForEach(MensaShowType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
-            }
-        }
-        .buttonBorderShape(.capsule)
-        .buttonStyle(
-            selected: settingsManager.mensaShowType == .all
-        )
-    }
-}
-
-private struct LocationFilterButtonView: View {
-
-    @EnvironmentObject var settingsManager: SettingsManager
+struct FilterBubble<T: Equatable>: View {
+    @Binding var value: T
+    let defaultValue: T
+    let name: String
 
     var body: some View {
-        Menu(settingsManager.mensaLocationType.localizedString) {
-            Picker(
-                String(""),
-                selection: $settingsManager.mensaLocationType.animation()
-            ) {
-                ForEach(Campus.CampusType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
+        if value != defaultValue {
+            Button {
+                withAnimation(.easeInOut) { value = defaultValue }
+            } label: {
+                HStack(spacing: 6) {
+                    Text(name).font(.footnote.weight(.semibold))
+                    Image(systemName: "xmark")
+                        .font(.system(size: 10, weight: .bold))
+                        .accessibilityHidden(true)
                 }
             }
-        }
-        .buttonBorderShape(.capsule)
-        .buttonStyle(
-            selected: settingsManager.mensaLocationType == .all
-        )
-    }
-}
-
-private struct SortTypeButtonView: View {
-
-    @EnvironmentObject var settingsManager: SettingsManager
-
-    var body: some View {
-        Menu(settingsManager.sortBy.localizedString) {
-            Picker(
-                String(""),
-                selection: $settingsManager.sortBy.animation()
-            ) {
-                ForEach(SortType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
-            }
-        }
-        .buttonBorderShape(.capsule)
-        .buttonStyle(
-            selected: settingsManager.sortBy == .def
-        )
-    }
-}
-
-private struct WeekdayButtonView: View {
-
-    @EnvironmentObject var navigationManager: NavigationManager
-
-    private var menuString: String {
-        Date.weekdaysStartingAtOne.first { (index, _) in
-            index == navigationManager.selectedWeekdayCodeOverride
-        }?.1 ?? .init(localized: "WEEKDAY")
-    }
-
-    var body: some View {
-        if !SettingsManager.shared.allergens.isEmpty {
-            Menu(menuString) {
-                Picker(
-                    String(""),
-                    selection: $navigationManager.selectedWeekdayCodeOverride.animation()
-                ) {
-                    Text("NO_WEEKDAY_ALLERGEN_FILTER").tag(Int?(nil))
-                    ForEach(Date.weekdaysStartingAtOne, id: \.0) { (index, weekday) in
-                        Text(weekday).tag(index)
-                    }
-                }
-            }
+            .buttonStyle(.bordered)
             .buttonBorderShape(.capsule)
-            .buttonStyle(
-                selected: navigationManager.selectedWeekdayCodeOverride == nil
-            )
+            .accessibilityLabel("Clear \(name)")
         }
     }
 }
