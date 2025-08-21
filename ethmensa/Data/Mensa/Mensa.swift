@@ -52,7 +52,7 @@ class Mensa: Identifiable {
 #endif
 
     /// The cached campusType of this Mensa.
-    internal var getLocationTypeCache: Campus.CampusType?
+    var getLocationTypeCache: Campus.CampusType?
     /// The cached coordinates of this Mensa.
     internal var getCoordinatesCache: CLLocation?
 

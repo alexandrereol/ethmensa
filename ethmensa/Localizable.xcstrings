@@ -385,6 +385,16 @@
         }
       }
     },
+    "ALPHABETIC_SORTING" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort Alphabetically"
+          }
+        }
+      }
+    },
     "APPEARANCE" : {
       "localizations" : {
         "de" : {
@@ -496,6 +506,9 @@
           }
         }
       }
+    },
+    "Clear %@" : {
+
     },
     "CLOSE" : {
       "localizations" : {
@@ -2066,6 +2079,7 @@
       }
     },
     "NO_WEEKDAY_ALLERGEN_FILTER" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2509,6 +2523,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apri l'app e mostra le Mensa di Zentrum."
+          }
+        }
+      }
+    },
+    "OPEN_ONLY" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open only"
           }
         }
       }

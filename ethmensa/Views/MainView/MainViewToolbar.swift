@@ -6,7 +6,11 @@ import SwiftUI
 
 struct MainViewToolbar: ToolbarContent {
 
+    @Binding var filterOpenOnly: Bool
+    @Binding var sortAlphabetically: Bool
+    @Binding var filterCampus: Campus.CampusType?
     @Binding var mensaCellType: MensaCellType
+    let isFiltered: Bool
 
     private var cellTypes: [(name: String, type: MensaCellType)] {
         var result: [(String, MensaCellType)] = [
@@ -20,20 +24,54 @@ struct MainViewToolbar: ToolbarContent {
         }
         return result
     }
+    
+    var filterMenu: some View {
+        Menu {
+            Section{
+                Toggle("\(String(localized: "OPEN_ONLY"))", isOn: $filterOpenOnly.animation())
+                Toggle("\(String(localized: "ALPHABETIC_SORTING"))", isOn: $sortAlphabetically.animation())
+            }
+            Section {
+                let deselectableCampus = Binding {
+                    filterCampus
+                } set: { newValue in
+                    withAnimation {
+                        filterCampus = (newValue == filterCampus) ? nil : newValue
+                    }
+                }
 
-    var body: some ToolbarContent {
-        ToolbarItem(placement: .topBarLeading) {
-            Menu {
-                Picker("MENSA_CELL_SIZE", selection: $mensaCellType) {
+                Picker(String(""),selection: deselectableCampus) {
+                    ForEach(Campus.CampusType.allCases.filter{$0 != .all}, id: \.rawValue) { showType in
+                        Text(showType.localizedString).tag(showType)
+                    }
+                }
+            }
+            Section {
+                Picker("MENSA_CELL_SIZE", selection: $mensaCellType.animation()) {
                     ForEach(cellTypes, id: \.type) { viewType in
                         Text(viewType.name)
                             .tag(viewType.type)
                     }
                 }
-            } label: {
-                Image(systemName: "square.text.square")
+            }
+        } label: {
+            if (isFiltered){
+                Image(systemName: "line.3.horizontal.decrease.circle.fill")
+            } else {
+                Image(systemName: "line.3.horizontal.decrease.circle")
             }
         }
+    }
+    
+    var body: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            filterMenu
+        }
+
+
+    
+        
+    
 #if !os(watchOS) && !os(visionOS) && !APPCLIP && !targetEnvironment(macCatalyst)
         ToolbarItem(placement: .topBarTrailing) {
             Button("LEGI_CARD", systemImage: "person.text.rectangle") {

@@ -139,6 +139,23 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
     /// A list of allergens to be displayed.
     @Published var allergens: [Allergen]
 
+    /// Computed helper variables for mapping filters to their UI representation
+
+    var filterOpenOnly: Bool {
+        get { mensaShowType == .open }
+        set { mensaShowType = newValue ? .open : .all }
+    }
+        
+    var sortAlphabetically: Bool {
+        get { sortBy == .name }
+        set { sortBy = newValue ? .name : .def }
+    }
+    
+    var filterCampus: Campus.CampusType? {
+        get { mensaLocationType != .all ? mensaLocationType : nil }
+        set { mensaLocationType = newValue ?? .all }
+    }
+    
     /// A set of AnyCancellable objects that represent the subscribers to the settings manager.
     /// These subscribers are used to manage and cancel Combine subscriptions when they are no longer needed.
     private var subscribers: Set<AnyCancellable> = []
