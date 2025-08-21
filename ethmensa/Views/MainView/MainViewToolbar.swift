@@ -6,10 +6,11 @@ import SwiftUI
 
 struct MainViewToolbar: ToolbarContent {
 
-    @Binding var mensaShowType: MensaShowType
-    @Binding var mensaLocationType: Campus.CampusType
-    @Binding var sortBy: SortType
+    @Binding var filterOpenOnly: Bool
+    @Binding var sortAlphabetically: Bool
+    @Binding var filterCampus: Campus.CampusType?
     @Binding var mensaCellType: MensaCellType
+    let isFiltered: Bool
 
     private var cellTypes: [(name: String, type: MensaCellType)] {
         var result: [(String, MensaCellType)] = [
@@ -23,81 +24,42 @@ struct MainViewToolbar: ToolbarContent {
         }
         return result
     }
-
-    private var nonstandardSortOptions: Bool {
-        mensaShowType != .all &&
-        mensaLocationType != .all &&
-        sortBy != .def
-    }
     
     var filterMenu: some View {
         Menu {
-            let selectedOpenOnly = Binding<Bool>(
-                get: { mensaShowType == .open },
-                set: { mensaShowType = $0 ? .open : .all }
-            )
-            Toggle("\(String(localized: "OPEN_ONLY"))", isOn: selectedOpenOnly)
-            let alphabeticSorting = Binding<Bool>(
-                get: { sortBy == .name },
-                set: { sortBy = $0 ? .name : .def }
-            )
-            Toggle("\(String(localized: "ALPHABETIC_SORTING"))", isOn: alphabeticSorting)
-            Divider()
-            let selectedCampus = Binding<Optional<Campus.CampusType>>(
-                get: { mensaLocationType == .all ? nil : mensaLocationType },
-                set: {
-                    if let newValue = $0 {
-                        mensaLocationType = newValue
-                    } else {
-                        mensaLocationType = .all
+            Section{
+                Toggle("\(String(localized: "OPEN_ONLY"))", isOn: $filterOpenOnly.animation())
+                Toggle("\(String(localized: "ALPHABETIC_SORTING"))", isOn: $sortAlphabetically.animation())
+            }
+            Section {
+                let deselectableCampus = Binding {
+                    filterCampus
+                } set: { newValue in
+                    withAnimation {
+                        filterCampus = (newValue == filterCampus) ? nil : newValue
                     }
                 }
-            )
-            Picker(String(""),selection: selectedCampus) {
-                ForEach(Campus.CampusType.allCases.filter{$0 != .all}, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(Optional(showType))
+
+                Picker(String(""),selection: deselectableCampus) {
+                    ForEach(Campus.CampusType.allCases.filter{$0 != .all}, id: \.rawValue) { showType in
+                        Text(showType.localizedString).tag(showType)
+                    }
                 }
             }
-            Divider()
-            Picker("MENSA_CELL_SIZE", selection: $mensaCellType) {
-                ForEach(cellTypes, id: \.type) { viewType in
-                    Text(viewType.name)
-                        .tag(viewType.type)
-                }
-            }
-        } label: {
-            Image(systemName: "line.3.horizontal.decrease.circle")
-        }
-    }
-    
-    var filterMenuVerbose: some View {
-        Menu {
-            Picker(String(""),selection: $mensaShowType) {
-                ForEach(MensaShowType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
-            }
-            Divider()
-            Picker(String(""),selection: $mensaLocationType) {
-                ForEach(Campus.CampusType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
-            }
-            Divider()
-            Picker(String(""),selection: $sortBy) {
-                ForEach(SortType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
-            }
-            Divider()
-            Picker("MENSA_CELL_SIZE", selection: $mensaCellType) {
-                ForEach(cellTypes, id: \.type) { viewType in
-                    Text(viewType.name)
-                        .tag(viewType.type)
+            Section {
+                Picker("MENSA_CELL_SIZE", selection: $mensaCellType.animation()) {
+                    ForEach(cellTypes, id: \.type) { viewType in
+                        Text(viewType.name)
+                            .tag(viewType.type)
+                    }
                 }
             }
         } label: {
-            Image(systemName: "square.text.square")
+            if (isFiltered){
+                Image(systemName: "line.3.horizontal.decrease.circle.fill")
+            } else {
+                Image(systemName: "line.3.horizontal.decrease.circle")
+            }
         }
     }
     

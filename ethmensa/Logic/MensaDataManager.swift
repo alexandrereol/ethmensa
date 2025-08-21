@@ -29,8 +29,26 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 
     /// A published property that holds a list of `Mensa` objects.
     /// This list may contain filtered values based on certain criteria.
-    @Published var mensaList: [Mensa]?
+    var mensaList: [Mensa]? {
+        guard var mensaList = unfilteredMenaList else {
+            return nil
+        }
+        
+#if os(watchOS)
+        removeMensasWithoutMenuToday(mensaList: &mensaList)
+#else
+        if SettingsManager.shared.hideMensaWithNoMenus {
+            removeMensasWithoutMenuToday(mensaList: &mensaList)
+        }
+        search(mensaList: &mensaList)
+#endif
+        filter(mensaList: &mensaList)
+        sort(mensaList: &mensaList)
+        return mensaList
+    }
 
+    
+    
 #if !os(watchOS)
     /// A published property that holds the search term entered by the user.
     /// - Important: This property is not applicable on watchOS.
@@ -121,7 +139,7 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
             }
         }
         for mensa in newUnfilteredMenaList {
-            _ = await mensa.getCoordinates()
+            _ = await mensa.getLocationType()
         }
         await updateFiltersOnMensaList()
     }
@@ -137,6 +155,7 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     /// 5. Sorts the mensa list.
     /// 6. Sets the final filtered and sorted mensa list to `self.mensaList` on the main actor.
     private func updateFiltersOnMensaList() async {
+        /*
         guard let unfilteredMenaList else {
             await MainActor.run {
                 self.mensaList = nil
@@ -157,7 +176,7 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         let finalMensaList = mensaList
         await MainActor.run {
             self.mensaList = finalMensaList
-        }
+        }*/
     }
 
 #if !os(watchOS)
@@ -187,7 +206,7 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     ///   the selected location type.
     /// - If the `hideMensaWithNoMenus` setting in `SettingsManager` is enabled, remove Mensa objects that have
     ///   no meal times.
-    private func filter(mensaList: inout [Mensa]) async {
+    private func filter(mensaList: inout [Mensa]) {
         var filteredArray: [Mensa] = []
         for mensa in mensaList {
             let allergenCond = if let weekdayCodeOverride = NavigationManager.shared.selectedWeekdayCodeOverride {
@@ -209,7 +228,8 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
             let locationCond = if SettingsManager.shared.mensaLocationType == .all {
                 true
             } else {
-                SettingsManager.shared.mensaLocationType == (await mensa.getLocationType())
+                // HACK: 
+                SettingsManager.shared.mensaLocationType == mensa.getLocationTypeCache
             }
             if allergenCond,
                openCond,

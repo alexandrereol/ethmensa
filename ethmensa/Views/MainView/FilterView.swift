@@ -10,30 +10,26 @@ struct FilterView: View {
     @EnvironmentObject var settingsManager: SettingsManager
 
     var body: some View {
-        if (settingsManager.mensaShowType != .all ||
-            settingsManager.sortBy != .def ||
-            settingsManager.mensaLocationType != .all) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    FilterBubble(
-                        value: $settingsManager.mensaShowType,
-                        defaultValue: .all,
-                        name: String(localized: "OPEN_ONLY")
-                    )
-                    FilterBubble(
-                        value: $settingsManager.sortBy,
-                        defaultValue: .def,
-                        name: String(localized: "ALPHABETIC_SORTING")
-                    )
-                    FilterBubble(
-                        value: $settingsManager.mensaLocationType,
-                        defaultValue: .all,
-                        name: settingsManager.mensaLocationType.localizedString
-                    )
-                }
-                .environmentObject(navigationManager)
-                .environmentObject(settingsManager)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                FilterBubble(
+                    value: $settingsManager.filterOpenOnly,
+                    defaultValue: false,
+                    name: String(localized: "OPEN_ONLY")
+                )
+                FilterBubble(
+                    value: $settingsManager.sortAlphabetically,
+                    defaultValue: false,
+                    name: String(localized: "ALPHABETIC_SORTING")
+                )
+                FilterBubble(
+                    value: $settingsManager.filterCampus,
+                    defaultValue: nil,
+                    name: settingsManager.mensaLocationType.localizedString
+                )
             }
+            .environmentObject(navigationManager)
+            .environmentObject(settingsManager)
         }
     }
 }
@@ -46,7 +42,9 @@ struct FilterBubble<T: Equatable>: View {
     var body: some View {
         if value != defaultValue {
             Button {
-                withAnimation(.easeInOut) { value = defaultValue }
+                withAnimation {
+                    value = defaultValue
+                }
             } label: {
                 HStack(spacing: 6) {
                     Text(name).font(.footnote.weight(.semibold))
@@ -55,7 +53,7 @@ struct FilterBubble<T: Equatable>: View {
                         .accessibilityHidden(true)
                 }
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .accessibilityLabel("Clear \(name)")
         }

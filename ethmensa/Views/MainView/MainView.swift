@@ -37,9 +37,11 @@ struct MainView: View {
     var body: some View {
         ZStack {
             List(selection: $navigationManager.selectedMensa) {
-                FilterView()
-                    .listRowInsets(EdgeInsets())
-                    .listRowBackground(Color.clear)
+                if (mensaDataManager.isFiltered) {
+                    FilterView()
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
+                }
                 if viewState == .loadedWithContent {
                     ForEach(mensaDataManager.mensaList ?? []) { mensa in
                         MainMensaView(mensa: mensa)
@@ -95,10 +97,11 @@ struct MainView: View {
         )
         .toolbar {
             MainViewToolbar(
-                mensaShowType: $settingsManager.mensaShowType,
-                mensaLocationType: $settingsManager.mensaLocationType,
-                sortBy: $settingsManager.sortBy,
-                mensaCellType: $settingsManager.mensaCellType
+                filterOpenOnly: $settingsManager.filterOpenOnly,
+                sortAlphabetically: $settingsManager.sortAlphabetically,
+                filterCampus: $settingsManager.filterCampus,
+                mensaCellType: $settingsManager.mensaCellType,
+                isFiltered: mensaDataManager.isFiltered
             )
         }
     }
