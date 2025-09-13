@@ -22,16 +22,19 @@ struct SettingsNotificationsView: View {
         NavigationStack {
             List {
                 Section {
-                    Toggle("ENABLE_NOTIFICATIONS", isOn: $viewModel.notifications.animation())
-                        .tint(.accent)
-                        .permissionAlerts(
-                            localizedDeniedPermission: .init(localized: "NOTIFICATIONS"),
-                            deniedShown: $viewModel.notificationDeniedAlertShown,
-                            notSupportedShown: $viewModel.notificationNotSupportedAlertShown,
-                            deniedSettingsAction: {
-                                viewModel.deniedAction()
-                            }
-                        )
+                    Toggle(
+                        "ENABLE_NOTIFICATIONS",
+                        isOn: $viewModel.notifications.animation()
+                    )
+                    .tint(.accent)
+                    .permissionAlerts(
+                        localizedDeniedPermission: .init(localized: "NOTIFICATIONS"),
+                        deniedShown: $viewModel.notificationDeniedAlertShown,
+                        notSupportedShown: $viewModel.notificationNotSupportedAlertShown,
+                        deniedSettingsAction: {
+                            viewModel.deniedAction()
+                        }
+                    )
                 } footer: {
                     Text("ENABLE_NOTIFICATIONS_FOOTER")
                 }
