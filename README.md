@@ -1,7 +1,7 @@
 # ETH Mensa (iOS, iPadOS, macOS, watchOS, visionOS)
 <br />
 <p align="center">
-  <img src="ethmensa/Assets.xcassets/AppIconRounded.imageset/ethmensa.png" alt="ETH Mensa App Icon" width="120">
+  <img src="ethmensa/App/Assets.xcassets/AppIconRoundedLG.imageset/AppIconLiquidGlass.png" alt="ETH Mensa App Icon" width="120">
 </p>
 <br />
 <p align="center">
