@@ -103,7 +103,6 @@ class SettingsNotificationsViewModel: NSObject, ObservableObject {
     }
 
 #if !os(visionOS)
-
     private func locationChange(_ newLocation: Bool) async throws {
         if newLocation {
             switch coreLocationManager.authorizationStatus {

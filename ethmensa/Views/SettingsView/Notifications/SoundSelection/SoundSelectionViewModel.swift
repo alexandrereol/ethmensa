@@ -29,7 +29,7 @@ class SoundSelectionViewModel: ObservableObject {
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
             player?.play()
         } catch {
-            logger.critical("playSound(): \(error)")
+            logger.critical("\(#function): \(error)")
         }
     }
 }

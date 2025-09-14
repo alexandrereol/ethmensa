@@ -42,7 +42,7 @@ class SharedWithYouManager: NSObject, SWHighlightCenterDelegate {
     /// - Parameter highlightCenter: The `SWHighlightCenter` instance containing the updated highlights.
     func highlightCenterHighlightsDidChange(_ highlightCenter: SWHighlightCenter) {
         self.swHighlights = highlightCenter.highlights
-        logger.info("highlightCenterHighlightsDidChange(): new count: \(highlightCenter.highlights.count)")
+        logger.info("\(#function): new count: \(highlightCenter.highlights.count)")
     }
 
     /// Handles the "Shared With You" highlights by filtering and reordering the provided `mensaArray`.

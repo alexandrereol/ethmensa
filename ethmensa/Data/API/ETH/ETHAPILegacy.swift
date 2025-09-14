@@ -20,7 +20,7 @@ class ETHAPILegacy: APIProtocol {
         let acceptLanguage = Bundle.main.preferredLocalizations.first == "de" ? "de-DE;de;q=0.9" : "en-EN,en;q=0.9"
         guard let mensaAnswer = await download(language: language, acceptLanguage: acceptLanguage) else {
             logger.critical(
-                "get(): mensaAnswer from download(language: \(language), acceptLanguage: \(acceptLanguage)) is nil"
+                "\(#function): mensaAnswer from download(language: \(language), acceptLanguage: \(acceptLanguage)) is nil"
             )
             return []
         }
@@ -39,7 +39,7 @@ class ETHAPILegacy: APIProtocol {
 
     private func download(language: String, acceptLanguage: String) async -> [ETHMensaAnswerLegacy]? {
         guard let url = "\(endpoint)/mensas/detail?lang=\(language)".toURL() else {
-            logger.critical("download(): Could not create URL from endpoint")
+            logger.critical("\(#function): Could not create URL from endpoint")
             return nil
         }
         let result = await API.shared.perform(
@@ -55,7 +55,7 @@ class ETHAPILegacy: APIProtocol {
         case .success(let mensa):
             return mensa
         case .failure(let error):
-            logger.critical("download(): \(error)")
+            logger.critical("\(#function): \(error)")
             return nil
         }
     }

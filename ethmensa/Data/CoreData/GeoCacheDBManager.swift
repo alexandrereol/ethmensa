@@ -52,7 +52,7 @@ class GeoCacheDBManager {
             do {
                 try managedContext.save()
             } catch let error as NSError {
-                logger.critical("create(geoCache: \(geoCache.debugString): Could not save. \(error)")
+                logger.critical("\(#function): Could not save. \(error)")
             }
         }
     }
@@ -77,7 +77,7 @@ class GeoCacheDBManager {
                     )
                 }
             } catch let error as NSError {
-                logger.critical("update(geoCache: \(geoCache.debugString): Could not fetch/save. \(error)")
+                logger.critical("\(#function): Could not fetch/save. \(error)")
             }
         }
     }
@@ -93,12 +93,12 @@ class GeoCacheDBManager {
                 }
                 guard let long = entity.value(forKey: "long") as? Double,
                       let lat = entity.value(forKey: "lat") as? Double else {
-                    logger.critical("read(address: \(address)): Error decoding \(self.entityName)")
+                    logger.critical("\(#function): Error decoding \(self.entityName)")
                     return nil
                 }
                 return CLLocation(latitude: lat, longitude: long)
             } catch let error as NSError {
-                logger.critical("read(address: \(address)): Could not fetch. \(error), \(error.userInfo)")
+                logger.critical("\(#function): Could not fetch. \(error), \(error.userInfo)")
                 return nil
             }
         }
@@ -118,7 +118,7 @@ class GeoCacheDBManager {
                 }
                 return mappedResult
             } catch let error as NSError {
-                logger.critical("read(): Could not fetch. \(error), \(error.userInfo)")
+                logger.critical("\(#function): Could not fetch. \(error), \(error.userInfo)")
             }
             return []
         }
@@ -145,7 +145,7 @@ class GeoCacheDBManager {
                     options: nil
                 )
             } catch {
-                logger.critical("reset(): Could not reset. \(error)")
+                logger.critical("\(#function): Could not reset. \(error)")
             }
         }
     }

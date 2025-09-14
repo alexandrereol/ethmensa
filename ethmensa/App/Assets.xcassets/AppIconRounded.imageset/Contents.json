@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "ethmensa.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "ethmensa_round.png",
+      "idiom" : "vision"
+    },
+    {
+      "filename" : "ethmensa_round.png",
+      "idiom" : "watch"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

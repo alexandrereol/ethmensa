@@ -17,7 +17,7 @@ extension Mensa {
             getLocationTypeCache = result
             return result
         } else {
-            logger.critical("getLocationType(): failed getting Campus.CampusType.getNearest for \(self.name)")
+            logger.critical("\(#function): failed getting Campus.CampusType.getNearest for \(self.name)")
             return nil
         }
     }
@@ -32,7 +32,7 @@ extension Mensa {
             return getCoordinatesCache
         }
         guard let location else {
-            logger.critical("getCoordinates(): failed for \(self.name) because location is nil")
+            logger.critical("\(#function): failed for \(self.name) because location is nil")
             return nil
         }
         if let locationDBCache = GeoCacheDBManager.shared.read(
@@ -52,7 +52,7 @@ extension Mensa {
                 parsedAddress = parsedAddressArray.joined(separator: " ")
                 return try await geocodeAddress(parsedAddress)
             } catch {
-                logger.critical("getCoordinates() failed for \(parsedAddress) because \(error)")
+                logger.critical("\(#function): failed for \(parsedAddress) because \(error)")
                 return nil
             }
         }
@@ -83,7 +83,7 @@ extension Mensa {
             getCoordinatesCache = location
             return location
         } else {
-            logger.critical("geocodeAddress(): failed for \(address) because geocoderLocation is nil")
+            logger.critical("\(#function): failed for \(address) because geocoderLocation is nil")
             return nil
         }
     }

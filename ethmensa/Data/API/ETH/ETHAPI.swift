@@ -44,7 +44,7 @@ class ETHAPI: APIProtocol {
     func get() async -> [Mensa] {
         let legacyMensas = await ETHAPILegacy.shared.get()
         guard !legacyMensas.isEmpty else {
-            logger.critical("get(): legacyMensas is empty")
+            logger.critical("\(#function): legacyMensas is empty")
             return []
         }
         let language = Bundle.main.preferredLocalizations.first == "de" ? "de" : "en"
@@ -58,7 +58,7 @@ class ETHAPI: APIProtocol {
                 validBefore: DateFormatter.getETHIDApps.string(from: apiValidBeforeDate)
               ),
               let weeklyRotaArray = mensaAnswer.weeklyRotaArray?.filter(\.isValidToday) else {
-            logger.critical("get(): Could not download ETH data")
+            logger.critical("\(#function): Could not download ETH data")
             return []
         }
         var mensaArray: [Mensa] = []
@@ -97,7 +97,7 @@ class ETHAPI: APIProtocol {
             }
             guard let facilityID = weeklyRota.facilityID,
                   let legacyMensa = legacyMensas.first(where: { $0.facilityID == facilityID }) else {
-                logger.critical("get(): Could not get legacyMensa for facilityID \(weeklyRota.facilityID ?? -1)")
+                logger.critical("\(#function): Could not get legacyMensa for facilityID \(weeklyRota.facilityID ?? -1)")
                 continue
             }
             mensaArray.append(
@@ -133,7 +133,7 @@ class ETHAPI: APIProtocol {
             ("valid-before", validBefore)
         ].map { "\($0)=\($1)" }.joined(separator: "&")
         guard let url = "\(self.endpoint)?\(params)".toURL() else {
-            logger.critical("download(): Could not create URL from endpoint")
+            logger.critical("\(#function): Could not create URL from endpoint")
             return nil
         }
         let result = await API.shared.perform(
@@ -149,14 +149,14 @@ class ETHAPI: APIProtocol {
         case .success(let mensa):
             return mensa
         case .failure(let error):
-            logger.critical("download(): \(error)")
+            logger.critical("\(#function): \(error)")
             return nil
         }
     }
 
     private func mapMeal(fromETHMenuLine menuLine: ETHLineArray) -> Meal? {
         guard let meal = menuLine.meal else {
-            logger.info("mapMeal(): meal data is nil for menuLine \(menuLine.name ?? "unknown")")
+            logger.info("\(#function): meal data is nil for menuLine \(menuLine.name ?? "unknown")")
             return nil
         }
         let mealTitle = menuLine.name ?? String(localized: "MENU")

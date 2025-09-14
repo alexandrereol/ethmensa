@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "AppIconLiquidGlass.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "AppIconLiquidGlass_round.png",
+      "idiom" : "watch"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

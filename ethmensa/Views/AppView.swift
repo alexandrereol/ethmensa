@@ -35,7 +35,7 @@ struct AppView: View {
         .versionIncompatibleIfNeeded(
             host: API.shared.host,
             tintColor: .accent,
-            appIcon: .appIconRounded
+            appIcon: .appIconRoundedForUserVersion
         ) {
             openURL(String.appStoreURLString.toURL()!)
         } detailButtonAction: {

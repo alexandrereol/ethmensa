@@ -72,7 +72,7 @@ class GeofencingManager: NSObject {
     /// This method logs the start of the geofencing manager and iterates through the list of geofences,
     /// instructing the location manager to start monitoring each one.
     func startGeofencingManager() {
-        logger.info("Starting geofencing manager")
+        logger.info(#function)
         geofences.forEach {
             locationManager.startMonitoring(for: $0)
         }
@@ -83,7 +83,7 @@ class GeofencingManager: NSObject {
     /// This method logs an informational message indicating that the geofencing manager is stopping.
     /// It then iterates through all monitored geofences and stops monitoring each one using the location manager.
     func stopGeofencingManager() {
-        logger.info("Stopping geofencing manager")
+        logger.info(#function)
         geofences.forEach {
             locationManager.stopMonitoring(for: $0)
         }

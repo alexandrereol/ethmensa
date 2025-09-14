@@ -20,7 +20,7 @@ struct DetailViewToolbar: ToolbarContent {
                     UIActivityView(
                         name: selectedMensa.name,
                         url: selectedMensa.shareURL,
-                        image: .appIconRounded,
+                        image: .appIconRoundedForUserVersion,
                         excludedActivityTypes: []
                     )
                     .presentationDetents([.medium])

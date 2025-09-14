@@ -21,7 +21,7 @@ struct ModalAppView: View {
                 .lineLimit(3)
                 .minimumScaleFactor(0.25)
 #endif
-            Image(.appIconRounded)
+            Image(.appIconRoundedForUserVersion)
                 .resizable()
                 .scaledToFit()
 #if os(watchOS)

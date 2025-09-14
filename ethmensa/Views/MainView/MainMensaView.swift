@@ -44,7 +44,7 @@ struct MainMensaView: View {
             UIActivityView(
                 name: mensa.name,
                 url: mensa.shareURL,
-                image: .appIconRounded,
+                image: .appIconRoundedForUserVersion,
                 excludedActivityTypes: []
             )
             .presentationDetents(

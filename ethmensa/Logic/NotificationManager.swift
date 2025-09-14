@@ -66,7 +66,7 @@ class NotificationManager {
             )
             notificationCenter.add(request) { error in
                 if let error = error {
-                    self.logger.critical("generateNotif(): \(error)")
+                    self.logger.critical("\(#function): \(error)")
                 }
             }
         }
