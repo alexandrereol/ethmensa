@@ -24,9 +24,7 @@ struct MealCellView: View {
             Button("COPY", systemImage: "doc.on.clipboard") {
                 UIPasteboard.general.string = meal.summary
             }
-            ShareLink(item: meal.summary) {
-                Label("SHARE", systemImage: "square.and.arrow.up")
-            }
+            ShareLink(item: meal.summary)
         }
     }
 

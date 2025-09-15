@@ -8,24 +8,26 @@ struct DetailViewToolbar: ToolbarContent {
 
     var selectedMensa: Mensa?
 
-    @State private var shareSheetShown = false
-
     var body: some ToolbarContent {
         if let selectedMensa {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("SHARE", systemImage: "square.and.arrow.up") {
-                    shareSheetShown = true
-                }
-                .popover(isPresented: $shareSheetShown) {
-                    UIActivityView(
-                        name: selectedMensa.name,
-                        url: selectedMensa.shareURL,
-                        image: .appIconRoundedForUserVersion,
-                        excludedActivityTypes: []
+                ShareLink(
+                    item: selectedMensa.shareURL,
+                    preview: .init(
+                        selectedMensa.name,
+                        image: Image(uiImage: .appIconRoundedForUserVersion)
                     )
-                    .presentationDetents([.medium])
-                }
+                )
             }
         }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        Text(String("Hello World!"))
+            .toolbar {
+                DetailViewToolbar(selectedMensa: .example)
+            }
     }
 }

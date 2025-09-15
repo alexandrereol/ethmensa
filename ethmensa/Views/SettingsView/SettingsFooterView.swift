@@ -8,7 +8,6 @@ struct SettingsFooterView: View {
 
     @Environment(\.openURL) private var openURL
 
-    @State private var shareSheetShown = false
     @State private var privacyPolicyPresented = false
 
     private var isETHVideoPromotionShown: Bool {
@@ -24,20 +23,17 @@ struct SettingsFooterView: View {
 
     var body: some View {
         Section {
-            Button(
-                "SHARE_APP",
-                systemImage: "square.and.arrow.up.fill"
-            ) {
-                shareSheetShown = true
-            }
-            .popover(isPresented: $shareSheetShown) {
-                UIActivityView(
-                    name: Bundle.main.displayName,
-                    url: String.appStoreURLString.toURL()!,
-                    image: .appIconRoundedForUserVersion,
-                    excludedActivityTypes: []
+            ShareLink(
+                item: String.appStoreURLString.toURL()!,
+                preview: .init(
+                    Bundle.main.displayName,
+                    image: Image(uiImage: .appIconRoundedForUserVersion)
                 )
-                .presentationDetents([.medium])
+            ) {
+                Label(
+                    "SHARE_APP",
+                    systemImage: "square.and.arrow.up.fill"
+                )
             }
             Button(
                 "REVIEW_ON_APP_STORE",

@@ -9,8 +9,6 @@ struct MainMensaView: View {
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var mensaDataManager: MensaDataManager
 
-    @State private var shareSheetShown = false
-
     var mensa: Mensa
     var isLoading = false
 
@@ -29,27 +27,17 @@ struct MainMensaView: View {
             ) {
                 navigationManager.selectedMensa = mensa
             }
-            Button(
-                "SHARE",
-                systemImage: "square.and.arrow.up"
-            ) {
-                shareSheetShown = true
-            }
+            ShareLink(
+                item: mensa.shareURL,
+                preview: .init(
+                    mensa.name,
+                    image: Image(uiImage: .appIconRoundedForUserVersion)
+                )
+            )
         } preview: {
             DetailView(contextMenuPreview: true)
                 .environmentObject(NavigationManager(selectedMensa: mensa))
                 .environmentObject(mensaDataManager)
-        }
-        .sheet(isPresented: $shareSheetShown) {
-            UIActivityView(
-                name: mensa.name,
-                url: mensa.shareURL,
-                image: .appIconRoundedForUserVersion,
-                excludedActivityTypes: []
-            )
-            .presentationDetents(
-                [.medium]
-            )
         }
     }
 }
