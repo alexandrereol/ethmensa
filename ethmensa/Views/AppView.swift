@@ -62,13 +62,20 @@ struct AppView: View {
                 .environmentObject(navigationManager)
                 .environmentObject(settingsManager)
         }
-        .overlay(
+        .overlay {
             ImageViewerRemote(
                 imageURL: $navigationManager.imagePopoverURLString,
                 viewerShown: $navigationManager.imagePopoverShown,
                 disableCache: false
             )
-        )
+            if navigationManager.imagePopoverShown {
+                Button(String("")) {
+                    navigationManager.imagePopoverShown = false
+                }
+                .opacity(0)
+                .keyboardShortcut(.escape, modifiers: [])
+            }
+        }
     }
 }
 

@@ -11,6 +11,12 @@ struct SettingsGeneralView: View {
     var body: some View {
         Section("GENERAL") {
             SettingsCellView(
+                label: .init(localized: "LANGUAGE"),
+                systemImageName: "globe.fill"
+            ) {
+                SettingsLanguageSelectionView()
+            }
+            SettingsCellView(
                 label: .init(localized: "NOTIFICATIONS"),
                 systemImageName: "bell.badge.fill"
             ) {
