@@ -736,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa visionOS";
 				SDKROOT = xros;
@@ -767,7 +767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa visionOS";
 				SDKROOT = xros;
@@ -944,7 +944,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = auto;
@@ -991,7 +991,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = auto;
@@ -1028,7 +1028,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.Clip;
 				PRODUCT_NAME = "ETH Mensa Clip";
 				SDKROOT = iphoneos;
@@ -1067,7 +1067,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.Clip;
 				PRODUCT_NAME = "ETH Mensa Clip";
 				SDKROOT = iphoneos;
@@ -1104,7 +1104,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.watchkitapp;
 				PRODUCT_NAME = "ETH Mensa watchOS";
 				SDKROOT = watchos;
@@ -1138,7 +1138,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.watchkitapp;
 				PRODUCT_NAME = "ETH Mensa watchOS";
 				SDKROOT = watchos;
@@ -1172,7 +1172,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1208,7 +1208,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 6.11;
+				MARKETING_VERSION = 6.12;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
