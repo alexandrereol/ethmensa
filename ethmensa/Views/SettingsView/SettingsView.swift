@@ -39,7 +39,7 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    if #available(iOS 26.0, *) {
+                    if #available(iOS 26.0, visionOS 26.0, *) {
                         Button(role: .close) {
                             dismiss()
                         }

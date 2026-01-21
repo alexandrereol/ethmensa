@@ -68,7 +68,7 @@ struct AppViewSheets: View {
                         .environmentObject(settingsManager)
                         .toolbar {
                             ToolbarItem(placement: .topBarTrailing) {
-                                if #available(iOS 26.0, *) {
+                                if #available(iOS 26.0, visionOS 26.0, *) {
                                     Button(role: .close) {
                                         dismiss()
                                     }

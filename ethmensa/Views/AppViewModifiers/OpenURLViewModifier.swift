@@ -44,7 +44,7 @@ private struct OpenURLViewModifier: ViewModifier {
                 "UNIVERSAL_LINK_NO_MENSA",
                 isPresented: $universalLinkAlertShown
             ) {
-                if #available(iOS 26.0, *) {
+                if #available(iOS 26.0, visionOS 26.0, *) {
                     Button(role: .close) {
                         universalLinkAlertShown = false
                     }

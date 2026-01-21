@@ -36,7 +36,7 @@ private struct SettingsPermissionAlertModifiers: ViewModifier {
                     deniedSettingsAction()
                 }
 #endif
-                if #available(iOS 26.0, *) {
+                if #available(iOS 26.0, visionOS 26.0, *) {
                     Button(role: .close) {
                         deniedShown = false
                     }
@@ -52,7 +52,7 @@ private struct SettingsPermissionAlertModifiers: ViewModifier {
                 "NOT_SUPPORTED",
                 isPresented: $notSupportedShown
             ) {
-                if #available(iOS 26.0, *) {
+                if #available(iOS 26.0, visionOS 26.0, *) {
                     Button(role: .close) {
                         notSupportedShown = false
                     }
