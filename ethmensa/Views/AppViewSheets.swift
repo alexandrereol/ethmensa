@@ -67,9 +67,15 @@ struct AppViewSheets: View {
                     SettingsNotificationsView()
                         .environmentObject(settingsManager)
                         .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button("CLOSE") {
-                                    navigationManager.sheet = nil
+                            ToolbarItem(placement: .topBarTrailing) {
+                                if #available(iOS 26.0, *) {
+                                    Button(role: .close) {
+                                        dismiss()
+                                    }
+                                } else {
+                                    Button("CLOSE") {
+                                        dismiss()
+                                    }
                                 }
                             }
                         }
@@ -85,5 +91,9 @@ struct AppViewSheets: View {
             }
         }
         .environmentObject(navigationManager)
+    }
+
+    private func dismiss() {
+        navigationManager.sheet = nil
     }
 }

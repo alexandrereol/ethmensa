@@ -44,7 +44,15 @@ private struct OpenURLViewModifier: ViewModifier {
                 "UNIVERSAL_LINK_NO_MENSA",
                 isPresented: $universalLinkAlertShown
             ) {
-                Button("CLOSE", role: .cancel) { }
+                if #available(iOS 26.0, *) {
+                    Button(role: .close) {
+                        universalLinkAlertShown = false
+                    }
+                } else {
+                    Button("CLOSE") {
+                        universalLinkAlertShown = false
+                    }
+                }
             } message: {
                 Text("UNIVERSAL_LINK_NO_MENSA_MESSAGE")
             }

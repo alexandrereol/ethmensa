@@ -38,11 +38,18 @@ struct SettingsView: View {
             .navigationTitle("SETTINGS")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("CLOSE") {
-                        dismiss()
+                ToolbarItem(placement: .topBarTrailing) {
+                    if #available(iOS 26.0, *) {
+                        Button(role: .close) {
+                            dismiss()
+                        }
+                        .keyboardShortcut(.cancelAction)
+                    } else {
+                        Button("CLOSE") {
+                            dismiss()
+                        }
+                        .keyboardShortcut(.cancelAction)
                     }
-                    .keyboardShortcut(.cancelAction)
                 }
             }
         }

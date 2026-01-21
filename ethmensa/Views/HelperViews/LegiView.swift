@@ -55,9 +55,15 @@ struct LegiView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("CLOSE") {
-                        dismiss()
+                ToolbarItem(placement: .topBarTrailing) {
+                    if #available(iOS 26.0, *) {
+                        Button(role: .close) {
+                            dismiss()
+                        }
+                    } else {
+                        Button("CLOSE") {
+                            dismiss()
+                        }
                     }
                 }
             }

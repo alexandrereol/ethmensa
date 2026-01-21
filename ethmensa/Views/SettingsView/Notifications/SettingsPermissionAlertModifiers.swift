@@ -36,7 +36,15 @@ private struct SettingsPermissionAlertModifiers: ViewModifier {
                     deniedSettingsAction()
                 }
 #endif
-                Button("CLOSE", role: .cancel) { }
+                if #available(iOS 26.0, *) {
+                    Button(role: .close) {
+                        deniedShown = false
+                    }
+                } else {
+                    Button("CLOSE") {
+                        deniedShown = false
+                    }
+                }
             } message: {
                 Text("\(localizedDeniedPermission)_PERMISSION_DENIED_MESSAGE")
             }
@@ -44,7 +52,15 @@ private struct SettingsPermissionAlertModifiers: ViewModifier {
                 "NOT_SUPPORTED",
                 isPresented: $notSupportedShown
             ) {
-                Button("CLOSE", role: .cancel) { }
+                if #available(iOS 26.0, *) {
+                    Button(role: .close) {
+                        notSupportedShown = false
+                    }
+                } else {
+                    Button("CLOSE") {
+                        notSupportedShown = false
+                    }
+                }
             } message: {
                 Text("\(localizedDeniedPermission)_IS_NOT_SUPPORTED_ON_THIS_DEVICE")
             }
