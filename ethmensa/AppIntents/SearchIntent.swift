@@ -19,7 +19,7 @@ import AppIntents
 import Foundation
 
 @available(iOS 17.2, *)
-@AssistantIntent(schema: .system.search)
+@AppIntent(schema: .system.search)
 struct SearchIntent: AppIntent {
 
     static let title: LocalizedStringResource = "SEARCH_IN_ETH_MENSA"
