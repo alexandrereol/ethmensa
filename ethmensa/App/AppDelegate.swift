@@ -33,6 +33,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+#if !APPCLIP && !os(visionOS)
+        ShortcutsProvider.updateAppShortcutParameters()
+#endif
         // Add AppDependencyManager for AppIntents
         AppDependencyManager.shared.add(dependency: NavigationManager.shared)
         AppDependencyManager.shared.add(dependency: MensaDataManager.shared)
