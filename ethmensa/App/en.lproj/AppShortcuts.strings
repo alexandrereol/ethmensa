@@ -25,3 +25,8 @@
 "SHOWS_IRCHEL_MENSAS_IN_${applicationName}" = "Show Irchel mensas in ${applicationName}";
 "SHOWS_ZENTRUM_IN_${applicationName}" = "Show Zentrum in ${applicationName}";
 "SHOWS_ZENTRUM_MENSAS_IN_${applicationName}" = "Show Zentrum mensas in ${applicationName}";
+
+"CURRENTLY_OPEN" = "Currently Open";
+"ZENTRUM_MENSAS" = "Zentrum Mensas";
+"HONGG_MENSAS" = "Hönggerberg Mensas";
+"IRCHEL_MENSAS" = "Irchel Mensas";

@@ -25,3 +25,8 @@
 "SHOWS_IRCHEL_MENSAS_IN_${applicationName}" = "Zeige Mensen auf dem Irchel in ${applicationName}";
 "SHOWS_ZENTRUM_IN_${applicationName}" = "Zeige Zentrum in ${applicationName}";
 "SHOWS_ZENTRUM_MENSAS_IN_${applicationName}" = "Zeige Mensen im Zentrum in ${applicationName}";
+
+"CURRENTLY_OPEN" = "Aktuell geöffnet";
+"ZENTRUM_MENSAS" = "Mensen im Zentrum";
+"HONGG_MENSAS" = "Mensen auf dem Hönggerberg";
+"IRCHEL_MENSAS" = "Mensen auf dem Irchel";

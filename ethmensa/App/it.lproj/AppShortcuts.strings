@@ -25,3 +25,8 @@
 "SHOWS_IRCHEL_MENSAS_IN_${applicationName}" = "Mostra le mense di Irchel in ${applicationName}";
 "SHOWS_ZENTRUM_IN_${applicationName}" = "Mostra Zentrum in ${applicationName}";
 "SHOWS_ZENTRUM_MENSAS_IN_${applicationName}" = "Mostra le mense di Zentrum in ${applicationName}";
+
+"CURRENTLY_OPEN" = "Attualmente aperto";
+"ZENTRUM_MENSAS" = "Mense del Zentrum";
+"HONGG_MENSAS" = "Mense di Hönggerberg";
+"IRCHEL_MENSAS" = "Mense di Irchel";

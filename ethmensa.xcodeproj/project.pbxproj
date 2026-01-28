@@ -184,7 +184,6 @@
 		290E0EEE2E0ACFBB005E0BD4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				/Localized/App/AppShortcuts.strings,
 				App/AppIcon.icon,
 				App/Assets.xcassets,
 				App/InfoPlist.xcstrings,
