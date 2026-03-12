@@ -33,7 +33,7 @@ class ETHAPILegacy: APIProtocol {
         let acceptLanguage = Bundle.main.preferredLocalizations.first == "de" ? "de-DE;de;q=0.9" : "en-EN,en;q=0.9"
         guard let mensaAnswer = await download(language: language, acceptLanguage: acceptLanguage) else {
             logger.critical(
-                "\(#function): mensaAnswer from download(language: \(language), acceptLanguage: \(acceptLanguage)) is nil"
+                "\(#function): download(language: \(language), acceptLanguage: \(acceptLanguage)) is nil"
             )
             return []
         }
