@@ -168,16 +168,30 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
         hideMensaWithNoMenus = udf.bool(
             forKey: Prefix.appSettings.udfKey(for: .hideMensaWithNoMenus)
         )
-        mensaCellType = MensaCellType(
-            rawValue: udf.string(
+        if let mensaCellTypeRaw = udf.string(
+            forKey: Prefix.appSettings.udfKey(for: .mensaCellType)
+        ),
+           let mensaCellType = MensaCellType(rawValue: mensaCellTypeRaw) {
+            self.mensaCellType = mensaCellType
+        } else {
+            udf.set(
+                MensaCellType.standard.rawValue,
                 forKey: Prefix.appSettings.udfKey(for: .mensaCellType)
-            ) ?? MensaCellType.standard.rawValue
-        )!
-        priceType = PriceType(
-            rawValue: udf.string(
+            )
+            self.mensaCellType = .standard
+        }
+        if let priceTypeRaw = udf.string(
+            forKey: Prefix.appSettings.udfKey(for: .priceType)
+        ),
+           let priceType = PriceType(rawValue: priceTypeRaw) {
+            self.priceType = priceType
+        } else {
+            udf.set(
+                PriceType.all.rawValue,
                 forKey: Prefix.appSettings.udfKey(for: .priceType)
-            ) ?? PriceType.all.rawValue
-        )!
+            )
+            self.priceType = .all
+        }
         notifications = udf.bool(forKey: Prefix.appSettings.udfKey(for: .notifications))
         if let notificationsSound = kvs.string(
             forKey: Prefix.appSettings.udfKey(for: .notificationsSound)
@@ -195,12 +209,13 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
             self.sortBy = .def
         }
         if let array = kvs.array(forKey: Prefix.appSettings.udfKey(for: .notificationsTime)),
+           array.count >= 2,
            let hour = array[0] as? Int, let minute = array[1] as? Int,
            let notificationsTime = Date.fromInt(hour: hour, minute: minute) {
             self.notificationsTime = notificationsTime
         } else {
             kvs.set([11, 0], forKey: Prefix.appSettings.udfKey(for: .notificationsTime))
-            self.notificationsTime = .fromInt(hour: 11, minute: 0)!
+            self.notificationsTime = .fromInt(hour: 11, minute: 0) ?? .now
         }
         if let mensaShowTypeRaw = kvs.string(
             forKey: Prefix.appSettings.udfKey(for: .mensaShowType)
@@ -226,11 +241,6 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
             )
             self.mensaLocationType = .all
         }
-        mensaLocationType = Campus.CampusType(
-            rawValue: udf.string(
-                forKey: Prefix.appSettings.udfKey(for: .campusType)
-            ) ?? Campus.CampusType.all.rawValue
-        )!
         cloudkitForSettings = udf.bool(
             forKey: Prefix.appSettings.udfKey(for: .cloudKitForSettings)
         )
