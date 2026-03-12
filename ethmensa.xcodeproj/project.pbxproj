@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 76;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -284,6 +284,7 @@
 			membershipExceptions = (
 				App/Localizable.xcstrings,
 				AppIntents/Intents/ShowLegiIntent.swift,
+				Extensions/BundleExtension.swift,
 				Extensions/StringExtension.swift,
 				Logic/NavigationManager.swift,
 				Views/AppViewSheets.swift,
@@ -531,6 +532,7 @@
 				};
 			};
 			buildConfigurationList = 294E16342A8E22C3000A3AB6 /* Build configuration list for PBXProject "ethmensa" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -546,7 +548,6 @@
 				299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 				299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 			);
-			preferredProjectObjectVersion = 56;
 			productRefGroup = 294E163A2A8E22C3000A3AB6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
