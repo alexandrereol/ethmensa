@@ -98,62 +98,25 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
     }
 
 #if !APPCLIP && !os(watchOS) && !os(visionOS)
-    /// A published property that indicates the location setting.
     @Published var location: Bool
 #endif
 
-    /// A published property indicating whether the first launch has been completed.
     @Published var completedFirstLaunch: Bool
-
-    /// A boolean value indicating whether the debug mode is enabled.
     @Published var debugMode: Bool
-
-    /// A boolean value indicating whether the onboarding process is completed.
     @Published var completedOnboarding: Bool
-
-    /// A boolean value indicating whether the screenshot mode is enabled.
     @Published var screenshotMode: Bool
-
-    /// A boolean value indicating whether to hide mensa with no menus.
     @Published var hideMensaWithNoMenus: Bool
-
-    /// The type of mensa cell to be displayed.
     @Published var mensaCellType: MensaCellType
-
-    /// The type of price to be displayed.
     @Published var priceType: PriceType
-
-    /// A boolean value indicating whether notifications are enabled.
     @Published var notifications: Bool
-
-    /// The sound to be used for notifications.
     @Published var notificationsSound: String
-
-    /// The type of sorting to be applied.
     @Published var sortBy: SortType
-
-    /// The time at which notifications should be sent.
-    ///
-    /// - Important: This property uses a `Date` instead of `DateComponents` because of SwiftUI's DatePicker.
     @Published var notificationsTime: Date
-
-    /// The type of mensa show to be displayed.
     @Published var mensaShowType: MensaShowType
-
-    /// The type of mensa location to be displayed.
     @Published var mensaLocationType: Campus.CampusType
-
-    /// A boolean value indicating whether CloudKit is enabled for settings.
     @Published var cloudkitForSettings: Bool
-
-    /// A boolean value indicating whether to show allergens.
     @Published var showAllergens: Bool
-
-    /// A list of allergens to be displayed.
     @Published var allergens: [Allergen]
-
-    /// A set of AnyCancellable objects that represent the subscribers to the settings manager.
-    /// These subscribers are used to manage and cancel Combine subscriptions when they are no longer needed.
     private var subscribers: Set<AnyCancellable> = []
 
     // swiftlint:disable:next function_body_length
@@ -257,10 +220,6 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
         synchronize()
     }
 
-    // swiftlint:disable:next orphaned_doc_comment
-    /// Sets up Combine publishers to synchronize with UserDefaults or Key-Value Storage.
-    /// This method binds the published variables to the respective storage mechanisms,
-    /// ensuring that changes are persisted and can be observed.
     // swiftlint:disable:next function_body_length
     private func setupCombine() {
         $completedFirstLaunch.sink { newValue in
