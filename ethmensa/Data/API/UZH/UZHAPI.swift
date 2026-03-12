@@ -21,7 +21,7 @@ import os.log
 class UZHAPI: APIProtocol {
     static let shared = UZHAPI()
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: UZHAPI.self)
     )
 

@@ -21,7 +21,7 @@ import os.log
 class ETHAPI: APIProtocol {
     static let shared = ETHAPI()
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: ETHAPI.self)
     )
 

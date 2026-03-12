@@ -25,7 +25,7 @@ import CoreLocation
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     internal let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: AppDelegate.self)
     )
 

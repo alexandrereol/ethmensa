@@ -24,7 +24,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
     var window: UIWindow?
 
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: SceneDelegate.self)
     )
 

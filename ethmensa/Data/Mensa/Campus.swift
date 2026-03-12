@@ -22,7 +22,7 @@ import os.log
 /// A structure representing a campus.
 struct Campus {
     static let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: Campus.self)
     )
 

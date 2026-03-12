@@ -32,7 +32,7 @@ class SharedWithYouManager: NSObject, SWHighlightCenterDelegate {
     /// and the name of the `SharedWithYouManager` class as the category. It is used to
     /// log messages related to the operations and events within the SharedWithYouManager.
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: SharedWithYouManager.self)
     )
 
@@ -77,8 +77,11 @@ class SharedWithYouManager: NSObject, SWHighlightCenterDelegate {
             guard let swHiglightMensaId = swHighlight.shareID else {
                 continue
             }
-            let index = mensaArray.map(\.id).firstIndex(of: swHiglightMensaId)
-            let mensa = mensaArray.remove(at: index!)
+            guard let index = mensaArray.map(\.id).firstIndex(of: swHiglightMensaId) else {
+                logger.warning("\(#function): mensa ID \(swHiglightMensaId) not found in array, skipping highlight")
+                continue
+            }
+            let mensa = mensaArray.remove(at: index)
             mensa.swHighlight = swHighlight
             mensaArray.insert(mensa, at: 0)
         }

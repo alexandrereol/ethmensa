@@ -31,7 +31,7 @@ class API {
     /// and the name of the `API` class as the category. It is used to
     /// log messages related to the operations and events within the API.
     internal let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: API.self)
     )
 

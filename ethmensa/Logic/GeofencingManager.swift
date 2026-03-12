@@ -34,7 +34,7 @@ class GeofencingManager: NSObject {
     /// and the name of the `GeofencingManager` class as the category. It is used to
     /// log messages related to geofencing operations within the app.
     internal let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: GeofencingManager.self)
     )
 

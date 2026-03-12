@@ -20,7 +20,7 @@ import os.log
 
 class VersionIncompatible: ObservableObject {
     static private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: VersionIncompatible.self)
     )
 

@@ -49,4 +49,12 @@ extension Bundle {
             forInfoDictionaryKey: "CFBundleDisplayName"
         ) as? String ?? "ETH Mensa"
     }
+
+    /// A computed property that safely retrieves the bundle identifier,
+    /// falling back to a hardcoded default if the identifier is nil.
+    ///
+    /// - Returns: The bundle identifier as a `String`, or `"ch.alexandrereol.ethmensa"` if not available.
+    var safeIdentifier: String {
+        bundleIdentifier ?? "ch.alexandrereol.ethmensa"
+    }
 }

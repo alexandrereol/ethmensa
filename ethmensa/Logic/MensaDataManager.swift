@@ -32,7 +32,7 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     /// and the name of the `MensaDataManager` class as the category. It is used to
     /// log messages related to the operations and events within the MensaDataManager.
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: MensaDataManager.self)
     )
 
@@ -54,6 +54,10 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     /// This ensures that the subscriptions are cancelled and deallocated properly when no longer needed.
     private var subscribers = Set<AnyCancellable>()
 
+    /// Tracks the current in-flight reload or filter update task.
+    /// New tasks cancel the previous one to prevent concurrent data races on `@Published` properties.
+    private var currentUpdateTask: Task<Void, Never>?
+
     /// A computed property that determines if the mensa data is filtered based on user settings.
     ///
     /// The data is considered filtered if any of the following conditions are met:
@@ -67,29 +71,37 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     }
 
     init() {
-        SettingsManager.shared.$sortBy.sink { _ in
-            Task {
+        SettingsManager.shared.$sortBy.sink { [weak self] _ in
+            guard let self else { return }
+            self.currentUpdateTask?.cancel()
+            self.currentUpdateTask = Task {
                 await self.updateFiltersOnMensaList()
             }
         }.store(in: &subscribers)
-        SettingsManager.shared.$mensaShowType.sink { _ in
-            Task {
+        SettingsManager.shared.$mensaShowType.sink { [weak self] _ in
+            guard let self else { return }
+            self.currentUpdateTask?.cancel()
+            self.currentUpdateTask = Task {
                 await self.updateFiltersOnMensaList()
             }
         }.store(in: &subscribers)
-        SettingsManager.shared.$mensaLocationType.sink { _ in
-            Task {
+        SettingsManager.shared.$mensaLocationType.sink { [weak self] _ in
+            guard let self else { return }
+            self.currentUpdateTask?.cancel()
+            self.currentUpdateTask = Task {
                 await self.updateFiltersOnMensaList()
             }
         }.store(in: &subscribers)
 #if !os(watchOS)
-        $searchTerm.sink { _ in
-            Task {
+        $searchTerm.sink { [weak self] _ in
+            guard let self else { return }
+            self.currentUpdateTask?.cancel()
+            self.currentUpdateTask = Task {
                 await self.updateFiltersOnMensaList()
             }
         }.store(in: &subscribers)
 #endif
-        Task {
+        currentUpdateTask = Task {
             await reloadUnfilteredMensaList()
         }
     }
@@ -123,20 +135,30 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     ///
     /// - Note: This function should be called from an asynchronous context.
     func reloadUnfilteredMensaList() async {
-        let newUnfilteredMenaList = await API.shared.get()
-        await MainActor.run {
-            self.unfilteredMenaList = newUnfilteredMenaList
-        }
-        if let selectedMensa = NavigationManager.shared.selectedMensa,
-           let updatedMensa = newUnfilteredMenaList.first(where: { $0 == selectedMensa }) {
+        currentUpdateTask?.cancel()
+        let task = Task {
+            let newUnfilteredMenaList = await API.shared.get()
+            guard !Task.isCancelled else { return }
             await MainActor.run {
-                NavigationManager.shared.selectedMensa = updatedMensa
+                self.unfilteredMenaList = newUnfilteredMenaList
             }
+            guard !Task.isCancelled else { return }
+            if let selectedMensa = NavigationManager.shared.selectedMensa,
+               let updatedMensa = newUnfilteredMenaList.first(where: { $0 == selectedMensa }) {
+                await MainActor.run {
+                    NavigationManager.shared.selectedMensa = updatedMensa
+                }
+            }
+            guard !Task.isCancelled else { return }
+            for mensa in newUnfilteredMenaList {
+                guard !Task.isCancelled else { return }
+                _ = await mensa.getCoordinates()
+            }
+            guard !Task.isCancelled else { return }
+            await self.updateFiltersOnMensaList()
         }
-        for mensa in newUnfilteredMenaList {
-            _ = await mensa.getCoordinates()
-        }
-        await updateFiltersOnMensaList()
+        currentUpdateTask = task
+        await task.value
     }
 
     /// Updates the filters on the mensa list asynchronously.
@@ -156,6 +178,7 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
             }
             return
         }
+        guard !Task.isCancelled else { return }
         var mensaList = unfilteredMenaList
 #if os(watchOS)
         removeMensasWithoutMenuToday(mensaList: &mensaList)
@@ -166,8 +189,10 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         search(mensaList: &mensaList)
 #endif
         await filter(mensaList: &mensaList)
+        guard !Task.isCancelled else { return }
         sort(mensaList: &mensaList)
         let finalMensaList = mensaList
+        guard !Task.isCancelled else { return }
         await MainActor.run {
             self.mensaList = finalMensaList
         }

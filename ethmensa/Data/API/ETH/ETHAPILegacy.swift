@@ -21,7 +21,7 @@ import os.log
 class ETHAPILegacy: APIProtocol {
     static let shared = ETHAPILegacy()
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: ETHAPILegacy.self)
     )
 

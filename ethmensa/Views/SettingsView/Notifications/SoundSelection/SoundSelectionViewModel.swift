@@ -21,7 +21,7 @@ import SwiftUI
 
 class SoundSelectionViewModel: ObservableObject {
     let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: SoundSelectionViewModel.self)
     )
 

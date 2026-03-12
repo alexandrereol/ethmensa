@@ -79,7 +79,7 @@ class Mensa: Identifiable {
         mealTimes: [MealTime]
     ) {
         self.logger = Logger(
-            subsystem: Bundle.main.bundleIdentifier!,
+            subsystem: Bundle.main.safeIdentifier,
             category: String(describing: Mensa.self) + ": \(facilityID)"
         )
         self.provider = provider
