@@ -22,7 +22,7 @@ import os.log
 class ClickCountDBManager {
     static let shared = ClickCountDBManager()
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: ClickCountDBManager.self)
     )
 
@@ -45,10 +45,13 @@ class ClickCountDBManager {
 
     private func create(id: String) {
         managedContext.performAndWait {
-            let entity = NSEntityDescription.entity(
+            guard let entity = NSEntityDescription.entity(
                 forEntityName: entityName,
                 in: managedContext
-            )!
+            ) else {
+                logger.critical("\(#function): Could not find entity description for \(self.entityName)")
+                return
+            }
             let newEntity = NSManagedObject(entity: entity, insertInto: managedContext)
             newEntity.setValue(id, forKeyPath: "id")
             newEntity.setValue(1, forKeyPath: "count")

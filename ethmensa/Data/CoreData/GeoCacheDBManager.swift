@@ -23,7 +23,7 @@ import os.log
 class GeoCacheDBManager {
     static let shared = GeoCacheDBManager()
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
+        subsystem: Bundle.main.safeIdentifier,
         category: String(describing: GeoCacheDBManager.self)
     )
 
@@ -54,10 +54,13 @@ class GeoCacheDBManager {
 
     private func create(geoCache: CoreDataElement) {
         managedContext.performAndWait {
-            let entity = NSEntityDescription.entity(
+            guard let entity = NSEntityDescription.entity(
                 forEntityName: entityName,
                 in: managedContext
-            )!
+            ) else {
+                logger.critical("\(#function): Could not find entity description for \(self.entityName)")
+                return
+            }
             let newEntity = NSManagedObject(entity: entity, insertInto: managedContext)
             newEntity.setValue(geoCache.address, forKeyPath: "address")
             newEntity.setValue(geoCache.long, forKeyPath: "long")
