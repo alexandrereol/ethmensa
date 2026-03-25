@@ -70,7 +70,7 @@ struct LargeMensaCellView: View {
             )
             .ignoresSafeArea()
             .frame(height: 50)
-            .padding(.bottom, -11)
+            .padding(.bottom, -15)
             .padding(.leading, -20)
             .padding(.trailing, -40)
             .overlay {
