@@ -1,2 +1,5 @@
 opt_in_rules:
   - sorted_imports
+
+excluded:
+    - ethmensa/Data/API/ZFV/Generated

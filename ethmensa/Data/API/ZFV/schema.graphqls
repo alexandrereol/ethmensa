@@ -1,0 +1,83 @@
+schema {
+  query: Query
+}
+
+type Query {
+  outlets: [Outlet!]!
+}
+
+type Outlet {
+  externalId: String
+  name: String
+  location: Location
+  calendar: OutletCalendar
+}
+
+type Location {
+  address: Address
+}
+
+type Address {
+  addressLine1: String
+  zipCode: String
+  city: String
+}
+
+type OutletCalendar {
+  week: OutletCalendarRange
+}
+
+type OutletCalendarRange {
+  daily: [OutletCalendarRangeDay]
+}
+
+type OutletCalendarRangeDay {
+  date: DateWithTimezone
+  menuCategories: [OutletMenuCategoryCalendarRangeDay]
+}
+
+type DateWithTimezone {
+  weekdayNumber: Int
+}
+
+type OutletMenuCategoryCalendarRangeDay {
+  category: OutletMenuCategory
+  menuItems: [OutletMenuItem]
+}
+
+type OutletMenuCategory {
+  name: String
+}
+
+union OutletMenuItem = OutletMenuItemDish
+
+type OutletMenuItemDish {
+  dish: Dish
+  category: OutletMenuCategory
+  prices: [OutletMenuItemPrice]
+}
+
+type Dish {
+  name: String
+  imageUrl: String
+  allergens: [DishAllergen]
+  isVegan: Boolean
+  isVegetarian: Boolean
+}
+
+type DishAllergen {
+  allergen: Allergen
+}
+
+type Allergen {
+  externalId: String
+}
+
+type OutletMenuItemPrice {
+  priceCategory: OutletMenuPriceCategory
+  amount: String
+}
+
+type OutletMenuPriceCategory {
+  externalId: String
+}
