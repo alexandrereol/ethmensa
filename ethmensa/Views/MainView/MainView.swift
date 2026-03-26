@@ -61,6 +61,7 @@ struct MainView: View {
                     ForEach(Array(repeating: Mensa.example, count: 10)) { mensa in
                         MainMensaView(mensa: mensa, isLoading: true)
                     }
+                    .accessibilityHidden(true)
                     .onAppear {
                         Task {
                             await mensaDataManager.reloadUnfilteredMensaList()
@@ -93,6 +94,7 @@ struct MainView: View {
                         }
                         .buttonStyle(.borderedProminent)
                         .buttonBorderShape(.roundedRectangle)
+                        .accessibilityHint(String(localized: "CLEARS_ALL_ACTIVE_FILTERS_AND_SEARCH_TEXT"))
                     }
                 )
             }
