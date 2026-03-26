@@ -194,6 +194,31 @@ extension Allergen {
     }
 }
 
+extension Allergen {
+    // swiftlint:disable:next orphaned_doc_comment
+    /// Get the Allergen from the ZFV-API provided string.
+    // swiftlint:disable:next cyclomatic_complexity
+    static func fromZFVString(_ string: String) -> Self? {
+        switch string.lowercased() {
+        case "gluten", "wheat": .gluten
+        case "crustaceans": .crustaceans
+        case "eggs", "egg": .eggs
+        case "fish": .fish
+        case "peanuts", "peanut": .peanuts
+        case "soy", "soya", "soybeans": .soya
+        case "milk", "milk/lactose", "lactose": .lactose
+        case "nuts", "tree nuts": .nuts
+        case "celery": .celery
+        case "mustard": .mustard
+        case "sesame", "sesame seeds": .sesame
+        case "sulphur dioxide", "sulfites", "sulphites": .sulphurdioxide
+        case "lupin", "lupine": .lupin
+        case "molluscs", "mollusks": .molluscs
+        default: .other(string)
+        }
+    }
+}
+
 extension Array<Allergen> {
     /// A computed property that returns a localized string representation of the allergen.
     var localizedString: String {

@@ -1,6 +1,7 @@
 .DS_Store
-*.xcuserstate
-xcschememanagement.plist
-ethmensa.xcodeproj/project.xcworkspace/xcuserdata/*
-ethmensa.xcodeproj/xcuserdata/*
+apollo-ios-cli
 ETH Mensa.doccarchive
+ethmensa.xcodeproj/project.xcworkspace/xcuserdata
+ethmensa.xcodeproj/xcuserdata
+xcschememanagement.plist
+Config/Secrets.xcconfig

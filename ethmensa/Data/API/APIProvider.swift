@@ -20,7 +20,7 @@ struct APIProvider {
     /// An enumeration representing the different types of API providers.
     enum ProviderType: String, CaseIterable {
         case eth
-        case uzh
+        case zfv
     }
 
     /// The type of provider, represented by the `ProviderType` enum.
@@ -31,9 +31,12 @@ struct APIProvider {
 
     /// A computed property that returns an array of all available API providers.
     static var allProviders: [APIProvider] {
-        [
-            APIProvider(type: .eth, apiProtocol: ETHAPI.shared),
-            APIProvider(type: .uzh, apiProtocol: UZHAPI.shared)
+        var providers = [
+            APIProvider(type: .eth, apiProtocol: ETHAPI.shared)
         ]
+        #if !WATCHOS && !APPCLIP
+        providers.append(APIProvider(type: .zfv, apiProtocol: ZFVAPI.shared))
+        #endif
+        return providers
     }
 }

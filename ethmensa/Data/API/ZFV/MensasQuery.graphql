@@ -1,0 +1,52 @@
+query MensasQuery {
+  outlets {
+    externalId
+    name
+    location {
+      address {
+        addressLine1
+        zipCode
+        city
+      }
+    }
+    calendar {
+      week {
+        daily {
+          date {
+            weekdayNumber
+          }
+          menuCategories {
+            category {
+              name
+            }
+            menuItems {
+              __typename
+              ... on OutletMenuItemDish {
+                dish {
+                  name
+                  imageUrl
+                  allergens {
+                    allergen {
+                      externalId
+                    }
+                  }
+                  isVegan
+                  isVegetarian
+                }
+                category {
+                  name
+                }
+                prices {
+                  priceCategory {
+                    externalId
+                  }
+                  amount
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

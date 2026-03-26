@@ -45,7 +45,8 @@ Otherwise, the most actual code documentation can be built in Xcode using DocC.
 ## Installation
 1. Clone the repo: ```git clone https://github.com/alexandrereol/ethmensa.git```
 2. Change the bundle identifier/team identifier/development team in the project settings
-3. Run the app on your device
+3. Copy `Config/Secrets.example.xcconfig` to `Config/Secrets.xcconfig` and set `ZFV_API_KEY`
+4. Run the app on your device
 
 ## Contribute
 If you would like to contribute to the codebase, please fork the repository and submit a pull request.

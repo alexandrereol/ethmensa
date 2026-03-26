@@ -2,6 +2,15 @@
   "originHash" : "dd6a8eaf839d1d608b5a217fd33e108121a28660d89193c52a772f77e594959a",
   "pins" : [
     {
+      "identity" : "apollo-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apollographql/apollo-ios.git",
+      "state" : {
+        "revision" : "185b322c503dc2e6b76a2d379cba4758da03cb8c",
+        "version" : "1.25.4"
+      }
+    },
+    {
       "identity" : "swiftlintplugins",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SimplyDanny/SwiftLintPlugins",

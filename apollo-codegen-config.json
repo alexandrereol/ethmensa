@@ -1,0 +1,27 @@
+{
+  "schemaNamespace": "ZFVGraph",
+  "input": {
+    "operationSearchPaths": [
+      "ethmensa/Data/API/ZFV/**/*.graphql"
+    ],
+    "schemaSearchPaths": [
+      "ethmensa/Data/API/ZFV/**/*.graphqls"
+    ]
+  },
+  "output": {
+    "testMocks": {
+      "none": {}
+    },
+    "schemaTypes": {
+      "path": "ethmensa/Data/API/ZFV/Generated",
+      "moduleType": {
+        "embeddedInTarget": {
+          "name": "ethmensa"
+        }
+      }
+    },
+    "operations": {
+      "inSchemaModule": {}
+    }
+  }
+}
