@@ -39,6 +39,10 @@ struct MealCellView: View {
             }
             ShareLink(item: meal.summary)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityAction(named: String(localized: "COPY_MEAL")) {
+            UIPasteboard.general.string = meal.summary
+        }
     }
 
     private struct MealNameAndPriceView: View {
@@ -63,6 +67,7 @@ struct MealCellView: View {
                     mealTypeImageAndColor.image
                         .foregroundStyle(mealTypeImageAndColor.color)
                         .fontWeight(.semibold)
+                        .accessibilityHidden(true)
                 }
                 ForEach(meatTypeImageAndColors) { meatTypeImageAndColor in
                     meatTypeImageAndColor.image
@@ -70,6 +75,7 @@ struct MealCellView: View {
                         .scaledToFit()
                         .frame(height: 23)
                         .foregroundStyle(meatTypeImageAndColor.color)
+                        .accessibilityHidden(true)
                 }
                 Spacer()
                 if let priceText = meal.price?.getString() {
@@ -121,8 +127,11 @@ struct MealCellView: View {
                         .scaledToFill()
                         .frame(width: 60, height: 60)
                         .cornerRadius(10)
+                        .accessibilityHidden(true)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(String(localized: "VIEW_FULL_IMAGE_OF_MEAL"))
+                    .accessibilityHint(String(localized: "DOUBLE_TAP_TO_OPEN_FULL_SCREEN_IMAGE"))
                 }
             }
         }
@@ -141,6 +150,9 @@ struct MealCellView: View {
                     .font(.callout)
                     .italic()
                     .foregroundStyle(.gray)
+                    .accessibilityLabel(
+                        "\(String(localized: "CONTAINS")): \(string)"
+                    )
             }
         }
     }

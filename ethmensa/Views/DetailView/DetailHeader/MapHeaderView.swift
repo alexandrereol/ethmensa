@@ -60,6 +60,11 @@ struct MapHeaderView: View {
                     item: viewModel.mapItem,
                     displaysMap: true
                 )
+                .accessibilityLabel(
+                    String(format: String(localized: "MAP_SHOWING_LOCATION_OF_%@"), selectedMensa.name)
+                )
+                .accessibilityHint(String(localized: "DOUBLE_TAP_TO_OPEN_IN_MAPS"))
+                .accessibilityAddTraits(.isButton)
                 VStack(alignment: .leading, spacing: 10) {
                     if let location = selectedMensa.location {
                         Text(location)
