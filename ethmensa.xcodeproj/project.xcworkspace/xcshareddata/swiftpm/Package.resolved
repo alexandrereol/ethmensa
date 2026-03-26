@@ -1,6 +1,15 @@
 {
-  "originHash" : "2bba8e352d917f707bba3ac43af8bd6ff445e2e6d59cc2b55906e502477fcee3",
+  "originHash" : "9dc9d6827321f2412296b35dcb45e27a68635f96c20ddab5cc5589bf6c0dae6f",
   "pins" : [
+    {
+      "identity" : "apollo-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apollographql/apollo-ios.git",
+      "state" : {
+        "revision" : "185b322c503dc2e6b76a2d379cba4758da03cb8c",
+        "version" : "1.25.4"
+      }
+    },
     {
       "identity" : "swiftui-image-viewer",
       "kind" : "remoteSourceControl",

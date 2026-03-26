@@ -1,0 +1,84 @@
+scalar DateTime
+scalar URL
+
+type Query {
+  outlets: [Outlet!]!
+}
+
+type Outlet {
+  id: ID!
+  name: String!
+  logoUrl: String
+  location: Location
+  externalId: String
+  menuItems(from: DateTime!, to: DateTime!): [OutletMenuItem!]!
+}
+
+type Location {
+  id: ID!
+  name: String!
+  address: Address
+}
+
+type Address {
+  id: ID!
+  zipCode: String
+  city: String
+}
+
+interface OutletMenuItem {
+  id: ID!
+  type: String
+  label: String
+  validFrom: DateTimeWithTimezone
+  validTo: DateTimeWithTimezone
+  prices: [Price!]!
+}
+
+type OutletMenuItemDish implements OutletMenuItem {
+  id: ID!
+  type: String
+  label: String
+  validFrom: DateTimeWithTimezone
+  validTo: DateTimeWithTimezone
+  prices: [Price!]!
+  dish: Dish
+}
+
+type OutletMenuItemOther implements OutletMenuItem {
+  id: ID!
+  type: String
+  label: String
+  validFrom: DateTimeWithTimezone
+  validTo: DateTimeWithTimezone
+  prices: [Price!]!
+}
+
+type DateTimeWithTimezone {
+  dateUtc: String!
+}
+
+type Price {
+  id: ID!
+  amount: String!
+  currency: String!
+}
+
+type Dish {
+  id: ID!
+  name: String!
+  imageUrl: String
+  type: String
+  isVegan: Boolean!
+  isVegetarian: Boolean!
+  allergens: [DishAllergenRelation!]!
+}
+
+type DishAllergenRelation {
+  allergen: DishAllergen!
+}
+
+type DishAllergen {
+  id: ID!
+  name: String!
+}
