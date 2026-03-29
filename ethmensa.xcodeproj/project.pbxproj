@@ -207,7 +207,6 @@
 				Data/CoreData/GeoCacheDBManager.swift,
 				Data/Enums/Allergen.swift,
 				Data/Enums/AppReleaseType.swift,
-				Data/Enums/DeviceType.swift,
 				Data/Enums/MealType.swift,
 				Data/Enums/MeatType.swift,
 				Data/Enums/MensaCellType.swift,
@@ -300,6 +299,7 @@
 		290E09B92E0ACF5C005E0BD4 /* clip */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = clip; sourceTree = "<group>"; };
 		290E09CC2E0ACF5C005E0BD4 /* watchos */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (290E09DB2E0ACF5C005E0BD4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = watchos; sourceTree = "<group>"; };
 		290E0D112E0ACFBA005E0BD4 /* ethmensa */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (290E0EEC2E0ACFBB005E0BD4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 290E0EED2E0ACFBB005E0BD4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 290E0EEE2E0ACFBB005E0BD4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 290E0EEF2E0ACFBB005E0BD4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 290E0EF02E0ACFBB005E0BD4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ethmensa; sourceTree = "<group>"; };
+		29AF8EBE2F79540400F49EDF /* ci_scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ci_scripts; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +357,7 @@
 				290E09CC2E0ACF5C005E0BD4 /* watchos */,
 				290E099C2E0ACF5C005E0BD4 /* TestFlight */,
 				294E163A2A8E22C3000A3AB6 /* Products */,
+				29AF8EBE2F79540400F49EDF /* ci_scripts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -547,6 +548,7 @@
 				2997301E2BF2AE3500BB3A18 /* XCRemoteSwiftPackageReference "UIOnboarding" */,
 				299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 				299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
+				29AF8EBC2F7953DE00F49EDF /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = 294E163A2A8E22C3000A3AB6 /* Products */;
 			projectDirPath = "";
@@ -1315,6 +1317,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.3.1;
+			};
+		};
+		29AF8EBC2F7953DE00F49EDF /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.63.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

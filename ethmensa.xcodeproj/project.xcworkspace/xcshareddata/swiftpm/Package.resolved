@@ -1,6 +1,15 @@
 {
-  "originHash" : "2bba8e352d917f707bba3ac43af8bd6ff445e2e6d59cc2b55906e502477fcee3",
+  "originHash" : "faae64e40e20830083544bba6b654738442c1dd17ed1ccd10c6253d2d178105a",
   "pins" : [
+    {
+      "identity" : "swiftlintplugins",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimplyDanny/SwiftLintPlugins",
+      "state" : {
+        "revision" : "8a4640d14777685ba8f14e832373160498fbab92",
+        "version" : "0.63.2"
+      }
+    },
     {
       "identity" : "swiftui-image-viewer",
       "kind" : "remoteSourceControl",
