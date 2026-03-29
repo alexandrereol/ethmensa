@@ -28,13 +28,12 @@ struct MensaEntity: AppEntity, Identifiable {
     @Property(title: "MENSA_NAME")
     var name: String
 
+    private static let appIconPngData: Data? = UIImage.appIconRoundedForUserVersion.pngData()
+
     var displayRepresentation: DisplayRepresentation {
-        if let uiImagePngData = UIImage(
-            resource: .appIconRoundedForUserVersion
-        ).pngData() {
+        if let uiImagePngData = Self.appIconPngData {
             .init(
                 title: "\(name)",
-                // In the future return image of the Mensa itself, probably from `URLImage` cache
                 image: DisplayRepresentation.Image(
                     data: uiImagePngData
                 )

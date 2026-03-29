@@ -18,10 +18,6 @@
 import SwiftUI
 
 extension UIImage {
-    static var appIconRoundedForUserVersion: UIImage {
-        .init(resource: .appIconRoundedForUserVersion)
-    }
-    static var appETHVideoIconRoundedForUserVersion: UIImage {
-        .init(resource: .appETHVideoIconRoundedForUserVersion)
-    }
+    static let appIconRoundedForUserVersion: UIImage = .init(resource: .appIconRoundedForUserVersion)
+    static let appETHVideoIconRoundedForUserVersion: UIImage = .init(resource: .appETHVideoIconRoundedForUserVersion)
 }
