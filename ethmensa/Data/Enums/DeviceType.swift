@@ -55,8 +55,6 @@ enum DeviceType: String {
             .visionPro
 #elseif os(watchOS)
             .appleWatch
-#elseif os(tvOS)
-            .appleTV
 #else
             .unknown
 #endif
