@@ -97,6 +97,7 @@ struct MealCellView: View {
                     }
                     if let description = meal.description {
                         Text(description)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 Spacer()
@@ -120,6 +121,7 @@ struct MealCellView: View {
                         }
                         .scaledToFill()
                         .frame(width: 60, height: 60)
+                        .clipped()
                         .cornerRadius(10)
                     }
                     .buttonStyle(.plain)
