@@ -1,41 +1,48 @@
-query MensasQuery($from: DateTime!, $to: DateTime!) {
+query MensasQuery {
   outlets {
-    id
+    externalId
     name
-    logoUrl
     location {
-      id
-      name
       address {
-        id
+        addressLine1
         zipCode
         city
       }
     }
-    externalId
-    menuItems(from: $from, to: $to) {
-      id
-      type
-      label
-      validFrom { dateUtc }
-      validTo { dateUtc }
-      prices {
-        id
-        amount
-        currency
-      }
-      ... on OutletMenuItemDish {
-        dish {
-          id
-          name
-          imageUrl
-          type
-          isVegan
-          isVegetarian
-          allergens {
-            allergen {
-              id
+    calendar {
+      week {
+        daily {
+          date {
+            weekdayNumber
+          }
+          menuCategories {
+            category {
               name
+            }
+            menuItems {
+              __typename
+              ... on OutletMenuItemDish {
+                dish {
+                  name
+                  imageUrl
+                  allergens {
+                    allergen {
+                      externalId
+                    }
+                  }
+                  isVegan
+                  isVegetarian
+                }
+                category {
+                  name
+                }
+                prices {
+                  priceCategory {
+                    externalId
+                  }
+                  amount
+                }
+              }
             }
           }
         }

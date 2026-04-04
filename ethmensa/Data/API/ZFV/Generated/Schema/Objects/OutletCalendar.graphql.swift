@@ -4,8 +4,8 @@
 import ApolloAPI
 
 extension ZFVGraph.Objects {
-  static let Price = ApolloAPI.Object(
-    typename: "Price",
+  static let OutletCalendar = ApolloAPI.Object(
+    typename: "OutletCalendar",
     implementedInterfaces: [],
     keyFields: nil
   )

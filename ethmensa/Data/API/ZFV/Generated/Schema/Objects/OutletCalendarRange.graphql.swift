@@ -4,8 +4,8 @@
 import ApolloAPI
 
 extension ZFVGraph.Objects {
-  static let DishAllergenRelation = ApolloAPI.Object(
-    typename: "DishAllergenRelation",
+  static let OutletCalendarRange = ApolloAPI.Object(
+    typename: "OutletCalendarRange",
     implementedInterfaces: [],
     keyFields: nil
   )

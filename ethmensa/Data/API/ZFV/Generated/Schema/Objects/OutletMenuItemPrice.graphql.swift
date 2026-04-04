@@ -4,8 +4,8 @@
 import ApolloAPI
 
 extension ZFVGraph.Objects {
-  static let DateTimeWithTimezone = ApolloAPI.Object(
-    typename: "DateTimeWithTimezone",
+  static let OutletMenuItemPrice = ApolloAPI.Object(
+    typename: "OutletMenuItemPrice",
     implementedInterfaces: [],
     keyFields: nil
   )

@@ -24,14 +24,6 @@ struct ZFVConverter {
         category: String(describing: ZFVConverter.self)
     )
 
-    private static let zurichTimeZone = TimeZone(identifier: "Europe/Zurich") ?? .current
-
-    private static let isoFormatter: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter
-    }()
-
     static func convert(data: ZFVGraph.MensasQuery.Data) -> [Mensa] {
         data.outlets.compactMap { convertOutlet($0) }
     }
@@ -39,122 +31,119 @@ struct ZFVConverter {
     private static func convertOutlet(
         _ outlet: ZFVGraph.MensasQuery.Data.Outlet
     ) -> Mensa? {
-        guard let externalIdStr = outlet.externalId,
+        guard let name = outlet.name,
+              let externalIdStr = outlet.externalId,
               let facilityID = Int(externalIdStr) else {
             logger.critical(
-                "\(#function): Missing or invalid externalId for outlet \(outlet.id)"
+                "\(#function): Missing or invalid externalId for outlet \(outlet.name ?? "unknown")"
             )
             return nil
         }
-        let locationStr = [
-            outlet.location?.address?.city,
-            outlet.location?.address?.zipCode
+        let street = outlet.location?.address?.addressLine1
+        let cityLine = [
+            outlet.location?.address?.zipCode,
+            outlet.location?.address?.city
         ].compactMap { $0 }.joined(separator: " ")
-        let mealTimes = buildMealTimes(from: outlet.menuItems)
+        let locationStr = [
+            street,
+            cityLine.isEmpty ? nil : cityLine
+        ].compactMap { $0 }.joined(separator: "\n")
+        let mealTimes = buildMealTimes(from: outlet.calendar?.week?.daily)
         return Mensa(
             provider: .zfv,
             facilityID: facilityID,
-            name: outlet.name,
+            name: name,
             location: locationStr.isEmpty ? nil : locationStr,
             webURL: nil,
-            imageURL: outlet.logoUrl.flatMap { URL(string: $0) },
+            imageURL: nil,
             mealTimes: mealTimes
         )
     }
 
     private static func buildMealTimes(
-        from items: [ZFVGraph.MensasQuery.Data.Outlet.MenuItem]
+        from dailyEntries: [ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily?]?
     ) -> [MealTime] {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = zurichTimeZone
+        guard let dailyEntries else {
+            return []
+        }
 
-        var groups: [String: [ZFVGraph.MensasQuery.Data.Outlet.MenuItem]] = [:]
-        for item in items {
-            guard let validFromStr = item.validFrom?.dateUtc,
-                  let validFromDate = isoFormatter.date(from: validFromStr) else {
+        var mealTimes: [MealTime] = []
+        for daily in dailyEntries {
+            guard let daily else {
                 continue
             }
-            let comps = calendar.dateComponents([.year, .month, .day, .hour], from: validFromDate)
-            let hour = comps.hour ?? 0
-            let period = hour < 14 ? "LUNCH" : "DINNER"
-            let key = String(
-                format: "%04d-%02d-%02d/%@",
-                comps.year ?? 0,
-                comps.month ?? 0,
-                comps.day ?? 0,
-                period
-            )
-            groups[key, default: []].append(item)
+            mealTimes.append(contentsOf: buildMealTimes(from: daily))
+        }
+        return mealTimes
+    }
+
+    private static func buildMealTimes(
+        from daily: ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily
+    ) -> [MealTime] {
+        guard let weekdayCode = daily.date?.weekdayNumber else {
+            logger.critical("\(#function): Could not parse weekday")
+            return []
         }
 
-        return groups.compactMap { key, groupItems in
-            buildMealTime(key: key, items: groupItems, calendar: calendar)
-        }.sorted {
-            if $0.weekdayCode != $1.weekdayCode {
-                return ($0.weekdayCode ?? 0) < ($1.weekdayCode ?? 0)
-            }
-            // DINNER sorts after LUNCH alphabetically — reverse to put LUNCH first
-            return ($0.type ?? "") < ($1.type ?? "")
-        }
+        return daily.menuCategories?.compactMap { category in
+            guard let category else { return nil }
+            return buildMealTime(from: category, weekdayCode: weekdayCode)
+        } ?? []
     }
 
     private static func buildMealTime(
-        key: String,
-        items: [ZFVGraph.MensasQuery.Data.Outlet.MenuItem],
-        calendar: Calendar
+        from category: ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily.MenuCategory,
+        weekdayCode: Int
     ) -> MealTime? {
-        guard let firstItem = items.first,
-              let validFromStr = firstItem.validFrom?.dateUtc,
-              let validToStr = firstItem.validTo?.dateUtc,
-              let validFromDate = isoFormatter.date(from: validFromStr),
-              let validToDate = isoFormatter.date(from: validToStr) else {
-            return nil
-        }
-        let period = key.components(separatedBy: "/").last ?? "LUNCH"
-        let weekdayCode = calendar.component(.weekday, from: validFromDate) - 1
-        let startComponents = calendar.dateComponents([.hour, .minute], from: validFromDate)
-        let endComponents = calendar.dateComponents([.hour, .minute], from: validToDate)
-        let meals = items.compactMap { buildMeal(from: $0) }
+        let meals = category.menuItems?.compactMap { item -> Meal? in
+            guard let dishItem = item?.asOutletMenuItemDish else { return nil }
+            return buildMeal(from: dishItem)
+        } ?? []
+
         guard !meals.isEmpty else {
             return nil
         }
+
         return MealTime(
             weekdayCode: weekdayCode,
-            startDateComponents: startComponents,
-            endDateComponents: endComponents,
-            type: period,
+            type: category.category?.name,
             meals: meals
         )
     }
 
     private static func buildMeal(
-        from item: ZFVGraph.MensasQuery.Data.Outlet.MenuItem
+        from dishItem: ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily.MenuCategory.MenuItem.AsOutletMenuItemDish
     ) -> Meal? {
-        guard let dishFragment = item.asOutletMenuItemDish,
-              let dish = dishFragment.dish else {
+        guard let dish = dishItem.dish,
+              let dishName = dish.name else {
+            logger.critical("\(#function): Could not get dish name")
             return nil
         }
-        let student = item.prices.first.flatMap { Double($0.amount) }
-        let staff = item.prices.count > 1 ? Double(item.prices[1].amount) : nil
-        let extern = item.prices.count > 2 ? Double(item.prices[2].amount) : nil
+        let prices = dishItem.prices ?? []
+        let student = prices.first { $0?.priceCategory?.externalId == "1" }??.amount.flatMap(Double.init)
+        let staff = prices.first { $0?.priceCategory?.externalId == "2" }??.amount.flatMap(Double.init)
+        let extern = prices.first { $0?.priceCategory?.externalId == "3" }??.amount.flatMap(Double.init)
         let price = Price(student: student, staff: staff, extern: extern)
         var mealTypes: [MealType] = []
-        if dish.isVegan {
+        if dish.isVegan == true {
             mealTypes.append(.vegan)
-        } else if dish.isVegetarian {
+        } else if dish.isVegetarian == true {
             mealTypes.append(.vegetarian)
         }
-        let allergens = dish.allergens.compactMap { relation in
-            Allergen.fromZFVString(relation.allergen.name)
+        let allergens: [Allergen]? = dish.allergens?.compactMap { wrapper -> Allergen? in
+            guard let externalID = wrapper?.allergen?.externalId else {
+                return nil
+            }
+            return Allergen.fromZFVString(externalID)
         }
         return Meal(
-            title: item.label,
-            name: dish.name,
-            description: nil,
-            imageURL: dish.imageUrl.flatMap { URL(string: $0) },
+            title: dishItem.category?.name,
+            name: nil,
+            description: dishName,
+            imageURL: dish.imageUrl?.toURL(),
             price: price,
             mealType: mealTypes.isEmpty ? nil : mealTypes,
-            allergen: allergens.isEmpty ? nil : allergens
+            allergen: allergens?.isEmpty == true ? nil : allergens
         )
     }
 }
