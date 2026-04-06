@@ -29,15 +29,20 @@ extension ZFVGraph {
 
     private static let objectTypeMap: [String: ApolloAPI.Object] = [
       "Address": ZFVGraph.Objects.Address,
-      "DateTimeWithTimezone": ZFVGraph.Objects.DateTimeWithTimezone,
+      "Allergen": ZFVGraph.Objects.Allergen,
+      "DateWithTimezone": ZFVGraph.Objects.DateWithTimezone,
       "Dish": ZFVGraph.Objects.Dish,
       "DishAllergen": ZFVGraph.Objects.DishAllergen,
-      "DishAllergenRelation": ZFVGraph.Objects.DishAllergenRelation,
       "Location": ZFVGraph.Objects.Location,
       "Outlet": ZFVGraph.Objects.Outlet,
+      "OutletCalendar": ZFVGraph.Objects.OutletCalendar,
+      "OutletCalendarRange": ZFVGraph.Objects.OutletCalendarRange,
+      "OutletCalendarRangeDay": ZFVGraph.Objects.OutletCalendarRangeDay,
+      "OutletMenuCategory": ZFVGraph.Objects.OutletMenuCategory,
+      "OutletMenuCategoryCalendarRangeDay": ZFVGraph.Objects.OutletMenuCategoryCalendarRangeDay,
       "OutletMenuItemDish": ZFVGraph.Objects.OutletMenuItemDish,
-      "OutletMenuItemOther": ZFVGraph.Objects.OutletMenuItemOther,
-      "Price": ZFVGraph.Objects.Price,
+      "OutletMenuItemPrice": ZFVGraph.Objects.OutletMenuItemPrice,
+      "OutletMenuPriceCategory": ZFVGraph.Objects.OutletMenuPriceCategory,
       "Query": ZFVGraph.Objects.Query
     ]
 

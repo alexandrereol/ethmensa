@@ -35,27 +35,22 @@ class ZFVGraphQLClient {
         let transport = RequestChainNetworkTransport(
             interceptorProvider: DefaultInterceptorProvider(store: store),
             endpointURL: URL(string: "https://api.zfv.ch/graphql")!,
-            additionalHeaders: ["api-key": apiKey]
+            additionalHeaders: [
+                "api-key": apiKey,
+                "locale": Bundle.main.preferredLocalizations.first ?? "de"
+            ]
         )
         return ApolloClient(networkTransport: transport, store: store)
     }()
 
-    private let isoFormatter: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter
-    }()
-
     func getMensas() async -> ZFVGraph.MensasQuery.Data? {
-        let now = Date()
-        guard let twoWeeksFromNow = Calendar.current.date(byAdding: .day, value: 14, to: now) else {
-            logger.critical("\(#function): Could not compute end date")
-            return nil
-        }
-        let fromStr = isoFormatter.string(from: now)
-        let toStr = isoFormatter.string(from: twoWeeksFromNow)
         do {
-            let result = try await client.fetchAsync(query: ZFVGraph.MensasQuery(from: fromStr, to: toStr))
+            let result = try await client.fetchAsync(
+                query: ZFVGraph.MensasQuery()
+            )
+            if let errors = result.errors, !errors.isEmpty {
+                logger.error("\(#function): Apollo returned GraphQL errors: \(errors)")
+            }
             return result.data
         } catch {
             logger.critical("\(#function): \(error)")
