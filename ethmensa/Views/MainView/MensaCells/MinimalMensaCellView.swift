@@ -51,7 +51,9 @@ struct MinimalMensaCellView: View {
                 )
                 .padding(.trailing, 5)
             }
+            .accessibilityElement(children: .combine)
         }
+        .accessibilityHint(String(localized: "DOUBLE_TAP_TO_VIEW_MENU"))
     }
 }
 

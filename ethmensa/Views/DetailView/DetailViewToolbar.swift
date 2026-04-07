@@ -31,6 +31,9 @@ struct DetailViewToolbar: ToolbarContent {
                         image: Image(uiImage: .appIconRoundedForUserVersion)
                     )
                 )
+                .accessibilityLabel(
+                    "\(String(localized: "SHARE_MENSA_LABEL")) \(selectedMensa.name)"
+                )
             }
         }
     }

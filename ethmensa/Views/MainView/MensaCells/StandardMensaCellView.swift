@@ -48,6 +48,7 @@ struct StandardMensaCellView: View {
                 .frame(width: 60, height: 60)
                 .cornerRadius(10)
                 .padding(.trailing, 10)
+                .accessibilityHidden(true)
                 VStack(alignment: .leading) {
                     Text(mensa.name)
                     SharedWithYouView(
@@ -60,7 +61,9 @@ struct StandardMensaCellView: View {
                     isLoading: isLoading
                 )
             }
+            .accessibilityElement(children: .combine)
         }
+        .accessibilityHint(String(localized: "DOUBLE_TAP_TO_VIEW_MENU"))
 #if targetEnvironment(macCatalyst)
         .padding(.vertical, 5)
 #endif

@@ -37,6 +37,14 @@ struct OpeningTimesCircle: View {
         }
     }
 
+    private var accessibilityStatusLabel: String {
+        switch status {
+        case .open: String(localized: "OPEN")
+        case .closed: String(localized: "ACCESSIBILITY_CLOSED")
+        case .unknown: ""
+        }
+    }
+
     var body: some View {
         if status != .unknown {
             Circle()
@@ -45,6 +53,8 @@ struct OpeningTimesCircle: View {
                     width: 15,
                     height: 15
                 )
+                .accessibilityLabel(accessibilityStatusLabel)
+                .accessibilityHidden(isLoading)
         }
     }
 }
