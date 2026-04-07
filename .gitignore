@@ -4,3 +4,4 @@ ETH Mensa.doccarchive
 ethmensa.xcodeproj/project.xcworkspace/xcuserdata
 ethmensa.xcodeproj/xcuserdata
 xcschememanagement.plist
+Config/Secrets.xcconfig

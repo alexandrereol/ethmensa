@@ -20,7 +20,7 @@ import ApolloAPI
 import Foundation
 import os.log
 
-class ZFVGraphQLClient {
+final class ZFVGraphQLClient {
     static let shared = ZFVGraphQLClient()
 
     private let logger = Logger(
@@ -28,10 +28,13 @@ class ZFVGraphQLClient {
         category: String(describing: ZFVGraphQLClient.self)
     )
 
-    private let client: ApolloClient = {
+    private lazy var client: ApolloClient? = {
         let store = ApolloStore()
-        // swiftlint:disable:next line_length
-        let apiKey = "Y205NnFzenc4OGw2bnM2MHQ2MGh6OTlvdTpacE1aTGpUNFAxK1dJM0RmWUNsSXdoS3hXQldXUE5USHhRUmcxUUhZUnZCOWp1N3JadHFxOUZkUXNMdGVmSFI5"
+        guard let apiKey = Bundle.main.zfvAPIKey else {
+            logger.error("Missing ZFV_API_KEY")
+            return nil
+        }
+
         let transport = RequestChainNetworkTransport(
             interceptorProvider: DefaultInterceptorProvider(store: store),
             endpointURL: URL(string: "https://api.zfv.ch/graphql")!,
@@ -44,6 +47,10 @@ class ZFVGraphQLClient {
     }()
 
     func getMensas() async -> ZFVGraph.MensasQuery.Data? {
+        guard let client else {
+            return nil
+        }
+
         do {
             let result = try await client.fetchAsync(
                 query: ZFVGraph.MensasQuery()

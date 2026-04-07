@@ -47,5 +47,7 @@
 		<key>UISceneConfigurations</key>
 		<dict/>
 	</dict>
+	<key>ZFV_API_KEY</key>
+	<string>$(ZFV_API_KEY)</string>
 </dict>
 </plist>
