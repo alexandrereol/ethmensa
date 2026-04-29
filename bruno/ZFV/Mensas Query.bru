@@ -1,0 +1,71 @@
+meta {
+  name: Mensas Query
+  type: graphql
+  seq: 1
+}
+
+post {
+  url: https://api.zfv.ch/graphql
+  body: graphql
+  auth: none
+}
+
+headers {
+  api-key: {{zfv_api_key}}
+  locale: {{lang}}
+}
+
+body:graphql {
+  query MensasQuery {
+    outlets {
+      externalId
+      name
+      location {
+        address {
+          addressLine1
+          zipCode
+          city
+        }
+      }
+      calendar {
+        week {
+          daily {
+            date {
+              weekdayNumber
+            }
+            menuCategories {
+              category {
+                name
+              }
+              menuItems {
+                __typename
+                ... on OutletMenuItemDish {
+                  dish {
+                    name
+                    imageUrl
+                    allergens {
+                      allergen {
+                        externalId
+                      }
+                    }
+                    isVegan
+                    isVegetarian
+                  }
+                  category {
+                    name
+                  }
+                  prices {
+                    priceCategory {
+                      externalId
+                    }
+                    amount
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

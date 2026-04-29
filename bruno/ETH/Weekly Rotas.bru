@@ -1,0 +1,20 @@
+meta {
+  name: Weekly Rotas
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://idapps.ethz.ch/cookpit-pub-services/v1/weeklyrotas?rs-size=50&valid-after={{valid-after}}&valid-before={{valid-before}}&rs-first=0&client-id=ethz-wcms&lang={{lang}}
+  body: none
+  auth: none
+}
+
+params:query {
+  rs-size: 50
+  valid-after: {{valid-after}}
+  valid-before: {{valid-before}}
+  rs-first: 0
+  client-id: ethz-wcms
+  lang: {{lang}}
+}
