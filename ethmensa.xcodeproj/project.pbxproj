@@ -7,15 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29550BE22AEADD560014F07F /* ETH Mensa Clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 29550BD32AEADD550014F07F /* ETH Mensa Clip.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 299314982C8F4A8E0046D221 /* WhatsNewKit */; };
 		2993149B2C8F4A990046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2993149A2C8F4A990046D221 /* WhatsNewKit */; };
 		299730202BF2AE3500BB3A18 /* UIOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 2997301F2BF2AE3500BB3A18 /* UIOnboarding */; };
 		2997302B2BF2AEC300BB3A18 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302A2BF2AEC300BB3A18 /* ImageViewerRemote */; };
 		2997302D2BF2AED000BB3A18 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302C2BF2AED000BB3A18 /* ImageViewerRemote */; };
 		299730312BF2AF1400BB3A18 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 299730302BF2AF1400BB3A18 /* ImageViewerRemote */; };
-		29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29CEE1882D84301B00C6D257 /* widget.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		29E53F992AED5D4500BCDB65 /* ETH Mensa watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +46,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,7 +56,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
 			dstSubfolderSpec = 16;
 			files = (
-				29550BE22AEADD560014F07F /* ETH Mensa Clip.app in Embed App Clips */,
 			);
 			name = "Embed App Clips";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +66,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				29E53F992AED5D4500BCDB65 /* ETH Mensa watchOS.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,12 +73,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa visionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		293CAF6E2D6DCFFD0066E9F8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		294E16392A8E22C3000A3AB6 /* ETH Mensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		29550BD32AEADD550014F07F /* ETH Mensa Clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa Clip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		29CEE1882D84301B00C6D257 /* widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		293DF3962FABA84100D29927 /* ETH Mensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ETH Mensa.app"; path = "/Users/alexandrereol/Documents/ch.alexandrereol/ethmensa/build/Debug/ETH Mensa.app"; sourceTree = "<absolute>"; };
+		293DF3972FABA84100D29927 /* ETH Mensa Clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ETH Mensa Clip.app"; path = "/Users/alexandrereol/Documents/ch.alexandrereol/ethmensa/build/Debug-iphoneos/ETH Mensa Clip.app"; sourceTree = "<absolute>"; };
+		293DF3982FABA84100D29927 /* ETH Mensa watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ETH Mensa watchOS.app"; path = "/Users/alexandrereol/Documents/ch.alexandrereol/ethmensa/build/Debug-watchos/ETH Mensa watchOS.app"; sourceTree = "<absolute>"; };
+		293DF3992FABA84100D29927 /* ETH Mensa visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "ETH Mensa visionOS.app"; path = "/Users/alexandrereol/Documents/ch.alexandrereol/ethmensa/build/Debug-xros/ETH Mensa visionOS.app"; sourceTree = "<absolute>"; };
+		293DF39A2FABA84100D29927 /* widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = widget.appex; path = "/Users/alexandrereol/Documents/ch.alexandrereol/ethmensa/build/Debug-iphoneos/widget.appex"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -356,21 +350,8 @@
 				290E09B22E0ACF5C005E0BD4 /* widget */,
 				290E09CC2E0ACF5C005E0BD4 /* watchos */,
 				290E099C2E0ACF5C005E0BD4 /* TestFlight */,
-				294E163A2A8E22C3000A3AB6 /* Products */,
 				29AF8EBE2F79540400F49EDF /* ci_scripts */,
 			);
-			sourceTree = "<group>";
-		};
-		294E163A2A8E22C3000A3AB6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				294E16392A8E22C3000A3AB6 /* ETH Mensa.app */,
-				29550BD32AEADD550014F07F /* ETH Mensa Clip.app */,
-				2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */,
-				291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */,
-				29CEE1882D84301B00C6D257 /* widget.appex */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,7 +380,7 @@
 				2993149A2C8F4A990046D221 /* WhatsNewKit */,
 			);
 			productName = visionos;
-			productReference = 291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */;
+			productReference = 293DF3992FABA84100D29927 /* ETH Mensa visionOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		294E16382A8E22C3000A3AB6 /* ethmensa */ = {
@@ -432,7 +413,7 @@
 				299314982C8F4A8E0046D221 /* WhatsNewKit */,
 			);
 			productName = ethmensa;
-			productReference = 294E16392A8E22C3000A3AB6 /* ETH Mensa.app */;
+			productReference = 293DF3962FABA84100D29927 /* ETH Mensa.app */;
 			productType = "com.apple.product-type.application";
 		};
 		29550BD22AEADD550014F07F /* clip */ = {
@@ -456,7 +437,7 @@
 				2997302C2BF2AED000BB3A18 /* ImageViewerRemote */,
 			);
 			productName = Clip;
-			productReference = 29550BD32AEADD550014F07F /* ETH Mensa Clip.app */;
+			productReference = 293DF3972FABA84100D29927 /* ETH Mensa Clip.app */;
 			productType = "com.apple.product-type.application.on-demand-install-capable";
 		};
 		2982AFA32AEC4FCC008B2B41 /* watchos */ = {
@@ -480,7 +461,7 @@
 			packageProductDependencies = (
 			);
 			productName = "watchos Watch App";
-			productReference = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */;
+			productReference = 293DF3982FABA84100D29927 /* ETH Mensa watchOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		29CEE1872D84301B00C6D257 /* widget */ = {
@@ -502,7 +483,7 @@
 			packageProductDependencies = (
 			);
 			productName = widgetExtension;
-			productReference = 29CEE1882D84301B00C6D257 /* widget.appex */;
+			productReference = 293DF39A2FABA84100D29927 /* widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -550,7 +531,7 @@
 				299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 				29AF8EBC2F7953DE00F49EDF /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
-			productRefGroup = 294E163A2A8E22C3000A3AB6 /* Products */;
+			productRefGroup = 294E16302A8E22C3000A3AB6;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
