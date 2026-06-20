@@ -59,7 +59,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2982AFA32AEC4FCC008B2B41"
             BuildableName = "ETH Mensa watchOS.app"
-            BlueprintName = "watchos"
             ReferencedContainer = "container:ethmensa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,7 +75,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2982AFA32AEC4FCC008B2B41"
             BuildableName = "ETH Mensa watchOS.app"
-            BlueprintName = "watchos"
             ReferencedContainer = "container:ethmensa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
