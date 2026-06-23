@@ -30,6 +30,7 @@ struct WeekdaySelectorHeaderView: View {
                 }
             }
             .pickerStyle(.menu)
+            .accessibilityHint(String(localized: "SELECT_A_DAY_TO_VIEW_THAT_DAYS_MENU"))
         }
     }
 }

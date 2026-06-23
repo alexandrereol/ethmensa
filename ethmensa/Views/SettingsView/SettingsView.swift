@@ -44,11 +44,13 @@ struct SettingsView: View {
                             dismiss()
                         }
                         .keyboardShortcut(.cancelAction)
+                        .accessibilityLabel(String(localized: "CLOSE_SETTINGS"))
                     } else {
                         Button("CLOSE") {
                             dismiss()
                         }
                         .keyboardShortcut(.cancelAction)
+                        .accessibilityLabel(String(localized: "CLOSE_SETTINGS"))
                     }
                 }
             }

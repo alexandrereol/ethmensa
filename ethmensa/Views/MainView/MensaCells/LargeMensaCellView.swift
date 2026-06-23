@@ -32,6 +32,7 @@ struct LargeMensaCellView: View {
                     EmptyView()
                 }
                 .opacity(0)
+                .accessibilityHidden(true)
                 URLImage(url: url) {
                     Color.gray
                 } inProgress: { _ in
@@ -46,16 +47,20 @@ struct LargeMensaCellView: View {
                 .ignoresSafeArea()
                 .frame(maxHeight: 140)
                 .padding(-45)
+                .accessibilityHidden(true)
                 VStack(alignment: .leading) {
                     SharedWithYouView(
                         swhighlight: mensa.swHighlight
                     )
                     .padding(.top, 15)
+                    .accessibilityLabel(String(localized: "SHARED_WITH_YOU"))
                     Spacer()
                     bottomBarView
                 }
                 .frame(height: 140)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityHint(String(localized: "DOUBLE_TAP_TO_VIEW_MENU"))
         } else {
             MinimalMensaCellView(mensa: mensa, isLoading: isLoading)
         }
@@ -86,6 +91,7 @@ struct LargeMensaCellView: View {
                         .scaledToFit()
                         .frame(width: 12.5, height: 12.5)
                         .foregroundStyle(.tertiary)
+                        .accessibilityHidden(true)
                 }
                 .padding(.top, 11)
             }

@@ -55,6 +55,10 @@ private struct OpeningTimeFilterButtonView: View {
         .buttonStyle(
             selected: settingsManager.mensaShowType == .all
         )
+        .accessibilityLabel(
+            "\(String(localized: "OPENING_TIME_FILTER")): \(settingsManager.mensaShowType.localizedString)"
+        )
+        .accessibilityHint(String(localized: "DOUBLE_TAP_TO_CHANGE_FILTER"))
     }
 }
 
@@ -77,6 +81,10 @@ private struct LocationFilterButtonView: View {
         .buttonStyle(
             selected: settingsManager.mensaLocationType == .all
         )
+        .accessibilityLabel(
+            "\(String(localized: "LOCATION_FILTER")): \(settingsManager.mensaLocationType.localizedString)"
+        )
+        .accessibilityHint(String(localized: "DOUBLE_TAP_TO_CHANGE_FILTER"))
     }
 }
 
@@ -99,6 +107,10 @@ private struct SortTypeButtonView: View {
         .buttonStyle(
             selected: settingsManager.sortBy == .def
         )
+        .accessibilityLabel(
+            "\(String(localized: "SORT_FILTER")): \(settingsManager.sortBy.localizedString)"
+        )
+        .accessibilityHint(String(localized: "DOUBLE_TAP_TO_CHANGE_FILTER"))
     }
 }
 
@@ -129,6 +141,10 @@ private struct WeekdayButtonView: View {
             .buttonStyle(
                 selected: navigationManager.selectedWeekdayCodeOverride == nil
             )
+            .accessibilityLabel(
+                "\(String(localized: "WEEKDAY_FILTER")): \(menuString)"
+            )
+            .accessibilityHint(String(localized: "DOUBLE_TAP_TO_CHANGE_FILTER"))
         }
     }
 }

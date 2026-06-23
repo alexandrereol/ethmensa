@@ -87,6 +87,24 @@ struct AppView: View {
                 }
                 .opacity(0)
                 .keyboardShortcut(.escape, modifiers: [])
+                .accessibilityHidden(true)
+                // A separate fully accessible dismiss button for VoiceOver users
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button {
+                            navigationManager.imagePopoverShown = false
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title)
+                                .foregroundStyle(.white)
+                                .padding()
+                        }
+                        .accessibilityLabel(String(localized: "DISMISS_IMAGE_VIEWER"))
+                        .accessibilityAddTraits(.isButton)
+                    }
+                    Spacer()
+                }
             }
         }
     }
