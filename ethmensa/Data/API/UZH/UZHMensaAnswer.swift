@@ -1,5 +1,5 @@
 //
-//  Copyright © 2022 Alexandre Reol. All rights reserved.
+//  Copyright © 2026 Alexandre Reol. All rights reserved.
 //
 
 import Foundation
