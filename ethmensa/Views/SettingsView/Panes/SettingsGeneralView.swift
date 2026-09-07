@@ -44,6 +44,18 @@ struct SettingsGeneralView: View {
                     .environmentObject(settingsManager)
             }
         }
+        .reservedIconWidthIfAvailable(28)
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func reservedIconWidthIfAvailable(_ width: CGFloat) -> some View {
+        if #available(iOS 26.0, *) {
+            self.labelReservedIconWidth(width)
+        } else {
+            self
+        }
     }
 }
 
