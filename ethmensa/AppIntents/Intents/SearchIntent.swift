@@ -18,7 +18,7 @@
 import AppIntents
 import Foundation
 
-@available(iOS 17.2, *)
+@available(iOS 18.0, *)
 @AppIntent(schema: .system.search)
 struct SearchIntent: AppIntent {
 
