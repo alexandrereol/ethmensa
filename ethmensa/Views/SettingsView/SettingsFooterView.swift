@@ -68,23 +68,28 @@ struct SettingsFooterView: View {
                 SafariWebView(url: String.privacyPolicyURLString.toURL()!)
                     .ignoresSafeArea()
             }
+        } header: {
+            Spacer(minLength: 10).listRowInsets(EdgeInsets())
         }
         .tint(.primary)
         Section {
-            Button {
-                openURL(String.whatsAppURLString.toURL()!)
+            Menu {
+                Button(String("WhatsApp")) {
+                    openURL(String.whatsAppURLString.toURL()!)
+                }
+                Button("EMAIL") {
+                    openURL(String.emailURLString.toURL()!)
+                }
             } label: {
                 Label(
-                    "LIVE_SUPPORT_OVER_WHATSAPP",
-                    systemImage: "bubble.fill"
+                    "CONTACT",
+                    systemImage: "bubble.left.and.bubble.right.fill"
                 )
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
             }
-            Button(
-                "SUPPORT_OVER_EMAIL",
-                systemImage: "envelope.fill"
-            ) {
-                openURL(String.emailURLString.toURL()!)
-            }
+        } header: {
+            Spacer(minLength: 10).listRowInsets(EdgeInsets())
         }
         .tint(.primary)
         Section {
@@ -122,6 +127,8 @@ struct SettingsFooterView: View {
                         )
                 }
             }
+        } header: {
+            Spacer(minLength: 10).listRowInsets(EdgeInsets())
         }
     }
 }

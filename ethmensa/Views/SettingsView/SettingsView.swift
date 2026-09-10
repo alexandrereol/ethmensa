@@ -29,11 +29,16 @@ struct SettingsView: View {
                 SettingsGeneralView()
                 SettingsAppearanceView()
                 SettingsiCloudView()
-                SettingsCellView(label: .init(localized: "ADVANCED_SETTINGS")) {
-                    AdvancedSettingsView()
+                Section {
+                    SettingsCellView(label: .init(localized: "ADVANCED_SETTINGS")) {
+                        AdvancedSettingsView()
+                    }
+                } header: {
+                    Spacer(minLength: 10).listRowInsets(EdgeInsets())
                 }
                 SettingsFooterView()
             }
+            .environment(\.defaultMinListHeaderHeight, 10)
             .environmentObject(settingsManager)
             .navigationTitle("SETTINGS")
             .navigationBarTitleDisplayMode(.inline)

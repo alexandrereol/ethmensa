@@ -29,6 +29,8 @@ struct SettingsAllergensView: View {
                     isOn: $settingsManager.showAllergens
                 )
                 .tint(.accentColor)
+            } header: {
+                Spacer(minLength: 10).listRowInsets(EdgeInsets())
             }
             Section("MY_ALLERGENS") {
                 ForEach(Allergen.allCases) { allergen in
@@ -52,6 +54,7 @@ struct SettingsAllergensView: View {
                 }
             }
         }
+        .environment(\.defaultMinListHeaderHeight, 10)
         .navigationTitle("ALLERGENS")
         .navigationBarTitleDisplayMode(.inline)
     }

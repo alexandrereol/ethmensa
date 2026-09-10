@@ -43,10 +43,13 @@ struct SettingsLanguageSelectionView: View {
                     }
                     .tint(.primary)
                 }
+            } header: {
+                Spacer(minLength: 10).listRowInsets(EdgeInsets())
             } footer: {
                 Text("LANGUAGE_CHANGE_ON_APP_RESTART")
             }
         }
+        .environment(\.defaultMinListHeaderHeight, 10)
         .navigationTitle("LANGUAGE")
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -48,6 +48,8 @@ struct SettingsNotificationsView: View {
                             viewModel.deniedAction()
                         }
                     )
+                } header: {
+                    Spacer(minLength: 10).listRowInsets(EdgeInsets())
                 } footer: {
                     Text("ENABLE_NOTIFICATIONS_FOOTER")
                 }
@@ -87,6 +89,7 @@ struct SettingsNotificationsView: View {
 #endif
                 }
             }
+            .environment(\.defaultMinListHeaderHeight, 10)
             .navigationTitle("NOTIFICATIONS")
             .navigationBarTitleDisplayMode(.inline)
         }
