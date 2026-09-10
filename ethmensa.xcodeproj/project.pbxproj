@@ -356,8 +356,8 @@
 				290E09B22E0ACF5C005E0BD4 /* widget */,
 				290E09CC2E0ACF5C005E0BD4 /* watchos */,
 				290E099C2E0ACF5C005E0BD4 /* TestFlight */,
-				294E163A2A8E22C3000A3AB6 /* Products */,
 				29AF8EBE2F79540400F49EDF /* ci_scripts */,
+				294E163A2A8E22C3000A3AB6 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
