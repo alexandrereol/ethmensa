@@ -114,7 +114,7 @@ class ClickCountDBManager {
                 let result = try managedContext.fetch(fetchRequest)
                 let mappedResult = result.compactMap {
                     CoreDataElement(
-                        id: $0.value(forKey: "id") as? String ?? "nil",
+                        id: $0.value(forKey: "id") as? String ?? String("nil"),
                         count: $0.value(forKey: "count") as? Int ?? -1
                     )
                 }

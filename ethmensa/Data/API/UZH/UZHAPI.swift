@@ -60,7 +60,7 @@ class UZHAPI: APIProtocol {
     private func getUniqueIds(fromUZHDays uzhDays: [UZHDay]) -> [Int] {
         uzhDays.compactMap { uzhDay -> [Int]? in
             guard let mensaArray = uzhDay.mensa else {
-                logger.critical("\(#function): Could not get mensa array from UZH day (\(uzhDay.dayDate ?? "nil"))")
+                logger.critical("\(#function): Could not get mensa array from UZH day (\(uzhDay.dayDate ?? String("nil")))")
                 return nil
             }
             return mensaArray.compactMap(\.mensaId)
@@ -76,7 +76,7 @@ class UZHAPI: APIProtocol {
     private func mapMensa(fromId id: Int, usingUzhDays uzhDays: [UZHDay]) -> Mensa? {
         let filteredUZHDay = uzhDays.compactMap { uzhDay -> UZHDay? in
             guard let mensaArray = uzhDay.mensa else {
-                logger.critical("\(#function): Could not get mensa (\(id)) from UZH day (\(uzhDay.dayDate ?? "nil"))")
+                logger.critical("\(#function): Could not get mensa (\(id)) from UZH day (\(uzhDay.dayDate ?? String("nil")))")
                 return nil
             }
             let mensas = mensaArray.filter { mensa in

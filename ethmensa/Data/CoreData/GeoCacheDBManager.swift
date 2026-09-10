@@ -127,7 +127,7 @@ class GeoCacheDBManager {
                 let result = try managedContext.fetch(fetchRequest)
                 let mappedResult = result.compactMap {
                     CoreDataElement(
-                        address: $0.value(forKey: "address") as? String ?? "nil",
+                        address: $0.value(forKey: "address") as? String ?? String("nil"),
                         long: $0.value(forKey: "long") as? Double ?? -1,
                         lat: $0.value(forKey: "lat") as? Double ?? -1
                     )
