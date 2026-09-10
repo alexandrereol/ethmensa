@@ -65,8 +65,11 @@ struct AdvancedSettingsView: View {
                 ) {
                     viewModel.resetSettingsAndData()
                 }
+            } header: {
+                Spacer(minLength: 10).listRowInsets(EdgeInsets())
             }
         }
+        .environment(\.defaultMinListHeaderHeight, 10)
         .buttonStyle(.plain)
     }
 }
