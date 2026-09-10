@@ -87,7 +87,7 @@ extension ModalViewModel {
             type: .about,
             title: Bundle.main.displayName,
             label1: versionBuildString,
-            label2: .init(localized: "DEVELOPED_BY:") + " " + .developerName
+            label2: .init(localized: "DEVELOPED_BY") + " " + .developerName
         )
     }
 }

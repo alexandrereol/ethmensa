@@ -98,7 +98,7 @@ struct SettingsFooterView: View {
                     openURL("https://apps.apple.com/app/id6458144304".toURL()!)
                 } label: {
                     Label {
-                        Text("CHECK_OUT_ETH_VIDEO!")
+                        Text("CHECK_OUT_ETH_VIDEO")
                     } icon: {
                         Image(.appETHVideoIconRoundedForUserVersion)
                             .resizable()
