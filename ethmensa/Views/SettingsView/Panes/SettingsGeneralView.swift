@@ -51,7 +51,7 @@ struct SettingsGeneralView: View {
 extension View {
     @ViewBuilder
     func reservedIconWidthIfAvailable(_ width: CGFloat) -> some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, visionOS 26.0, *) {
             self.labelReservedIconWidth(width)
         } else {
             self
