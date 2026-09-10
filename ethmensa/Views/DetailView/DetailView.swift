@@ -63,8 +63,12 @@ struct DetailView: View {
             case .contentAvailable, .noMenu:
                 List {
                     if !contextMenuPreview {
-                        MapHeaderView()
-                        WeekdaySelectorHeaderView()
+                        Section {
+                            MapHeaderView()
+                            WeekdaySelectorHeaderView()
+                        } header: {
+                            Spacer(minLength: 10).listRowInsets(EdgeInsets())
+                        }
                     }
                     if viewState == .noMenu {
                         Section {
@@ -91,6 +95,7 @@ struct DetailView: View {
                         }
                     }
                 }
+                .environment(\.defaultMinListHeaderHeight, 10)
             }
         }
         .environmentObject(navigationManager)
