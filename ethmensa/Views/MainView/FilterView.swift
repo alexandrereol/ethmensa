@@ -33,6 +33,7 @@ struct FilterView: View {
             .environmentObject(navigationManager)
             .environmentObject(settingsManager)
         }
+        .scrollClipDisabledIfAvailable()
     }
 }
 
@@ -134,19 +135,53 @@ private struct WeekdayButtonView: View {
 }
 
 private extension View {
+    /// Lets a chip grow past the scroll view's bounds while it animates on press,
+    /// instead of being cut off at the top and bottom.
+    @ViewBuilder
+    func scrollClipDisabledIfAvailable() -> some View {
+        if #available(iOS 17.0, *) {
+            self.scrollClipDisabled()
+        } else {
+            self
+        }
+    }
+
+    /// Styles a filter chip. `selected` is true while the filter is at its default value;
+    /// an active (non-default) filter is shown prominently in the accent colour.
+    /// On iOS 26 and later the chips use Liquid Glass. The glass styles are not
+    /// available on visionOS, whose bordered buttons are already glass.
+    @ViewBuilder
     func buttonStyle(selected: Bool) -> some View {
-        Group {
+#if !os(visionOS)
+        if #available(iOS 26.0, *) {
             if selected {
                 self
-                    .buttonStyle(.bordered)
-#if !os(visionOS)
-                    .tint(.primary)
-#endif
+                    .buttonStyle(.glass)
             } else {
                 self
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.glassProminent)
                     .tint(.accentColor)
             }
+        } else {
+            legacyButtonStyle(selected: selected)
+        }
+#else
+        legacyButtonStyle(selected: selected)
+#endif
+    }
+
+    @ViewBuilder
+    private func legacyButtonStyle(selected: Bool) -> some View {
+        if selected {
+            self
+                .buttonStyle(.bordered)
+#if !os(visionOS)
+                .tint(.primary)
+#endif
+        } else {
+            self
+                .buttonStyle(.borderedProminent)
+                .tint(.accentColor)
         }
     }
 }
