@@ -11,9 +11,9 @@
 		299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 299314982C8F4A8E0046D221 /* WhatsNewKit */; };
 		2993149B2C8F4A990046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2993149A2C8F4A990046D221 /* WhatsNewKit */; };
 		299730202BF2AE3500BB3A18 /* UIOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 2997301F2BF2AE3500BB3A18 /* UIOnboarding */; };
-		2997302B2BF2AEC300BB3A18 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302A2BF2AEC300BB3A18 /* ImageViewerRemote */; };
-		2997302D2BF2AED000BB3A18 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302C2BF2AED000BB3A18 /* ImageViewerRemote */; };
-		299730312BF2AF1400BB3A18 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 299730302BF2AF1400BB3A18 /* ImageViewerRemote */; };
+		2997302B2BF2AEC300BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302A2BF2AEC300BB3A18 /* URLImage */; };
+		2997302D2BF2AED000BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302C2BF2AED000BB3A18 /* URLImage */; };
+		299730312BF2AF1400BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 299730302BF2AF1400BB3A18 /* URLImage */; };
 		29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29CEE1882D84301B00C6D257 /* widget.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29E53F992AED5D4500BCDB65 /* ETH Mensa watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -308,7 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2993149B2C8F4A990046D221 /* WhatsNewKit in Frameworks */,
-				299730312BF2AF1400BB3A18 /* ImageViewerRemote in Frameworks */,
+				299730312BF2AF1400BB3A18 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +318,7 @@
 			files = (
 				299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */,
 				299730202BF2AE3500BB3A18 /* UIOnboarding in Frameworks */,
-				2997302B2BF2AEC300BB3A18 /* ImageViewerRemote in Frameworks */,
+				2997302B2BF2AEC300BB3A18 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +326,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2997302D2BF2AED000BB3A18 /* ImageViewerRemote in Frameworks */,
+				2997302D2BF2AED000BB3A18 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +395,7 @@
 			);
 			name = visionos;
 			packageProductDependencies = (
-				299730302BF2AF1400BB3A18 /* ImageViewerRemote */,
+				299730302BF2AF1400BB3A18 /* URLImage */,
 				2993149A2C8F4A990046D221 /* WhatsNewKit */,
 			);
 			productName = visionos;
@@ -428,7 +428,7 @@
 			name = ethmensa;
 			packageProductDependencies = (
 				2997301F2BF2AE3500BB3A18 /* UIOnboarding */,
-				2997302A2BF2AEC300BB3A18 /* ImageViewerRemote */,
+				2997302A2BF2AEC300BB3A18 /* URLImage */,
 				299314982C8F4A8E0046D221 /* WhatsNewKit */,
 			);
 			productName = ethmensa;
@@ -453,7 +453,7 @@
 			);
 			name = clip;
 			packageProductDependencies = (
-				2997302C2BF2AED000BB3A18 /* ImageViewerRemote */,
+				2997302C2BF2AED000BB3A18 /* URLImage */,
 			);
 			productName = Clip;
 			productReference = 29550BD32AEADD550014F07F /* ETH Mensa Clip.app */;
@@ -546,7 +546,7 @@
 			mainGroup = 294E16302A8E22C3000A3AB6;
 			packageReferences = (
 				2997301E2BF2AE3500BB3A18 /* XCRemoteSwiftPackageReference "UIOnboarding" */,
-				299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
+				299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */,
 				299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 				29AF8EBC2F7953DE00F49EDF /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
@@ -1311,12 +1311,12 @@
 				minimumVersion = 2.0.3;
 			};
 		};
-		299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+		299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Jake-Short/swiftui-image-viewer.git";
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.1;
+				minimumVersion = 2.2.5;
 			};
 		};
 		29AF8EBC2F7953DE00F49EDF /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
@@ -1345,20 +1345,20 @@
 			package = 2997301E2BF2AE3500BB3A18 /* XCRemoteSwiftPackageReference "UIOnboarding" */;
 			productName = UIOnboarding;
 		};
-		2997302A2BF2AEC300BB3A18 /* ImageViewerRemote */ = {
+		2997302A2BF2AEC300BB3A18 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
-			productName = ImageViewerRemote;
+			package = 299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
-		2997302C2BF2AED000BB3A18 /* ImageViewerRemote */ = {
+		2997302C2BF2AED000BB3A18 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
-			productName = ImageViewerRemote;
+			package = 299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
-		299730302BF2AF1400BB3A18 /* ImageViewerRemote */ = {
+		299730302BF2AF1400BB3A18 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
-			productName = ImageViewerRemote;
+			package = 299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

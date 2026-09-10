@@ -103,7 +103,7 @@ struct MealCellView: View {
                 Spacer()
                 if let url = meal.imageURL {
                     Button {
-                        navigationManager.imagePopoverURLString = url.absoluteString
+                        navigationManager.imagePopoverURL = url
                         navigationManager.imagePopoverShown = true
                     } label: {
                         Group {

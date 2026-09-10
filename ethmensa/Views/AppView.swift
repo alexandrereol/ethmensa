@@ -15,7 +15,6 @@
 //  along with this program. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import ImageViewerRemote
 import SwiftUI
 
 #if canImport(WhatsNewKit)
@@ -75,18 +74,9 @@ struct AppView: View {
                 .environmentObject(navigationManager)
                 .environmentObject(settingsManager)
         }
-        .overlay {
-            ImageViewerRemote(
-                imageURL: $navigationManager.imagePopoverURLString,
-                viewerShown: $navigationManager.imagePopoverShown,
-                disableCache: false
-            )
-            if navigationManager.imagePopoverShown {
-                Button(String("")) {
-                    navigationManager.imagePopoverShown = false
-                }
-                .opacity(0)
-                .keyboardShortcut(.escape, modifiers: [])
+        .fullScreenCover(isPresented: $navigationManager.imagePopoverShown) {
+            if let url = navigationManager.imagePopoverURL {
+                FullscreenImageView(url: url)
             }
         }
     }

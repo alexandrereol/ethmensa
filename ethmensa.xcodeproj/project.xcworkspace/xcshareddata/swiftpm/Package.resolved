@@ -1,5 +1,5 @@
 {
-  "originHash" : "45dea1f0047ff33336e8c85e5c9fe36dcb763fe05db55dfb7c11c10afe7681c3",
+  "originHash" : "dd6a8eaf839d1d608b5a217fd33e108121a28660d89193c52a772f77e594959a",
   "pins" : [
     {
       "identity" : "swiftlintplugins",
@@ -8,15 +8,6 @@
       "state" : {
         "revision" : "ef7d692fc6706e8f5628e26bcafaefa445c58a97",
         "version" : "0.65.1"
-      }
-    },
-    {
-      "identity" : "swiftui-image-viewer",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Jake-Short/swiftui-image-viewer.git",
-      "state" : {
-        "revision" : "f61f298c0100c81dfb0c7908091e68aad12a892c",
-        "version" : "2.3.1"
       }
     },
     {
