@@ -932,6 +932,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ethmensa/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
@@ -981,6 +982,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ethmensa/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
