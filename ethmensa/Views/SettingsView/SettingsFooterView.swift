@@ -22,6 +22,7 @@ struct SettingsFooterView: View {
     @Environment(\.openURL) private var openURL
 
     @State private var privacyPolicyPresented = false
+    @State private var contactDialogPresented = false
 
     private var isETHVideoPromotionShown: Bool {
         !UIApplication.shared.canOpenURL("ethvideo://".toURL()!)
@@ -73,6 +74,28 @@ struct SettingsFooterView: View {
         }
         .tint(.primary)
         Section {
+#if targetEnvironment(macCatalyst)
+            // Catalyst tints a menu's label as one piece, which greys out the icon.
+            // A button renders like the other rows, so offer the options in a dialog.
+            Button(
+                "CONTACT",
+                systemImage: "bubble.left.and.bubble.right.fill"
+            ) {
+                contactDialogPresented = true
+            }
+            .confirmationDialog(
+                "CONTACT",
+                isPresented: $contactDialogPresented,
+                titleVisibility: .visible
+            ) {
+                Button(String("WhatsApp")) {
+                    openURL(String.whatsAppURLString.toURL()!)
+                }
+                Button("EMAIL") {
+                    openURL(String.emailURLString.toURL()!)
+                }
+            }
+#else
             Menu {
                 Button(String("WhatsApp")) {
                     openURL(String.whatsAppURLString.toURL()!)
@@ -88,6 +111,7 @@ struct SettingsFooterView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
             }
+#endif
         } header: {
             Spacer(minLength: 10).listRowInsets(EdgeInsets())
         }
