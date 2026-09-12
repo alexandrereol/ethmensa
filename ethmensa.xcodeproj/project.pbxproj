@@ -732,12 +732,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ethmensa/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa visionOS";
 				SDKROOT = xros;
@@ -762,12 +763,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ethmensa/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa visionOS";
 				SDKROOT = xros;
@@ -934,6 +936,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ethmensa/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
@@ -952,7 +955,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = auto;
@@ -983,6 +986,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ethmensa/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Location is used for geofencing your device to nearby university buildings to send notifications.";
@@ -1001,7 +1005,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
 				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = auto;
@@ -1028,6 +1032,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = clip/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1039,7 +1044,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.Clip;
 				PRODUCT_NAME = "ETH Mensa Clip";
 				SDKROOT = iphoneos;
@@ -1068,6 +1073,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = clip/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ETH Mensa";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1079,7 +1085,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.Clip;
 				PRODUCT_NAME = "ETH Mensa Clip";
 				SDKROOT = iphoneos;
@@ -1115,7 +1121,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.watchkitapp;
 				PRODUCT_NAME = "ETH Mensa watchOS";
 				SDKROOT = watchos;
@@ -1148,7 +1154,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.watchkitapp;
 				PRODUCT_NAME = "ETH Mensa watchOS";
 				SDKROOT = watchos;
@@ -1183,7 +1189,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1220,7 +1226,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 6.14;
+				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
