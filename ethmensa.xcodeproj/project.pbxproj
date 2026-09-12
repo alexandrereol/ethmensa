@@ -740,7 +740,7 @@
 				);
 				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
-				PRODUCT_NAME = "ETH Mensa visionOS";
+				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = xros;
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -771,7 +771,7 @@
 				);
 				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa;
-				PRODUCT_NAME = "ETH Mensa visionOS";
+				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = xros;
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1123,7 +1123,7 @@
 				);
 				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.watchkitapp;
-				PRODUCT_NAME = "ETH Mensa watchOS";
+				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "WATCHOS DEBUG";
@@ -1156,7 +1156,7 @@
 				);
 				MARKETING_VERSION = 6.15;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.alexandrereol.ethmensa.watchkitapp;
-				PRODUCT_NAME = "ETH Mensa watchOS";
+				PRODUCT_NAME = "ETH Mensa";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WATCHOS;
