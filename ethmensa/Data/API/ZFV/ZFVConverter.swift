@@ -89,9 +89,14 @@ struct ZFVConverter {
             return []
         }
 
-        return daily.menuCategories?.compactMap { category in
-            buildMealTime(from: category, weekdayCode: weekdayCode)
-        } ?? []
+        return daily.menuCategories?
+            // Lists lunch before dinner, which the API does not always do
+            .sorted { lhs, rhs in
+                ServiceTime(slug: lhs.category?.slug) == .lunch && ServiceTime(slug: rhs.category?.slug) == .dinner
+            }
+            .compactMap { category in
+                buildMealTime(from: category, weekdayCode: weekdayCode)
+            } ?? []
     }
 
     private static func buildMealTime(
@@ -108,7 +113,7 @@ struct ZFVConverter {
 
         return MealTime(
             weekdayCode: weekdayCode,
-            type: category.category?.name,
+            type: ServiceTime(slug: category.category?.slug)?.localizedString ?? category.category?.name,
             meals: meals
         )
     }
@@ -150,5 +155,34 @@ struct ZFVConverter {
             mealType: mealTypes.isEmpty ? nil : mealTypes,
             allergen: allergens?.isEmpty == true ? nil : allergens
         )
+    }
+}
+
+extension ZFVConverter {
+    /// The meal time a menu category is served at. The API names the categories inconsistently,
+    /// e.g. "Mittagsverpflegung", "Lunch" or "Abend", so they are told apart by their slug.
+    enum ServiceTime {
+        case lunch
+        case dinner
+
+        init?(slug: String?) {
+            guard let slug else {
+                return nil
+            }
+            if slug.contains("abend") || slug.contains("dinner") {
+                self = .dinner
+            } else if slug.contains("mittag") || slug.contains("lunch") {
+                self = .lunch
+            } else {
+                return nil
+            }
+        }
+
+        var localizedString: String {
+            switch self {
+            case .lunch: .init(localized: "LUNCH")
+            case .dinner: .init(localized: "DINNER")
+            }
+        }
     }
 }

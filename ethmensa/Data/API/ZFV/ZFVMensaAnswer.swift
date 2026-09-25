@@ -67,7 +67,7 @@ struct ZFVMenuCategoryDay: Codable {
 }
 
 struct ZFVMenuCategory: Codable {
-    let name: String?
+    let name, slug: String?
 }
 
 struct ZFVMenuItem: Codable {

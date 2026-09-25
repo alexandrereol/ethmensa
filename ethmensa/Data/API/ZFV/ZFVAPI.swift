@@ -50,6 +50,7 @@ class ZFVAPI: APIProtocol {
                   menuCategories {
                     category {
                       name
+                      slug
                     }
                     menuItems {
                       ... on OutletMenuItemDish {
