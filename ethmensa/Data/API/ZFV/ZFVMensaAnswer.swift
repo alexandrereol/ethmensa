@@ -77,9 +77,18 @@ struct ZFVMenuItem: Codable {
 }
 
 struct ZFVDish: Codable {
-    let name, imageUrl: String?
+    let name, description: String?
+    let media: [ZFVDishMedia]?
     let allergens: [ZFVDishAllergen]?
     let isVegan, isVegetarian: Bool?
+}
+
+struct ZFVDishMedia: Codable {
+    let media: ZFVMedia?
+}
+
+struct ZFVMedia: Codable {
+    let url: String?
 }
 
 struct ZFVDishAllergen: Codable {

@@ -55,8 +55,13 @@ class ZFVAPI: APIProtocol {
                     menuItems {
                       ... on OutletMenuItemDish {
                         dish {
-                          name
-                          imageUrl
+                          name(mode: SHORT)
+                          description
+                          media {
+                            media {
+                              url
+                            }
+                          }
                           allergens {
                             allergen {
                               externalId

@@ -132,10 +132,6 @@ struct ZFVConverter {
         guard let dish = dishItem.dish else {
             return nil
         }
-        guard let dishName = dish.name else {
-            logger.critical("\(#function): Could not get dish name")
-            return nil
-        }
         let prices = dishItem.prices ?? []
         let student = prices.first { $0.priceCategory?.externalId == "1" }?.amount.flatMap(Double.init)
         let staff = prices.first { $0.priceCategory?.externalId == "2" }?.amount.flatMap(Double.init)
@@ -155,11 +151,12 @@ struct ZFVConverter {
             }
             return Allergen.fromZFV(id: externalID, name: wrapper.allergen?.name)
         }.unique
+        // Some dishes have an empty name and description, only their menu line tells what they are
         return Meal(
             title: dishItem.category?.name,
-            name: nil,
-            description: dishName,
-            imageURL: dish.imageUrl?.toURL(),
+            name: dish.name?.isEmpty == false ? dish.name : nil,
+            description: dish.description?.isEmpty == false ? dish.description : nil,
+            imageURL: dish.media?.first?.media?.url?.toURL(),
             price: price,
             mealType: mealTypes.isEmpty ? nil : mealTypes,
             allergen: allergens?.isEmpty == true ? nil : allergens
