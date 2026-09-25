@@ -1,0 +1,4 @@
+// Build settings shared by all targets.
+
+// Holds ZFV_API_KEY. It is git-ignored, so it is only included if it exists, see Secrets.example.xcconfig.
+#include? "Secrets.xcconfig"
