@@ -140,7 +140,9 @@ struct ZFVConverter {
         let student = prices.first { $0.priceCategory?.externalId == "1" }?.amount.flatMap(Double.init)
         let staff = prices.first { $0.priceCategory?.externalId == "2" }?.amount.flatMap(Double.init)
         let extern = prices.first { $0.priceCategory?.externalId == "3" }?.amount.flatMap(Double.init)
-        let price = Price(student: student, staff: staff, extern: extern)
+        // Some dishes, such as the daily pasta, come with no prices or prices of 0
+        let hasPrice = [student, staff, extern].contains { ($0 ?? 0) > 0 }
+        let price = hasPrice ? Price(student: student, staff: staff, extern: extern) : nil
         var mealTypes: [MealType] = []
         if dish.isVegan == true {
             mealTypes.append(.vegan)
