@@ -31,12 +31,9 @@ struct APIProvider {
 
     /// A computed property that returns an array of all available API providers.
     static var allProviders: [APIProvider] {
-        var providers = [
-            APIProvider(type: .eth, apiProtocol: ETHAPI.shared)
+        [
+            APIProvider(type: .eth, apiProtocol: ETHAPI.shared),
+            APIProvider(type: .zfv, apiProtocol: ZFVAPI.shared)
         ]
-        #if !WATCHOS && !APPCLIP
-        providers.append(APIProvider(type: .zfv, apiProtocol: ZFVAPI.shared))
-        #endif
-        return providers
     }
 }
