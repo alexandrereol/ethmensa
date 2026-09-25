@@ -24,12 +24,12 @@ struct ZFVConverter {
         category: String(describing: ZFVConverter.self)
     )
 
-    static func convert(data: ZFVGraph.MensasQuery.Data) -> [Mensa] {
-        data.outlets.compactMap { convertOutlet($0) }
+    static func convert(outlets: [ZFVOutlet]) -> [Mensa] {
+        outlets.compactMap { convertOutlet($0) }
     }
 
     private static func convertOutlet(
-        _ outlet: ZFVGraph.MensasQuery.Data.Outlet
+        _ outlet: ZFVOutlet
     ) -> Mensa? {
         guard let name = outlet.name,
               let externalIdStr = outlet.externalId,
@@ -61,7 +61,7 @@ struct ZFVConverter {
     }
 
     private static func buildMealTimes(
-        from dailyEntries: [ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily?]?
+        from dailyEntries: [ZFVCalendarDay]?
     ) -> [MealTime] {
         guard let dailyEntries else {
             return []
@@ -69,16 +69,13 @@ struct ZFVConverter {
 
         var mealTimes: [MealTime] = []
         for daily in dailyEntries {
-            guard let daily else {
-                continue
-            }
             mealTimes.append(contentsOf: buildMealTimes(from: daily))
         }
         return mealTimes
     }
 
     private static func buildMealTimes(
-        from daily: ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily
+        from daily: ZFVCalendarDay
     ) -> [MealTime] {
         guard let weekdayCode = daily.date?.weekdayNumber else {
             logger.critical("\(#function): Could not parse weekday")
@@ -86,18 +83,16 @@ struct ZFVConverter {
         }
 
         return daily.menuCategories?.compactMap { category in
-            guard let category else { return nil }
-            return buildMealTime(from: category, weekdayCode: weekdayCode)
+            buildMealTime(from: category, weekdayCode: weekdayCode)
         } ?? []
     }
 
     private static func buildMealTime(
-        from category: ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily.MenuCategory,
+        from category: ZFVMenuCategoryDay,
         weekdayCode: Int
     ) -> MealTime? {
-        let meals = category.menuItems?.compactMap { item -> Meal? in
-            guard let dishItem = item?.asOutletMenuItemDish else { return nil }
-            return buildMeal(from: dishItem)
+        let meals = category.menuItems?.compactMap { item in
+            buildMeal(from: item)
         } ?? []
 
         guard !meals.isEmpty else {
@@ -112,17 +107,20 @@ struct ZFVConverter {
     }
 
     private static func buildMeal(
-        from dishItem: ZFVGraph.MensasQuery.Data.Outlet.Calendar.Week.Daily.MenuCategory.MenuItem.AsOutletMenuItemDish
+        from dishItem: ZFVMenuItem
     ) -> Meal? {
-        guard let dish = dishItem.dish,
-              let dishName = dish.name else {
+        // Menu items other than dishes come without a dish and are skipped
+        guard let dish = dishItem.dish else {
+            return nil
+        }
+        guard let dishName = dish.name else {
             logger.critical("\(#function): Could not get dish name")
             return nil
         }
         let prices = dishItem.prices ?? []
-        let student = prices.first { $0?.priceCategory?.externalId == "1" }??.amount.flatMap(Double.init)
-        let staff = prices.first { $0?.priceCategory?.externalId == "2" }??.amount.flatMap(Double.init)
-        let extern = prices.first { $0?.priceCategory?.externalId == "3" }??.amount.flatMap(Double.init)
+        let student = prices.first { $0.priceCategory?.externalId == "1" }?.amount.flatMap(Double.init)
+        let staff = prices.first { $0.priceCategory?.externalId == "2" }?.amount.flatMap(Double.init)
+        let extern = prices.first { $0.priceCategory?.externalId == "3" }?.amount.flatMap(Double.init)
         let price = Price(student: student, staff: staff, extern: extern)
         var mealTypes: [MealType] = []
         if dish.isVegan == true {
@@ -131,7 +129,7 @@ struct ZFVConverter {
             mealTypes.append(.vegetarian)
         }
         let allergens: [Allergen]? = dish.allergens?.compactMap { wrapper -> Allergen? in
-            guard let externalID = wrapper?.allergen?.externalId else {
+            guard let externalID = wrapper.allergen?.externalId else {
                 return nil
             }
             return Allergen.fromZFVString(externalID)

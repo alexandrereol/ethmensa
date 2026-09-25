@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0FFA0467C22E4B578C590894 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 03E5CA64FD1B4F039EE7D428 /* ApolloAPI */; };
-		10698B8A84CB48CB8711A758 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 709C9965DCCD47FDA52AA84C /* Apollo */; };
-		1810223F3F13462BAFC2B008 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 6D180EC4B55A4215884C3F07 /* ApolloAPI */; };
 		29550BE22AEADD560014F07F /* ETH Mensa Clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 29550BD32AEADD550014F07F /* ETH Mensa Clip.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 299314982C8F4A8E0046D221 /* WhatsNewKit */; };
 		2993149B2C8F4A990046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2993149A2C8F4A990046D221 /* WhatsNewKit */; };
@@ -19,7 +16,6 @@
 		299730312BF2AF1400BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 299730302BF2AF1400BB3A18 /* URLImage */; };
 		29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29CEE1882D84301B00C6D257 /* widget.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29E53F992AED5D4500BCDB65 /* ETH Mensa watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		99F5769D0051466E9D72D8BB /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = B15178F8CEEB4CF6A0279628 /* Apollo */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,29 +151,10 @@
 				AppIntents/MensaEntity.swift,
 				"AppIntents/MensaEntity+IndexedEntity.swift",
 				AppIntents/ShortcutsProvider.swift,
-				Data/API/ZFV/Generated/Operations/Queries/MensasQuery.graphql.swift,
-				Data/API/ZFV/Generated/Schema/CustomScalars/DateTime.swift,
-				Data/API/ZFV/Generated/Schema/CustomScalars/ID.swift,
-				Data/API/ZFV/Generated/Schema/Interfaces/OutletMenuItem.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/Address.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/DateTimeWithTimezone.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/Dish.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/DishAllergen.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/DishAllergenRelation.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/Location.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/Outlet.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/OutletMenuItemDish.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/OutletMenuItemOther.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/Price.graphql.swift,
-				Data/API/ZFV/Generated/Schema/Objects/Query.graphql.swift,
-				Data/API/ZFV/Generated/Schema/SchemaConfiguration.swift,
-				Data/API/ZFV/Generated/Schema/SchemaMetadata.graphql.swift,
-				Data/API/ZFV/Generated/ZFVGraph.graphql.swift,
 				Data/API/ZFV/ZFVAPI.swift,
 				Data/API/ZFV/ZFVConverter.swift,
-				Data/API/ZFV/ZFVGraphQLClient.swift,
+				Data/API/ZFV/ZFVMensaAnswer.swift,
 				Data/WhatsNewProvider.swift,
-				Extensions/ApolloClientExtension.swift,
 				"Extensions/Array+UIOnboardingFeatureExtension.swift",
 				Logic/GeofencingManager.swift,
 				"Logic/GeofencingManager+Location.swift",
@@ -336,8 +313,6 @@
 			files = (
 				2993149B2C8F4A990046D221 /* WhatsNewKit in Frameworks */,
 				299730312BF2AF1400BB3A18 /* URLImage in Frameworks */,
-				99F5769D0051466E9D72D8BB /* Apollo in Frameworks */,
-				0FFA0467C22E4B578C590894 /* ApolloAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,8 +323,6 @@
 				299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */,
 				299730202BF2AE3500BB3A18 /* UIOnboarding in Frameworks */,
 				2997302B2BF2AEC300BB3A18 /* URLImage in Frameworks */,
-				10698B8A84CB48CB8711A758 /* Apollo in Frameworks */,
-				1810223F3F13462BAFC2B008 /* ApolloAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,8 +411,6 @@
 			packageProductDependencies = (
 				299730302BF2AF1400BB3A18 /* URLImage */,
 				2993149A2C8F4A990046D221 /* WhatsNewKit */,
-				B15178F8CEEB4CF6A0279628 /* Apollo */,
-				03E5CA64FD1B4F039EE7D428 /* ApolloAPI */,
 			);
 			productName = visionos;
 			productReference = 291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */;
@@ -473,8 +444,6 @@
 				2997301F2BF2AE3500BB3A18 /* UIOnboarding */,
 				2997302A2BF2AEC300BB3A18 /* URLImage */,
 				299314982C8F4A8E0046D221 /* WhatsNewKit */,
-				709C9965DCCD47FDA52AA84C /* Apollo */,
-				6D180EC4B55A4215884C3F07 /* ApolloAPI */,
 			);
 			productName = ethmensa;
 			productReference = 294E16392A8E22C3000A3AB6 /* ETH Mensa.app */;
@@ -594,7 +563,6 @@
 				299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */,
 				299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 				29AF8EBC2F7953DE00F49EDF /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
-				A55BE7ABEDC4444789AEF988 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = 294E163A2A8E22C3000A3AB6 /* Products */;
 			projectDirPath = "";
@@ -1385,22 +1353,9 @@
 				minimumVersion = 0.63.2;
 			};
 		};
-		A55BE7ABEDC4444789AEF988 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		03E5CA64FD1B4F039EE7D428 /* ApolloAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A55BE7ABEDC4444789AEF988 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = ApolloAPI;
-		};
 		299314982C8F4A8E0046D221 /* WhatsNewKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
@@ -1430,21 +1385,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
-		};
-		6D180EC4B55A4215884C3F07 /* ApolloAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A55BE7ABEDC4444789AEF988 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = ApolloAPI;
-		};
-		709C9965DCCD47FDA52AA84C /* Apollo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A55BE7ABEDC4444789AEF988 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = Apollo;
-		};
-		B15178F8CEEB4CF6A0279628 /* Apollo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A55BE7ABEDC4444789AEF988 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = Apollo;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

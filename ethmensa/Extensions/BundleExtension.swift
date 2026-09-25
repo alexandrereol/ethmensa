@@ -57,4 +57,16 @@ extension Bundle {
     var safeIdentifier: String {
         bundleIdentifier ?? "ch.alexandrereol.ethmensa"
     }
+
+    /// A computed property that retrieves the ZFV API key, which is set as `ZFV_API_KEY` in
+    /// `Config/Secrets.xcconfig` and written to the Info.plist file during the build.
+    ///
+    /// - Returns: The API key as a `String`, or `nil` if it is not set.
+    var zfvAPIKey: String? {
+        guard let key = object(forInfoDictionaryKey: "ZFV_API_KEY") as? String,
+              !key.isEmpty else {
+            return nil
+        }
+        return key
+    }
 }
