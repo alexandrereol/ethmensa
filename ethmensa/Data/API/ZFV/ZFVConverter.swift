@@ -49,6 +49,10 @@ struct ZFVConverter {
             cityLine.isEmpty ? nil : cityLine
         ].compactMap { $0 }.joined(separator: "\n")
         let mealTimes = buildMealTimes(from: outlet.calendar?.week?.daily)
+        // Leaves out outlets without dishes this week, such as the cafés and shops
+        guard !mealTimes.isEmpty else {
+            return nil
+        }
         return Mensa(
             provider: .zfv,
             facilityID: facilityID,

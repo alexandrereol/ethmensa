@@ -28,9 +28,10 @@ class ZFVAPI: APIProtocol {
 
     private let host = "api.zfv.ch"
     private let endpoint = "https://api.zfv.ch/graphql"
+    // Without `take`, only the first 10 outlets are returned. 100 is the maximum.
     private let query = """
         query MensasQuery {
-          outlets {
+          outlets(take: 100) {
             externalId
             name
             location {
