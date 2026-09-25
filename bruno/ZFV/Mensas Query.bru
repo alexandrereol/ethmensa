@@ -17,7 +17,7 @@ headers {
 
 body:graphql {
   query MensasQuery {
-    outlets {
+    outlets(take: 100) {
       externalId
       name
       location {
@@ -36,16 +36,22 @@ body:graphql {
             menuCategories {
               category {
                 name
+                slug
               }
               menuItems {
-                __typename
                 ... on OutletMenuItemDish {
                   dish {
-                    name
-                    imageUrl
+                    name(mode: SHORT)
+                    description
+                    media {
+                      media {
+                        url
+                      }
+                    }
                     allergens {
                       allergen {
                         externalId
+                        name
                       }
                     }
                     isVegan
