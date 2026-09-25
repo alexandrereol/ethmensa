@@ -87,7 +87,7 @@ struct ZFVDishAllergen: Codable {
 }
 
 struct ZFVAllergen: Codable {
-    let externalId: String?
+    let externalId, name: String?
 }
 
 struct ZFVPrice: Codable {

@@ -132,12 +132,12 @@ struct ZFVConverter {
         } else if dish.isVegetarian == true {
             mealTypes.append(.vegetarian)
         }
-        let allergens: [Allergen]? = dish.allergens?.compactMap { wrapper -> Allergen? in
+        let allergens: [Allergen]? = dish.allergens?.flatMap { wrapper -> [Allergen] in
             guard let externalID = wrapper.allergen?.externalId else {
-                return nil
+                return []
             }
-            return Allergen.fromZFVString(externalID)
-        }
+            return Allergen.fromZFV(id: externalID, name: wrapper.allergen?.name)
+        }.unique
         return Meal(
             title: dishItem.category?.name,
             name: nil,

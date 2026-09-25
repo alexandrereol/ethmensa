@@ -59,6 +59,7 @@ class ZFVAPI: APIProtocol {
                           allergens {
                             allergen {
                               externalId
+                              name
                             }
                           }
                           isVegan
