@@ -85,11 +85,12 @@ class ZFVAPI: APIProtocol {
         """
 
     func get() async -> [Mensa] {
+        async let infos = ZFVOutletInfo.load()
         guard let outlets = await download()?.data?.outlets else {
             logger.critical("\(#function): Could not download ZFV data")
             return []
         }
-        return ZFVConverter.convert(outlets: outlets)
+        return await ZFVConverter.convert(outlets: outlets, infos: infos)
     }
 
     private func download() async -> ZFVMensaAnswer? {

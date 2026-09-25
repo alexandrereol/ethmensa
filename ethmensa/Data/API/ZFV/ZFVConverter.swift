@@ -24,16 +24,19 @@ struct ZFVConverter {
         category: String(describing: ZFVConverter.self)
     )
 
-    static func convert(outlets: [ZFVOutlet]) -> [Mensa] {
-        outlets.compactMap { convertOutlet($0) }
+    static func convert(outlets: [ZFVOutlet], infos: [String: ZFVOutletInfo]) -> [Mensa] {
+        outlets.compactMap { outlet in
+            convertOutlet(outlet, info: outlet.externalId.flatMap { infos[$0] })
+        }
     }
 
     private static func convertOutlet(
-        _ outlet: ZFVOutlet
+        _ outlet: ZFVOutlet,
+        info: ZFVOutletInfo?
     ) -> Mensa? {
         guard let name = outlet.name,
               let externalIdStr = outlet.externalId,
-              let facilityID = Int(externalIdStr) else {
+              let externalID = Int(externalIdStr) else {
             logger.critical(
                 "\(#function): Missing or invalid externalId for outlet \(outlet.name ?? "unknown")"
             )
@@ -54,12 +57,12 @@ struct ZFVConverter {
             return nil
         }
         return Mensa(
-            provider: .zfv,
-            facilityID: facilityID,
-            name: name,
-            location: locationStr.isEmpty ? nil : locationStr,
+            provider: .uzh,
+            facilityID: info?.uzhID ?? externalID,
+            name: info?.name ?? name,
+            location: locationStr.isEmpty ? info?.address : locationStr,
             webURL: nil,
-            imageURL: nil,
+            imageURL: info?.imageURL,
             mealTimes: mealTimes
         )
     }
