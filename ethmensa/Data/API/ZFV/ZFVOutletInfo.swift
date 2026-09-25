@@ -18,9 +18,15 @@
 import Foundation
 import os.log
 
-/// Details about the UZH mensas that the ZFV API does not provide.
+/// Details about the UZH mensas that the ZFV API does not provide, e.g. the opening hours.
 /// They are loaded from `zfv_uzh_mapping.json` in the repository, so they can be updated without an app release.
 struct ZFVOutletInfo: Codable {
+    /// The hours a meal time is served, e.g. from "11:00" to "14:30".
+    struct Hours: Codable {
+        let start: String
+        let end: String
+    }
+
     /// The id of the mensa in the former UZH API, if it was listed there. It is used as the facility ID,
     /// so that click counts, share links and shortcuts keep working.
     var uzhID: Int?
@@ -29,6 +35,10 @@ struct ZFVOutletInfo: Codable {
     var name: String?
     /// The address of the mensa, for the outlets without a location in the ZFV API.
     var address: String?
+    /// The hours lunch is served.
+    var lunch: Hours?
+    /// The hours dinner is served.
+    var dinner: Hours?
 
     /// The photo of the mensa, which is still served by the former UZH API.
     var imageURL: URL? {
@@ -36,6 +46,14 @@ struct ZFVOutletInfo: Codable {
             return nil
         }
         return "https://ziuzhnowweb.uzh.ch/v3/mensa/\(uzhID)/image".toURL()
+    }
+
+    /// Returns the hours the given meal time is served.
+    func hours(for serviceTime: ZFVConverter.ServiceTime) -> Hours? {
+        switch serviceTime {
+        case .lunch: lunch
+        case .dinner: dinner
+        }
     }
 }
 
@@ -54,7 +72,7 @@ extension ZFVOutletInfo {
 
     /// Loads the details of the UZH mensas, keyed by the external id of the ZFV outlet.
     /// A downloaded copy is used for 72 hours. If the file cannot be downloaded, no details are returned
-    /// and the UZH mensas are shown with the ZFV data only, e.g. with the ZFV names.
+    /// and the UZH mensas are shown with the ZFV data only, e.g. without opening hours.
     static func load() async -> [String: ZFVOutletInfo] {
         let defaults = UserDefaults.standard
         if let cacheDate = defaults.object(forKey: cacheDateKey) as? Date,

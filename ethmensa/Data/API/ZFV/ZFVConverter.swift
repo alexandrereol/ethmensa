@@ -51,7 +51,7 @@ struct ZFVConverter {
             street,
             cityLine.isEmpty ? nil : cityLine
         ].compactMap { $0 }.joined(separator: "\n")
-        let mealTimes = buildMealTimes(from: outlet.calendar?.week?.daily)
+        let mealTimes = buildMealTimes(from: outlet.calendar?.week?.daily, info: info)
         // Leaves out outlets without dishes this week, such as the cafés and shops
         guard !mealTimes.isEmpty else {
             return nil
@@ -68,7 +68,8 @@ struct ZFVConverter {
     }
 
     private static func buildMealTimes(
-        from dailyEntries: [ZFVCalendarDay]?
+        from dailyEntries: [ZFVCalendarDay]?,
+        info: ZFVOutletInfo?
     ) -> [MealTime] {
         guard let dailyEntries else {
             return []
@@ -76,13 +77,14 @@ struct ZFVConverter {
 
         var mealTimes: [MealTime] = []
         for daily in dailyEntries {
-            mealTimes.append(contentsOf: buildMealTimes(from: daily))
+            mealTimes.append(contentsOf: buildMealTimes(from: daily, info: info))
         }
         return mealTimes
     }
 
     private static func buildMealTimes(
-        from daily: ZFVCalendarDay
+        from daily: ZFVCalendarDay,
+        info: ZFVOutletInfo?
     ) -> [MealTime] {
         guard let weekdayCode = daily.date?.weekdayNumber else {
             logger.critical("\(#function): Could not parse weekday")
@@ -95,13 +97,14 @@ struct ZFVConverter {
                 ServiceTime(slug: lhs.category?.slug) == .lunch && ServiceTime(slug: rhs.category?.slug) == .dinner
             }
             .compactMap { category in
-                buildMealTime(from: category, weekdayCode: weekdayCode)
+                buildMealTime(from: category, weekdayCode: weekdayCode, info: info)
             } ?? []
     }
 
     private static func buildMealTime(
         from category: ZFVMenuCategoryDay,
-        weekdayCode: Int
+        weekdayCode: Int,
+        info: ZFVOutletInfo?
     ) -> MealTime? {
         let meals = category.menuItems?.compactMap { item in
             buildMeal(from: item)
@@ -111,9 +114,13 @@ struct ZFVConverter {
             return nil
         }
 
+        let serviceTime = ServiceTime(slug: category.category?.slug)
+        let hours = serviceTime.flatMap { info?.hours(for: $0) }
         return MealTime(
             weekdayCode: weekdayCode,
-            type: ServiceTime(slug: category.category?.slug)?.localizedString ?? category.category?.name,
+            startDateComponents: hours.flatMap { .fromStringSeparatedByColon(string: $0.start) },
+            endDateComponents: hours.flatMap { .fromStringSeparatedByColon(string: $0.end) },
+            type: serviceTime?.localizedString ?? category.category?.name,
             meals: meals
         )
     }
