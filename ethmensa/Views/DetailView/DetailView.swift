@@ -25,6 +25,7 @@ struct DetailView: View {
     private enum ViewState {
         case noSelection
         case noMenu
+        case noAllergenFriendlyMeal
         case contentAvailable
     }
 
@@ -33,6 +34,8 @@ struct DetailView: View {
             .noSelection
         } else if mealTimes.isEmpty {
             .noMenu
+        } else if shownMealTimes.isEmpty {
+            .noAllergenFriendlyMeal
         } else {
             .contentAvailable
         }
@@ -50,6 +53,15 @@ struct DetailView: View {
         }
     }
 
+    /// The meal times shown, leaving out those without an allergen-friendly meal while that filter is active.
+    private var shownMealTimes: [MealTime] {
+        if navigationManager.allergenFriendlyOnly {
+            mealTimes.filter { !$0.allergenCompatibleMeals.isEmpty }
+        } else {
+            mealTimes
+        }
+    }
+
     var body: some View {
         Group {
             switch viewState {
@@ -60,7 +72,7 @@ struct DetailView: View {
                     description: .init(localized: "NO_MENSA_SELECTED_MESSAGE"),
                     actions: { EmptyView() }
                 )
-            case .contentAvailable, .noMenu:
+            case .contentAvailable, .noMenu, .noAllergenFriendlyMeal:
                 List {
                     if !contextMenuPreview {
                         Section {
@@ -79,10 +91,19 @@ struct DetailView: View {
                                 actions: { EmptyView() }
                             )
                         }
+                    } else if viewState == .noAllergenFriendlyMeal {
+                        Section {
+                            CustomContentUnavailableView(
+                                label: .init(localized: "NO_ALLERGEN_FRIENDLY_MEAL"),
+                                systemImageName: MensaFilter.allergenFriendly.systemImageName,
+                                description: .init(localized: "NO_MEAL_WITHOUT_YOUR_ALLERGENS_ON_THIS_DAY"),
+                                actions: { EmptyView() }
+                            )
+                        }
                     } else if viewState == .contentAvailable {
-                        ForEach(mealTimes) { mealTime in
+                        ForEach(shownMealTimes) { mealTime in
                             Section(mealTime.type ?? .init(localized: "MEAL")) {
-                                if navigationManager.selectedWeekdayCodeOverride != nil {
+                                if navigationManager.allergenFriendlyOnly {
                                     ForEach(mealTime.allergenCompatibleMeals) { meal in
                                         MealCellView(meal: meal)
                                     }

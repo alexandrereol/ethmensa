@@ -210,6 +210,7 @@
 				Data/Enums/MealType.swift,
 				Data/Enums/MeatType.swift,
 				Data/Enums/MensaCellType.swift,
+				Data/Enums/MensaFilter.swift,
 				Data/Enums/MensaShowType.swift,
 				Data/Enums/OperatingSystemType.swift,
 				Data/Enums/PriceType.swift,

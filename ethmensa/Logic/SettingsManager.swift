@@ -292,7 +292,7 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
             self.synchronize()
         }.store(in: &subscribers)
         $sortBy.sink { newValue in
-            self.udf.set(
+            self.kvs.set(
                 newValue.rawValue,
                 forKey: Prefix.appSettings.udfKey(for: .sortBy)
             )

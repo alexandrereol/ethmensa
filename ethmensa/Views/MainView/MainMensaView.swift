@@ -49,7 +49,13 @@ struct MainMensaView: View {
             )
         } preview: {
             DetailView(contextMenuPreview: true)
-                .environmentObject(NavigationManager(selectedMensa: mensa))
+                .environmentObject(
+                    NavigationManager(
+                        selectedMensa: mensa,
+                        selectedWeekdayCodeOverride: navigationManager.selectedWeekdayCodeOverride,
+                        allergenFriendlyOnly: navigationManager.allergenFriendlyOnly
+                    )
+                )
                 .environmentObject(mensaDataManager)
         }
     }

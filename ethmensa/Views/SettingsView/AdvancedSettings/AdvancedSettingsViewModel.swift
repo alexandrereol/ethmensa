@@ -30,10 +30,12 @@ class AdvancedSettingsViewModel: ObservableObject {
 
     func resetSmartSorting() {
         ClickCountDBManager.shared.reset()
+        MensaDataManager.shared.resetClickCounts()
     }
 
     func resetAppleMapsCache() {
         GeoCacheDBManager.shared.reset()
+        MensaDataManager.shared.resetLocationTypes()
     }
 
     func resetSettings() {

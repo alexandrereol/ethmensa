@@ -54,6 +54,15 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     /// If set, this value will be used instead of `selectedWeekdayCode`.
     @Published var selectedWeekdayCodeOverride: Int?
 
+    /// A published property indicating whether only mensas and meals compatible with the user's allergens
+    /// are shown for the selected weekday.
+    @Published var allergenFriendlyOnly = false
+
+    /// The weekday the mensa list is shown for: the overriding weekday if one is selected, otherwise today.
+    var listWeekdayCode: Int {
+        selectedWeekdayCodeOverride ?? Calendar.todayWeedaykETHCorrected
+    }
+
 #if !os(watchOS)
     /// The identifier for the Mensa obtained from a universal link.
     /// This property is published to allow SwiftUI views to react to changes.
@@ -76,14 +85,28 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     @Published var imagePopoverURL: URL?
 #endif
 
+#if os(watchOS)
+    /// The watch app has no way to turn the allergen filter on or off, so it is always off there.
+    private static let isAllergenFilterOnForUsersWithAllergens = false
+#else
+    /// The allergen filter is on by default for users who have set allergens.
+    private static let isAllergenFilterOnForUsersWithAllergens = true
+#endif
+
     /// A set that holds any cancellable subscribers to manage the lifecycle of subscriptions.
     /// This ensures that the subscriptions are cancelled and deallocated properly when no longer needed.
     private var subscribers: Set<AnyCancellable> = []
 
     init(
-        selectedMensa: Mensa? = nil
+        selectedMensa: Mensa? = nil,
+        selectedWeekdayCodeOverride: Int? = nil,
+        allergenFriendlyOnly: Bool? = nil
     ) {
         self.selectedMensa = selectedMensa
+        self.selectedWeekdayCodeOverride = selectedWeekdayCodeOverride
+        self.allergenFriendlyOnly = allergenFriendlyOnly ?? (
+            Self.isAllergenFilterOnForUsersWithAllergens && !SettingsManager.shared.allergens.isEmpty
+        )
 #if !os(watchOS)
         initializeLinkHandlers()
 #endif
@@ -94,6 +117,14 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
                 Calendar.todayWeedaykETHCorrected
             }
         }.store(in: &subscribers)
+        // The allergen filter is turned on when the first allergen is set, and off once none are left.
+        SettingsManager.shared.$allergens
+            .map { !$0.isEmpty }
+            .removeDuplicates()
+            .dropFirst()
+            .sink { [weak self] hasAllergens in
+                self?.allergenFriendlyOnly = hasAllergens && Self.isAllergenFilterOnForUsersWithAllergens
+            }.store(in: &subscribers)
     }
 
 #if !os(watchOS)

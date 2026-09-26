@@ -30,8 +30,8 @@ struct MainView: View {
         case noContent
     }
 
-    private var viewState: ViewState {
-        if let mensaList = mensaDataManager.mensaList {
+    private func viewState(for mensaList: [Mensa]?) -> ViewState {
+        if let mensaList {
             if mensaList.isEmpty {
                 .loadedButEmpty
             } else {
@@ -43,6 +43,9 @@ struct MainView: View {
     }
 
     var body: some View {
+        // The filtered list is derived on access, so it is computed only once per render.
+        let mensaList = mensaDataManager.mensaList
+        let viewState = self.viewState(for: mensaList)
         NavigationSplitView {
             Group {
                 if viewState == .loadedButEmpty {
@@ -52,7 +55,7 @@ struct MainView: View {
                 } else {
                     List(selection: $navigationManager.selectedMensa) {
                         if viewState == .loadedWithContent {
-                            ForEach(mensaDataManager.mensaList ?? []) { mensa in
+                            ForEach(mensaList ?? []) { mensa in
                                 MainViewCell(mensa: mensa)
                             }
                         } else if viewState == .loading {
@@ -60,6 +63,10 @@ struct MainView: View {
                                 MainViewCell(mensa: mensa)
                             }
                             .onAppear {
+                                // The list may also be loading while the campuses of the mensas are determined.
+                                guard mensaDataManager.unfilteredMenaList == nil else {
+                                    return
+                                }
                                 Task {
                                     await mensaDataManager.reloadUnfilteredMensaList()
                                 }

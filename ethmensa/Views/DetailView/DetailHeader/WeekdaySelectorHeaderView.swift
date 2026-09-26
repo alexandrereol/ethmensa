@@ -22,14 +22,18 @@ struct WeekdaySelectorHeaderView: View {
     @EnvironmentObject var navigationManager: NavigationManager
 
     var body: some View {
-        if navigationManager.selectedWeekdayCodeOverride == nil {
-            Picker("WEEKDAY", selection: $navigationManager.selectedWeekdayCode.animation()) {
-                ForEach(Date.weekdaysStartingAtOne, id: \.index) { mealtime in
-                    Text(mealtime.string)
-                        .tag(mealtime.index)
-                }
+        Picker("WEEKDAY", selection: $navigationManager.selectedWeekdayCode.animation()) {
+            ForEach(Date.weekdaysStartingAtOne, id: \.index) { mealtime in
+                Text(mealtime.string)
+                    .tag(mealtime.index)
             }
-            .pickerStyle(.menu)
+        }
+        .pickerStyle(.menu)
+        // While a day is selected in the filter menu, the menu of that day is shown.
+        .disabled(navigationManager.selectedWeekdayCodeOverride != nil)
+        if navigationManager.allergenFriendlyOnly {
+            Label("ALLERGEN_FRIENDLY", systemImage: MensaFilter.allergenFriendly.systemImageName)
+                .foregroundStyle(.secondary)
         }
     }
 }

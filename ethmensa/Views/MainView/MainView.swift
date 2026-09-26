@@ -29,8 +29,8 @@ struct MainView: View {
         case loadedWithContent
     }
 
-    private var viewState: ViewState {
-        if let mensaList = mensaDataManager.mensaList {
+    private func viewState(for mensaList: [Mensa]?) -> ViewState {
+        if let mensaList {
             if mensaList.isEmpty {
                 .loadedButEmpty
             } else {
@@ -48,26 +48,38 @@ struct MainView: View {
     }
 
     var body: some View {
+        // The filtered list is derived on access, so it is computed only once per render.
+        let mensaList = mensaDataManager.mensaList
+        let viewState = self.viewState(for: mensaList)
         ZStack {
             List(selection: $navigationManager.selectedMensa) {
-                FilterView()
-                    .listRowInsets(EdgeInsets())
-                    .listRowBackground(Color.clear)
-                if viewState == .loadedWithContent {
-                    ForEach(mensaDataManager.mensaList ?? []) { mensa in
-                        MainMensaView(mensa: mensa)
-                    }
-                } else if viewState == .loading {
-                    ForEach(Array(repeating: Mensa.example, count: 10)) { mensa in
-                        MainMensaView(mensa: mensa, isLoading: true)
-                    }
-                    .onAppear {
-                        Task {
-                            await mensaDataManager.reloadUnfilteredMensaList()
+                Section {
+                    if viewState == .loadedWithContent {
+                        ForEach(mensaList ?? []) { mensa in
+                            MainMensaView(mensa: mensa)
+                        }
+                    } else if viewState == .loading {
+                        ForEach(Array(repeating: Mensa.example, count: 10)) { mensa in
+                            MainMensaView(mensa: mensa, isLoading: true)
+                        }
+                        .onAppear {
+                            // The list may also be loading while the campuses of the mensas are determined.
+                            guard mensaDataManager.unfilteredMenaList == nil else {
+                                return
+                            }
+                            Task {
+                                await mensaDataManager.reloadUnfilteredMensaList()
+                            }
                         }
                     }
+                } header: {
+                    // A header instead of a row, as inserting or removing a row makes the list jump
+                    // and an empty row would leave a gap.
+                    FilterView()
+                        .textCase(nil)
                 }
             }
+            .environment(\.defaultMinListHeaderHeight, 0)
             .redacted(reason: viewState == .loading ? .placeholder : [])
             .disabled(viewState == .loading)
             .scrollDisabled(viewState == .loading)
@@ -107,9 +119,7 @@ struct MainView: View {
             prompt: "SEARCH_MENSAS"
         )
         .toolbar {
-            MainViewToolbar(
-                mensaCellType: $settingsManager.mensaCellType
-            )
+            MainViewToolbar()
         }
     }
 }

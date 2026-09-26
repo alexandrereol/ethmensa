@@ -17,19 +17,23 @@
 
 import SwiftUI
 
+/// Shows every active filter as a chip that removes the filter when tapped.
+/// Filters are added through the filter menu in the toolbar.
 struct FilterView: View {
 
+    // Observed so the chips update whenever a filter changes, as `MensaFilter.active` reads the shared managers.
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var settingsManager: SettingsManager
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                OpeningTimeFilterButtonView()
-                LocationFilterButtonView()
-                SortTypeButtonView()
-                WeekdayButtonView()
+                ForEach(MensaFilter.active) { filter in
+                    FilterChipView(filter: filter)
+                }
             }
+            // Keeps a chip that is being removed in place while the header collapses, instead of re-centring it.
+            .frame(maxHeight: .infinity, alignment: .top)
             .environmentObject(navigationManager)
             .environmentObject(settingsManager)
         }
@@ -37,100 +41,28 @@ struct FilterView: View {
     }
 }
 
-private struct OpeningTimeFilterButtonView: View {
+private struct FilterChipView: View {
 
-    @EnvironmentObject var settingsManager: SettingsManager
+    let filter: MensaFilter
 
     var body: some View {
-        Menu(settingsManager.mensaShowType.localizedString) {
-            Picker(
-                String(""),
-                selection: $settingsManager.mensaShowType.animation()
-            ) {
-                ForEach(MensaShowType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
+        Button {
+            withAnimation {
+                filter.remove()
             }
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: filter.systemImageName)
+                Text(filter.localizedString)
+                Image(systemName: "xmark")
+                    .font(.caption.weight(.bold))
+            }
+            .font(.subheadline.weight(.semibold))
         }
         .buttonBorderShape(.capsule)
-        .buttonStyle(
-            selected: settingsManager.mensaShowType == .all
-        )
-    }
-}
-
-private struct LocationFilterButtonView: View {
-
-    @EnvironmentObject var settingsManager: SettingsManager
-
-    var body: some View {
-        Menu(settingsManager.mensaLocationType.localizedString) {
-            Picker(
-                String(""),
-                selection: $settingsManager.mensaLocationType.animation()
-            ) {
-                ForEach(Campus.CampusType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
-            }
-        }
-        .buttonBorderShape(.capsule)
-        .buttonStyle(
-            selected: settingsManager.mensaLocationType == .all
-        )
-    }
-}
-
-private struct SortTypeButtonView: View {
-
-    @EnvironmentObject var settingsManager: SettingsManager
-
-    var body: some View {
-        Menu(settingsManager.sortBy.localizedString) {
-            Picker(
-                String(""),
-                selection: $settingsManager.sortBy.animation()
-            ) {
-                ForEach(SortType.allCases, id: \.rawValue) { showType in
-                    Text(showType.localizedString).tag(showType)
-                }
-            }
-        }
-        .buttonBorderShape(.capsule)
-        .buttonStyle(
-            selected: settingsManager.sortBy == .def
-        )
-    }
-}
-
-private struct WeekdayButtonView: View {
-
-    @EnvironmentObject var navigationManager: NavigationManager
-
-    private var menuString: String {
-        Date.weekdaysStartingAtOne.first { (index, _) in
-            index == navigationManager.selectedWeekdayCodeOverride
-        }?.1 ?? .init(localized: "WEEKDAY")
-    }
-
-    var body: some View {
-        if !SettingsManager.shared.allergens.isEmpty {
-            Menu(menuString) {
-                Picker(
-                    String(""),
-                    selection: $navigationManager.selectedWeekdayCodeOverride.animation()
-                ) {
-                    Text("NO_WEEKDAY_ALLERGEN_FILTER").tag(Int?(nil))
-                    ForEach(Date.weekdaysStartingAtOne, id: \.0) { (index, weekday) in
-                        Text(weekday).tag(index)
-                    }
-                }
-            }
-            .buttonBorderShape(.capsule)
-            .buttonStyle(
-                selected: navigationManager.selectedWeekdayCodeOverride == nil
-            )
-        }
+        .buttonStyle(selected: false)
+        .accessibilityLabel(filter.localizedString)
+        .accessibilityHint("REMOVES_THIS_FILTER")
     }
 }
 
