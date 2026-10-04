@@ -79,7 +79,7 @@ struct DetailView: View {
                             MapHeaderView()
                             WeekdaySelectorHeaderView()
                         } header: {
-                            Spacer(minLength: 10).listRowInsets(EdgeInsets())
+                            Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                         }
                     }
                     if viewState == .noMenu {
@@ -90,6 +90,9 @@ struct DetailView: View {
                                 description: .init(localized: "NO_MENU_ON_THIS_DAY"),
                                 actions: { EmptyView() }
                             )
+                        } header: {
+                            // First on screen when the context-menu preview hides the map.
+                            Spacer(minLength: 0).frame(height: contextMenuPreview ? 10 : 0).listRowInsets(EdgeInsets())
                         }
                     } else if viewState == .noAllergenFriendlyMeal {
                         Section {
@@ -116,7 +119,7 @@ struct DetailView: View {
                         }
                     }
                 }
-                .environment(\.defaultMinListHeaderHeight, 10)
+                .environment(\.defaultMinListHeaderHeight, 0)
             }
         }
         .environmentObject(navigationManager)

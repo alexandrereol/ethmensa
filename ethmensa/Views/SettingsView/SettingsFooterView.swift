@@ -70,7 +70,7 @@ struct SettingsFooterView: View {
                     .ignoresSafeArea()
             }
         } header: {
-            Spacer(minLength: 10).listRowInsets(EdgeInsets())
+            Spacer(minLength: 0).listRowInsets(EdgeInsets())
         }
         .tint(.primary)
         Section {
@@ -113,7 +113,7 @@ struct SettingsFooterView: View {
             }
 #endif
         } header: {
-            Spacer(minLength: 10).listRowInsets(EdgeInsets())
+            Spacer(minLength: 0).listRowInsets(EdgeInsets())
         }
         .tint(.primary)
         Section {
@@ -152,7 +152,7 @@ struct SettingsFooterView: View {
                 }
             }
         } header: {
-            Spacer(minLength: 10).listRowInsets(EdgeInsets())
+            Spacer(minLength: 0).listRowInsets(EdgeInsets())
         }
     }
 }
@@ -162,5 +162,6 @@ struct SettingsFooterView: View {
         List {
             SettingsFooterView()
         }
+        .environment(\.defaultMinListHeaderHeight, 0)
     }
 }

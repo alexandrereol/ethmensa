@@ -34,11 +34,11 @@ struct SettingsView: View {
                         AdvancedSettingsView()
                     }
                 } header: {
-                    Spacer(minLength: 10).listRowInsets(EdgeInsets())
+                    Spacer(minLength: 0).listRowInsets(EdgeInsets())
                 }
                 SettingsFooterView()
             }
-            .environment(\.defaultMinListHeaderHeight, 10)
+            .environment(\.defaultMinListHeaderHeight, 0)
             .environmentObject(settingsManager)
             .navigationTitle("SETTINGS")
             .navigationBarTitleDisplayMode(.inline)

@@ -49,7 +49,7 @@ struct SettingsNotificationsView: View {
                         }
                     )
                 } header: {
-                    Spacer(minLength: 10).listRowInsets(EdgeInsets())
+                    Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                 } footer: {
                     Text("ENABLE_NOTIFICATIONS_FOOTER")
                 }
@@ -68,6 +68,9 @@ struct SettingsNotificationsView: View {
                             selection: $settingsManager.notificationsTime,
                             displayedComponents: .hourAndMinute
                         )
+                    } header: {
+                        // 10 pt: the section above ends in a footer.
+                        Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                     } footer: {
                         Text("TIME_OF_NOTIFICATIONS_FOOTER")
                     }
@@ -83,13 +86,16 @@ struct SettingsNotificationsView: View {
                                     viewModel.deniedAction()
                                 }
                             )
+                    } header: {
+                        // 10 pt: the section above ends in a footer.
+                        Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                     } footer: {
                         Text("LOCATIONS_BASED_NOTIFICATIONS_FOOTER")
                     }
 #endif
                 }
             }
-            .environment(\.defaultMinListHeaderHeight, 10)
+            .environment(\.defaultMinListHeaderHeight, 0)
             .navigationTitle("NOTIFICATIONS")
             .navigationBarTitleDisplayMode(.inline)
         }

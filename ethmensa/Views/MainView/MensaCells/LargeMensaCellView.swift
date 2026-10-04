@@ -95,15 +95,18 @@ struct LargeMensaCellView: View {
 #Preview("Sample Data") {
     NavigationSplitView {
         List {
-            ForEach(0...10, id: \.self) { _ in
+            ForEach(0...10, id: \.self) { index in
                 Section {
                     LargeMensaCellView(
                         mensa: .example,
                         isLoading: false
                     )
+                } header: {
+                    Spacer(minLength: 0).frame(height: index == 0 ? 10 : 0).listRowInsets(EdgeInsets())
                 }
             }
         }
+        .environment(\.defaultMinListHeaderHeight, 0)
     } detail: {
         EmptyView()
     }
@@ -112,16 +115,19 @@ struct LargeMensaCellView: View {
 #Preview("Loading") {
     NavigationSplitView {
         List {
-            ForEach(0...10, id: \.self) { _ in
+            ForEach(0...10, id: \.self) { index in
                 Section {
                     LargeMensaCellView(
                         mensa: .example,
                         isLoading: true
                     )
                     .redacted(reason: .placeholder)
+                } header: {
+                    Spacer(minLength: 0).frame(height: index == 0 ? 10 : 0).listRowInsets(EdgeInsets())
                 }
             }
         }
+        .environment(\.defaultMinListHeaderHeight, 0)
     } detail: {
         EmptyView()
     }

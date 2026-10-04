@@ -30,7 +30,7 @@ struct SettingsAllergensView: View {
                 )
                 .tint(.accentColor)
             } header: {
-                Spacer(minLength: 10).listRowInsets(EdgeInsets())
+                Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
             }
             Section("MY_ALLERGENS") {
                 ForEach(Allergen.allCases) { allergen in
@@ -54,7 +54,7 @@ struct SettingsAllergensView: View {
                 }
             }
         }
-        .environment(\.defaultMinListHeaderHeight, 10)
+        .environment(\.defaultMinListHeaderHeight, 0)
         .navigationTitle("ALLERGENS")
         .navigationBarTitleDisplayMode(.inline)
     }

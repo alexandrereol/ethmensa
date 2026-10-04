@@ -39,6 +39,8 @@ struct SoundSelectionView: View {
                             )
                         }
                     }
+                } header: {
+                    Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                 }
                 Section {
                     ForEach(Sound.all.dropFirst()) { sound in
@@ -52,8 +54,11 @@ struct SoundSelectionView: View {
                             )
                         }
                     }
+                } header: {
+                    Spacer(minLength: 0).listRowInsets(EdgeInsets())
                 }
             }
+            .environment(\.defaultMinListHeaderHeight, 0)
             .navigationTitle("NOTIFICATION_SOUND")
             .navigationBarTitleDisplayMode(.inline)
             .tint(.primary)

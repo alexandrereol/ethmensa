@@ -33,6 +33,8 @@ struct SettingsView: View {
                     } label: {
                         SettingsElementLabel(text: "PRICE_TO_SHOW")
                     }
+                } header: {
+                    Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                 } footer: {
                     Text("PRICE_TO_SHOW_FOOTER")
                 }
@@ -42,6 +44,9 @@ struct SettingsView: View {
                     } label: {
                         SettingsElementLabel(text: "ADVANCED_SETTINGS")
                     }
+                } header: {
+                    // 10 pt: the section above ends in a footer.
+                    Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                 }
                 Section {
                     NavigationLink {
@@ -52,8 +57,11 @@ struct SettingsView: View {
                     } label: {
                         SettingsElementLabel(text: "ABOUT_\(Bundle.main.displayName)")
                     }
+                } header: {
+                    Spacer(minLength: 0).listRowInsets(EdgeInsets())
                 }
             }
+            .environment(\.defaultMinListHeaderHeight, 0)
             .navigationTitle("SETTINGS")
         }
     }

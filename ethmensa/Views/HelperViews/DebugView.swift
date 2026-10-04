@@ -41,6 +41,8 @@ struct DebugView: View {
                 Section {
                     Toggle("DEBUG", isOn: $settingsManager.debugMode)
                     Toggle(String("Screenshot mode"), isOn: $settingsManager.screenshotMode)
+                } header: {
+                    Spacer(minLength: 0).listRowInsets(EdgeInsets())
                 }
                 Section(String("KVS")) {
                     NavigationLink(String("KVS")) {
@@ -89,23 +91,29 @@ struct DebugView: View {
                 Section(String("CoreData")) {
                     NavigationLink(String("CoreData: ClickCount")) {
                         List {
-                            ForEach(ClickCountDBManager.shared.read()) { clickCount in
+                            ForEach(Array(ClickCountDBManager.shared.read().enumerated()), id: \.element.id) { index, clickCount in
                                 Section {
                                     Text(clickCount.id)
                                     Text(String(clickCount.count))
+                                } header: {
+                                    Spacer(minLength: 0).frame(height: index == 0 ? 10 : 0).listRowInsets(EdgeInsets())
                                 }
                             }
                         }
+                        .environment(\.defaultMinListHeaderHeight, 0)
                     }
                     NavigationLink(String("CoreData: GeoCache")) {
                         List {
-                            ForEach(GeoCacheDBManager.shared.read()) { geoCache in
+                            ForEach(Array(GeoCacheDBManager.shared.read().enumerated()), id: \.element.id) { index, geoCache in
                                 Section {
                                     Text(geoCache.address)
                                     Text(String("Longitude: \(geoCache.long) | Latitude: \(geoCache.lat)"))
+                                } header: {
+                                    Spacer(minLength: 0).frame(height: index == 0 ? 10 : 0).listRowInsets(EdgeInsets())
                                 }
                             }
                         }
+                        .environment(\.defaultMinListHeaderHeight, 0)
                     }
                 }
 #if !os(watchOS)
@@ -119,6 +127,7 @@ struct DebugView: View {
                 }
 #endif
             }
+            .environment(\.defaultMinListHeaderHeight, 0)
             .navigationTitle("DEBUG")
             .navigationBarTitleDisplayMode(.inline)
 #if !os(watchOS)
