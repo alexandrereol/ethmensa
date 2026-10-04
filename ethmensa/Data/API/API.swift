@@ -58,14 +58,24 @@ class API {
         }
     }
 
-    /// Asynchronously fetches a list of Mensa objects of all providers.
+    /// Fetches the Mensa objects of all providers in parallel.
     ///
-    /// - Returns: An array of `Mensa` objects over all providers.
-    func get() async -> [Mensa] {
-        var mensaArray: [Mensa] = []
-        for api in APIProvider.allProviders.map(\.apiProtocol) {
-            mensaArray = await mensaArray + api.get()
+    /// - Returns: A stream that yields the `Mensa` objects of each provider as soon as they are loaded.
+    func get() -> AsyncStream<(provider: APIProvider.ProviderType, mensas: [Mensa])> {
+        AsyncStream { continuation in
+            let task = Task {
+                await withTaskGroup(of: Void.self) { group in
+                    for provider in APIProvider.allProviders {
+                        group.addTask {
+                            continuation.yield((provider: provider.type, mensas: await provider.apiProtocol.get()))
+                        }
+                    }
+                }
+                continuation.finish()
+            }
+            continuation.onTermination = { _ in
+                task.cancel()
+            }
         }
-        return mensaArray
     }
 }

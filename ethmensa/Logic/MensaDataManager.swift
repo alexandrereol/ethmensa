@@ -119,7 +119,8 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 
     /// Reloads the unfiltered list of Mensa asynchronously.
     ///
-    /// This function fetches the latest Mensa data from the API and updates the unfiltered Mensa list.
+    /// This function fetches the latest Mensa data from the API and updates the unfiltered Mensa list
+    /// as soon as the Mensas of a provider are loaded. Until then, a provider keeps the Mensas it had before.
     /// It also updates the selected Mensa in the `NavigationManager` if it exists in the new list.
     /// Afterwards, it determines the campus of every Mensa, which filtering by campus relies on.
     ///
@@ -127,34 +128,14 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     func reloadUnfilteredMensaList() async {
         currentUpdateTask?.cancel()
         let task = Task {
-            let newUnfilteredMenaList = await API.shared.get()
-            let newClickCounts = Dictionary(
-                newUnfilteredMenaList.map { ($0.id, $0.getClicks()) },
-                uniquingKeysWith: max
-            )
-            guard !Task.isCancelled else { return }
-            await MainActor.run {
-                // A mensa keeps its campus, so only mensas that were not loaded before have to be resolved.
-                let previousLocationTypes = Dictionary(
-                    (self.unfilteredMenaList ?? []).map { ($0.id, $0.getLocationTypeCache) },
-                    uniquingKeysWith: { first, _ in first }
-                )
-                for mensa in newUnfilteredMenaList {
-                    mensa.getLocationTypeCache = previousLocationTypes[mensa.id] ?? nil
-                }
-                self.areLocationTypesResolved = self.areLocationTypesResolved && newUnfilteredMenaList.allSatisfy {
-                    previousLocationTypes.keys.contains($0.id)
-                }
-                self.clickCounts = newClickCounts
-                self.unfilteredMenaList = newUnfilteredMenaList
+            var newMensasByProvider: [APIProvider.ProviderType: [Mensa]] = [:]
+            var updatedMensaList: [Mensa] = []
+            for await result in API.shared.get() {
+                newMensasByProvider[result.provider] = result.mensas
+                guard let mensaList = await update(with: newMensasByProvider) else { return }
+                updatedMensaList = mensaList
             }
-            guard !Task.isCancelled else { return }
-            if let selectedMensa = NavigationManager.shared.selectedMensa,
-               let updatedMensa = newUnfilteredMenaList.first(where: { $0 == selectedMensa }) {
-                await MainActor.run {
-                    NavigationManager.shared.selectedMensa = updatedMensa
-                }
-            }
+            let newUnfilteredMenaList = updatedMensaList
             guard !Task.isCancelled else { return }
             for mensa in newUnfilteredMenaList {
                 guard !Task.isCancelled else { return }
@@ -169,6 +150,46 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         }
         currentUpdateTask = task
         await task.value
+    }
+
+    /// Updates the unfiltered Mensa list with the Mensas loaded so far.
+    ///
+    /// - Parameter newMensasByProvider: The Mensas loaded so far, by provider.
+    ///   Providers that have not loaded yet keep the Mensas they had before.
+    /// - Returns: The new unfiltered Mensa list, or `nil` if the reload was cancelled.
+    private func update(with newMensasByProvider: [APIProvider.ProviderType: [Mensa]]) async -> [Mensa]? {
+        let previousMensaList = await MainActor.run { self.unfilteredMenaList ?? [] }
+        let newUnfilteredMenaList = APIProvider.allProviders.flatMap { provider in
+            newMensasByProvider[provider.type] ?? previousMensaList.filter { $0.provider == provider.type }
+        }
+        let newClickCounts = Dictionary(
+            newUnfilteredMenaList.map { ($0.id, $0.getClicks()) },
+            uniquingKeysWith: max
+        )
+        guard !Task.isCancelled else { return nil }
+        await MainActor.run {
+            // A mensa keeps its campus, so only mensas that were not loaded before have to be resolved.
+            let previousLocationTypes = Dictionary(
+                (self.unfilteredMenaList ?? []).map { ($0.id, $0.getLocationTypeCache) },
+                uniquingKeysWith: { first, _ in first }
+            )
+            for mensa in newUnfilteredMenaList {
+                mensa.getLocationTypeCache = previousLocationTypes[mensa.id] ?? nil
+            }
+            self.areLocationTypesResolved = self.areLocationTypesResolved && newUnfilteredMenaList.allSatisfy {
+                previousLocationTypes.keys.contains($0.id)
+            }
+            self.clickCounts = newClickCounts
+            self.unfilteredMenaList = newUnfilteredMenaList
+        }
+        guard !Task.isCancelled else { return nil }
+        if let selectedMensa = NavigationManager.shared.selectedMensa,
+           let updatedMensa = newUnfilteredMenaList.first(where: { $0 == selectedMensa }) {
+            await MainActor.run {
+                NavigationManager.shared.selectedMensa = updatedMensa
+            }
+        }
+        return newUnfilteredMenaList
     }
 
     /// Forgets the click counts the smart sorting is based on, e.g. after they have been reset.
