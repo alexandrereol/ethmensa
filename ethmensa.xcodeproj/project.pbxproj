@@ -196,6 +196,7 @@
 				Data/API/API.swift,
 				"Data/API/API+Errors.swift",
 				"Data/API/API+Perform.swift",
+				Data/API/APICache.swift,
 				Data/API/APIProtocol.swift,
 				Data/API/APIProvider.swift,
 				Data/API/ETH/ETHAPI.swift,

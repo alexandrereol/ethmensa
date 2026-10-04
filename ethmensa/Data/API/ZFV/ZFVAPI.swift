@@ -90,13 +90,32 @@ class ZFVAPI: APIProtocol {
         }
         """
 
+    /// The language the menus are requested in.
+    private var locale: String {
+        Bundle.main.preferredLocalizations.first ?? "de"
+    }
+
+    private let cache = APICache<[ZFVOutlet]>(name: "zfv_outlets")
+
     func get() async -> [Mensa] {
         async let infos = ZFVOutletInfo.load()
-        guard let outlets = await download()?.data?.outlets else {
+        let downloadedOutlets = await download()?.data?.outlets
+        if let downloadedOutlets {
+            cache.write(downloadedOutlets, language: locale)
+        }
+        // Falls back to the last download if it is from this week
+        guard let outlets = downloadedOutlets ?? cache.read(language: locale) else {
             logger.critical("\(#function): Could not download ZFV data")
             return []
         }
         return await ZFVConverter.convert(outlets: outlets, infos: infos)
+    }
+
+    func cached() async -> [Mensa]? {
+        guard let outlets = cache.read(language: locale) else {
+            return nil
+        }
+        return ZFVConverter.convert(outlets: outlets, infos: ZFVOutletInfo.cached() ?? [:])
     }
 
     private func download() async -> ZFVMensaAnswer? {
@@ -115,7 +134,7 @@ class ZFVAPI: APIProtocol {
             headers: [
                 "Content-Type": "application/json",
                 "api-key": apiKey,
-                "locale": Bundle.main.preferredLocalizations.first ?? "de"
+                "locale": locale
             ],
             body: body,
             resultType: ZFVMensaAnswer.self

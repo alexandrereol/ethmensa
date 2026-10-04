@@ -70,15 +70,22 @@ extension ZFVOutletInfo {
     private static let cacheKey = "zfvOutletInfo"
     private static let cacheDateKey = "zfvOutletInfoDate"
 
+    /// The details of the UZH mensas from a copy downloaded within the last 72 hours, or `nil` if there is none.
+    static func cached() -> [String: ZFVOutletInfo]? {
+        let defaults = UserDefaults.standard
+        guard let cacheDate = defaults.object(forKey: cacheDateKey) as? Date,
+              cacheDate.timeIntervalSinceNow > -cacheDuration,
+              let data = defaults.data(forKey: cacheKey) else {
+            return nil
+        }
+        return try? JSONDecoder().decode([String: ZFVOutletInfo].self, from: data)
+    }
+
     /// Loads the details of the UZH mensas, keyed by the external id of the ZFV outlet.
     /// A downloaded copy is used for 72 hours. If the file cannot be downloaded, no details are returned
     /// and the UZH mensas are shown with the ZFV data only, e.g. without opening hours.
     static func load() async -> [String: ZFVOutletInfo] {
-        let defaults = UserDefaults.standard
-        if let cacheDate = defaults.object(forKey: cacheDateKey) as? Date,
-           cacheDate.timeIntervalSinceNow > -cacheDuration,
-           let data = defaults.data(forKey: cacheKey),
-           let infos = try? JSONDecoder().decode([String: ZFVOutletInfo].self, from: data) {
+        if let infos = cached() {
             return infos
         }
         guard let url = endpoint.toURL() else {
@@ -93,8 +100,8 @@ extension ZFVOutletInfo {
         switch result {
         case .success(let infos):
             if let data = try? JSONEncoder().encode(infos) {
-                defaults.set(data, forKey: cacheKey)
-                defaults.set(Date.now, forKey: cacheDateKey)
+                UserDefaults.standard.set(data, forKey: cacheKey)
+                UserDefaults.standard.set(Date.now, forKey: cacheDateKey)
             }
             return infos
         case .failure(let error):
