@@ -169,29 +169,6 @@ extension Allergen {
         default: .other(string)
         }
     }
-
-    // swiftlint:disable:next orphaned_doc_comment
-    /// Get the Allergen from the UZH-API provided string.
-    // swiftlint:disable:next cyclomatic_complexity
-    static func fromUZHString(_ string: String) -> Self? {
-        return switch string.uppercased() {
-        case "FREI_VON_DEKLARAT_PFLICHTIGEN_ALLERGENEN": nil
-        case "GLUTEN": .gluten
-        case "SOJA": .soya
-        case "EI": .eggs
-        case "FISCH": .fish
-        case "ERDNUSS": .peanuts
-        case "KREBSTIERE": .crustaceans
-        case "MILCH_LAKTOSE": .lactose
-        case "SCHALENFRUECHTE", "CASHEW", "MANDEL": .nuts
-        case "SELLERIE": .celery
-        case "SENF": .mustard
-        case "SESAM": .sesame
-        case "SULPHURDIOXIDE", "SCHWFELDIOXID_SULFITE": .sulphurdioxide
-        case "WEIZEN": .wheat
-        default: .other(string)
-        }
-    }
 }
 
 extension Allergen {

@@ -65,13 +65,4 @@ enum MealType {
         default: nil
         }
     }
-
-    /// Get the MealType from the UZH-API provided string.
-    static func fromUZHString(_ string: String) -> Self? {
-        switch string.lowercased() {
-        case "vegan": .vegan
-        case "vegetarisch": .vegetarian
-        default: nil
-        }
-    }
 }
