@@ -64,7 +64,8 @@ extension ZFVOutletInfo {
     )
 
     private static let host = "raw.githubusercontent.com"
-    private static let endpoint = "https://\(host)/alexandrereol/ethmensa/refs/heads/main/zfv_uzh_mapping.json"
+    private static let path = "alexandrereol/ethmensa/refs/heads/main/ethmensa/Data/API/ZFV/zfv_uzh_mapping.json"
+    private static let endpoint = "https://\(host)/\(path)"
     /// How long a downloaded copy is used before it is downloaded again.
     private static let cacheDuration: TimeInterval = 72 * 60 * 60
     private static let cacheKey = "zfvOutletInfo"

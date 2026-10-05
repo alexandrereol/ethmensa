@@ -206,6 +206,7 @@
 				Data/API/ZFV/ZFVConverter.swift,
 				Data/API/ZFV/ZFVMensaAnswer.swift,
 				Data/API/ZFV/ZFVOutletInfo.swift,
+				Data/API/ZFV/zfv_uzh_mapping.json,
 				Data/CoreData/ClickCount.xcdatamodeld,
 				Data/CoreData/ClickCountDBManager.swift,
 				Data/CoreData/GeoCache.xcdatamodeld,
