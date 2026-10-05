@@ -81,7 +81,6 @@
 /* Begin PBXFileReference section */
 		291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa visionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2920D0012F10000100000004 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Base.xcconfig; sourceTree = SOURCE_ROOT; };
-		2920D0012F10000100000001 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Secrets.xcconfig; sourceTree = SOURCE_ROOT; };
 		2920D0012F10000100000002 /* Secrets.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Secrets.example.xcconfig; sourceTree = SOURCE_ROOT; };
 		293CAF6E2D6DCFFD0066E9F8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		294E16392A8E22C3000A3AB6 /* ETH Mensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,7 +357,6 @@
 			isa = PBXGroup;
 			children = (
 				2920D0012F10000100000004 /* Base.xcconfig */,
-				2920D0012F10000100000001 /* Secrets.xcconfig */,
 				2920D0012F10000100000002 /* Secrets.example.xcconfig */,
 			);
 			path = Config;
