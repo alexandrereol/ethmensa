@@ -60,6 +60,10 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 #endif
         filter(mensaList: &mensaList)
         sort(mensaList: &mensaList)
+        // An empty list only counts as loaded once every provider has loaded, until then it might still fill up.
+        guard !mensaList.isEmpty || areAllProvidersLoaded else {
+            return nil
+        }
         return mensaList
     }
 
@@ -71,6 +75,13 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 
     /// Whether the campus of every mensa in `unfilteredMenaList` has been determined.
     @Published private var areLocationTypesResolved = false
+
+    /// Whether `unfilteredMenaList` contains the Mensas of every provider.
+    /// The Mensas of a provider are shown as soon as they are loaded, so at first it might only contain some.
+    @Published private(set) var areAllProvidersLoaded = false
+
+    /// Determines the campus of every mensa in `unfilteredMenaList`, see `resolveLocationTypes(of:)`.
+    private var locationTypeTask: Task<Void, Never>?
 
     /// The click counts of the mensas, read when the list is loaded.
     /// Sorting uses this snapshot so the list does not reorder while the user taps through it.
@@ -122,34 +133,40 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     /// This function fetches the latest Mensa data from the API and updates the unfiltered Mensa list
     /// as soon as the Mensas of a provider are loaded. Until then, a provider keeps the Mensas it had before.
     /// It also updates the selected Mensa in the `NavigationManager` if it exists in the new list.
-    /// Afterwards, it determines the campus of every Mensa, which filtering by campus relies on.
+    /// After each update, it determines the campus of every Mensa, which filtering by campus relies on.
     ///
     /// - Note: This function should be called from an asynchronous context.
+    @MainActor
     func reloadUnfilteredMensaList() async {
         currentUpdateTask?.cancel()
         let task = Task {
             var newMensasByProvider: [APIProvider.ProviderType: [Mensa]] = [:]
-            var updatedMensaList: [Mensa] = []
             for await result in API.shared.get() {
                 newMensasByProvider[result.provider] = result.mensas
                 guard let mensaList = await update(with: newMensasByProvider) else { return }
-                updatedMensaList = mensaList
-            }
-            let newUnfilteredMenaList = updatedMensaList
-            guard !Task.isCancelled else { return }
-            for mensa in newUnfilteredMenaList {
-                guard !Task.isCancelled else { return }
-                _ = await mensa.getLocationType()
-            }
-            guard !Task.isCancelled else { return }
-            await MainActor.run {
-                if self.unfilteredMenaList?.elementsEqual(newUnfilteredMenaList, by: ===) == true {
-                    self.areLocationTypesResolved = true
-                }
+                resolveLocationTypes(of: mensaList)
             }
         }
         currentUpdateTask = task
         await task.value
+    }
+
+    /// Determines the campus of every Mensa in the given list in the background,
+    /// so the Mensas of the other providers are shown without waiting for it.
+    @MainActor
+    private func resolveLocationTypes(of mensaList: [Mensa]) {
+        locationTypeTask?.cancel()
+        locationTypeTask = Task {
+            for mensa in mensaList {
+                guard !Task.isCancelled else { return }
+                _ = await mensa.getLocationType()
+            }
+            guard !Task.isCancelled,
+                  self.unfilteredMenaList?.elementsEqual(mensaList, by: ===) == true else {
+                return
+            }
+            self.areLocationTypesResolved = true
+        }
     }
 
     /// Updates the unfiltered Mensa list with the Mensas loaded so far.
@@ -179,6 +196,9 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
             self.areLocationTypesResolved = self.areLocationTypesResolved && newUnfilteredMenaList.allSatisfy {
                 previousLocationTypes.keys.contains($0.id)
             }
+            // Set before the list, so observers of the list already see it
+            self.areAllProvidersLoaded = self.areAllProvidersLoaded
+                || newMensasByProvider.count == APIProvider.allProviders.count
             self.clickCounts = newClickCounts
             self.unfilteredMenaList = newUnfilteredMenaList
         }
@@ -200,9 +220,10 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 
     /// Forgets the campuses of the mensas and determines them again, e.g. after the geocoding cache has been reset.
     func resetLocationTypes() {
-        unfilteredMenaList?.forEach { $0.getLocationTypeCache = nil }
-        areLocationTypesResolved = false
-        Task {
+        Task { @MainActor in
+            locationTypeTask?.cancel()
+            unfilteredMenaList?.forEach { $0.getLocationTypeCache = nil }
+            areLocationTypesResolved = false
             await reloadUnfilteredMensaList()
         }
     }

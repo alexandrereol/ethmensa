@@ -136,7 +136,11 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
                 return
             }
             guard let mensa = unfilteredMenaList.first(where: { $0.id == receivedValue }) else {
-                self.universalLinkAlertShown = true
+                // The Mensa might be from a provider that has not loaded yet
+                if MensaDataManager.shared.areAllProvidersLoaded {
+                    self.universalLinkAlertShown = true
+                    self.universalLinkMensaId = nil
+                }
                 return
             }
             self.selectedMensa = mensa
@@ -149,7 +153,11 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
                 return
             }
             guard let mensa = receivedValue.first(where: { $0.id == universalLinkMensaId }) else {
-                self.universalLinkAlertShown = true
+                // The Mensa might be from a provider that has not loaded yet
+                if MensaDataManager.shared.areAllProvidersLoaded {
+                    self.universalLinkAlertShown = true
+                    self.universalLinkMensaId = nil
+                }
                 return
             }
             self.selectedMensa = mensa

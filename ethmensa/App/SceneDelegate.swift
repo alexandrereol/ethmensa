@@ -111,6 +111,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
         ]
 #if !os(visionOS) && !APPCLIP
         if #available(iOS 18.0, *),
+           MensaDataManager.shared.areAllProvidersLoaded,
            let unfilteredMenaList = MensaDataManager.shared.unfilteredMenaList,
            !unfilteredMenaList.isEmpty {
             Task {
