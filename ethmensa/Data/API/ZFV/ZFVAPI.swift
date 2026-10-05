@@ -90,9 +90,10 @@ class ZFVAPI: APIProtocol {
         }
         """
 
-    /// The language the menus are requested in.
+    /// The language the menus are requested in. ZFV only translates them to English,
+    /// so like the ETH menus, they are in English unless the app is in German.
     private var locale: String {
-        Bundle.main.preferredLocalizations.first ?? "de"
+        Bundle.main.preferredLocalizations.first == "de" ? "de" : "en"
     }
 
     private let cache = APICache<[ZFVOutlet]>(name: "zfv_outlets")
