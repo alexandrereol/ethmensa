@@ -94,7 +94,7 @@ struct ZFVConverter {
         return daily.menuCategories?
             // Lists lunch before dinner, which the API does not always do
             .sorted { lhs, rhs in
-                ServiceTime(slug: lhs.category?.slug) == .lunch && ServiceTime(slug: rhs.category?.slug) == .dinner
+                ServiceTime.rank(of: lhs.category?.slug) < ServiceTime.rank(of: rhs.category?.slug)
             }
             .compactMap { category in
                 buildMealTime(from: category, weekdayCode: weekdayCode, info: info)
@@ -181,6 +181,15 @@ extension ZFVConverter {
                 self = .lunch
             } else {
                 return nil
+            }
+        }
+
+        /// The position of a menu category in the day: lunch first, dinner last and other categories in between.
+        static func rank(of slug: String?) -> Int {
+            switch ServiceTime(slug: slug) {
+            case .lunch: 0
+            case nil: 1
+            case .dinner: 2
             }
         }
 
