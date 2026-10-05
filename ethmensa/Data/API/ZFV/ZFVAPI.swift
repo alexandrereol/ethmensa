@@ -99,12 +99,14 @@ class ZFVAPI: APIProtocol {
 
     func get() async -> [Mensa] {
         async let infos = ZFVOutletInfo.load()
-        let downloadedOutlets = await download()?.data?.outlets
+        let answer = await download()
+        // A response with errors may be incomplete, so it neither replaces the cache nor the last complete download
+        let downloadedOutlets = answer?.errors?.isEmpty == false ? nil : answer?.data?.outlets
         if let downloadedOutlets {
             cache.write(downloadedOutlets, language: locale)
         }
         // Falls back to the last download if it is from this week
-        guard let outlets = downloadedOutlets ?? cache.read(language: locale) else {
+        guard let outlets = downloadedOutlets ?? cache.read(language: locale) ?? answer?.data?.outlets else {
             logger.critical("\(#function): Could not download ZFV data")
             return []
         }
@@ -115,7 +117,7 @@ class ZFVAPI: APIProtocol {
         guard let outlets = cache.read(language: locale) else {
             return nil
         }
-        return ZFVConverter.convert(outlets: outlets, infos: ZFVOutletInfo.cached() ?? [:])
+        return ZFVConverter.convert(outlets: outlets, infos: ZFVOutletInfo.cached())
     }
 
     private func download() async -> ZFVMensaAnswer? {

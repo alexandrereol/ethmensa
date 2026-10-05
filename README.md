@@ -50,8 +50,8 @@ Otherwise, the most actual code documentation can be built in Xcode using DocC.
 
 ## UZH mensa details
 The ZFV API, which provides the menus of the UZH mensas, has no opening hours, and no address for some mensas.
-These, as well as the ids and names the mensas had in the former UZH API, are in [`zfv_uzh_mapping.json`](zfv_uzh_mapping.json), keyed by the id of the ZFV outlet.
-The app downloads this file from the `main` branch and caches it for 72 hours, so changes reach the app without a release.
+These, as well as the ids and names the mensas had in the former UZH API, are in [`zfv_uzh_mapping.json`](ethmensa/Data/API/ZFV/zfv_uzh_mapping.json), keyed by the id of the ZFV outlet.
+The app comes with a copy of this file and downloads the current one from the `main` branch every 72 hours, so changes reach the app without a release.
 The hours are the serving hours published on [zfv.ch](https://www.zfv.ch), or the opening hours where none are listed.
 
 ## Contribute

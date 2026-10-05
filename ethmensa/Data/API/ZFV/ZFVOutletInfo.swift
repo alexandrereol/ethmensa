@@ -19,7 +19,8 @@ import Foundation
 import os.log
 
 /// Details about the UZH mensas that the ZFV API does not provide, e.g. the opening hours.
-/// They are loaded from `zfv_uzh_mapping.json` in the repository, so they can be updated without an app release.
+/// They come with the app in `zfv_uzh_mapping.json` and are updated from its copy on the `main` branch,
+/// so they can be changed without an app release.
 struct ZFVOutletInfo: Codable {
     /// The hours a meal time is served, e.g. from "11:00" to "14:30".
     struct Hours: Codable {
@@ -71,27 +72,23 @@ extension ZFVOutletInfo {
     private static let cacheKey = "zfvOutletInfo"
     private static let cacheDateKey = "zfvOutletInfoDate"
 
-    /// The details of the UZH mensas from a copy downloaded within the last 72 hours, or `nil` if there is none.
-    static func cached() -> [String: ZFVOutletInfo]? {
-        let defaults = UserDefaults.standard
-        guard let cacheDate = defaults.object(forKey: cacheDateKey) as? Date,
-              cacheDate.timeIntervalSinceNow > -cacheDuration,
-              let data = defaults.data(forKey: cacheKey) else {
-            return nil
-        }
-        return try? JSONDecoder().decode([String: ZFVOutletInfo].self, from: data)
+    /// The details of the UZH mensas from the last download, or the ones the app comes with if there was none.
+    static func cached() -> [String: ZFVOutletInfo] {
+        downloaded() ?? bundled() ?? [:]
     }
 
     /// Loads the details of the UZH mensas, keyed by the external id of the ZFV outlet.
-    /// A downloaded copy is used for 72 hours. If the file cannot be downloaded, no details are returned
-    /// and the UZH mensas are shown with the ZFV data only, e.g. without opening hours.
+    /// A downloaded copy is used for 72 hours. If the download fails, the last downloaded copy is used,
+    /// or the one the app comes with.
     static func load() async -> [String: ZFVOutletInfo] {
-        if let infos = cached() {
+        if let cacheDate = UserDefaults.standard.object(forKey: cacheDateKey) as? Date,
+           cacheDate.timeIntervalSinceNow > -cacheDuration,
+           let infos = downloaded() {
             return infos
         }
         guard let url = endpoint.toURL() else {
             logger.critical("\(#function): Could not create URL from endpoint")
-            return [:]
+            return cached()
         }
         let result = await API.shared.perform(
             url,
@@ -107,7 +104,25 @@ extension ZFVOutletInfo {
             return infos
         case .failure(let error):
             logger.critical("\(#function): \(error)")
-            return [:]
+            return cached()
         }
+    }
+
+    /// The details of the last download, regardless of its age.
+    private static func downloaded() -> [String: ZFVOutletInfo]? {
+        guard let data = UserDefaults.standard.data(forKey: cacheKey) else {
+            return nil
+        }
+        return try? JSONDecoder().decode([String: ZFVOutletInfo].self, from: data)
+    }
+
+    /// The details the app comes with.
+    private static func bundled() -> [String: ZFVOutletInfo]? {
+        guard let url = Bundle.main.url(forResource: "zfv_uzh_mapping", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else {
+            logger.critical("\(#function): Could not read zfv_uzh_mapping.json")
+            return nil
+        }
+        return try? JSONDecoder().decode([String: ZFVOutletInfo].self, from: data)
     }
 }

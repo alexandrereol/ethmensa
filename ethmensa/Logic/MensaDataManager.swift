@@ -80,6 +80,9 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     /// The Mensas of a provider are shown as soon as they are loaded, so at first it might only contain some.
     @Published private(set) var areAllProvidersLoaded = false
 
+    /// Whether every provider has delivered downloaded, not only cached, Mensas in the current reload.
+    @Published private(set) var areAllProvidersUpToDate = false
+
     /// Determines the campus of every mensa in `unfilteredMenaList`, see `resolveLocationTypes(of:)`.
     private var locationTypeTask: Task<Void, Never>?
 
@@ -141,9 +144,18 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         currentUpdateTask?.cancel()
         let task = Task {
             var newMensasByProvider: [APIProvider.ProviderType: [Mensa]] = [:]
+            var upToDateProviders: Set<APIProvider.ProviderType> = []
             for await result in API.shared.get() {
                 newMensasByProvider[result.provider] = result.mensas
-                guard let mensaList = await update(with: newMensasByProvider) else { return }
+                if !result.isCached {
+                    upToDateProviders.insert(result.provider)
+                }
+                guard let mensaList = await update(
+                    with: newMensasByProvider,
+                    upToDateProviders: upToDateProviders
+                ) else {
+                    return
+                }
                 resolveLocationTypes(of: mensaList)
             }
         }
@@ -171,10 +183,15 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 
     /// Updates the unfiltered Mensa list with the Mensas loaded so far.
     ///
-    /// - Parameter newMensasByProvider: The Mensas loaded so far, by provider.
-    ///   Providers that have not loaded yet keep the Mensas they had before.
+    /// - Parameters:
+    ///   - newMensasByProvider: The Mensas loaded so far, by provider.
+    ///     Providers that have not loaded yet keep the Mensas they had before.
+    ///   - upToDateProviders: The providers whose Mensas were downloaded, not only read from their cache.
     /// - Returns: The new unfiltered Mensa list, or `nil` if the reload was cancelled.
-    private func update(with newMensasByProvider: [APIProvider.ProviderType: [Mensa]]) async -> [Mensa]? {
+    private func update(
+        with newMensasByProvider: [APIProvider.ProviderType: [Mensa]],
+        upToDateProviders: Set<APIProvider.ProviderType>
+    ) async -> [Mensa]? {
         let previousMensaList = await MainActor.run { self.unfilteredMenaList ?? [] }
         let newUnfilteredMenaList = APIProvider.allProviders.flatMap { provider in
             newMensasByProvider[provider.type] ?? previousMensaList.filter { $0.provider == provider.type }
@@ -196,9 +213,10 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
             self.areLocationTypesResolved = self.areLocationTypesResolved && newUnfilteredMenaList.allSatisfy {
                 previousLocationTypes.keys.contains($0.id)
             }
-            // Set before the list, so observers of the list already see it
+            // Set before the list, so observers of the list already see them
             self.areAllProvidersLoaded = self.areAllProvidersLoaded
                 || newMensasByProvider.count == APIProvider.allProviders.count
+            self.areAllProvidersUpToDate = upToDateProviders.count == APIProvider.allProviders.count
             self.clickCounts = newClickCounts
             self.unfilteredMenaList = newUnfilteredMenaList
         }

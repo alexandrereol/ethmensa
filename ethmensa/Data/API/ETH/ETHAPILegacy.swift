@@ -35,7 +35,11 @@ class ETHAPILegacy: APIProtocol {
 
     func get() async -> [Mensa] {
         let acceptLanguage = Bundle.main.preferredLocalizations.first == "de" ? "de-DE;de;q=0.9" : "en-EN,en;q=0.9"
-        let downloadedAnswer = await download(language: language, acceptLanguage: acceptLanguage)
+        var downloadedAnswer = await download(language: language, acceptLanguage: acceptLanguage)
+        // An empty answer is an error response, so it neither replaces the cache nor the cached Mensas
+        if downloadedAnswer?.isEmpty == true {
+            downloadedAnswer = nil
+        }
         if let downloadedAnswer {
             cache.write(downloadedAnswer, language: language)
         }

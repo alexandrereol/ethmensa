@@ -58,11 +58,19 @@ class API {
         }
     }
 
+    /// The Mensa objects of a provider, as yielded by `get()`.
+    struct ProviderMensas {
+        let provider: APIProvider.ProviderType
+        let mensas: [Mensa]
+        /// Whether the Mensa objects were read from the cache of the provider instead of downloaded.
+        let isCached: Bool
+    }
+
     /// Fetches the Mensa objects of all providers in parallel.
     ///
     /// - Returns: A stream that yields the `Mensa` objects of each provider as soon as they are loaded.
     ///   Providers that cache their `Mensa` objects yield the cached ones first.
-    func get() -> AsyncStream<(provider: APIProvider.ProviderType, mensas: [Mensa])> {
+    func get() -> AsyncStream<ProviderMensas> {
         AsyncStream { continuation in
             let task = Task {
                 await withTaskGroup(of: Void.self) { group in
@@ -70,9 +78,9 @@ class API {
                         group.addTask {
                             async let mensas = provider.apiProtocol.get()
                             if let cachedMensas = await provider.apiProtocol.cached() {
-                                continuation.yield((provider: provider.type, mensas: cachedMensas))
+                                continuation.yield(.init(provider: provider.type, mensas: cachedMensas, isCached: true))
                             }
-                            continuation.yield((provider: provider.type, mensas: await mensas))
+                            continuation.yield(.init(provider: provider.type, mensas: await mensas, isCached: false))
                         }
                     }
                 }

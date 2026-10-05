@@ -74,6 +74,10 @@ class ETHAPI: APIProtocol {
                 validBefore: DateFormatter.getETHIDApps.string(from: apiValidBeforeDate)
             )
         }
+        // An answer without weekly rotas is an error response, so it neither replaces the cache nor the cached Mensas
+        if downloadedAnswer?.weeklyRotaArray == nil {
+            downloadedAnswer = nil
+        }
         if let downloadedAnswer {
             cache.write(downloadedAnswer, language: language)
         }
