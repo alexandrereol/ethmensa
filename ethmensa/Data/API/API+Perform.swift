@@ -26,13 +26,19 @@ extension API {
     ///   - url: The URL for the request.
     ///   - host: The host to include in the header of the request.
     ///   - headers: A dictionary of headers to include in the request.
+    ///   - body: The body of the request. If set, the request is sent as a POST request.
     /// - Returns: A configured URLRequest object.
     private func prepareRequest(
         _ url: URL,
         host: String? = nil,
-        headers: [String: String]? = nil
+        headers: [String: String]? = nil,
+        body: Data? = nil
     ) -> URLRequest {
         var request = URLRequest(url: url)
+        if let body {
+            request.httpMethod = "POST"
+            request.httpBody = body
+        }
         if CommandLine.arguments.contains("LOCALHOST") {
             guard let host else {
                 logger.critical("\(#function): Using LOCALHOST but did not specify a host in the header")
@@ -76,6 +82,7 @@ extension API {
     ///   - url: The URL for the request.
     ///   - host: The host to include in the header of the request.
     ///   - headers: A dictionary of headers to include in the request.
+    ///   - body: The body of the request. If set, the request is sent as a POST request.
     ///   - resultType: The type to decode the response into.
     ///  
     /// - Returns: An object of type resultType containing the decoded response or an error.
@@ -83,12 +90,14 @@ extension API {
         _ url: URL,
         host: String? = nil,
         headers: [String: String]? = nil,
+        body: Data? = nil,
         resultType: T.Type
     ) async -> Result<T, API.Errors> {
         let request = prepareRequest(
             url,
             host: host,
-            headers: headers
+            headers: headers,
+            body: body
         )
         do {
             let (data, _) = try await URLSession.shared.data(for: request)

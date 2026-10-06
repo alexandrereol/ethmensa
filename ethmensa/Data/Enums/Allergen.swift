@@ -169,27 +169,33 @@ extension Allergen {
         default: .other(string)
         }
     }
+}
 
+extension Allergen {
     // swiftlint:disable:next orphaned_doc_comment
-    /// Get the Allergen from the UZH-API provided string.
+    /// Get the Allergens from the ZFV-API provided id, e.g. "cerealsContainingGluten".
+    /// Some ids map to more than one allergen, e.g. "wheat" also contains gluten.
+    /// Unknown ids fall back to the localized name provided by the API.
     // swiftlint:disable:next cyclomatic_complexity
-    static func fromUZHString(_ string: String) -> Self? {
-        return switch string.uppercased() {
-        case "FREI_VON_DEKLARAT_PFLICHTIGEN_ALLERGENEN": nil
-        case "GLUTEN": .gluten
-        case "SOJA": .soya
-        case "EI": .eggs
-        case "FISCH": .fish
-        case "ERDNUSS": .peanuts
-        case "KREBSTIERE": .crustaceans
-        case "MILCH_LAKTOSE": .lactose
-        case "SCHALENFRUECHTE", "CASHEW", "MANDEL": .nuts
-        case "SELLERIE": .celery
-        case "SENF": .mustard
-        case "SESAM": .sesame
-        case "SULPHURDIOXIDE", "SCHWFELDIOXID_SULFITE": .sulphurdioxide
-        case "WEIZEN": .wheat
-        default: .other(string)
+    static func fromZFV(id: String, name: String?) -> [Self] {
+        switch id {
+        case "cerealsContainingGluten", "barley", "oat", "rye": [.gluten]
+        case "wheat", "kamut", "spelt": [.gluten, .wheat]
+        case "crustaceans": [.crustaceans]
+        case "eggs": [.eggs]
+        case "fish": [.fish]
+        case "peanuts": [.peanuts]
+        case "soybeans": [.soya]
+        case "milk": [.lactose]
+        case "nuts", "almond", "brazilNut", "cashew", "hazel", "macadamia",
+             "pecan", "pistachio", "queenslandNut", "walnut": [.nuts]
+        case "celery": [.celery]
+        case "mustard": [.mustard]
+        case "sesame": [.sesame]
+        case "sulphites": [.sulphurdioxide]
+        case "lupin": [.lupin]
+        case "molluscs": [.molluscs]
+        default: [.other(name ?? id)]
         }
     }
 }

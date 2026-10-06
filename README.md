@@ -45,7 +45,14 @@ Otherwise, the most actual code documentation can be built in Xcode using DocC.
 ## Installation
 1. Clone the repo: ```git clone https://github.com/alexandrereol/ethmensa.git```
 2. Change the bundle identifier/team identifier/development team in the project settings
-3. Run the app on your device
+3. To show the UZH mensas, copy `Config/Secrets.example.xcconfig` to `Config/Secrets.xcconfig` and set `ZFV_API_KEY`
+4. Run the app on your device
+
+## UZH mensa details
+The ZFV API, which provides the menus of the UZH mensas, has no opening hours, and no address for some mensas.
+These, as well as the ids and names the mensas had in the former UZH API, are in [`zfv_uzh_mapping.json`](ethmensa/Data/API/ZFV/zfv_uzh_mapping.json), keyed by the id of the ZFV outlet.
+The app comes with a copy of this file and downloads the current one from the `main` branch every 72 hours, so changes reach the app without a release.
+The hours are the serving hours published on [zfv.ch](https://www.zfv.ch), or the opening hours where none are listed.
 
 ## Contribute
 If you would like to contribute to the codebase, please fork the repository and submit a pull request.

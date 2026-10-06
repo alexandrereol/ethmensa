@@ -1,0 +1,87 @@
+{
+  "250": {
+    "uzhID": 1,
+    "name": "Untere Mensa",
+    "lunch": { "start": "11:00", "end": "14:30" },
+    "dinner": { "start": "17:00", "end": "19:00" }
+  },
+  "251": {
+    "uzhID": 2,
+    "name": "Obere Mensa",
+    "lunch": { "start": "11:00", "end": "14:30" }
+  },
+  "252": {
+    "uzhID": 13,
+    "name": "Lichthof Rondell"
+  },
+  "253": {
+    "uzhID": 3,
+    "name": "Mensa UZH Irchel",
+    "lunch": { "start": "11:00", "end": "14:00" }
+  },
+  "254": {
+    "uzhID": 5,
+    "name": "Irchel Cafeteria Seerose",
+    "lunch": { "start": "07:30", "end": "16:00" },
+    "dinner": { "start": "16:00", "end": "19:30" }
+  },
+  "312": {
+    "uzhID": 6,
+    "name": "Cafeteria Zentrum für Zahnmedizin ZZM",
+    "address": "Plattenstrasse 11\n8032 Zürich",
+    "lunch": { "start": "11:00", "end": "13:45" }
+  },
+  "314": {
+    "uzhID": 7,
+    "name": "Cafeteria UZH Tierspital",
+    "address": "Winterthurerstrasse 260\n8057 Zürich",
+    "lunch": { "start": "06:30", "end": "16:30" }
+  },
+  "316": {
+    "uzhID": 8,
+    "name": "Cafeteria UZH Botanischer Garten",
+    "address": "Zollikerstrasse 107\n8008 Zürich",
+    "lunch": { "start": "08:00", "end": "17:00" }
+  },
+  "317": {
+    "uzhID": 9,
+    "name": "Platte 14",
+    "address": "Plattenstrasse 14\n8032 Zürich",
+    "lunch": { "start": "11:00", "end": "13:30" }
+  },
+  "318": {
+    "uzhID": 10,
+    "name": "Mensa UZH Binzmühle",
+    "address": "Binzmühlestrasse 14\n8050 Zürich",
+    "lunch": { "start": "07:45", "end": "14:30" }
+  },
+  "319": {
+    "uzhID": 11,
+    "name": "Cafeteria UZH Cityport",
+    "address": "Affolternstrasse 56\n8050 Zürich",
+    "lunch": { "start": "09:00", "end": "14:30" }
+  },
+  "320": {
+    "uzhID": 12,
+    "name": "Rämi 59",
+    "address": "Rämistrasse 59\n8001 Zürich",
+    "lunch": { "start": "07:30", "end": "15:00" }
+  },
+  "329": {
+    "address": "Winterthurerstrasse 196\n8057 Zürich",
+    "lunch": { "start": "11:00", "end": "13:30" }
+  },
+  "413": {
+    "uzhID": 4,
+    "name": "Green Kitchen Lab",
+    "lunch": { "start": "11:00", "end": "14:00" }
+  },
+  "476": {
+    "address": "Rämistrasse 74\n8001 Zürich",
+    "lunch": { "start": "11:00", "end": "14:30" }
+  },
+  "589": {
+    "address": "Binzmühlestrasse 11\n8050 Zürich",
+    "lunch": { "start": "11:00", "end": "14:00" }
+  }
+}

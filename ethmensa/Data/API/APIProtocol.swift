@@ -17,4 +17,12 @@
 
 protocol APIProtocol {
     func get() async -> [Mensa]
+    /// The Mensas of the last download, shown while `get()` loads, or `nil` if there are none.
+    func cached() async -> [Mensa]?
+}
+
+extension APIProtocol {
+    func cached() async -> [Mensa]? {
+        nil
+    }
 }

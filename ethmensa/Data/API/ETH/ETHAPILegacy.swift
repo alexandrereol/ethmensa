@@ -27,17 +27,38 @@ class ETHAPILegacy: APIProtocol {
 
     private let host = "idapps.ethz.ch"
     private let endpoint = "https://glyph.ethz.ch/eth-ws"
+    private let cache = APICache<[ETHMensaAnswerLegacy]>(name: "eth_mensas")
+
+    private var language: String {
+        Bundle.main.preferredLocalizations.first == "de" ? "de" : "en"
+    }
 
     func get() async -> [Mensa] {
-        let language = Bundle.main.preferredLocalizations.first == "de" ? "de" : "en"
         let acceptLanguage = Bundle.main.preferredLocalizations.first == "de" ? "de-DE;de;q=0.9" : "en-EN,en;q=0.9"
-        guard let mensaAnswer = await download(language: language, acceptLanguage: acceptLanguage) else {
+        var downloadedAnswer = await download(language: language, acceptLanguage: acceptLanguage)
+        // An empty answer is an error response, so it neither replaces the cache nor the cached Mensas
+        if downloadedAnswer?.isEmpty == true {
+            downloadedAnswer = nil
+        }
+        if let downloadedAnswer {
+            cache.write(downloadedAnswer, language: language)
+        }
+        // Falls back to the last download if it is from this week
+        guard let mensaAnswer = downloadedAnswer ?? cache.read(language: language) else {
             logger.critical(
-                "\(#function): download(language: \(language), acceptLanguage: \(acceptLanguage)) is nil"
+                "\(#function): download(language: \(self.language), acceptLanguage: \(acceptLanguage)) is nil"
             )
             return []
         }
-        return mensaAnswer.map { legacyMensa in
+        return convert(mensaAnswer)
+    }
+
+    func cached() async -> [Mensa]? {
+        cache.read(language: language).map(convert)
+    }
+
+    private func convert(_ mensaAnswer: [ETHMensaAnswerLegacy]) -> [Mensa] {
+        mensaAnswer.map { legacyMensa in
             Mensa(
                 provider: .eth,
                 facilityID: legacyMensa.mensaId,

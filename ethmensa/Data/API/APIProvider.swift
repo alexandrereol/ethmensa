@@ -33,7 +33,7 @@ struct APIProvider {
     static var allProviders: [APIProvider] {
         [
             APIProvider(type: .eth, apiProtocol: ETHAPI.shared),
-            APIProvider(type: .uzh, apiProtocol: UZHAPI.shared)
+            APIProvider(type: .uzh, apiProtocol: ZFVAPI.shared)
         ]
     }
 }

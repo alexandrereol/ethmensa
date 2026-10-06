@@ -27,6 +27,11 @@ class ETHAPI: APIProtocol {
 
     private let host = "idapps.ethz.ch"
     private let endpoint = "https://idapps.ethz.ch/cookpit-pub-services/v1/weeklyrotas"
+    private let cache = APICache<ETHMensaAnswer>(name: "eth_weekly_rotas")
+
+    private var language: String {
+        Bundle.main.preferredLocalizations.first == "de" ? "de" : "en"
+    }
 
     private var apiValidAfterDate: Date? {
         Calendar.current.date(
@@ -53,25 +58,49 @@ class ETHAPI: APIProtocol {
         }
     }
 
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func get() async -> [Mensa] {
         let legacyMensas = await ETHAPILegacy.shared.get()
         guard !legacyMensas.isEmpty else {
             logger.critical("\(#function): legacyMensas is empty")
             return []
         }
-        let language = Bundle.main.preferredLocalizations.first == "de" ? "de" : "en"
         let acceptLanguage = Bundle.main.preferredLocalizations.first == "de" ? "de-DE;de;q=0.9" : "en-EN,en;q=0.9"
-        guard let apiValidAfterDate,
-              let apiValidBeforeDate,
-              let mensaAnswer = await download(
+        var downloadedAnswer: ETHMensaAnswer?
+        if let apiValidAfterDate, let apiValidBeforeDate {
+            downloadedAnswer = await download(
                 language: language,
                 acceptLanguage: acceptLanguage,
                 validAfter: DateFormatter.getETHIDApps.string(from: apiValidAfterDate),
                 validBefore: DateFormatter.getETHIDApps.string(from: apiValidBeforeDate)
-              ),
-              let weeklyRotaArray = mensaAnswer.weeklyRotaArray?.filter(\.isValidToday) else {
+            )
+        }
+        // An answer without weekly rotas is an error response, so it neither replaces the cache nor the cached Mensas
+        if downloadedAnswer?.weeklyRotaArray == nil {
+            downloadedAnswer = nil
+        }
+        if let downloadedAnswer {
+            cache.write(downloadedAnswer, language: language)
+        }
+        // Falls back to the last download if it is from this week
+        guard let mensaAnswer = downloadedAnswer ?? cache.read(language: language) else {
             logger.critical("\(#function): Could not download ETH data")
+            return []
+        }
+        return convert(mensaAnswer, legacyMensas: legacyMensas)
+    }
+
+    func cached() async -> [Mensa]? {
+        guard let legacyMensas = await ETHAPILegacy.shared.cached(),
+              let mensaAnswer = cache.read(language: language) else {
+            return nil
+        }
+        return convert(mensaAnswer, legacyMensas: legacyMensas)
+    }
+
+    // swiftlint:disable:next function_body_length
+    private func convert(_ mensaAnswer: ETHMensaAnswer, legacyMensas: [Mensa]) -> [Mensa] {
+        guard let weeklyRotaArray = mensaAnswer.weeklyRotaArray?.filter(\.isValidToday) else {
+            logger.critical("\(#function): Could not get the weekly rotas")
             return []
         }
         var mensaArray: [Mensa] = []
