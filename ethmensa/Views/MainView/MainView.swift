@@ -77,6 +77,13 @@ struct MainView: View {
                     // and an empty row would leave a gap.
                     FilterView()
                         .textCase(nil)
+                        // Section headers are inset like the cells' content and ignore `listRowInsets`,
+                        // so the chips are pulled out to align with the edges of the cells.
+                        .padding(.horizontal, -16)
+                        // Brings the chips a little closer to the title.
+                        .padding(.top, -6)
+                        // Gives the chips a little room above the first cell, without leaving a gap without filters.
+                        .padding(.bottom, MensaFilter.isAnyActive ? 6 : 0)
                 }
             }
             .environment(\.defaultMinListHeaderHeight, 0)
@@ -103,8 +110,7 @@ struct MainView: View {
                             Text("RESET_FILTERS_AND_SEARCH")
                                 .padding(2)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .buttonBorderShape(.roundedRectangle)
+                        .resetButtonStyle()
                     }
                 )
             }
@@ -139,4 +145,30 @@ struct MainView: View {
         .environmentObject(MensaDataManager.shared)
         .environmentObject(NetworkManager.shared)
         .environmentObject(SettingsManager.shared)
+}
+
+private extension View {
+
+    /// Styles the reset button of the empty state prominently.
+    /// On iOS 26 and later it uses Liquid Glass. The glass styles are not
+    /// available on visionOS, whose bordered buttons are already glass.
+    @ViewBuilder
+    func resetButtonStyle() -> some View {
+#if !os(visionOS)
+        if #available(iOS 26.0, *) {
+            self
+                .buttonStyle(.glassProminent)
+        } else {
+            legacyResetButtonStyle()
+        }
+#else
+        legacyResetButtonStyle()
+#endif
+    }
+
+    private func legacyResetButtonStyle() -> some View {
+        self
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.roundedRectangle)
+    }
 }
