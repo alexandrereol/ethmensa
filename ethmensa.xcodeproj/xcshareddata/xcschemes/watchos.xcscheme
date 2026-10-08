@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2982AFA32AEC4FCC008B2B41"
-               BuildableName = "ETH Mensa watchOS.app"
+               BuildableName = "ETH Mensa.app"
                BlueprintName = "watchos"
                ReferencedContainer = "container:ethmensa.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2982AFA32AEC4FCC008B2B41"
-               BuildableName = "ETH Mensa watchOS.app"
+               BuildableName = "ETH Mensa.app"
                BlueprintName = "watchos"
                ReferencedContainer = "container:ethmensa.xcodeproj">
             </BuildableReference>
@@ -58,7 +58,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2982AFA32AEC4FCC008B2B41"
-            BuildableName = "ETH Mensa watchOS.app"
+            BuildableName = "ETH Mensa.app"
             ReferencedContainer = "container:ethmensa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,7 +74,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2982AFA32AEC4FCC008B2B41"
-            BuildableName = "ETH Mensa watchOS.app"
+            BuildableName = "ETH Mensa.app"
             ReferencedContainer = "container:ethmensa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -15,7 +15,7 @@
 		2997302D2BF2AED000BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302C2BF2AED000BB3A18 /* URLImage */; };
 		299730312BF2AF1400BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 299730302BF2AF1400BB3A18 /* URLImage */; };
 		29CEE19A2D84301C00C6D257 /* widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29CEE1882D84301B00C6D257 /* widget.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		29E53F992AED5D4500BCDB65 /* ETH Mensa watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		29E53F992AED5D4500BCDB65 /* ETH Mensa.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				29E53F992AED5D4500BCDB65 /* ETH Mensa watchOS.app in Embed Watch Content */,
+				29E53F992AED5D4500BCDB65 /* ETH Mensa.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,13 +79,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa visionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2920D0012F10000100000004 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Base.xcconfig; sourceTree = SOURCE_ROOT; };
-		2920D0012F10000100000002 /* Secrets.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Secrets.example.xcconfig; sourceTree = SOURCE_ROOT; };
+		291C81DB2B5998BB00730BFD /* ETH Mensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2920D0012F10000100000002 /* Config/Secrets.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Secrets.example.xcconfig; sourceTree = SOURCE_ROOT; };
+		2920D0012F10000100000004 /* Config/Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Base.xcconfig; sourceTree = SOURCE_ROOT; };
 		293CAF6E2D6DCFFD0066E9F8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		294E16392A8E22C3000A3AB6 /* ETH Mensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29550BD32AEADD550014F07F /* ETH Mensa Clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa Clip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2982AFA42AEC4FCC008B2B41 /* ETH Mensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETH Mensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEE1882D84301B00C6D257 /* widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -202,11 +202,11 @@
 				Data/API/ETH/ETHAPILegacy.swift,
 				Data/API/ETH/ETHMensaAnswer.swift,
 				Data/API/ETH/ETHMensaAnswerLegacy.swift,
+				Data/API/ZFV/zfv_uzh_mapping.json,
 				Data/API/ZFV/ZFVAPI.swift,
 				Data/API/ZFV/ZFVConverter.swift,
 				Data/API/ZFV/ZFVMensaAnswer.swift,
 				Data/API/ZFV/ZFVOutletInfo.swift,
-				Data/API/ZFV/zfv_uzh_mapping.json,
 				Data/CoreData/ClickCount.xcdatamodeld,
 				Data/CoreData/ClickCountDBManager.swift,
 				Data/CoreData/GeoCache.xcdatamodeld,
@@ -357,8 +357,8 @@
 		2920D0012F10000100000003 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				2920D0012F10000100000004 /* Base.xcconfig */,
-				2920D0012F10000100000002 /* Secrets.example.xcconfig */,
+				2920D0012F10000100000004 /* Config/Base.xcconfig */,
+				2920D0012F10000100000002 /* Config/Secrets.example.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -383,8 +383,8 @@
 			children = (
 				294E16392A8E22C3000A3AB6 /* ETH Mensa.app */,
 				29550BD32AEADD550014F07F /* ETH Mensa Clip.app */,
-				2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */,
-				291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */,
+				2982AFA42AEC4FCC008B2B41 /* ETH Mensa.app */,
+				291C81DB2B5998BB00730BFD /* ETH Mensa.app */,
 				29CEE1882D84301B00C6D257 /* widget.appex */,
 			);
 			name = Products;
@@ -416,7 +416,7 @@
 				2993149A2C8F4A990046D221 /* WhatsNewKit */,
 			);
 			productName = visionos;
-			productReference = 291C81DB2B5998BB00730BFD /* ETH Mensa visionOS.app */;
+			productReference = 291C81DB2B5998BB00730BFD /* ETH Mensa.app */;
 			productType = "com.apple.product-type.application";
 		};
 		294E16382A8E22C3000A3AB6 /* ethmensa */ = {
@@ -497,7 +497,7 @@
 			packageProductDependencies = (
 			);
 			productName = "watchos Watch App";
-			productReference = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa watchOS.app */;
+			productReference = 2982AFA42AEC4FCC008B2B41 /* ETH Mensa.app */;
 			productType = "com.apple.product-type.application";
 		};
 		29CEE1872D84301B00C6D257 /* widget */ = {
@@ -801,7 +801,7 @@
 		};
 		294E16462A8E22C6000A3AB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2920D0012F10000100000004 /* Base.xcconfig */;
+			baseConfigurationReference = 2920D0012F10000100000004 /* Config/Base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -874,7 +874,7 @@
 		};
 		294E16472A8E22C6000A3AB6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2920D0012F10000100000004 /* Base.xcconfig */;
+			baseConfigurationReference = 2920D0012F10000100000004 /* Config/Base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
