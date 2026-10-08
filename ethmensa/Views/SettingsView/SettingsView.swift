@@ -34,7 +34,7 @@ struct SettingsView: View {
                         AdvancedSettingsView()
                     }
                 } header: {
-                    Spacer(minLength: 0).listRowInsets(EdgeInsets())
+                    Spacer(minLength: 0).frame(height: 10).listRowInsets(EdgeInsets())
                 }
                 SettingsFooterView()
             }
