@@ -32,10 +32,7 @@
 The app does not contain any tracking or analytics whatsoever. Any request to add them will be denied.
 
 ## Documentation
-You can find a full documentation on the following website:
-[ethmensa.ch/documentation](https://ethmensa.ch/documentation/)
-
-Otherwise, the most actual code documentation can be built in Xcode using DocC.
+The code documentation can be built in Xcode using DocC.
 
 ## Requirements
 - iOS and iPadOS 16.0+, watchOS 10.0+, macOS 12.0+, visionOS 1.0+
