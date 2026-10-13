@@ -46,6 +46,10 @@ struct DetailView: View {
                     .minimumScaleFactor(0.75)
                     .foregroundColor(.white)
             }
+            // Lets the viewed Mensa be continued on the iPhone, iPad or Mac.
+            .userActivity(Mensa.handoffActivityType, element: selectedMensa) { mensa, activity in
+                mensa.configure(activity)
+            }
         }
     }
 }

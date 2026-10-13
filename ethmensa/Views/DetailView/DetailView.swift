@@ -138,6 +138,15 @@ struct DetailView: View {
         .toolbar {
             DetailViewToolbar(selectedMensa: navigationManager.selectedMensa)
         }
+#if !APPCLIP
+        // Lets the viewed Mensa be continued on another device, but not the one in a context-menu preview.
+        .userActivity(
+            Mensa.handoffActivityType,
+            element: contextMenuPreview ? nil : navigationManager.selectedMensa
+        ) { mensa, activity in
+            mensa.configure(activity)
+        }
+#endif
     }
 }
 
