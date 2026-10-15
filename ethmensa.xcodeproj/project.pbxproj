@@ -10,7 +10,6 @@
 		29550BE22AEADD560014F07F /* ETH Mensa Clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 29550BD32AEADD550014F07F /* ETH Mensa Clip.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 299314982C8F4A8E0046D221 /* WhatsNewKit */; };
 		2993149B2C8F4A990046D221 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2993149A2C8F4A990046D221 /* WhatsNewKit */; };
-		299730202BF2AE3500BB3A18 /* UIOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 2997301F2BF2AE3500BB3A18 /* UIOnboarding */; };
 		2997302B2BF2AEC300BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302A2BF2AEC300BB3A18 /* URLImage */; };
 		2997302D2BF2AED000BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2997302C2BF2AED000BB3A18 /* URLImage */; };
 		299730312BF2AF1400BB3A18 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 299730302BF2AF1400BB3A18 /* URLImage */; };
@@ -152,17 +151,18 @@
 				"AppIntents/MensaEntity+IndexedEntity.swift",
 				AppIntents/ShortcutsProvider.swift,
 				Data/WhatsNewProvider.swift,
-				"Extensions/Array+UIOnboardingFeatureExtension.swift",
+				"Extensions/Array+OnboardingFeatureExtension.swift",
 				Logic/GeofencingManager.swift,
 				"Logic/GeofencingManager+Location.swift",
 				Logic/NotificationManager.swift,
 				Sounds/click.mp3,
 				Sounds/default.mp3,
 				Sounds/Sound.swift,
-				Views/AppViewModifiers/OnboardingHelper.swift,
-				Views/AppViewModifiers/OnboardingModifier.swift,
-				Views/AppViewModifiers/OnboardingView.swift,
 				Views/HelperViews/LegiView.swift,
+				Views/Onboarding/FoldClearance.swift,
+				Views/Onboarding/OnboardingFeature.swift,
+				Views/Onboarding/OnboardingModifier.swift,
+				Views/Onboarding/OnboardingWelcomeView.swift,
 				Views/SettingsView/AdvancedSettings/AdvancedSettingsAlertModifiers.swift,
 				Views/SettingsView/AdvancedSettings/AdvancedSettingsView.swift,
 				Views/SettingsView/AdvancedSettings/AdvancedSettingsViewModel.swift,
@@ -275,14 +275,15 @@
 				AppIntents/MensaEntity.swift,
 				"AppIntents/MensaEntity+IndexedEntity.swift",
 				AppIntents/ShortcutsProvider.swift,
-				"Extensions/Array+UIOnboardingFeatureExtension.swift",
+				"Extensions/Array+OnboardingFeatureExtension.swift",
 				Logic/GeofencingManager.swift,
 				"Logic/GeofencingManager+Location.swift",
-				Views/AppViewModifiers/OnboardingHelper.swift,
-				Views/AppViewModifiers/OnboardingModifier.swift,
-				Views/AppViewModifiers/OnboardingView.swift,
 				Views/AppViewModifiers/SKOverlayModifier.swift,
 				Views/HelperViews/LegiView.swift,
+				Views/Onboarding/FoldClearance.swift,
+				Views/Onboarding/OnboardingFeature.swift,
+				Views/Onboarding/OnboardingModifier.swift,
+				Views/Onboarding/OnboardingWelcomeView.swift,
 			);
 			target = 291C81DA2B5998BB00730BFD /* visionos */;
 		};
@@ -325,7 +326,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				299314992C8F4A8E0046D221 /* WhatsNewKit in Frameworks */,
-				299730202BF2AE3500BB3A18 /* UIOnboarding in Frameworks */,
 				2997302B2BF2AEC300BB3A18 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,7 +445,6 @@
 			);
 			name = ethmensa;
 			packageProductDependencies = (
-				2997301F2BF2AE3500BB3A18 /* UIOnboarding */,
 				2997302A2BF2AEC300BB3A18 /* URLImage */,
 				299314982C8F4A8E0046D221 /* WhatsNewKit */,
 			);
@@ -563,7 +562,6 @@
 			);
 			mainGroup = 294E16302A8E22C3000A3AB6;
 			packageReferences = (
-				2997301E2BF2AE3500BB3A18 /* XCRemoteSwiftPackageReference "UIOnboarding" */,
 				299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */,
 				299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 				29AF8EBC2F7953DE00F49EDF /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
@@ -1331,14 +1329,6 @@
 				minimumVersion = 2.2.1;
 			};
 		};
-		2997301E2BF2AE3500BB3A18 /* XCRemoteSwiftPackageReference "UIOnboarding" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/lascic/UIOnboarding.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.3;
-			};
-		};
 		299730292BF2AE9C00BB3A18 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
@@ -1367,11 +1357,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 299314972C8F4A8E0046D221 /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
 			productName = WhatsNewKit;
-		};
-		2997301F2BF2AE3500BB3A18 /* UIOnboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2997301E2BF2AE3500BB3A18 /* XCRemoteSwiftPackageReference "UIOnboarding" */;
-			productName = UIOnboarding;
 		};
 		2997302A2BF2AEC300BB3A18 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -30,55 +30,59 @@ struct AppView: View {
     @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var settingsManager: SettingsManager
 
-    @State private var showOnboarding = !SettingsManager.shared.completedFirstLaunch
-
     var body: some View {
-        NavigationSplitView {
-            MainView()
-        } detail: {
-            DetailView()
-        }
-        .environmentObject(navigationManager)
-        .environmentObject(mensaDataManager)
-        .environmentObject(settingsManager)
-        .fullScreenCover(isPresented: $networkManager.isOffline) {
-            ModalViewUI(viewModel: .noInternet)
-        }
-        .versionIncompatibleIfNeeded(
-            host: API.shared.host,
-            tintColor: .accent,
-            appIcon: .appIconRoundedForUserVersion
-        ) {
-            openURL(String.appStoreURLString.toURL()!)
-        } detailButtonAction: {
-            openURL(String.automaticUpdatesURLString.toURL()!)
+        // The onboarding cover sits on its own view level (a real container,
+        // not a transparent Group): one view can't present two covers at
+        // once, so it must not share the chain below with the offline /
+        // incompatible-version / image covers.
+        ZStack {
+            NavigationSplitView {
+                MainView()
+            } detail: {
+                DetailView()
+            }
+            .environmentObject(navigationManager)
+            .environmentObject(mensaDataManager)
+            .environmentObject(settingsManager)
+            .fullScreenCover(isPresented: $networkManager.isOffline) {
+                ModalViewUI(viewModel: .noInternet)
+            }
+            .versionIncompatibleIfNeeded(
+                host: API.shared.host,
+                tintColor: .accent,
+                appIcon: .appIconRoundedForUserVersion
+            ) {
+                openURL(String.appStoreURLString.toURL()!)
+            } detailButtonAction: {
+                openURL(String.automaticUpdatesURLString.toURL()!)
+            }
+#if APPCLIP
+            .skOverlay()
+#elseif canImport(WhatsNewKit)
+            .whatsNewSheet()
+#endif
+            .openURL(
+                universalLinkAlertShown: $navigationManager.universalLinkAlertShown,
+                universalLinkMensaId: $navigationManager.universalLinkMensaId
+            )
+            .sheet(item: $navigationManager.sheet) { type in
+                AppViewSheets(type: type)
+                    .environmentObject(navigationManager)
+                    .environmentObject(settingsManager)
+            }
+            .fullScreenCover(isPresented: $navigationManager.imagePopoverShown) {
+                if let url = navigationManager.imagePopoverURL {
+                    FullscreenImageView(url: url)
+                }
+            }
         }
 #if !APPCLIP && !os(visionOS)
         .onboardingFullScreenCoverIfNecessary(
-            showOnboarding: $showOnboarding
+            isPending: !settingsManager.completedFirstLaunch
         ) {
             settingsManager.completedFirstLaunch = true
         }
 #endif
-#if APPCLIP
-        .skOverlay()
-#elseif canImport(WhatsNewKit)
-        .whatsNewSheet()
-#endif
-        .openURL(
-            universalLinkAlertShown: $navigationManager.universalLinkAlertShown,
-            universalLinkMensaId: $navigationManager.universalLinkMensaId
-        )
-        .sheet(item: $navigationManager.sheet) { type in
-            AppViewSheets(type: type)
-                .environmentObject(navigationManager)
-                .environmentObject(settingsManager)
-        }
-        .fullScreenCover(isPresented: $navigationManager.imagePopoverShown) {
-            if let url = navigationManager.imagePopoverURL {
-                FullscreenImageView(url: url)
-            }
-        }
     }
 }
 
