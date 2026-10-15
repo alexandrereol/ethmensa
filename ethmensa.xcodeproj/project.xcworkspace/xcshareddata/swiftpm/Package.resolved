@@ -11,15 +11,6 @@
       }
     },
     {
-      "identity" : "uionboarding",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/lascic/UIOnboarding.git",
-      "state" : {
-        "revision" : "52b656c820cdb26e40a261bb2e79e60f847410de",
-        "version" : "2.0.5"
-      }
-    },
-    {
       "identity" : "url-image",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dmytro-anokhin/url-image.git",
