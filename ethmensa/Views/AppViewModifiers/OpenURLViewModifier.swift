@@ -20,6 +20,10 @@ import SwiftUI
 
 private struct OpenURLViewModifier: ViewModifier {
 
+#if !APPCLIP
+    @EnvironmentObject var navigationManager: NavigationManager
+#endif
+
     @Binding var universalLinkAlertShown: Bool
     @Binding var universalLinkMensaId: String?
 
@@ -40,6 +44,16 @@ private struct OpenURLViewModifier: ViewModifier {
                     universalLinkMensaId = String(matchSubstring)
                 }
             }
+#if !APPCLIP
+            // Opens the Mensa continued from another device with Handoff, closing any sheet in front of it.
+            .onContinueUserActivity(Mensa.handoffActivityType) { activity in
+                guard let mensaId = activity.userInfo?[Mensa.handoffMensaIdKey] as? String else {
+                    return
+                }
+                navigationManager.sheet = .none
+                universalLinkMensaId = mensaId
+            }
+#endif
             .alert(
                 "UNIVERSAL_LINK_NO_MENSA",
                 isPresented: $universalLinkAlertShown

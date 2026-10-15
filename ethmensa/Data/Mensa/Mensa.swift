@@ -109,6 +109,26 @@ extension Mensa: Transferable {
 }
 
 extension Mensa {
+    /// The type of the user activity advertised while a Mensa is viewed, so it can be continued on another device.
+    /// - Important: It is declared under `NSUserActivityTypes` in the iOS, visionOS and watchOS apps' Info.plist.
+    static let handoffActivityType = "ch.alexandrereol.ethmensa.viewMensa"
+
+    /// The `userInfo` key of the viewed Mensa's id in a Handoff user activity.
+    static let handoffMensaIdKey = "mensaId"
+
+    /// Configures a user activity to continue viewing this Mensa on another device with Handoff.
+    ///
+    /// A device without the app opens the Mensa's share URL on the website instead.
+    func configure(_ activity: NSUserActivity) {
+        activity.title = name
+        activity.userInfo = [Self.handoffMensaIdKey: id]
+        activity.requiredUserInfoKeys = [Self.handoffMensaIdKey]
+        activity.webpageURL = shareURL
+        activity.isEligibleForHandoff = true
+    }
+}
+
+extension Mensa {
     /// An example Mensa for testing purposes
     static let example = Mensa(
         provider: .eth,
