@@ -38,12 +38,12 @@ class API {
     /// A computed property that returns the appropriate host URL based on the current app release type.
     /// - Returns: A `String` representing the host URL.
     /// - Note: The host URL is determined by the `AppReleaseType.getCurrent` value.
-    ///   - For `.debug`, it returns "dev.api.ethmensa.reol.ch".
-    ///   - For `.testFlight` and `.appStore`, it returns "api.ethmensa.reol.ch".
+    ///   - For `.debug`, it returns "dev.api.ethmensa.ch".
+    ///   - For `.testFlight` and `.appStore`, it returns "api.ethmensa.ch".
     var host: String {
         switch AppReleaseType.getCurrent {
-        case .debug: "dev.api.ethmensa.reol.ch"
-        case .testFlight, .appStore: "api.ethmensa.reol.ch"
+        case .debug: "dev.api.ethmensa.ch"
+        case .testFlight, .appStore: "api.ethmensa.ch"
         }
     }
 

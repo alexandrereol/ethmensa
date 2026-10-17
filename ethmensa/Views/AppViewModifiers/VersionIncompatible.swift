@@ -40,9 +40,9 @@ class VersionIncompatible: ObservableObject {
             return false
         }
         let urlString = if CommandLine.arguments.contains("LOCALHOST") {
-            "http://127.0.0.1/version?obj=1"
+            "http://127.0.0.1:8080/v1/app/version?obj=1"
         } else {
-            "https://\(host)/version?obj=1"
+            "https://\(host)/v1/app/version?obj=1"
         }
         guard let url = urlString.toURL() else {
             logger.critical("\(#function): Unable to create URL from string: \(urlString)")
