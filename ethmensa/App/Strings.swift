@@ -27,7 +27,7 @@ extension String {
     static let appStoreURLString = "https://apps.apple.com/app/id\(appId)"
     static let automaticUpdatesURLString = "https://support.apple.com/en-us/HT202180"
     static let developerName = "Alexandre Reol"
-    static let emailURLString = "mailto:support@reol.ch"
+    static let emailURLString = "mailto:support@ethmensa.ch"
     static let iCloudUnavailableURL = "https://support.apple.com/en-us/HT204025"
     static let notificationRequestPeriodicPrefix = "\(Bundle.main.safeIdentifier).notification.request.periodic.day-"
     static let privacyPolicyURLString = "https://ethmensa.ch/privacy"
