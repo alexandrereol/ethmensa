@@ -81,7 +81,7 @@ struct LargeMensaCellView: View {
                         mensa: mensa,
                         isLoading: isLoading
                     )
-                    Image(systemName: "chevron.right")
+                    Image(systemName: "chevron.forward")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 12.5, height: 12.5)
