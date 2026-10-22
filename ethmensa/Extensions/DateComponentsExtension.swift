@@ -21,8 +21,8 @@ extension DateComponents {
     static func fromStringSeparatedByColon(string: String) -> DateComponents? {
         if let date = DateFormatter.hourMinuteSeparatedByColon.date(from: string) {
             fromInt(
-                hour: Calendar.current.component(.hour, from: date),
-                minute: Calendar.current.component(.minute, from: date)
+                hour: Calendar.api.component(.hour, from: date),
+                minute: Calendar.api.component(.minute, from: date)
             )
         } else {
             nil

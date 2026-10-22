@@ -32,11 +32,28 @@ extension DateFormatter {
         DateFormatter("yyyy-MM-dd")
     }
 
-    /// Initializes a `DateFormatter` with the specified date format string.
+    /// Initializes a fixed-format `DateFormatter` for API values with the specified date format string.
+    ///
+    /// The formatter uses the `en_US_POSIX` locale and the Gregorian calendar in the Europe/Zurich time zone
+    /// (`Calendar.api`), so API dates and times are parsed and formatted the same way regardless of the user's
+    /// calendar, locale, digits or 12/24-hour preference.
     ///
     /// - Parameter dateFormat: A string representing the desired date format.
     convenience init(_ dateFormat: String) {
         self.init()
+        self.locale = Locale(identifier: "en_US_POSIX")
+        self.calendar = .api
+        self.timeZone = Calendar.api.timeZone
         self.dateFormat = dateFormat
+    }
+}
+
+extension Calendar {
+    /// The Gregorian calendar in the Europe/Zurich time zone, used for fixed-format API dates and times.
+    static var api: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.locale = Locale(identifier: "en_US_POSIX")
+        calendar.timeZone = TimeZone(identifier: "Europe/Zurich") ?? .current
+        return calendar
     }
 }

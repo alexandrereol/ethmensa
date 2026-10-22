@@ -50,7 +50,7 @@ extension ETHWeeklyRotaArray {
                 // ETH has forgotten to provide a "valid-to" in the past, so default to 2099-12-31
                 from: validTo ?? "2099-12-31"
               ),
-              let validToDate = Calendar.current.date(
+              let validToDate = Calendar.api.date(
                 byAdding: .day,
                 value: 1,
                 to: validToDate
