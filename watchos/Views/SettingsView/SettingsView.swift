@@ -74,7 +74,7 @@ struct SettingsView: View {
             HStack {
                 Text(String(localized: text))
                 Spacer()
-                Image(systemName: "chevron.right")
+                Image(systemName: "chevron.forward")
             }
         }
     }
