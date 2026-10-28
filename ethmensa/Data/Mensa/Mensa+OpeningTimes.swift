@@ -32,11 +32,6 @@ extension Mensa {
     ///
     /// - Returns: An `OpeningTimeState` object representing the current state of the Mensa's opening times.
     func getOpeningTimes() -> OpeningTimeState {
-#if !APPCLIP
-        guard !SettingsManager.shared.screenshotMode else {
-            return .open
-        }
-#endif
         let mealTimesToday = mealTimes.filter { mealTime in
             mealTime.weekdayCode == (
                 Calendar.current.component(

@@ -28,7 +28,7 @@ struct SettingsiCloudView: View {
     }
 
     var body: some View {
-        if settingsManager.screenshotMode || FileManager.default.ubiquityIdentityToken != nil {
+        if FileManager.default.ubiquityIdentityToken != nil {
             Section {
                 Toggle(
                     "SYNC_SETTINGS",

@@ -23,7 +23,7 @@ struct OpeningTimesCircle: View {
     var isLoading: Bool
 
     private var status: Mensa.OpeningTimeState {
-        SettingsManager.shared.screenshotMode ? .open : mensa.getOpeningTimes()
+        mensa.getOpeningTimes()
     }
     private var circleColor: Color {
         if isLoading {
