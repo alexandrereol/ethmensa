@@ -21,8 +21,6 @@ struct SettingsView: View {
 
     @EnvironmentObject var settingsManager: SettingsManager
 
-    @State private var debugSheetShown = false
-
     var body: some View {
         NavigationStack {
             List {
@@ -51,9 +49,6 @@ struct SettingsView: View {
                 Section {
                     NavigationLink {
                         ModalViewUI(viewModel: .about)
-                            .sheet(isPresented: $debugSheetShown) {
-                                DebugView()
-                            }
                     } label: {
                         SettingsElementLabel(text: "ABOUT_\(Bundle.main.displayName)")
                     }

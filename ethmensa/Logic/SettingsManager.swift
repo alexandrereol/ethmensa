@@ -80,9 +80,7 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
     fileprivate enum UDKVSKeys: String {
         case firstLaunch = "FirstLaunch"
         case location = "Location"
-        case debugMode = "DebugMode"
         case onboarding = "Onboarding"
-        case screenshotMode = "ScreenshotMode"
         case hideMensaWithNoMenus = "HideMensaWithNoMenus"
         case mensaCellType = "MensaCellType"
         case priceType = "PriceType"
@@ -102,9 +100,7 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
 #endif
 
     @Published var completedFirstLaunch: Bool
-    @Published var debugMode: Bool
     @Published var completedOnboarding: Bool
-    @Published var screenshotMode: Bool
     @Published var hideMensaWithNoMenus: Bool
     @Published var mensaCellType: MensaCellType
     @Published var priceType: PriceType
@@ -125,9 +121,7 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
 #if !APPCLIP && !os(watchOS) && !os(visionOS)
         location = udf.bool(forKey: Prefix.appSettings.udfKey(for: .location))
 #endif
-        debugMode = udf.bool(forKey: Prefix.appSettings.udfKey(for: .debugMode))
         completedOnboarding = udf.bool(forKey: Prefix.appSettings.udfKey(for: .onboarding))
-        screenshotMode = udf.bool(forKey: Prefix.appSettings.udfKey(for: .screenshotMode))
         hideMensaWithNoMenus = udf.bool(
             forKey: Prefix.appSettings.udfKey(for: .hideMensaWithNoMenus)
         )
@@ -240,24 +234,10 @@ class SettingsManager: ObservableObject, @unchecked Sendable {
                 forKey: Prefix.appSettings.udfKey(for: .location)
             )
         }.store(in: &subscribers)
-        $debugMode.sink { newValue in
-            if newValue {
-                self.udf.set(
-                    newValue,
-                    forKey: Prefix.appSettings.udfKey(for: .debugMode)
-                )
-            }
-        }.store(in: &subscribers)
         $completedOnboarding.sink { newValue in
             self.udf.set(
                 newValue,
                 forKey: Prefix.appSettings.udfKey(for: .onboarding)
-            )
-        }.store(in: &subscribers)
-        $screenshotMode.sink { newValue in
-            self.udf.set(
-                newValue,
-                forKey: Prefix.appSettings.udfKey(for: .screenshotMode)
             )
         }.store(in: &subscribers)
         $hideMensaWithNoMenus.sink { newValue in

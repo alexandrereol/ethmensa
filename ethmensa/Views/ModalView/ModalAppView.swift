@@ -19,9 +19,6 @@ import SwiftUI
 
 struct ModalAppView: View {
 
-    @State private var appIconPressActionCount = 0
-    @State private var debugSheetShown = false
-
     var viewModel: ModalViewModel
 
     var body: some View {
@@ -42,20 +39,8 @@ struct ModalAppView: View {
 #else
                 .frame(width: 135, height: 135)
 #endif
-                .onTapGesture {
-                    appIconPressActionCount += 1
-                }
-                .onChange(of: appIconPressActionCount) { newValue in
-                    if newValue >= 10 {
-                        appIconPressActionCount = 0
-                        debugSheetShown = true
-                    }
-                }
         }
         .padding(.horizontal, 20)
-        .sheet(isPresented: $debugSheetShown) {
-            DebugView()
-        }
     }
 }
 

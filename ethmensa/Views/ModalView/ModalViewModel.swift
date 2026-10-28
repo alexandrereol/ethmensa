@@ -27,7 +27,6 @@ struct ModalViewModel {
         detailButtonLabel: String? = nil,
         mainAction: (() -> Void)? = nil,
         detailAction: (() -> Void)? = nil,
-        appIconPressAction: (() -> Void)? = nil,
         tintColor: Color = .accentColor
     ) {
         self.type = type
@@ -38,7 +37,6 @@ struct ModalViewModel {
         self.detailButtonLabel = detailButtonLabel
         self.mainAction = mainAction
         self.detailAction = detailAction
-        self.appIconPressAction = appIconPressAction
         self.tintColor = tintColor
     }
 
@@ -57,7 +55,6 @@ struct ModalViewModel {
     var detailButtonLabel: String?
     var mainAction: (() -> Void)?
     var detailAction: (() -> Void)?
-    var appIconPressAction: (() -> Void)?
     var tintColor: Color
 }
 

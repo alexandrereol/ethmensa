@@ -248,7 +248,6 @@
 				Views/AppViewModifiers/VersionIncompatible.swift,
 				Views/AppViewModifiers/VersionIncompatibleModifier.swift,
 				Views/AppViewSheets.swift,
-				Views/HelperViews/DebugView.swift,
 				Views/HelperViews/SafariWebView.swift,
 				Views/MainView/MensaCells/MensaCellHelperView/OpeningTimesCircle.swift,
 				Views/ModalView/ModalAppView.swift,
