@@ -19,6 +19,8 @@ import SwiftUI
 
 private struct ClickCountAndWeekdayModifier: ViewModifier {
 
+    @EnvironmentObject var navigationManager: NavigationManager
+
     @Binding var selectedMensa: Mensa?
     @Binding var selectedWeekdayCode: Int
 
@@ -40,7 +42,15 @@ private struct ClickCountAndWeekdayModifier: ViewModifier {
 
     private func onAppear(_ mensa: Mensa) {
         mensa.increaseClicks()
-        if NavigationManager.shared.selectedWeekdayCodeOverride == nil {
+#if !os(watchOS)
+        // A restored or newly opened window shows the weekday it was showing, or was opened for.
+        if let restoredWeekdayCode = navigationManager.restoredWeekdayCode {
+            navigationManager.restoredWeekdayCode = nil
+            selectedWeekdayCode = restoredWeekdayCode
+            return
+        }
+#endif
+        if navigationManager.selectedWeekdayCodeOverride == nil {
             selectedWeekdayCode = Calendar.todayWeedaykETHCorrected
         }
     }

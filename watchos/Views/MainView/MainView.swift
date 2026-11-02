@@ -44,7 +44,7 @@ struct MainView: View {
 
     var body: some View {
         // The filtered list is derived on access, so it is computed only once per render.
-        let mensaList = mensaDataManager.mensaList
+        let mensaList = mensaDataManager.mensaList(for: navigationManager)
         let viewState = self.viewState(for: mensaList)
         NavigationSplitView {
             Group {

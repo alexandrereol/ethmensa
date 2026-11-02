@@ -36,8 +36,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 #if !APPCLIP && !os(visionOS)
         ShortcutsProvider.updateAppShortcutParameters()
 #endif
-        // Add AppDependencyManager for AppIntents
-        AppDependencyManager.shared.add(dependency: NavigationManager.shared)
+        // Add AppDependencyManager for AppIntents.
+        // Every window has its own `NavigationManager`, so intents use the one of the main window active last.
         AppDependencyManager.shared.add(dependency: MensaDataManager.shared)
         AppDependencyManager.shared.add(dependency: SettingsManager.shared)
 #if !APPCLIP

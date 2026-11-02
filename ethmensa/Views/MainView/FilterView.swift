@@ -21,14 +21,14 @@ import SwiftUI
 /// Filters are added through the filter menu in the toolbar.
 struct FilterView: View {
 
-    // Observed so the chips update whenever a filter changes, as `MensaFilter.active` reads the shared managers.
+    // Observed so the chips update whenever a filter changes.
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var settingsManager: SettingsManager
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(MensaFilter.active) { filter in
+                ForEach(MensaFilter.active(in: navigationManager)) { filter in
                     FilterChipView(filter: filter)
                 }
             }
@@ -43,12 +43,14 @@ struct FilterView: View {
 
 private struct FilterChipView: View {
 
+    @EnvironmentObject var navigationManager: NavigationManager
+
     let filter: MensaFilter
 
     var body: some View {
         Button {
             withAnimation {
-                filter.remove()
+                filter.remove(in: navigationManager)
             }
         } label: {
             HStack(spacing: 6) {
@@ -120,7 +122,7 @@ private extension View {
 
 #Preview("Filter") {
     FilterView()
-        .environmentObject(NavigationManager.shared)
+        .environmentObject(NavigationManager())
         .environmentObject(SettingsManager.shared)
 }
 

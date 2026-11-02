@@ -15,7 +15,6 @@
 //  along with this program. If not, see <https://www.gnu.org/licenses/>.
 //
 
-import Combine
 import Foundation
 import MapKit
 
@@ -24,19 +23,6 @@ class MapHeaderViewModel: ObservableObject {
     @Published var mapCenter: MKCoordinateRegion?
     @Published var mapItem: MKMapItem?
     @Published var mapSheetShown = false
-
-    private var subscribers: Set<AnyCancellable> = []
-
-    init() {
-        NavigationManager.shared.$selectedMensa
-            .compactMap { $0 }
-            .sink { mensa in
-                Task {
-                    await self.loadMap(forMensa: mensa)
-                }
-            }
-            .store(in: &subscribers)
-    }
 
     func handleTap(mensa: Mensa) {
         if #available(iOS 18.0, visionOS 2.0, *) {

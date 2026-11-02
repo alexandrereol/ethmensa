@@ -49,7 +49,7 @@ struct MainView: View {
 
     var body: some View {
         // The filtered list is derived on access, so it is computed only once per render.
-        let mensaList = mensaDataManager.mensaList
+        let mensaList = mensaDataManager.mensaList(for: navigationManager)
         let viewState = self.viewState(for: mensaList)
         ZStack {
             List(selection: $navigationManager.selectedMensa) {
@@ -83,7 +83,7 @@ struct MainView: View {
                         // Brings the chips a little closer to the title.
                         .padding(.top, -6)
                         // Gives the chips a little room above the first cell, without leaving a gap without filters.
-                        .padding(.bottom, MensaFilter.isAnyActive ? 6 : 0)
+                        .padding(.bottom, MensaFilter.isAnyActive(in: navigationManager) ? 6 : 0)
                 }
             }
             .environment(\.defaultMinListHeaderHeight, 0)
@@ -103,9 +103,7 @@ struct MainView: View {
                     description: .init(localized: "NO_RESULTS_FOR_SELECTED_FILTERS."),
                     actions: {
                         Button {
-                            Task {
-                                await mensaDataManager.resetFiltersAndSearch()
-                            }
+                            navigationManager.resetFiltersAndSearch()
                         } label: {
                             Text("RESET_FILTERS_AND_SEARCH")
                                 .padding(2)
@@ -121,11 +119,11 @@ struct MainView: View {
         .navigationTitle(Bundle.main.displayName)
 #endif
         .searchable(
-            text: $mensaDataManager.searchTerm,
+            text: $navigationManager.searchTerm,
             prompt: "SEARCH_MENSAS"
         )
         .toolbar {
-            MainViewToolbar()
+            MainViewToolbar(navigationManager: navigationManager)
         }
     }
 }
@@ -141,7 +139,7 @@ struct MainView: View {
 
 #Preview("Live Data") {
     AppView()
-        .environmentObject(NavigationManager.shared)
+        .environmentObject(NavigationManager())
         .environmentObject(MensaDataManager.shared)
         .environmentObject(NetworkManager.shared)
         .environmentObject(SettingsManager.shared)

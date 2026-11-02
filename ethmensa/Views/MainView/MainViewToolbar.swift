@@ -19,6 +19,8 @@ import SwiftUI
 
 struct MainViewToolbar: ToolbarContent {
 
+    let navigationManager: NavigationManager
+
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             FilterMenuView()
@@ -26,14 +28,14 @@ struct MainViewToolbar: ToolbarContent {
 #if !os(watchOS) && !os(visionOS) && !APPCLIP && !targetEnvironment(macCatalyst)
         ToolbarItem(placement: .topBarTrailing) {
             Button("LEGI_CARD", systemImage: "person.text.rectangle") {
-                NavigationManager.shared.sheet = .legiCard
+                navigationManager.sheet = .legiCard
             }
         }
 #endif
 #if !APPCLIP
         ToolbarItem(placement: .topBarTrailing) {
             Button("SETTINGS", systemImage: "gear") {
-                NavigationManager.shared.sheet = .settings
+                navigationManager.sheet = .settings
             }
         }
 #endif
@@ -85,12 +87,12 @@ private struct FilterMenuView: View {
     /// Toggles, unlike a picker, also allow deselecting the selected campus again.
     private func isActive(_ filter: MensaFilter) -> Binding<Bool> {
         Binding {
-            MensaFilter.active.contains(filter)
+            MensaFilter.active(in: navigationManager).contains(filter)
         } set: { isActive in
             if isActive {
-                filter.apply()
+                filter.apply(in: navigationManager)
             } else {
-                filter.remove()
+                filter.remove(in: navigationManager)
             }
         }
     }
@@ -101,9 +103,9 @@ private struct FilterMenuView: View {
             navigationManager.listWeekdayCode
         } set: { weekdayCode in
             if weekdayCode == Calendar.todayWeedaykETHCorrected {
-                MensaFilter.weekday(weekdayCode).remove()
+                MensaFilter.weekday(weekdayCode).remove(in: navigationManager)
             } else {
-                MensaFilter.weekday(weekdayCode).apply()
+                MensaFilter.weekday(weekdayCode).apply(in: navigationManager)
             }
         }
     }
@@ -173,11 +175,11 @@ private struct FilterMenuView: View {
                 }
                 .pickerStyle(.menu)
             }
-            if MensaFilter.isAnyActive {
+            if MensaFilter.isAnyActive(in: navigationManager) {
                 Section {
                     Button("RESET_FILTERS", systemImage: "xmark.circle") {
                         afterMenuCloses {
-                            MensaFilter.removeAll()
+                            MensaFilter.removeAll(in: navigationManager)
                         }
                     }
                 }
@@ -185,7 +187,7 @@ private struct FilterMenuView: View {
         } label: {
             Label(
                 "FILTER",
-                systemImage: MensaFilter.isAnyActive
+                systemImage: MensaFilter.isAnyActive(in: navigationManager)
                     ? "line.3.horizontal.decrease.circle.fill"
                     : "line.3.horizontal.decrease.circle"
             )
@@ -195,7 +197,7 @@ private struct FilterMenuView: View {
 
 #Preview {
     AppView()
-        .environmentObject(NavigationManager.shared)
+        .environmentObject(NavigationManager())
         .environmentObject(MensaDataManager.shared)
         .environmentObject(NetworkManager.shared)
         .environmentObject(SettingsManager.shared)

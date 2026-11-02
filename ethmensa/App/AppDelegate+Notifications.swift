@@ -22,6 +22,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         openSettingsFor notification: UNNotification?
     ) {
-        NavigationManager.shared.sheet = .notificationSettings
+        Task { @MainActor in
+            NavigationManager.inPrimaryWindow { navigationManager in
+                navigationManager.sheet = .notificationSettings
+            }
+        }
     }
 }

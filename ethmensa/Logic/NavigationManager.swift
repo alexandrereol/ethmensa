@@ -20,11 +20,13 @@ import os.log
 import SwiftUI
 
 /// Responsible for managing navigation within the application.
+///
+/// Every window has its own instance, so windows navigate, filter and search independently.
 class NavigationManager: ObservableObject, @unchecked Sendable {
-    /// A singleton instance of `NavigationManager` to manage mensa data.
-    ///
-    /// Use `NavigationManager.shared` to access the shared instance.
+#if os(watchOS)
+    /// The navigation manager of the watch app, which has a single window.
     static let shared = NavigationManager()
+#endif
 
     /// A logger instance for the `NavigationManager` class.
     ///
@@ -58,6 +60,12 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     /// are shown for the selected weekday.
     @Published var allergenFriendlyOnly = false
 
+#if !os(watchOS)
+    /// The search term entered by the user in this window.
+    /// - Important: This property is not applicable on watchOS.
+    @Published var searchTerm = ""
+#endif
+
     /// The weekday the mensa list is shown for: the overriding weekday if one is selected, otherwise today.
     var listWeekdayCode: Int {
         selectedWeekdayCodeOverride ?? Calendar.todayWeedaykETHCorrected
@@ -76,6 +84,15 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     /// - Important: This property is not used in watchOS.
     @Published var universalLinkAlertShown = false
 
+    /// The identifier of a Mensa to select once it is loaded, without an alert if it does not exist anymore,
+    /// e.g. when the window is restored or opened for a Mensa.
+    /// - Important: This property is not used in watchOS.
+    @Published var restoredMensaId: String?
+
+    /// The weekday to show once the Mensa in `restoredMensaId` is selected, instead of today's.
+    /// - Important: This property is not used in watchOS.
+    var restoredWeekdayCode: Int?
+
     /// A boolean property that indicates whether the fullscreen meal image is currently shown.
     /// - Important: This property is not available on watchOS.
     @Published var imagePopoverShown = false
@@ -83,6 +100,15 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     /// The URL of the meal image to be displayed fullscreen.
     /// - Important: This property is not available on watchOS.
     @Published var imagePopoverURL: URL?
+
+    /// The scene of the window, set by `MainWindowView` once a main window is shown,
+    /// so it can be brought to the front when an intent or a notification changes it.
+    /// - Important: This property is not available on watchOS.
+    weak var windowScene: UIWindowScene? {
+        didSet {
+            windowScene?.session.isMainWindow = true
+        }
+    }
 #endif
 
 #if os(watchOS)
@@ -110,6 +136,19 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
 #if !os(watchOS)
         initializeLinkHandlers()
 #endif
+        // Keeps the selected Mensa up to date when the Mensas are reloaded.
+        MensaDataManager.shared.$unfilteredMenaList
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] receivedValue in
+                guard let self,
+                      let selectedMensa = self.selectedMensa,
+                      let updatedMensa = receivedValue.first(where: { $0 == selectedMensa }),
+                      updatedMensa !== selectedMensa else {
+                    return
+                }
+                self.selectedMensa = updatedMensa
+            }.store(in: &subscribers)
         $selectedWeekdayCodeOverride.sink { receivedValue in
             self.selectedWeekdayCode = if let receivedValue {
                 receivedValue
@@ -131,38 +170,82 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     private func initializeLinkHandlers() {
         $universalLinkMensaId
             .compactMap { $0 }
-            .sink { receivedValue in
-            guard let unfilteredMenaList = MensaDataManager.shared.unfilteredMenaList else {
-                return
-            }
-            guard let mensa = unfilteredMenaList.first(where: { $0.id == receivedValue }) else {
-                // The Mensa might come with the Mensas that are still being downloaded
-                if MensaDataManager.shared.areAllProvidersUpToDate {
-                    self.universalLinkAlertShown = true
-                    self.universalLinkMensaId = nil
+            // Selects the Mensa once the identifier is set, so it can be cleared again.
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self, let universalLinkMensaId else {
+                    return
                 }
-                return
-            }
-            self.selectedMensa = mensa
-            self.universalLinkMensaId = nil
-        }.store(in: &subscribers)
+                select(mensaId: universalLinkMensaId, in: MensaDataManager.shared.unfilteredMenaList, isLink: true)
+            }.store(in: &subscribers)
+        $restoredMensaId
+            .compactMap { $0 }
+            // Selects the Mensa once the identifier is set, so it can be cleared again.
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self, let restoredMensaId else {
+                    return
+                }
+                select(mensaId: restoredMensaId, in: MensaDataManager.shared.unfilteredMenaList, isLink: false)
+            }.store(in: &subscribers)
         MensaDataManager.shared.$unfilteredMenaList
             .compactMap { $0 }
-            .sink { receivedValue in
-            guard let universalLinkMensaId = self.universalLinkMensaId else {
-                return
-            }
-            guard let mensa = receivedValue.first(where: { $0.id == universalLinkMensaId }) else {
-                // The Mensa might come with the Mensas that are still being downloaded
-                if MensaDataManager.shared.areAllProvidersUpToDate {
-                    self.universalLinkAlertShown = true
-                    self.universalLinkMensaId = nil
+            .sink { [weak self] receivedValue in
+                guard let self else {
+                    return
                 }
-                return
+                if let universalLinkMensaId {
+                    select(mensaId: universalLinkMensaId, in: receivedValue, isLink: true)
+                }
+                if let restoredMensaId {
+                    select(mensaId: restoredMensaId, in: receivedValue, isLink: false)
+                }
+            }.store(in: &subscribers)
+    }
+
+    /// Selects the Mensa with the given identifier once it is loaded.
+    ///
+    /// - Parameters:
+    ///   - mensaId: The identifier of the Mensa to select.
+    ///   - mensaList: The Mensas loaded so far.
+    ///   - isLink: Whether the Mensa comes from a link, in which case an alert tells if it does not exist.
+    private func select(mensaId: String, in mensaList: [Mensa]?, isLink: Bool) {
+        guard let mensaList else {
+            return
+        }
+        guard let mensa = mensaList.first(where: { $0.id == mensaId }) else {
+            // The Mensa might come with the Mensas that are still being downloaded
+            if MensaDataManager.shared.areAllProvidersUpToDate {
+                if isLink {
+                    universalLinkAlertShown = true
+                    universalLinkMensaId = nil
+                } else {
+                    restoredMensaId = nil
+                    restoredWeekdayCode = nil
+                }
             }
-            self.selectedMensa = mensa
-            self.universalLinkMensaId = nil
-        }.store(in: &subscribers)
+            return
+        }
+        if !isLink {
+            restoredMensaId = nil
+        }
+        selectedMensa = mensa
+        if isLink {
+            universalLinkMensaId = nil
+        }
+    }
+
+    /// Clears the search term and removes every filter of the mensa list in this window.
+    @MainActor
+    func resetFiltersAndSearch() {
+        searchTerm = ""
+        MensaFilter.removeAll(in: self)
+    }
+#else
+    /// Removes every filter of the mensa list.
+    @MainActor
+    func resetFiltersAndSearch() {
+        MensaFilter.removeAll(in: self)
     }
 #endif
 #endif
@@ -175,5 +258,86 @@ extension NavigationManager {
     static let example = NavigationManager(
         selectedMensa: .example
     )
+}
+#endif
+
+extension NavigationManager {
+    /// The navigation manager of the main window that was active last.
+    /// Links, intents and notifications open there, so they only ever change one window.
+    @MainActor private static weak var primaryWindow: NavigationManager?
+
+    /// The actions waiting for a main window, e.g. those of an intent that launched the app.
+    @MainActor private static var pendingPrimaryWindowActions: [@MainActor (NavigationManager) -> Void] = []
+
+#if !WIDGET && !os(watchOS)
+    /// Brings this main window to the front, e.g. after an intent changed it while another window was in front.
+    @MainActor
+    private func bringWindowToFront() {
+        guard let windowScene,
+              windowScene.activationState != .foregroundActive else {
+            return
+        }
+        if #available(iOS 17.0, visionOS 1.0, *) {
+            UIApplication.shared.activateSceneSession(for: .init(session: windowScene.session))
+        } else {
+            UIApplication.shared.requestSceneSessionActivation(windowScene.session, userActivity: nil, options: nil)
+        }
+    }
+#endif
+
+    /// Makes this window's navigation manager the one links, intents and notifications open in,
+    /// and runs the actions that were waiting for a main window.
+    @MainActor
+    func becomePrimaryWindow() {
+        Self.primaryWindow = self
+        let actions = Self.pendingPrimaryWindowActions
+        Self.pendingPrimaryWindowActions = []
+        for action in actions {
+            action(self)
+        }
+    }
+
+    /// Runs the given action in the main window that was active last.
+    ///
+    /// If no main window is open yet, the action runs once one is, and one is opened if only Mensa windows are.
+    @MainActor
+    static func inPrimaryWindow(_ action: @escaping @MainActor (NavigationManager) -> Void) {
+        if let primaryWindow {
+            action(primaryWindow)
+#if !WIDGET && !os(watchOS)
+            primaryWindow.bringWindowToFront()
+#endif
+            return
+        }
+        pendingPrimaryWindowActions.append(action)
+#if !WIDGET && !os(watchOS)
+        // While the app launches its first window registers itself. Otherwise only Mensa windows are shown:
+        // a main window in the background, which is not connected after a relaunch, is brought to the front,
+        // or a new one is opened.
+        guard UIApplication.shared.supportsMultipleScenes,
+              UIApplication.shared.connectedScenes.contains(where: { $0.activationState == .foregroundActive }) else {
+            return
+        }
+        let mainWindowSession = UIApplication.shared.openSessions.first { $0.isMainWindow }
+        if #available(iOS 17.0, visionOS 1.0, *) {
+            UIApplication.shared.activateSceneSession(for: mainWindowSession.map { .init(session: $0) } ?? .init())
+        } else {
+            UIApplication.shared.requestSceneSessionActivation(mainWindowSession, userActivity: nil, options: nil)
+        }
+#endif
+    }
+}
+
+#if !WIDGET && !os(watchOS)
+extension UISceneSession {
+    /// The `userInfo` key marking the session of a main window.
+    private static let isMainWindowKey = "isMainWindow"
+
+    /// Whether the session belongs to a main window, as opposed to a Mensa window.
+    /// It is stored in the session's `userInfo`, so it is known after a relaunch, before the window is connected.
+    var isMainWindow: Bool {
+        get { userInfo?[Self.isMainWindowKey] as? Bool ?? false }
+        set { userInfo = (userInfo ?? [:]).merging([Self.isMainWindowKey: newValue]) { $1 } }
+    }
 }
 #endif

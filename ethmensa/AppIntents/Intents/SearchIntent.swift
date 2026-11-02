@@ -28,15 +28,15 @@ struct SearchIntent: AppIntent {
     @Parameter(title: "SEARCH_MENSAS")
     var criteria: StringSearchCriteria
 
-    @Dependency var mensaDataManager: MensaDataManager
-    @Dependency var navigationManager: NavigationManager
-
     @MainActor
     func perform() async throws -> some IntentResult {
-        navigationManager.selectedMensa = nil
-        await mensaDataManager.resetFiltersAndSearch()
-        mensaDataManager.searchTerm = criteria.term
-        navigationManager.sheet = .none
+        let term = criteria.term
+        NavigationManager.inPrimaryWindow { navigationManager in
+            navigationManager.selectedMensa = nil
+            navigationManager.resetFiltersAndSearch()
+            navigationManager.searchTerm = term
+            navigationManager.sheet = .none
+        }
         return .result()
     }
 }
