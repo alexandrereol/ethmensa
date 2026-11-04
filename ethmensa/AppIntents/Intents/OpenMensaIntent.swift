@@ -23,14 +23,14 @@ struct OpenMensaIntent: OpenIntent {
     @Parameter(title: "MENSA")
     var target: MensaEntity
 
-    @Dependency var mensaDataManager: MensaDataManager
-    @Dependency var navigationManager: NavigationManager
-
     @MainActor
     func perform() async throws -> some IntentResult {
-        await mensaDataManager.resetFiltersAndSearch()
-        navigationManager.sheet = .none
-        navigationManager.universalLinkMensaId = target.id
+        let mensaId = target.id
+        NavigationManager.inPrimaryWindow { navigationManager in
+            navigationManager.resetFiltersAndSearch()
+            navigationManager.sheet = .none
+            navigationManager.universalLinkMensaId = mensaId
+        }
         return .result()
     }
 }

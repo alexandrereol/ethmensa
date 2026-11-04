@@ -25,11 +25,11 @@ struct ShowLegiIntent: AppIntent {
 
     static let openAppWhenRun: Bool = true
 
-    @Dependency var navigationManager: NavigationManager
-
     @MainActor
     func perform() async throws -> some IntentResult {
-        navigationManager.sheet = .legiCard
+        NavigationManager.inPrimaryWindow { navigationManager in
+            navigationManager.sheet = .legiCard
+        }
         return .result()
     }
 }

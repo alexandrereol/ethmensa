@@ -158,6 +158,6 @@ struct DetailView: View {
 
 #Preview("Live Data") {
     AppView()
-        .environmentObject(NavigationManager.shared)
+        .environmentObject(NavigationManager())
         .environmentObject(MensaDataManager.shared)
 }

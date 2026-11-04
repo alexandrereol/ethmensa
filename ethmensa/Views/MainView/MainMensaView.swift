@@ -22,6 +22,9 @@ struct MainMensaView: View {
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var mensaDataManager: MensaDataManager
 
+    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
+    @Environment(\.openWindow) private var openWindow
+
     var mensa: Mensa
     var isLoading = false
 
@@ -32,13 +35,29 @@ struct MainMensaView: View {
         )
         // Here a custom uiID is used to ensure SwiftUI updates cell when the opening times changes
         .id(mensa.uiID)
-        .draggable(mensa)
+        // Dragged to the edge of the screen, the Mensa opens in a new window.
+        .onDrag {
+            mensa.dragItemProvider(weekdayCode: navigationManager.selectedWeekdayCodeOverride)
+        }
         .contextMenu {
             Button(
                 "OPEN",
                 systemImage: "arrow.up.right.square"
             ) {
                 navigationManager.selectedMensa = mensa
+            }
+            if supportsMultipleWindows {
+                Button(
+                    "OPEN_IN_NEW_WINDOW",
+                    systemImage: "macwindow.badge.plus"
+                ) {
+                    openWindow(
+                        value: MensaWindow(
+                            mensaId: mensa.id,
+                            weekdayCode: navigationManager.selectedWeekdayCodeOverride
+                        )
+                    )
+                }
             }
             ShareLink(
                 item: mensa.shareURL,
@@ -66,7 +85,7 @@ struct MainMensaView: View {
         List {
             MainMensaView(mensa: .example)
                 .environmentObject(MensaDataManager.shared)
-                .environmentObject(NavigationManager.shared)
+                .environmentObject(NavigationManager())
                 .environmentObject(SettingsManager.shared)
         }
     }

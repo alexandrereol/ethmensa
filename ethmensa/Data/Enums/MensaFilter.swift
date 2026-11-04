@@ -39,10 +39,10 @@ enum MensaFilter: Hashable, Identifiable {
 
     var id: Self { self }
 
-    /// The currently active filters, in the order they are displayed.
-    static var active: [Self] {
+    /// The filters active in a window, in the order they are displayed.
+    /// - Parameter navigationManager: The navigation manager of the window, which holds its own filters.
+    static func active(in navigationManager: NavigationManager) -> [Self] {
         let settingsManager = SettingsManager.shared
-        let navigationManager = NavigationManager.shared
         var filters: [Self] = []
         // Whether a mensa is open refers to now, so it cannot filter the list of another day.
         if settingsManager.mensaShowType != .all, navigationManager.selectedWeekdayCodeOverride == nil {
@@ -63,47 +63,47 @@ enum MensaFilter: Hashable, Identifiable {
         return filters
     }
 
-    /// Whether any filter is active.
-    static var isAnyActive: Bool {
-        !active.isEmpty
+    /// Whether any filter is active in a window.
+    static func isAnyActive(in navigationManager: NavigationManager) -> Bool {
+        !active(in: navigationManager).isEmpty
     }
 
-    /// Removes every filter from the mensa list.
-    static func removeAll() {
+    /// Removes every filter from the mensa list of a window.
+    static func removeAll(in navigationManager: NavigationManager) {
         SettingsManager.shared.mensaShowType = .all
         SettingsManager.shared.mensaLocationType = .all
-        NavigationManager.shared.selectedWeekdayCodeOverride = nil
-        NavigationManager.shared.allergenFriendlyOnly = false
+        navigationManager.selectedWeekdayCodeOverride = nil
+        navigationManager.allergenFriendlyOnly = false
         SettingsManager.shared.sortBy = .def
     }
 
-    /// Applies this filter to the mensa list.
-    func apply() {
+    /// Applies this filter to the mensa list of a window.
+    func apply(in navigationManager: NavigationManager) {
         switch self {
         case .openOnly:
             SettingsManager.shared.mensaShowType = .open
         case .campus(let campusType):
             SettingsManager.shared.mensaLocationType = campusType
         case .weekday(let weekdayCode):
-            NavigationManager.shared.selectedWeekdayCodeOverride = weekdayCode
+            navigationManager.selectedWeekdayCodeOverride = weekdayCode
         case .allergenFriendly:
-            NavigationManager.shared.allergenFriendlyOnly = true
+            navigationManager.allergenFriendlyOnly = true
         case .sorting(let sortType):
             SettingsManager.shared.sortBy = sortType
         }
     }
 
-    /// Removes this filter from the mensa list.
-    func remove() {
+    /// Removes this filter from the mensa list of a window.
+    func remove(in navigationManager: NavigationManager) {
         switch self {
         case .openOnly:
             SettingsManager.shared.mensaShowType = .all
         case .campus:
             SettingsManager.shared.mensaLocationType = .all
         case .weekday:
-            NavigationManager.shared.selectedWeekdayCodeOverride = nil
+            navigationManager.selectedWeekdayCodeOverride = nil
         case .allergenFriendly:
-            NavigationManager.shared.allergenFriendlyOnly = false
+            navigationManager.allergenFriendlyOnly = false
         case .sorting:
             SettingsManager.shared.sortBy = .def
         }

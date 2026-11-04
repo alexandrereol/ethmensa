@@ -27,15 +27,14 @@ struct ethmensa: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
+    // The data and settings are shared by all windows, each window has its own `NavigationManager`.
     @StateObject var mensaDataManager = MensaDataManager.shared
-    @StateObject var navigationManager = NavigationManager.shared
     @StateObject var networkManager = NetworkManager.shared
     @StateObject var settingsManager = SettingsManager.shared
 
     var body: some Scene {
         WindowGroup {
-            AppView()
-                .environmentObject(navigationManager)
+            MainWindowView()
                 .environmentObject(mensaDataManager)
                 .environmentObject(networkManager)
                 .environmentObject(settingsManager)
@@ -62,5 +61,21 @@ struct ethmensa: App {
              )
         )
 #endif
+        // A single Mensa, opened in a new window from its context menu or by dragging it to the edge of the screen.
+        WindowGroup(for: MensaWindow.self) { $window in
+            MensaWindowView(window: $window)
+                .environmentObject(mensaDataManager)
+                .environmentObject(networkManager)
+                .environmentObject(settingsManager)
+#if os(visionOS)
+                .frame(
+                    minWidth: 600,
+                    maxWidth: 2000,
+                    minHeight: 600,
+                    maxHeight: 2000
+                )
+#endif
+        }
+        .handlesExternalEvents(matching: [MensaWindow.externalEventIdentifier])
     }
 }

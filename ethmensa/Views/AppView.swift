@@ -88,7 +88,7 @@ struct AppView: View {
 
 #Preview {
     AppView()
-        .environmentObject(NavigationManager.shared)
+        .environmentObject(NavigationManager())
         .environmentObject(MensaDataManager.shared)
         .environmentObject(SettingsManager.shared)
 }

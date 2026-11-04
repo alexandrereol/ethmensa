@@ -40,25 +40,26 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     /// This array represents the unfiltered list of Mensa data.
     @Published var unfilteredMenaList: [Mensa]?
 
-    /// The mensa list with the search term, filters and sorting applied, or `nil` while it is loading.
+    /// The mensa list of a window with its search term, filters and sorting applied, or `nil` while it is loading.
     ///
-    /// The list is derived on every access, so it always reflects the current settings. Views observing
+    /// The list is derived on every call, so it always reflects the current settings. Views observing
     /// `SettingsManager` and `NavigationManager` re-render, and animate, as soon as a filter changes.
-    var mensaList: [Mensa]? {
+    /// - Parameter navigationManager: The navigation manager of the window, which holds its search term and filters.
+    func mensaList(for navigationManager: NavigationManager) -> [Mensa]? {
         // Filtering by campus needs the campus of every mensa, so the list keeps loading until they are known.
         guard var mensaList = unfilteredMenaList,
               areLocationTypesResolved || SettingsManager.shared.mensaLocationType == .all else {
             return nil
         }
 #if os(watchOS)
-        removeMensasWithoutMenuToday(mensaList: &mensaList)
+        removeMensasWithoutMenu(on: navigationManager.selectedWeekdayCode, mensaList: &mensaList)
 #else
         if SettingsManager.shared.hideMensaWithNoMenus {
-            removeMensasWithoutMenuToday(mensaList: &mensaList)
+            removeMensasWithoutMenu(on: navigationManager.selectedWeekdayCode, mensaList: &mensaList)
         }
-        search(mensaList: &mensaList)
+        search(for: navigationManager.searchTerm, mensaList: &mensaList)
 #endif
-        filter(mensaList: &mensaList)
+        filter(mensaList: &mensaList, navigationManager: navigationManager)
         sort(mensaList: &mensaList)
         // An empty list only counts as loaded once every provider has loaded, until then it might still fill up.
         guard !mensaList.isEmpty || areAllProvidersLoaded else {
@@ -66,12 +67,6 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         }
         return mensaList
     }
-
-#if !os(watchOS)
-    /// A published property that holds the search term entered by the user.
-    /// - Important: This property is not applicable on watchOS.
-    @Published var searchTerm = ""
-#endif
 
     /// Whether the campus of every mensa in `unfilteredMenaList` has been determined.
     @Published private var areLocationTypesResolved = false
@@ -112,30 +107,10 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         }
     }
 
-    /// Resets the filters and search term to their default values and reloads the unfiltered mensa list.
-    /// 
-    /// This function performs the following actions:
-    /// - Resets the search term to an empty string (except on watchOS).
-    /// - Sets the sorting preference to the default value.
-    /// - Sets the mensa show type to show all.
-    /// - Sets the mensa location type to show all.
-    /// - Clears any selected weekday code override in the navigation manager.
-    /// - Turns off the allergen-friendly filter.
-    /// - Reloads the unfiltered mensa list asynchronously.
-    func resetFiltersAndSearch() async {
-        await MainActor.run {
-#if !os(watchOS)
-            searchTerm = ""
-#endif
-            MensaFilter.removeAll()
-        }
-    }
-
     /// Reloads the unfiltered list of Mensa asynchronously.
     ///
     /// This function fetches the latest Mensa data from the API and updates the unfiltered Mensa list
     /// as soon as the Mensas of a provider are loaded. Until then, a provider keeps the Mensas it had before.
-    /// It also updates the selected Mensa in the `NavigationManager` if it exists in the new list.
     /// After each update, it determines the campus of every Mensa, which filtering by campus relies on.
     ///
     /// - Note: This function should be called from an asynchronous context.
@@ -221,12 +196,6 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
             self.unfilteredMenaList = newUnfilteredMenaList
         }
         guard !Task.isCancelled else { return nil }
-        if let selectedMensa = NavigationManager.shared.selectedMensa,
-           let updatedMensa = newUnfilteredMenaList.first(where: { $0 == selectedMensa }) {
-            await MainActor.run {
-                NavigationManager.shared.selectedMensa = updatedMensa
-            }
-        }
         return newUnfilteredMenaList
     }
 
@@ -248,10 +217,12 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 
 #if !os(watchOS)
     /// Filters the given list of Mensa objects based on the search term.
-    /// - Parameter mensaList: The list of Mensa objects to be filtered. This parameter is modified in place.
+    /// - Parameters:
+    ///   - searchTerm: The search term of the window.
+    ///   - mensaList: The list of Mensa objects to be filtered. This parameter is modified in place.
     /// - Note: If the search term is empty, the list remains unchanged.
     /// - Important: This function is not applicable on watchOS.
-    private func search(mensaList: inout [Mensa]) {
+    private func search(for searchTerm: String, mensaList: inout [Mensa]) {
         guard !searchTerm.isEmpty else {
             return
         }
@@ -262,8 +233,10 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
 #endif
 
     /// Filters the given list of Mensa objects based on various conditions.
-    /// - Parameter mensaList: The list of Mensa objects to be filtered. This parameter is modified in place.
-    /// 
+    /// - Parameters:
+    ///   - mensaList: The list of Mensa objects to be filtered. This parameter is modified in place.
+    ///   - navigationManager: The navigation manager of the window, which holds its filters.
+    ///
     /// The filtering conditions are:
     /// - If the allergen-friendly filter is active, only include Mensa objects that do not have meals with allergens
     ///   specified in `SettingsManager` on the weekday of the list.
@@ -272,13 +245,13 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     ///   the selected location type.
     /// - If the `hideMensaWithNoMenus` setting in `SettingsManager` is enabled, remove Mensa objects that have
     ///   no meal times.
-    private func filter(mensaList: inout [Mensa]) {
-        let activeFilters = MensaFilter.active
+    private func filter(mensaList: inout [Mensa], navigationManager: NavigationManager) {
+        let activeFilters = MensaFilter.active(in: navigationManager)
         var filteredArray: [Mensa] = []
         for mensa in mensaList {
             let allergenCond = if activeFilters.contains(.allergenFriendly) {
                 !mensa.mealTimes.filter { mealTime in
-                    mealTime.weekdayCode == NavigationManager.shared.listWeekdayCode
+                    mealTime.weekdayCode == navigationManager.listWeekdayCode
                 }.allSatisfy { mealTime in
                     mealTime.meals.allSatisfy { meal in
                         !Set(SettingsManager.shared.allergens).isDisjoint(with: meal.allergen ?? [])
@@ -335,12 +308,14 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         }
     }
 
-    /// Removes mensas from the provided list that do not have a menu for today.
-    /// - Parameter mensaList: The list of mensas to be filtered. This parameter is modified in place.
-    private func removeMensasWithoutMenuToday(mensaList: inout [Mensa]) {
+    /// Removes mensas from the provided list that do not have a menu on the given weekday.
+    /// - Parameters:
+    ///   - weekdayCode: The weekday selected in the window.
+    ///   - mensaList: The list of mensas to be filtered. This parameter is modified in place.
+    private func removeMensasWithoutMenu(on weekdayCode: Int, mensaList: inout [Mensa]) {
         mensaList.removeAll { mensa in
             if let todayMealTime = mensa.mealTimes.filter({ mealTime in
-                mealTime.weekdayCode == NavigationManager.shared.selectedWeekdayCode
+                mealTime.weekdayCode == weekdayCode
             }).first {
                 todayMealTime.meals.isEmpty
             } else {
