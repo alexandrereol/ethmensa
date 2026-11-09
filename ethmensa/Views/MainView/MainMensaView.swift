@@ -40,12 +40,6 @@ struct MainMensaView: View {
             mensa.dragItemProvider(weekdayCode: navigationManager.selectedWeekdayCodeOverride)
         }
         .contextMenu {
-            Button(
-                "OPEN",
-                systemImage: "arrow.up.right.square"
-            ) {
-                navigationManager.selectedMensa = mensa
-            }
             if supportsMultipleWindows {
                 Button(
                     "OPEN_IN_NEW_WINDOW",
