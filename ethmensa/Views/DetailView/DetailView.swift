@@ -15,6 +15,7 @@
 //  along with this program. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import AppIntents
 import SwiftUI
 
 struct DetailView: View {
@@ -145,6 +146,12 @@ struct DetailView: View {
             element: contextMenuPreview ? nil : navigationManager.selectedMensa
         ) { mensa, activity in
             mensa.configure(activity)
+#if !os(visionOS)
+            // Tells Siri and Apple Intelligence which Mensa is on screen.
+            if #available(iOS 27.0, *) {
+                activity.appEntityIdentifier = EntityIdentifier(for: MensaEntity.self, identifier: mensa.id)
+            }
+#endif
         }
 #endif
     }

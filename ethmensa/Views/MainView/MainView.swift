@@ -15,6 +15,7 @@
 //  along with this program. If not, see <https://www.gnu.org/licenses/>.
 //
 
+import AppIntents
 import SwiftUI
 
 struct MainView: View {
@@ -57,6 +58,7 @@ struct MainView: View {
                     if viewState == .loadedWithContent {
                         ForEach(mensaList ?? []) { mensa in
                             MainMensaView(mensa: mensa)
+                                .mensaEntityIdentifier(mensa)
                         }
                     } else if viewState == .loading {
                         ForEach(Array(repeating: Mensa.example, count: 10)) { mensa in
@@ -146,6 +148,22 @@ struct MainView: View {
 }
 
 private extension View {
+
+    /// Tells Siri and Apple Intelligence which Mensa a row shows, on iOS 27 and later.
+    /// `MensaEntity` is not part of the App Clip and visionOS targets.
+    @ViewBuilder
+    func mensaEntityIdentifier(_ mensa: Mensa) -> some View {
+#if !APPCLIP && !os(visionOS)
+        if #available(iOS 27.0, *) {
+            self
+                .appEntityIdentifier(EntityIdentifier(for: MensaEntity.self, identifier: mensa.id))
+        } else {
+            self
+        }
+#else
+        self
+#endif
+    }
 
     /// Styles the reset button of the empty state prominently.
     /// On iOS 26 and later it uses Liquid Glass. The glass styles are not
