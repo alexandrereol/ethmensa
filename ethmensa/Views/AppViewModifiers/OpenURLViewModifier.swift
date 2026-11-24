@@ -42,6 +42,11 @@ private struct OpenURLViewModifier: ViewModifier {
                 }
                 if let matchSubstring = url.relativePath.firstMatch(of: regex)?[mensaIdRef] {
                     universalLinkMensaId = String(matchSubstring)
+                } else if url.pathComponents.dropFirst().first == "s" {
+                    // A Mensa link without a valid identifier, e.g. one that was cut off,
+                    // replacing any earlier link that is still waiting for the Mensas to load
+                    universalLinkMensaId = nil
+                    universalLinkAlertShown = true
                 }
             }
 #if !APPCLIP
