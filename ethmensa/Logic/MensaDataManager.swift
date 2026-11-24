@@ -220,9 +220,11 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     /// - Parameters:
     ///   - searchTerm: The search term of the window.
     ///   - mensaList: The list of Mensa objects to be filtered. This parameter is modified in place.
-    /// - Note: If the search term is empty, the list remains unchanged.
+    /// - Note: Leading and trailing whitespace is ignored (keyboard predictions append a space).
+    ///   If the trimmed search term is empty, the list remains unchanged.
     /// - Important: This function is not applicable on watchOS.
     private func search(for searchTerm: String, mensaList: inout [Mensa]) {
+        let searchTerm = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !searchTerm.isEmpty else {
             return
         }
