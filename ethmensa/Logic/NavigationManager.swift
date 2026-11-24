@@ -208,7 +208,8 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     /// - Parameters:
     ///   - mensaId: The identifier of the Mensa to select.
     ///   - mensaList: The Mensas loaded so far.
-    ///   - isLink: Whether the Mensa comes from a link, in which case an alert tells if it does not exist.
+    ///   - isLink: Whether the Mensa comes from a link, in which case a sheet or image in front of it is closed,
+    ///     or an alert tells if it does not exist.
     private func select(mensaId: String, in mensaList: [Mensa]?, isLink: Bool) {
         guard let mensaList else {
             return
@@ -231,6 +232,9 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
         }
         selectedMensa = mensa
         if isLink {
+            // Closes whatever is in front of the Mensa, so the link doesn't seem to do nothing.
+            sheet = .none
+            imagePopoverShown = false
             universalLinkMensaId = nil
         }
     }
