@@ -26,7 +26,7 @@ struct DetailView: View {
     private enum ViewState {
         case noSelection
         case noMenu
-        case noAllergenFriendlyMeal
+        case noMatchingMeal
         case contentAvailable
     }
 
@@ -36,7 +36,7 @@ struct DetailView: View {
         } else if mealTimes.isEmpty {
             .noMenu
         } else if shownMealTimes.isEmpty {
-            .noAllergenFriendlyMeal
+            .noMatchingMeal
         } else {
             .contentAvailable
         }
@@ -54,12 +54,31 @@ struct DetailView: View {
         }
     }
 
-    /// The meal times shown, leaving out those without an allergen-friendly meal while that filter is active.
+    /// The meal times shown, leaving out those without a meal matching the diet and allergen-friendly filters.
     private var shownMealTimes: [MealTime] {
-        if navigationManager.allergenFriendlyOnly {
-            mealTimes.filter { !$0.allergenCompatibleMeals.isEmpty }
-        } else {
-            mealTimes
+        mealTimes.filter { !navigationManager.shownMeals(of: $0).isEmpty }
+    }
+
+    /// The view shown when the diet or allergen-friendly filter hides every meal of the selected day.
+    @ViewBuilder
+    private var noMatchingMealView: some View {
+        switch navigationManager.diet {
+        case .all:
+            CustomContentUnavailableView(
+                label: .init(localized: "NO_ALLERGEN_FRIENDLY_MEAL"),
+                systemImageName: MensaFilter.allergenFriendly.systemImageName,
+                description: .init(localized: "NO_MEAL_WITHOUT_YOUR_ALLERGENS_ON_THIS_DAY"),
+                actions: { EmptyView() }
+            )
+        case .vegetarian, .vegan:
+            CustomContentUnavailableView(
+                label: navigationManager.diet == .vegan
+                    ? .init(localized: "NO_VEGAN_MEAL")
+                    : .init(localized: "NO_VEGETARIAN_MEAL"),
+                systemImageName: navigationManager.diet.systemImageName,
+                description: .init(localized: "NO_MEAL_MATCHES_YOUR_FILTERS_ON_THIS_DAY"),
+                actions: { EmptyView() }
+            )
         }
     }
 
@@ -73,7 +92,7 @@ struct DetailView: View {
                     description: .init(localized: "NO_MENSA_SELECTED_MESSAGE"),
                     actions: { EmptyView() }
                 )
-            case .contentAvailable, .noMenu, .noAllergenFriendlyMeal:
+            case .contentAvailable, .noMenu, .noMatchingMeal:
                 List {
                     if !contextMenuPreview {
                         Section {
@@ -95,26 +114,15 @@ struct DetailView: View {
                             // First on screen when the context-menu preview hides the map.
                             Spacer(minLength: 0).frame(height: contextMenuPreview ? 10 : 0).listRowInsets(EdgeInsets())
                         }
-                    } else if viewState == .noAllergenFriendlyMeal {
+                    } else if viewState == .noMatchingMeal {
                         Section {
-                            CustomContentUnavailableView(
-                                label: .init(localized: "NO_ALLERGEN_FRIENDLY_MEAL"),
-                                systemImageName: MensaFilter.allergenFriendly.systemImageName,
-                                description: .init(localized: "NO_MEAL_WITHOUT_YOUR_ALLERGENS_ON_THIS_DAY"),
-                                actions: { EmptyView() }
-                            )
+                            noMatchingMealView
                         }
                     } else if viewState == .contentAvailable {
                         ForEach(shownMealTimes) { mealTime in
                             Section(mealTime.type ?? .init(localized: "MEAL")) {
-                                if navigationManager.allergenFriendlyOnly {
-                                    ForEach(mealTime.allergenCompatibleMeals) { meal in
-                                        MealCellView(meal: meal)
-                                    }
-                                } else {
-                                    ForEach(mealTime.meals) { meal in
-                                        MealCellView(meal: meal)
-                                    }
+                                ForEach(navigationManager.shownMeals(of: mealTime)) { meal in
+                                    MealCellView(meal: meal)
                                 }
                             }
                         }

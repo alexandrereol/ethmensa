@@ -31,6 +31,10 @@ struct WeekdaySelectorHeaderView: View {
         .pickerStyle(.menu)
         // While a day is selected in the filter menu, the menu of that day is shown.
         .disabled(navigationManager.selectedWeekdayCodeOverride != nil)
+        if navigationManager.diet != .all {
+            Label(navigationManager.diet.localizedString, systemImage: navigationManager.diet.systemImageName)
+                .foregroundStyle(.secondary)
+        }
         if navigationManager.allergenFriendlyOnly {
             Label("ALLERGEN_FRIENDLY", systemImage: MensaFilter.allergenFriendly.systemImageName)
                 .foregroundStyle(.secondary)

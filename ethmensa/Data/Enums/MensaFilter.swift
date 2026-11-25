@@ -31,6 +31,9 @@ enum MensaFilter: Hashable, Identifiable {
     /// The menus of the given weekday instead of today's.
     case weekday(Int)
 
+    /// Only mensas serving at least one meal of the given diet on the selected day.
+    case diet(Diet)
+
     /// Only mensas serving at least one meal without the user's allergens on the selected day.
     case allergenFriendly
 
@@ -38,6 +41,52 @@ enum MensaFilter: Hashable, Identifiable {
     case sorting(SortType)
 
     var id: Self { self }
+
+    /// A diet the meals can be filtered by, based on the labels the mensas give their meals.
+    /// - Important: The diet is only kept for the session of a window. It is never saved, synced or logged.
+    enum Diet: CaseIterable, Hashable {
+        /// Every meal, labelled or not.
+        case all
+
+        /// Vegetarian meals, including vegan ones.
+        case vegetarian
+
+        /// Vegan meals.
+        case vegan
+
+        /// Whether the given meal is of this diet.
+        /// Meals the mensa did not label never match a diet other than `.all`.
+        func includes(_ meal: Meal) -> Bool {
+            let mealTypes = meal.mealType ?? []
+            return switch self {
+            case .all:
+                true
+            case .vegetarian:
+                // `Meal` drops the vegetarian label of vegan meals.
+                mealTypes.contains(.vegetarian) || mealTypes.contains(.vegan)
+            case .vegan:
+                mealTypes.contains(.vegan)
+            }
+        }
+
+        /// The localized name of the diet.
+        var localizedString: String {
+            switch self {
+            case .all: .init(localized: "ALL_MEALS")
+            case .vegetarian: .init(localized: "VEGETARIAN")
+            case .vegan: .init(localized: "VEGAN")
+            }
+        }
+
+        /// The name of the SF Symbol representing the diet, matching the labels of the meals.
+        var systemImageName: String {
+            switch self {
+            case .all: "fork.knife"
+            case .vegetarian: "leaf"
+            case .vegan: "leaf.fill"
+            }
+        }
+    }
 
     /// The filters active in a window, in the order they are displayed.
     /// - Parameter navigationManager: The navigation manager of the window, which holds its own filters.
@@ -53,6 +102,9 @@ enum MensaFilter: Hashable, Identifiable {
         }
         if let weekdayCode = navigationManager.selectedWeekdayCodeOverride {
             filters.append(.weekday(weekdayCode))
+        }
+        if navigationManager.diet != .all {
+            filters.append(.diet(navigationManager.diet))
         }
         if navigationManager.allergenFriendlyOnly {
             filters.append(.allergenFriendly)
@@ -73,6 +125,7 @@ enum MensaFilter: Hashable, Identifiable {
         SettingsManager.shared.mensaShowType = .all
         SettingsManager.shared.mensaLocationType = .all
         navigationManager.selectedWeekdayCodeOverride = nil
+        navigationManager.diet = .all
         navigationManager.allergenFriendlyOnly = false
         SettingsManager.shared.sortBy = .def
     }
@@ -86,6 +139,8 @@ enum MensaFilter: Hashable, Identifiable {
             SettingsManager.shared.mensaLocationType = campusType
         case .weekday(let weekdayCode):
             navigationManager.selectedWeekdayCodeOverride = weekdayCode
+        case .diet(let diet):
+            navigationManager.diet = diet
         case .allergenFriendly:
             navigationManager.allergenFriendlyOnly = true
         case .sorting(let sortType):
@@ -102,6 +157,8 @@ enum MensaFilter: Hashable, Identifiable {
             SettingsManager.shared.mensaLocationType = .all
         case .weekday:
             navigationManager.selectedWeekdayCodeOverride = nil
+        case .diet:
+            navigationManager.diet = .all
         case .allergenFriendly:
             navigationManager.allergenFriendlyOnly = false
         case .sorting:
@@ -118,6 +175,8 @@ enum MensaFilter: Hashable, Identifiable {
             campusType.localizedString
         case .weekday(let weekdayCode):
             Date.weekdaysStartingAtOne.first { $0.index == weekdayCode }?.string ?? .init(localized: "WEEKDAY")
+        case .diet(let diet):
+            diet.localizedString
         case .allergenFriendly:
             .init(localized: "ALLERGEN_FRIENDLY")
         case .sorting(let sortType):
@@ -131,8 +190,18 @@ enum MensaFilter: Hashable, Identifiable {
         case .openOnly: "clock"
         case .campus: "mappin"
         case .weekday: "calendar"
+        case .diet(let diet): diet.systemImageName
         case .allergenFriendly: "checkmark.shield"
         case .sorting: "arrow.up.arrow.down"
         }
+    }
+}
+
+extension NavigationManager {
+    /// The meals of a meal time shown in this window: those of the selected diet, and without the user's
+    /// allergens while the allergen-friendly filter is active.
+    func shownMeals(of mealTime: MealTime) -> [Meal] {
+        let meals = allergenFriendlyOnly ? mealTime.allergenCompatibleMeals : mealTime.meals
+        return meals.filter(diet.includes)
     }
 }
