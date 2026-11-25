@@ -62,23 +62,33 @@ struct DetailView: View {
     /// The view shown when the diet or allergen-friendly filter hides every meal of the selected day.
     @ViewBuilder
     private var noMatchingMealView: some View {
-        switch navigationManager.diet {
-        case .all:
+        if navigationManager.diet == .all {
+            // Only the allergen-friendly filter is active.
             CustomContentUnavailableView(
                 label: .init(localized: "NO_ALLERGEN_FRIENDLY_MEAL"),
                 systemImageName: MensaFilter.allergenFriendly.systemImageName,
                 description: .init(localized: "NO_MEAL_WITHOUT_YOUR_ALLERGENS_ON_THIS_DAY"),
                 actions: { EmptyView() }
             )
-        case .vegetarian, .vegan:
+        } else {
             CustomContentUnavailableView(
-                label: navigationManager.diet == .vegan
-                    ? .init(localized: "NO_VEGAN_MEAL")
-                    : .init(localized: "NO_VEGETARIAN_MEAL"),
+                label: noMatchingMealTitle,
                 systemImageName: navigationManager.diet.systemImageName,
                 description: .init(localized: "NO_MEAL_MATCHES_YOUR_FILTERS_ON_THIS_DAY"),
                 actions: { EmptyView() }
             )
+        }
+    }
+
+    /// The title of the empty state of a diet filter. With the allergen-friendly filter also active, meals of the
+    /// diet may exist but contain the user's allergens, so the title doesn't name the diet.
+    private var noMatchingMealTitle: String {
+        if navigationManager.allergenFriendlyOnly {
+            .init(localized: "NO_MATCHING_MEAL")
+        } else if navigationManager.diet == .vegan {
+            .init(localized: "NO_VEGAN_MEAL")
+        } else {
+            .init(localized: "NO_VEGETARIAN_MEAL")
         }
     }
 
@@ -117,6 +127,9 @@ struct DetailView: View {
                     } else if viewState == .noMatchingMeal {
                         Section {
                             noMatchingMealView
+                        } header: {
+                            // First on screen when the context-menu preview hides the map.
+                            Spacer(minLength: 0).frame(height: contextMenuPreview ? 10 : 0).listRowInsets(EdgeInsets())
                         }
                     } else if viewState == .contentAvailable {
                         ForEach(shownMealTimes) { mealTime in

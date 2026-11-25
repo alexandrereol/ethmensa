@@ -202,6 +202,6 @@ extension NavigationManager {
     /// allergens while the allergen-friendly filter is active.
     func shownMeals(of mealTime: MealTime) -> [Meal] {
         let meals = allergenFriendlyOnly ? mealTime.allergenCompatibleMeals : mealTime.meals
-        return meals.filter(diet.includes)
+        return diet == .all ? meals : meals.filter(diet.includes)
     }
 }

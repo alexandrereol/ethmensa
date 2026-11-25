@@ -2280,6 +2280,35 @@
         }
       }
     },
+    "NO_MATCHING_MEAL" : {
+      "comment" : "The title shown in a mensa's menu when the diet and allergen-friendly filters together hide every meal of the selected day.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein passendes Menü"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No matching meal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun menu correspondant"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun menu corrispondente"
+          }
+        }
+      }
+    },
     "NO_MEAL_MATCHES_YOUR_FILTERS_ON_THIS_DAY" : {
       "comment" : "The description shown in a mensa's menu when the diet filter, possibly with the allergen-friendly filter, hides every meal of the selected day.",
       "localizations" : {
