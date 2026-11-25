@@ -60,6 +60,10 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     /// are shown for the selected weekday.
     @Published var allergenFriendlyOnly = false
 
+    /// A published property that holds the diet whose meals are shown in this window, see `MensaFilter.Diet`.
+    /// - Important: The diet is only kept for the session of the window. It is never saved, synced or logged.
+    @Published var diet = MensaFilter.Diet.all
+
 #if !os(watchOS)
     /// The search term entered by the user in this window.
     /// - Important: This property is not applicable on watchOS.
@@ -126,10 +130,12 @@ class NavigationManager: ObservableObject, @unchecked Sendable {
     init(
         selectedMensa: Mensa? = nil,
         selectedWeekdayCodeOverride: Int? = nil,
-        allergenFriendlyOnly: Bool? = nil
+        allergenFriendlyOnly: Bool? = nil,
+        diet: MensaFilter.Diet = .all
     ) {
         self.selectedMensa = selectedMensa
         self.selectedWeekdayCodeOverride = selectedWeekdayCodeOverride
+        self.diet = diet
         self.allergenFriendlyOnly = allergenFriendlyOnly ?? (
             Self.isAllergenFilterOnForUsersWithAllergens && !SettingsManager.shared.allergens.isEmpty
         )

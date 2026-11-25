@@ -240,8 +240,8 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
     ///   - navigationManager: The navigation manager of the window, which holds its filters.
     ///
     /// The filtering conditions are:
-    /// - If the allergen-friendly filter is active, only include Mensa objects that do not have meals with allergens
-    ///   specified in `SettingsManager` on the weekday of the list.
+    /// - If the allergen-friendly filter or a diet filter is active, only include Mensa objects that have at least one
+    ///   meal on the weekday of the list that is of the diet and has none of the allergens in `SettingsManager`.
     /// - If the open-only filter is active, only include Mensa objects that are currently open.
     /// - If the mensa location type in `SettingsManager` is not set to `.all`, only include Mensa objects that match
     ///   the selected location type.
@@ -251,13 +251,11 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
         let activeFilters = MensaFilter.active(in: navigationManager)
         var filteredArray: [Mensa] = []
         for mensa in mensaList {
-            let allergenCond = if activeFilters.contains(.allergenFriendly) {
-                !mensa.mealTimes.filter { mealTime in
+            // The allergen-friendly and diet filters combine: a single meal has to match both.
+            let mealCond = if activeFilters.contains(.allergenFriendly) || navigationManager.diet != .all {
+                mensa.mealTimes.contains { mealTime in
                     mealTime.weekdayCode == navigationManager.listWeekdayCode
-                }.allSatisfy { mealTime in
-                    mealTime.meals.allSatisfy { meal in
-                        !Set(SettingsManager.shared.allergens).isDisjoint(with: meal.allergen ?? [])
-                    }
+                        && !navigationManager.shownMeals(of: mealTime).isEmpty
                 }
             } else {
                 true
@@ -273,7 +271,7 @@ class MensaDataManager: ObservableObject, @unchecked Sendable {
                 // The campus of every Mensa is determined in `reloadUnfilteredMensaList()`.
                 SettingsManager.shared.mensaLocationType == mensa.getLocationTypeCache
             }
-            if allergenCond,
+            if mealCond,
                openCond,
                locationCond {
                 filteredArray.append(mensa)

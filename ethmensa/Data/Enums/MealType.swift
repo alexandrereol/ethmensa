@@ -56,12 +56,12 @@ enum MealType {
         }
     }
 
-    /// Get the MealType from the ETH-API provided string.
+    /// Get the MealType from the ETH-API provided string, in English or German (`lang=de`).
     static func fromETHString(_ string: String) -> Self? {
         switch string.lowercased() {
         case "vegan": .vegan
-        case "vegetarian": .vegetarian
-        case "fish": .fish
+        case "vegetarian", "vegetarisch": .vegetarian
+        case "fish", "fisch": .fish
         default: nil
         }
     }

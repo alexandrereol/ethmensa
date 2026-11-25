@@ -110,6 +110,19 @@ private struct FilterMenuView: View {
         }
     }
 
+    /// Selecting all meals removes the diet filter.
+    private var diet: Binding<MensaFilter.Diet> {
+        Binding {
+            navigationManager.diet
+        } set: { diet in
+            if diet == .all {
+                MensaFilter.diet(navigationManager.diet).remove(in: navigationManager)
+            } else {
+                MensaFilter.diet(diet).apply(in: navigationManager)
+            }
+        }
+    }
+
     private var selectedWeekdayName: String {
         if let weekdayCode = navigationManager.selectedWeekdayCodeOverride {
             MensaFilter.weekday(weekdayCode).localizedString
@@ -144,6 +157,15 @@ private struct FilterMenuView: View {
                         systemImage: MensaFilter.weekday(navigationManager.listWeekdayCode).systemImageName
                     )
                     Text(selectedWeekdayName)
+                }
+                .pickerStyle(.menu)
+                Picker(selection: afterMenuCloses(diet)) {
+                    ForEach(MensaFilter.Diet.allCases, id: \.self) { diet in
+                        Label(diet.localizedString, systemImage: diet.systemImageName).tag(diet)
+                    }
+                } label: {
+                    Label("DIET", systemImage: MensaFilter.Diet.vegetarian.systemImageName)
+                    Text(navigationManager.diet.localizedString)
                 }
                 .pickerStyle(.menu)
                 // The allergen filter only has an effect once allergens are set in the settings.

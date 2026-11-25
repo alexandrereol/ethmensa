@@ -66,7 +66,8 @@ struct MainMensaView: View {
                     NavigationManager(
                         selectedMensa: mensa,
                         selectedWeekdayCodeOverride: navigationManager.selectedWeekdayCodeOverride,
-                        allergenFriendlyOnly: navigationManager.allergenFriendlyOnly
+                        allergenFriendlyOnly: navigationManager.allergenFriendlyOnly,
+                        diet: navigationManager.diet
                     )
                 )
                 .environmentObject(mensaDataManager)
