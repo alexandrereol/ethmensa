@@ -24,12 +24,10 @@ struct MainView: View {
     @EnvironmentObject var mensaDataManager: MensaDataManager
     @EnvironmentObject var settingsManager: SettingsManager
 
-    /// The bottom edge of the filter chips, in the coordinate space of the view, so the empty state stays below them.
-    @State private var filterViewBottom: CGFloat = 0
-    /// The top edge of the empty state, in the coordinate space of the view.
-    @State private var noResultsTop: CGFloat = 0
+    /// Where the filter chips end, so the empty state stays below them.
+    @State private var filterChipsFrame = FilterChipsFrame()
 
-    private static let coordinateSpaceName = "MainView"
+    fileprivate static let coordinateSpaceName = "MainView"
 
     private enum ViewState {
         case loading
@@ -95,8 +93,8 @@ struct MainView: View {
                         .padding(.bottom, MensaFilter.isAnyActive(in: navigationManager) ? 6 : 0)
                         .onGeometryChange(for: CGFloat.self) { proxy in
                             proxy.frame(in: .named(Self.coordinateSpaceName)).maxY
-                        } action: { newValue in
-                            filterViewBottom = newValue
+                        } action: { [filterChipsFrame] newValue in
+                            filterChipsFrame.bottom = newValue
                         }
                 }
             }
@@ -111,24 +109,7 @@ struct MainView: View {
                 }
             }
             if viewState == .loadedButEmpty {
-                // Kept below the filter chips, so it never covers them, even at large text sizes.
-                // Centred as before while that leaves the chips clear; scrolling, from below the chips,
-                // once it is taller than the space left.
-                let chipsClearance = max(filterViewBottom - noResultsTop, 0)
-                ViewThatFits(in: .vertical) {
-                    CenteredBelowLayout(minTop: chipsClearance) {
-                        noResultsView
-                    }
-                    ScrollView {
-                        noResultsView
-                    }
-                    .padding(.top, chipsClearance)
-                }
-                .onGeometryChange(for: CGFloat.self) { proxy in
-                    proxy.frame(in: .named(Self.coordinateSpaceName)).minY
-                } action: { newValue in
-                    noResultsTop = newValue
-                }
+                BelowFilterChips(chipsFrame: filterChipsFrame, content: noResultsView)
             }
         }
         .coordinateSpace(name: Self.coordinateSpaceName)
@@ -179,6 +160,44 @@ struct MainView: View {
         .environmentObject(MensaDataManager.shared)
         .environmentObject(NetworkManager.shared)
         .environmentObject(SettingsManager.shared)
+}
+
+/// Where the filter chips in the list's header end, in the coordinate space of `MainView`.
+///
+/// A reference that `MainView` doesn't observe: the header moves on every frame the list scrolls, and only
+/// the empty state, which observes it, should update then, not the whole list.
+private final class FilterChipsFrame: ObservableObject {
+    @Published var bottom: CGFloat = 0
+}
+
+/// Keeps the empty state below the filter chips, so it never covers them, even at large text sizes.
+/// Centred as before while that leaves the chips clear; scrolling, from below the chips, once it is
+/// taller than the space left.
+private struct BelowFilterChips<Content: View>: View {
+
+    @ObservedObject var chipsFrame: FilterChipsFrame
+    let content: Content
+
+    /// The top edge of this view, in the coordinate space of `MainView`.
+    @State private var top: CGFloat = 0
+
+    var body: some View {
+        let clearance = max(chipsFrame.bottom - top, 0)
+        ViewThatFits(in: .vertical) {
+            CenteredBelowLayout(minTop: clearance) {
+                content
+            }
+            ScrollView {
+                content
+            }
+            .padding(.top, clearance)
+        }
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.frame(in: .named(MainView.coordinateSpaceName)).minY
+        } action: { newValue in
+            top = newValue
+        }
+    }
 }
 
 /// Centres its content vertically, but never higher than `minTop` from its top edge.
