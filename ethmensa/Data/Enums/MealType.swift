@@ -33,6 +33,8 @@ enum MealType {
         let id: String
         let image: Image
         let color: Color
+        /// The VoiceOver label of the image, e.g. "Vegan".
+        let accessibilityLabel: String
     }
 
     /// The image and color associated with the meal type.
@@ -41,17 +43,20 @@ enum MealType {
         case .vegan: .init(
             id: "vegan",
             image: .init(systemName: "leaf.fill"),
-            color: .green
+            color: .green,
+            accessibilityLabel: .init(localized: "VEGAN")
         )
         case .vegetarian: .init(
             id: "vegetarian",
             image: .init(systemName: "leaf"),
-            color: .green
+            color: .green,
+            accessibilityLabel: .init(localized: "VEGETARIAN")
         )
         case .fish: .init(
             id: "fish",
             image: .init(systemName: "fish.fill"),
-            color: .blue
+            color: .blue,
+            accessibilityLabel: .init(localized: "MEAL_TYPE_FISH")
         )
         }
     }
