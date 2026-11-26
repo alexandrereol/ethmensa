@@ -44,7 +44,8 @@ struct SettingsAllergensView: View {
                         }
                     } label: {
                         CheckMarkView(
-                            text: allergen.localizedString.capitalized,
+                            text: allergen.localizedString.prefix(1).localizedUppercase
+                                + allergen.localizedString.dropFirst(),
                             shown: settingsManager.allergens.contains {
                                 $0.id == allergen.id
                             }
