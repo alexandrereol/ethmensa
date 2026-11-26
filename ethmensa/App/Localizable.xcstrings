@@ -1980,6 +1980,64 @@
         }
       }
     },
+    "MEAL_TYPE_VEGAN" : {
+      "comment" : "VoiceOver label of the vegan diet icon shown next to a meal's title on the menu.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vegan"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vegan"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Végan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vegano"
+          }
+        }
+      }
+    },
+    "MEAL_TYPE_VEGETARIAN" : {
+      "comment" : "VoiceOver label of the vegetarian diet icon shown next to a meal's title on the menu.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vegetarisch"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vegetarian"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Végétarien"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vegetariano"
+          }
+        }
+      }
+    },
     "MEAT_TYPE_BEEF" : {
       "comment" : "VoiceOver label of the meat icon shown next to a meal's title on the menu.",
       "localizations" : {

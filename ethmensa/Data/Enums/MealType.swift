@@ -44,13 +44,13 @@ enum MealType {
             id: "vegan",
             image: .init(systemName: "leaf.fill"),
             color: .green,
-            accessibilityLabel: .init(localized: "VEGAN")
+            accessibilityLabel: .init(localized: "MEAL_TYPE_VEGAN")
         )
         case .vegetarian: .init(
             id: "vegetarian",
             image: .init(systemName: "leaf"),
             color: .green,
-            accessibilityLabel: .init(localized: "VEGETARIAN")
+            accessibilityLabel: .init(localized: "MEAL_TYPE_VEGETARIAN")
         )
         case .fish: .init(
             id: "fish",
