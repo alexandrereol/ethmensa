@@ -34,6 +34,8 @@ struct SettingsAllergensView: View {
             }
             Section("MY_ALLERGENS") {
                 ForEach(Allergen.allCases) { allergen in
+                    // Sentence case, not .capitalized: "Sulphur dioxide", not "Sulphur Dioxide"
+                    let name = allergen.localizedString
                     Button {
                         if let index = settingsManager.allergens.firstIndex(where: { currentAllergen in
                             currentAllergen.id == allergen.id
@@ -44,8 +46,7 @@ struct SettingsAllergensView: View {
                         }
                     } label: {
                         CheckMarkView(
-                            text: allergen.localizedString.prefix(1).localizedUppercase
-                                + allergen.localizedString.dropFirst(),
+                            text: name.prefix(1).localizedUppercase + name.dropFirst(),
                             shown: settingsManager.allergens.contains {
                                 $0.id == allergen.id
                             }
