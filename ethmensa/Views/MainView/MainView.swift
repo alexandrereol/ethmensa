@@ -24,6 +24,13 @@ struct MainView: View {
     @EnvironmentObject var mensaDataManager: MensaDataManager
     @EnvironmentObject var settingsManager: SettingsManager
 
+    /// The bottom edge of the filter chips, in the coordinate space of the view, so the empty state stays below them.
+    @State private var filterViewBottom: CGFloat = 0
+    /// The top edge of the empty state, in the coordinate space of the view.
+    @State private var noResultsTop: CGFloat = 0
+
+    private static let coordinateSpaceName = "MainView"
+
     private enum ViewState {
         case loading
         case loadedButEmpty
@@ -86,6 +93,11 @@ struct MainView: View {
                         .padding(.top, -6)
                         // Gives the chips a little room above the first cell, without leaving a gap without filters.
                         .padding(.bottom, MensaFilter.isAnyActive(in: navigationManager) ? 6 : 0)
+                        .onGeometryChange(for: CGFloat.self) { proxy in
+                            proxy.frame(in: .named(Self.coordinateSpaceName)).maxY
+                        } action: { newValue in
+                            filterViewBottom = newValue
+                        }
                 }
             }
             .environment(\.defaultMinListHeaderHeight, 0)
@@ -99,22 +111,27 @@ struct MainView: View {
                 }
             }
             if viewState == .loadedButEmpty {
-                CustomContentUnavailableView(
-                    label: .init(localized: "NO_RESULTS"),
-                    systemImageName: "sparkle.magnifyingglass",
-                    description: .init(localized: "NO_RESULTS_FOR_SELECTED_FILTERS."),
-                    actions: {
-                        Button {
-                            navigationManager.resetFiltersAndSearch()
-                        } label: {
-                            Text("RESET_FILTERS_AND_SEARCH")
-                                .padding(2)
-                        }
-                        .resetButtonStyle()
+                // Kept below the filter chips, so it never covers them, even at large text sizes.
+                // Centred as before while that leaves the chips clear; scrolling, from below the chips,
+                // once it is taller than the space left.
+                let chipsClearance = max(filterViewBottom - noResultsTop, 0)
+                ViewThatFits(in: .vertical) {
+                    CenteredBelowLayout(minTop: chipsClearance) {
+                        noResultsView
                     }
-                )
+                    ScrollView {
+                        noResultsView
+                    }
+                    .padding(.top, chipsClearance)
+                }
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.frame(in: .named(Self.coordinateSpaceName)).minY
+                } action: { newValue in
+                    noResultsTop = newValue
+                }
             }
         }
+        .coordinateSpace(name: Self.coordinateSpaceName)
         .environmentObject(navigationManager)
         .environmentObject(mensaDataManager)
 #if !os(visionOS)
@@ -127,6 +144,23 @@ struct MainView: View {
         .toolbar {
             MainViewToolbar(navigationManager: navigationManager)
         }
+    }
+
+    private var noResultsView: some View {
+        CustomContentUnavailableView(
+            label: .init(localized: "NO_RESULTS"),
+            systemImageName: "sparkle.magnifyingglass",
+            description: .init(localized: "NO_RESULTS_FOR_SELECTED_FILTERS."),
+            actions: {
+                Button {
+                    navigationManager.resetFiltersAndSearch()
+                } label: {
+                    Text("RESET_FILTERS_AND_SEARCH")
+                        .padding(2)
+                }
+                .resetButtonStyle()
+            }
+        )
     }
 }
 
@@ -145,6 +179,31 @@ struct MainView: View {
         .environmentObject(MensaDataManager.shared)
         .environmentObject(NetworkManager.shared)
         .environmentObject(SettingsManager.shared)
+}
+
+/// Centres its content vertically, but never higher than `minTop` from its top edge.
+/// Its ideal height is the content's plus `minTop`, so a `ViewThatFits` can fall back once it doesn't fit.
+private struct CenteredBelowLayout: Layout {
+
+    var minTop: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let content = subviews.first?.sizeThatFits(ProposedViewSize(width: proposal.width, height: nil)) ?? .zero
+        return CGSize(width: proposal.width ?? content.width, height: proposal.height ?? content.height + minTop)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        guard let content = subviews.first else {
+            return
+        }
+        let height = content.sizeThatFits(ProposedViewSize(width: bounds.width, height: nil)).height
+        let top = max(bounds.midY - height / 2, bounds.minY + minTop)
+        content.place(
+            at: CGPoint(x: bounds.midX, y: top),
+            anchor: .top,
+            proposal: ProposedViewSize(width: bounds.width, height: height)
+        )
+    }
 }
 
 private extension View {
