@@ -39,6 +39,7 @@ struct DetailMenuView: View {
                     ForEach(mealTypeImageAndColors) { mealTypeImageAndColor in
                         mealTypeImageAndColor.image
                             .fontWeight(.semibold)
+                            .accessibilityLabel(mealTypeImageAndColor.accessibilityLabel)
                     }
                     if !meatTypeImageAndColors.isEmpty,
                        !mealTypeImageAndColors.isEmpty {
@@ -51,6 +52,7 @@ struct DetailMenuView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: 23)
+                            .accessibilityLabel(meatTypeImageAndColor.accessibilityLabel)
                     }
                 }
                 Text(description)

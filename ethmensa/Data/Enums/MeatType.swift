@@ -42,6 +42,8 @@ enum MeatType {
         let id: String
         let image: Image
         let color: Color
+        /// The VoiceOver label of the image, e.g. "Beef".
+        let accessibilityLabel: String
     }
 
     /// The image and color associated with the meal type.
@@ -50,32 +52,38 @@ enum MeatType {
         case .beef: .init(
             id: "beef",
             image: .init(.beef),
-            color: .brown
+            color: .brown,
+            accessibilityLabel: .init(localized: "MEAT_TYPE_BEEF")
         )
         case .chicken: .init(
             id: "chicken",
             image: .init(.chicken),
-            color: .yellow
+            color: .yellow,
+            accessibilityLabel: .init(localized: "MEAT_TYPE_CHICKEN")
         )
         case .duck: .init(
             id: "duck",
             image: .init(.duck),
-            color: .orange
+            color: .orange,
+            accessibilityLabel: .init(localized: "MEAT_TYPE_DUCK")
         )
         case .veal: .init(
             id: "veal",
             image: .init(.beef),
-            color: .gray
+            color: .gray,
+            accessibilityLabel: .init(localized: "MEAT_TYPE_VEAL")
         )
         case .turkey: .init(
             id: "turkey",
             image: .init(.turkey),
-            color: .brown
+            color: .brown,
+            accessibilityLabel: .init(localized: "MEAT_TYPE_TURKEY")
         )
         case .pork: .init(
             id: "pork",
             image: .init(.pork),
-            color: .pink
+            color: .pink,
+            accessibilityLabel: .init(localized: "MEAT_TYPE_PORK")
         )
         }
     }

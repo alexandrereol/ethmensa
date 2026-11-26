@@ -63,6 +63,7 @@ struct MealCellView: View {
                     mealTypeImageAndColor.image
                         .foregroundStyle(mealTypeImageAndColor.color)
                         .fontWeight(.semibold)
+                        .accessibilityLabel(mealTypeImageAndColor.accessibilityLabel)
                 }
                 ForEach(meatTypeImageAndColors) { meatTypeImageAndColor in
                     meatTypeImageAndColor.image
@@ -70,6 +71,7 @@ struct MealCellView: View {
                         .scaledToFit()
                         .frame(height: 23)
                         .foregroundStyle(meatTypeImageAndColor.color)
+                        .accessibilityLabel(meatTypeImageAndColor.accessibilityLabel)
                 }
                 Spacer()
                 if let priceText = meal.price?.getString() {
