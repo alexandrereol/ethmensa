@@ -4524,7 +4524,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This actions is irreversible."
+            "value" : "This action is irreversible."
           }
         },
         "fr" : {
