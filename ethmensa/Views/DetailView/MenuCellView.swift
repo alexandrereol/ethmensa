@@ -52,9 +52,17 @@ struct MealCellView: View {
             meal.meatType?.compactMap(\.imageAndColor) ?? []
         }
 
+        /// Sentence case, not .capitalized: keeps units as sent ("Hot & Cold 100g", not "100G")
+        private var title: String {
+            guard let title = meal.title else {
+                return .init(localized: "MENU")
+            }
+            return title.prefix(1).localizedUppercase + title.dropFirst()
+        }
+
         var body: some View {
             HStack {
-                Text(meal.title?.capitalized ?? .init(localized: "MENU"))
+                Text(title)
                     .bold()
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
