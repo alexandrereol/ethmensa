@@ -1815,7 +1815,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Locations-based notifications"
+            "value" : "Location-based notifications"
           }
         },
         "fr" : {
