@@ -94,15 +94,16 @@ struct WebView: UIViewRepresentable {
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
         // SwiftUI calls this on every update of the parent, e.g. when the app returns to the foreground.
-        // Load again only if the URL changed, so the page keeps its state (typed fields, scroll position).
-        guard context.coordinator.loadedURL != request.url else {
+        // Load again only if the request changed or the last load failed, so the page keeps its state
+        // (typed fields, scroll position).
+        guard context.coordinator.loadedRequest != request else {
             return
         }
         load(in: uiView, context: context)
     }
 
     private func load(in webView: WKWebView, context: Context) {
-        context.coordinator.loadedURL = request.url
+        context.coordinator.loadedRequest = request
         webView.load(request)
     }
 
@@ -111,8 +112,24 @@ struct WebView: UIViewRepresentable {
     }
 
     class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
-        /// The URL last loaded into the web view.
-        var loadedURL: URL?
+        /// The request last loaded into the web view, or `nil` if it failed to load.
+        var loadedRequest: URLRequest?
+
+        func webView(
+            _ webView: WKWebView,
+            didFailProvisionalNavigation navigation: WKNavigation!,
+            withError error: Error
+        ) {
+            // Retry on the next update, e.g. when the app returns to the foreground.
+            if (error as NSError).code != NSURLErrorCancelled {
+                loadedRequest = nil
+            }
+        }
+
+        func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+            // iOS can end the web content process while the app is in the background, which leaves the page blank.
+            webView.reload()
+        }
 
         func webView(
             _ webView: WKWebView,
