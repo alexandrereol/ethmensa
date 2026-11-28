@@ -158,7 +158,7 @@ extension Allergen {
         case "fish": .fish
         case "peanuts": .peanuts
         case "soya": .soya
-        case "lactose", "milk": .lactose
+        case "lactose", "milk", "milk, lactose": .lactose
         case "nuts": .nuts
         case "celery": .celery
         case "mustard": .mustard
@@ -167,6 +167,31 @@ extension Allergen {
         case "lupin": .lupin
         case "molluscs": .molluscs
         default: .other(string)
+        }
+    }
+
+    // swiftlint:disable:next orphaned_doc_comment
+    /// Get the Allergen from the ETH-API provided code and description.
+    /// The description is localized ("milk, lactose" in English, "Milch, Laktose" in German),
+    /// so the language-independent code is used first and the description only for unknown codes.
+    // swiftlint:disable:next cyclomatic_complexity
+    static func fromETH(code: Int?, desc: String?) -> Self? {
+        switch code {
+        case 10: .gluten
+        case 11: .crustaceans
+        case 12: .eggs
+        case 13: .fish
+        case 14: .peanuts
+        case 15: .soya
+        case 16: .lactose
+        case 17: .nuts
+        case 18: .celery
+        case 19: .mustard
+        case 20: .sesame
+        case 21: .sulphurdioxide
+        case 22: .lupin
+        case 23: .molluscs
+        default: desc.flatMap(fromETHString)
         }
     }
 }

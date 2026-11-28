@@ -222,9 +222,9 @@ class ETHAPI: APIProtocol {
         let meatType: [MeatType]? = meal.meatTypeArray?.compactMap(\.desc).compactMap {
             MeatType.fromETHString($0)
         }
-        let allergen: [Allergen]? = meal.allergenArray?.compactMap(\.desc).compactMap {
-            Allergen.fromETHString($0)
-        }
+        let allergen: [Allergen]? = meal.allergenArray?.compactMap {
+            Allergen.fromETH(code: $0.code, desc: $0.desc)
+        }.unique
         return .init(
             title: mealTitle,
             name: mealName,
