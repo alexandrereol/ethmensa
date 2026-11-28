@@ -19,6 +19,8 @@ import SwiftUI
 
 struct OpeningTimesCircle: View {
 
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+
     var mensa: Mensa
     var isLoading: Bool
 
@@ -36,15 +38,48 @@ struct OpeningTimesCircle: View {
             }
         }
     }
+    /// The status spoken by VoiceOver, e.g. "Closed". `nil` while loading.
+    private var statusLabel: String? {
+        guard !isLoading else {
+            return nil
+        }
+        switch status {
+        case .open: return .init(localized: "MENSA_STATUS_OPEN")
+        case .closed: return .init(localized: "MENSA_STATUS_CLOSED")
+        case .unknown: return nil
+        }
+    }
+    /// With Differentiate Without Color on, a check or cross tells open and closed apart.
+    private var differentiatingSymbol: String? {
+        guard differentiateWithoutColor, !isLoading else {
+            return nil
+        }
+        switch status {
+        case .open: return "checkmark.circle.fill"
+        case .closed: return "xmark.circle.fill"
+        case .unknown: return nil
+        }
+    }
 
     var body: some View {
         if status != .unknown {
-            Circle()
-                .foregroundStyle(circleColor)
-                .frame(
-                    width: 15,
-                    height: 15
-                )
+            Group {
+                if let differentiatingSymbol {
+                    Image(systemName: differentiatingSymbol)
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    Circle()
+                }
+            }
+            .foregroundStyle(circleColor)
+            .frame(
+                width: 15,
+                height: 15
+            )
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(statusLabel ?? "")
+            .accessibilityHidden(statusLabel == nil)
         }
     }
 }
