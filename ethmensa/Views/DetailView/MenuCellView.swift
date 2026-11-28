@@ -52,10 +52,14 @@ struct MealCellView: View {
             meal.meatType?.compactMap(\.imageAndColor) ?? []
         }
 
-        /// Sentence case, not .capitalized: keeps units as sent ("Hot & Cold 100g", not "100G")
+        /// All-caps titles ("GARDEN") are capitalized to "Garden"; others keep the API's casing apart from a capital
+        /// first letter, so units stay as sent ("Hot & Cold 100g", not "100G")
         private var title: String {
             guard let title = meal.title else {
                 return .init(localized: "MENU")
+            }
+            guard title.contains(where: \.isLowercase) else {
+                return title.capitalized
             }
             return title.prefix(1).localizedUppercase + title.dropFirst()
         }
