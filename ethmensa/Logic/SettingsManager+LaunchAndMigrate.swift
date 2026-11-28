@@ -36,15 +36,7 @@ extension SettingsManager {
             // Needed as visionOS and watchOS do not have Onboarding
             completedFirstLaunch = true
 #endif
-#if os(watchOS)
-            cloudkitForSettings = true
-            synchronize()
-#else
-            if FileManager.default.ubiquityIdentityToken != nil {
-                cloudkitForSettings = true
-                synchronize()
-            }
-#endif
+            enableCloudKitForSettingsIfAvailable()
         }
 #if !APPCLIP && !os(watchOS) && !os(visionOS)
         if location {
@@ -54,6 +46,44 @@ extension SettingsManager {
         }
 #endif
         migrateIfNeeded()
+    }
+
+    /// Resets every user-facing setting to its default value, as on a fresh install.
+    ///
+    /// Call this after removing the stored settings keys, so the open app shows the defaults right away instead of
+    /// after a relaunch. Assigning the properties also writes the defaults back to storage.
+    /// - Note: `completedFirstLaunch` and `completedOnboarding` are kept in memory, so onboarding isn't presented
+    ///   over the open app. Their keys stay removed, so onboarding shows again on the next launch.
+    func resetToDefaults() {
+#if !APPCLIP && !os(watchOS) && !os(visionOS)
+        location = false
+#endif
+        hideMensaWithNoMenus = false
+        mensaCellType = .standard
+        priceType = .all
+        notifications = false
+        notificationsSound = "default"
+        sortBy = .def
+        notificationsTime = .fromInt(hour: 11, minute: 0) ?? .now
+        mensaShowType = .all
+        mensaLocationType = .all
+        showAllergens = false
+        allergens = []
+        cloudkitForSettings = false
+        enableCloudKitForSettingsIfAvailable()
+    }
+
+    /// Turns on iCloud sync for settings when iCloud is available (always on watchOS), as on the first launch.
+    private func enableCloudKitForSettingsIfAvailable() {
+#if os(watchOS)
+        cloudkitForSettings = true
+        synchronize()
+#else
+        if FileManager.default.ubiquityIdentityToken != nil {
+            cloudkitForSettings = true
+            synchronize()
+        }
+#endif
     }
 
     /// Checks if a migration is needed and performs the migration if necessary.

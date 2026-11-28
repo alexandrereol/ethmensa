@@ -45,6 +45,7 @@ class AdvancedSettingsViewModel: ObservableObject {
         for key in kvs.dictionaryRepresentation.keys where SettingsManager.Prefix.isPrefixMatching(key: key) {
             kvs.removeObject(forKey: key)
         }
+        SettingsManager.shared.resetToDefaults()
         SettingsManager.shared.launchAndMigrate()
     }
 
@@ -57,6 +58,7 @@ class AdvancedSettingsViewModel: ObservableObject {
         }
         resetSmartSorting()
         resetAppleMapsCache()
+        SettingsManager.shared.resetToDefaults()
         SettingsManager.shared.launchAndMigrate()
     }
 }
