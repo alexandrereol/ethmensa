@@ -27,6 +27,7 @@ struct AdvancedSettingsView: View {
                 Button("RESET_SMART_SORTING") {
                     viewModel.resetSmartSortingAlertShown = true
                 }
+                .tint(.primary)
                 .advancedSettingsAlert(
                     isPresented: $viewModel.resetSmartSortingAlertShown,
                     title: "\(String(localized: "RESET_SMART_SORTING"))?"
@@ -36,6 +37,7 @@ struct AdvancedSettingsView: View {
                 Button("RESET_MAPS_CACHE") {
                     viewModel.resetAppleMapsCacheAlertShown = true
                 }
+                .tint(.primary)
                 .advancedSettingsAlert(
                     isPresented: $viewModel.resetAppleMapsCacheAlertShown,
                     title: "\(String(localized: "RESET_MAPS_CACHE"))?"
@@ -50,6 +52,7 @@ struct AdvancedSettingsView: View {
                 Button("RESET_SETTINGS") {
                     viewModel.resetSettingsAlertShown = true
                 }
+                .tint(.primary)
                 .advancedSettingsAlert(
                     isPresented: $viewModel.resetSettingsAlertShown,
                     title: "\(String(localized: "RESET_SETTINGS"))?"
@@ -59,6 +62,7 @@ struct AdvancedSettingsView: View {
                 Button("RESET_SETTINGS_AND_DATA") {
                     viewModel.resetSettingsAndDataAlertShown = true
                 }
+                .tint(.primary)
                 .advancedSettingsAlert(
                     isPresented: $viewModel.resetSettingsAndDataAlertShown,
                     title: "\(String(localized: "RESET_SETTINGS_AND_DATA"))?"
@@ -70,7 +74,6 @@ struct AdvancedSettingsView: View {
             }
         }
         .environment(\.defaultMinListHeaderHeight, 0)
-        .buttonStyle(.plain)
     }
 }
 
