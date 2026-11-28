@@ -52,9 +52,22 @@ struct MealCellView: View {
             meal.meatType?.compactMap(\.imageAndColor) ?? []
         }
 
+        /// All-caps titles ("GARDEN") are capitalized to "Garden"; others keep the API's casing apart from a capital
+        /// first letter, so units stay as sent ("Hot & Cold 100g", not "100G")
+        private var title: String {
+            guard let title = meal.title?.trimmingCharacters(in: .whitespaces), !title.isEmpty else {
+                return .init(localized: "MENU")
+            }
+            guard title.contains(where: \.isLowercase) else {
+                return title.capitalized
+            }
+            // API text, not the device language: no locale-specific casing (e.g. a Turkish dotted İ)
+            return title.prefix(1).uppercased() + title.dropFirst()
+        }
+
         var body: some View {
             HStack {
-                Text(meal.title?.capitalized ?? .init(localized: "MENU"))
+                Text(title)
                     .bold()
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
