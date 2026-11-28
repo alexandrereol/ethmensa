@@ -56,6 +56,36 @@ extension SettingsManager {
         migrateIfNeeded()
     }
 
+    /// Resets every user-facing setting to its default value, as on a fresh install.
+    ///
+    /// Call this after removing the stored settings keys, so the open app shows the defaults right away instead of
+    /// after a relaunch. Where `setupCombine()` observes a setting, assigning it also writes the default back.
+    /// - Note: `completedFirstLaunch` and `completedOnboarding` are kept in memory, so onboarding isn't presented
+    ///   over the open app. Their keys stay removed, so onboarding shows again on the next launch, as before.
+    func resetToDefaults() {
+        // Set first, so the iCloud sync done when the other settings change follows the new value.
+#if os(watchOS)
+        cloudkitForSettings = true
+#else
+        cloudkitForSettings = FileManager.default.ubiquityIdentityToken != nil
+#endif
+#if !APPCLIP && !os(watchOS) && !os(visionOS)
+        location = false
+#endif
+        hideMensaWithNoMenus = false
+        mensaCellType = .standard
+        priceType = .all
+        notifications = false
+        notificationsSound = "default"
+        sortBy = .def
+        notificationsTime = .fromInt(hour: 11, minute: 0) ?? .now
+        mensaShowType = .all
+        mensaLocationType = .all
+        showAllergens = false
+        allergens = []
+        synchronize()
+    }
+
     /// Checks if a migration is needed and performs the migration if necessary.
     private func migrateIfNeeded() {
         // Removed sort option popular from 5.5 -> 6.0

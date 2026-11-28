@@ -45,18 +45,13 @@ class AdvancedSettingsViewModel: ObservableObject {
         for key in kvs.dictionaryRepresentation.keys where SettingsManager.Prefix.isPrefixMatching(key: key) {
             kvs.removeObject(forKey: key)
         }
+        SettingsManager.shared.resetToDefaults()
         SettingsManager.shared.launchAndMigrate()
     }
 
     func resetSettingsAndData() {
-        for key in udf.dictionaryRepresentation().keys where SettingsManager.Prefix.isPrefixMatching(key: key) {
-            udf.removeObject(forKey: key)
-        }
-        for key in kvs.dictionaryRepresentation.keys where SettingsManager.Prefix.isPrefixMatching(key: key) {
-            kvs.removeObject(forKey: key)
-        }
+        resetSettings()
         resetSmartSorting()
         resetAppleMapsCache()
-        SettingsManager.shared.launchAndMigrate()
     }
 }
