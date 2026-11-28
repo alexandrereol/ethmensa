@@ -88,11 +88,22 @@ struct WebView: UIViewRepresentable {
         webView.uiDelegate = context.coordinator
         webView.navigationDelegate = context.coordinator
         webView.scrollView.delegate = context.coordinator
+        load(in: webView, context: context)
         return webView
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        uiView.load(request)
+        // SwiftUI calls this on every update of the parent, e.g. when the app returns to the foreground.
+        // Load again only if the URL changed, so the page keeps its state (typed fields, scroll position).
+        guard context.coordinator.loadedURL != request.url else {
+            return
+        }
+        load(in: uiView, context: context)
+    }
+
+    private func load(in webView: WKWebView, context: Context) {
+        context.coordinator.loadedURL = request.url
+        webView.load(request)
     }
 
     func makeCoordinator() -> Coordinator {
@@ -100,6 +111,9 @@ struct WebView: UIViewRepresentable {
     }
 
     class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
+        /// The URL last loaded into the web view.
+        var loadedURL: URL?
+
         func webView(
             _ webView: WKWebView,
             didFinish navigation: WKNavigation!
