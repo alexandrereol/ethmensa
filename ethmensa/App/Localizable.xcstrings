@@ -2303,7 +2303,7 @@
       }
     },
     "MENSA_STATUS_CLOSED" : {
-      "comment" : "VoiceOver label of the red dot on a mensa row in the mensa list: the mensa is closed now.",
+      "comment" : "VoiceOver label of the open/closed status indicator on a mensa row in the mensa list: the mensa is closed now.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2332,12 +2332,12 @@
       }
     },
     "MENSA_STATUS_OPEN" : {
-      "comment" : "VoiceOver label of the green dot on a mensa row in the mensa list: the mensa is open now.",
+      "comment" : "VoiceOver label of the open/closed status indicator on a mensa row in the mensa list: the mensa is open now.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geöffnet"
+            "value" : "Offen"
           }
         },
         "en" : {

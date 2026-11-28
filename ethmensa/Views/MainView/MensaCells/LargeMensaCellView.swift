@@ -87,6 +87,8 @@ struct LargeMensaCellView: View {
                         .frame(width: 12.5, height: 12.5)
                         .foregroundStyle(.tertiary)
                 }
+                // One VoiceOver stop with the name and the status, e.g. "CafeBar, Closed".
+                .accessibilityElement(children: .combine)
                 .padding(.top, 11)
             }
     }

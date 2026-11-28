@@ -24,62 +24,29 @@ struct OpeningTimesCircle: View {
     var mensa: Mensa
     var isLoading: Bool
 
-    private var status: Mensa.OpeningTimeState {
-        mensa.getOpeningTimes()
-    }
-    private var circleColor: Color {
-        if isLoading {
-            .gray
-        } else {
-            switch status {
-            case .open: .green
-            case .closed: .red
-            case .unknown: .clear
-            }
-        }
-    }
-    /// The status spoken by VoiceOver, e.g. "Closed". `nil` while loading.
-    private var statusLabel: String? {
-        guard !isLoading else {
-            return nil
-        }
-        switch status {
-        case .open: return .init(localized: "MENSA_STATUS_OPEN")
-        case .closed: return .init(localized: "MENSA_STATUS_CLOSED")
-        case .unknown: return nil
-        }
-    }
-    /// With Differentiate Without Color on, a check or cross tells open and closed apart.
-    private var differentiatingSymbol: String? {
-        guard differentiateWithoutColor, !isLoading else {
-            return nil
-        }
-        switch status {
-        case .open: return "checkmark.circle.fill"
-        case .closed: return "xmark.circle.fill"
-        case .unknown: return nil
-        }
-    }
-
     var body: some View {
+        // Computed once per render, so the color, symbol and label always agree.
+        let status = mensa.getOpeningTimes()
+        let statusLabel: LocalizedStringKey = status == .open ? "MENSA_STATUS_OPEN" : "MENSA_STATUS_CLOSED"
         if status != .unknown {
             Group {
-                if let differentiatingSymbol {
-                    Image(systemName: differentiatingSymbol)
+                if differentiateWithoutColor && !isLoading {
+                    // A check or cross tells open and closed apart without color.
+                    Image(systemName: status == .open ? "checkmark.circle.fill" : "xmark.circle.fill")
                         .resizable()
                         .scaledToFit()
                 } else {
                     Circle()
                 }
             }
-            .foregroundStyle(circleColor)
+            .foregroundStyle(isLoading ? Color.gray : status == .open ? Color.green : Color.red)
             .frame(
                 width: 15,
                 height: 15
             )
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel(statusLabel ?? "")
-            .accessibilityHidden(statusLabel == nil)
+            .accessibilityElement()
+            .accessibilityLabel(statusLabel)
+            .accessibilityHidden(isLoading)
         }
     }
 }
