@@ -19,32 +19,34 @@ import SwiftUI
 
 struct OpeningTimesCircle: View {
 
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+
     var mensa: Mensa
     var isLoading: Bool
 
-    private var status: Mensa.OpeningTimeState {
-        mensa.getOpeningTimes()
-    }
-    private var circleColor: Color {
-        if isLoading {
-            .gray
-        } else {
-            switch status {
-            case .open: .green
-            case .closed: .red
-            case .unknown: .clear
-            }
-        }
-    }
-
     var body: some View {
+        // Computed once per render, so the color, symbol and label always agree.
+        let status = mensa.getOpeningTimes()
+        let statusLabel: LocalizedStringKey = status == .open ? "MENSA_STATUS_OPEN" : "MENSA_STATUS_CLOSED"
         if status != .unknown {
-            Circle()
-                .foregroundStyle(circleColor)
-                .frame(
-                    width: 15,
-                    height: 15
-                )
+            Group {
+                if differentiateWithoutColor && !isLoading {
+                    // A check or cross tells open and closed apart without color.
+                    Image(systemName: status == .open ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    Circle()
+                }
+            }
+            .foregroundStyle(isLoading ? Color.gray : status == .open ? Color.green : Color.red)
+            .frame(
+                width: 15,
+                height: 15
+            )
+            .accessibilityElement()
+            .accessibilityLabel(statusLabel)
+            .accessibilityHidden(isLoading)
         }
     }
 }
