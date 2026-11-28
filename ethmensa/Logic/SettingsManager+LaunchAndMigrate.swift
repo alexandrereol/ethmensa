@@ -36,7 +36,15 @@ extension SettingsManager {
             // Needed as visionOS and watchOS do not have Onboarding
             completedFirstLaunch = true
 #endif
-            enableCloudKitForSettingsIfAvailable()
+#if os(watchOS)
+            cloudkitForSettings = true
+            synchronize()
+#else
+            if FileManager.default.ubiquityIdentityToken != nil {
+                cloudkitForSettings = true
+                synchronize()
+            }
+#endif
         }
 #if !APPCLIP && !os(watchOS) && !os(visionOS)
         if location {
@@ -51,10 +59,16 @@ extension SettingsManager {
     /// Resets every user-facing setting to its default value, as on a fresh install.
     ///
     /// Call this after removing the stored settings keys, so the open app shows the defaults right away instead of
-    /// after a relaunch. Assigning the properties also writes the defaults back to storage.
+    /// after a relaunch. Where `setupCombine()` observes a setting, assigning it also writes the default back.
     /// - Note: `completedFirstLaunch` and `completedOnboarding` are kept in memory, so onboarding isn't presented
-    ///   over the open app. Their keys stay removed, so onboarding shows again on the next launch.
+    ///   over the open app. Their keys stay removed, so onboarding shows again on the next launch, as before.
     func resetToDefaults() {
+        // Set first, so the iCloud sync done when the other settings change follows the new value.
+#if os(watchOS)
+        cloudkitForSettings = true
+#else
+        cloudkitForSettings = FileManager.default.ubiquityIdentityToken != nil
+#endif
 #if !APPCLIP && !os(watchOS) && !os(visionOS)
         location = false
 #endif
@@ -69,21 +83,7 @@ extension SettingsManager {
         mensaLocationType = .all
         showAllergens = false
         allergens = []
-        cloudkitForSettings = false
-        enableCloudKitForSettingsIfAvailable()
-    }
-
-    /// Turns on iCloud sync for settings when iCloud is available (always on watchOS), as on the first launch.
-    private func enableCloudKitForSettingsIfAvailable() {
-#if os(watchOS)
-        cloudkitForSettings = true
         synchronize()
-#else
-        if FileManager.default.ubiquityIdentityToken != nil {
-            cloudkitForSettings = true
-            synchronize()
-        }
-#endif
     }
 
     /// Checks if a migration is needed and performs the migration if necessary.
